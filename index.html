@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ch">
+	<head>
+		<meta charset="utf-8"/>
+		<title>算法乐园AlgorithmPark</title>
+		<meta
+  			name="description"
+ 		 	content="A website that teaches you algorithm and knowledge about computer science" />
+		<style>
+			/*标题栏部分*/
+			body{
+                margin: auto;
+                padding: 1em;
+                width: 90%;
+                /* text-align: center; */
+                background-color: rgba(243,242,238, 1);
+            }
+			#top{
+				/* text-align: center; */
+                border:1.4px solid rgb(20, 169, 192);
+                padding: 0.5em;
+				padding-left: 5px;
+                max-width: 800px;
+				min-width: 500px;
+                margin: auto;
+				border-radius: 8px;
+
+				display:grid;
+				/* grid-template-columns: 70px 100px 50px 100px 100px 100px; */
+				grid-template-columns: 13% 20% 10% 19% 19% 19%;
+				background: linear-gradient(217deg, rgba(255,0,0,.1), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.1), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.1), rgba(0,0,255,0) 70.71%);
+			}
+			#top .navigate{
+				color:rgb(9, 9, 182);
+				background-color: rgba(239, 220, 141,0.6);
+				font-weight: bold;
+				font-size: 1.3em;
+				/* width:50px; */
+				width:70%;
+                padding:7px;
+                margin:0 auto;
+                text-align:center;
+				border: 2mm ridge rgba(203, 220, 50, 0.6);
+                /* border-bottom: solid yellow; */
+			}
+			#top #nav1{/*当前所在页面*/
+				border-bottom: solid rgba(239, 220, 141,0.3);
+				background-color: rgb(231, 206, 109);
+				margin-top:4%;
+			}
+			#top #topName{
+				/* font-size:1.3em; */
+				min-width: 85px;
+			}
+			/*鼠标效果*/
+			#top a:hover {
+				background-color: rgba(203, 220, 50, 0.6)!important;
+			}
+
+			/*主体部分*/
+			/* #intro{
+				display: grid;
+				grid-template-columns: 100px;
+			} */
+			.wrapper{
+				height: 15em;
+				display: grid;
+			}
+			
+			.wrapper a{
+				width: 500px;
+                height:210px;
+                /* margin:1.5em auto; */
+                /* max-width: 500px; */
+				/* border:3px solid; */
+			}
+			.wrapper img{
+				object-fit: contain;
+                width:100%;
+                height:100%;
+				margin:0 auto;
+			}
+			.wrapper a:hover{
+				width:520px;
+				height: 220px;
+			}
+			#CSDN{
+				border: 1px solid black;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<span><img src="favicon.ico" alt="logo" class="logo"></span>
+			<span class="navigate" id="topName">算法乐园</span>
+			<span></span>
+			<a class="navigate" class="buttons" id="nav1" href="http://algorithmpark.xyz">主页</a>
+			<a class="navigate" class="buttons" id="nav2" href="http://algorithmpark.xyz/notes">笔记</a>
+			<a class="navigate" class="buttons" id="nav3" href="http://algorithmpark.xyz/problemset">刷题</a>
+		</div>
+		<article>
+		<div id="intro">
+			<h1>网站介绍</h1>
+		</div>
+		<article>
+			<p>在这里简要介绍一下网站的搭建过程和技术细节</p>
+			<ol>
+				<li>
+					租了一台云服务器，在服务器上部署nginx，并上传了网页的html代码，另外还买了个域名algorithmpark.xyz，可以省去每次都要输入IP地址的麻烦
+				</li>
+				<li>
+					网站的logo是随便找的一张滑稽图，如果需要更改只需更换根目录中favicon.ico文件为想要的图片
+				</li>
+				<li>
+					网站的大部分页面html、css、javascript代码都是自己写的，有点丑陋多多包涵🥹。笔记内容和视频部分的代码是用typora自动生成的（之前用typora记的markdown笔记，众所周知markdown文件可以导出为网页）。在此特别鸣谢typora。
+				</li>
+			</ol>
+			<br>
+			<hr>
+			<p>一些有用的学习网站链接：</p>
+
+		</article>
+		<div class="wrapper">
+		<a href="https://developer.mozilla.org/zh-CN/" title="打开MDN-web开发者指南" target="_blank"><img src="./pictures/MDN.png"/></a>
+		</div>
+		<div class="wrapper">
+			<a href="https://www.csdn.net/" title="打开CSDN-专业开发者社区" target="_blank"><img src="./pictures/CSDN.png" id="CSDN"/></a>
+		</div>
+	</body>
+</html>
