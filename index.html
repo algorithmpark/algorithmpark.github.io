@@ -109,18 +109,39 @@
 			<p>在这里简要介绍一下网站的搭建过程和技术细节</p>
 			<ol>
 				<li>
-					租了一台云服务器，在服务器上部署nginx，并上传了网页的html代码，另外还买了个域名algorithmpark.xyz，可以省去每次都要输入IP地址的麻烦
-				</li>
-				<li>
 					网站的logo是随便找的一张滑稽图，如果需要更改只需更换根目录中favicon.ico文件为想要的图片
 				</li>
 				<li>
 					网站的大部分页面html、css、javascript代码都是自己写的，有点丑陋多多包涵🥹。笔记内容和视频部分的代码是用typora自动生成的（之前用typora记的markdown笔记，众所周知markdown文件可以导出为网页）。在此特别鸣谢typora。
 				</li>
 				<li>
-					2023-8-18补充：在github上建了一个镜像站，你可以通过<a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a>来访问（长期稳定有效）。原网站<a href="http://www.algorithmpark.xyz/">http://www.algorithmpark.xyz/</a>因为经费问题不会维持很久🥹
+					刷题页面目前仅支持单选题和不定项选择题两种题型，可以实现点击查看答案、提交评测、计算分数等功能，技术尚不成熟。
+				</li>
+				<li>
+					搭建了两个相同的网站，网址以xyz结尾的是在云服务器上搭建的，以github.io结尾的是在github上搭建的
 				</li>
 			</ol>
+			<p><a href="http://www.algorithmpark.xyz/">http://www.algorithmpark.xyz/</a>的搭建过程：</p>
+			<ul>
+				<li>
+					租了一台云服务器，服务器上安装好了Ubuntu系统并且拥有一个IPv4地址，在服务器上部署nginx，并上传了网页的代码。
+				</li>
+				<li>
+					购买了一个域名algorithmpark.xyz，这种以xyz结尾的域名很便宜，这样就能通过域名访问本站了
+				</li>
+			</ul>
+			<p><a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a>的搭建过程：</p>
+			<ul>
+				<li>
+					github支持搭建小型网站的功能。在github上新建一个团队(organization)名叫algorithmpark，为团队创建名为algorithmpark.github.io的仓库(repository)，并上传网页代码
+				</li>
+				<li>
+					<a href="https://github.com/algorithmpark/algorithmpark.github.io" target="_blank" title="仓库地址">网页代码仓库</a>
+				</li>
+			</ul>
+			<p>
+				云服务器的运行是有成本的，所以algorithmpark.xyz不会维持很久，而github上的镜像站可以长期运行，建议收藏网址：<a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a>
+			</p>
 			<br>
 			<hr>
 			<p>一些有用的学习网站链接：</p>
