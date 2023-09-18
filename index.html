@@ -64,33 +64,34 @@
 				display: grid;
 				grid-template-columns: 100px;
 			} */
-			.wrapper{
-				height: 15em;
-				display: grid;
-			}
 			
-			.wrapper a{
-				width: 500px;
-                height:210px;
-                /* margin:1.5em auto; */
-                /* max-width: 500px; */
-				/* border:3px solid; */
-			}
-			.wrapper img{
-				object-fit: contain;
-                width:100%;
-                height:100%;
-				margin:0 auto;
-			}
-			.wrapper a:hover{
-				width:520px;
-				height: 220px;
-			}
-			#CSDN{
-				border: 1px solid black;
-			}
-
+            
+            #search{
+                padding: 0.7em;
+                margin: auto;
+                text-align: center;
+            }
+            section{
+                display:flex;
+                flex-wrap: wrap;
+                
+            }
+            section article{
+                padding: 10px;
+                margin: 10px;
+                background: rgb(226, 227, 213);
+                flex:310px;
+                
+            }
+            .lists{
+                vertical-align:middle
+            }
+            .mpic{
+                margin-bottom: 0px;
+                
+            }
 		</style>
+        
 	</head>
 	<body>
 		<div id="top">
@@ -103,55 +104,79 @@
 		</div>
 		<article>
 		<div id="intro">
-			<h1>网站介绍</h1>
+			<h1>算法乐园|上网导航</h1>
 		</div>
 		<article>
-			<p>在这里简要介绍一下网站的搭建过程和技术细节</p>
-			<ol>
-				<li>
-					网站的logo是随便找的一张滑稽图，如果需要更改只需更换根目录中favicon.ico文件为想要的图片
-				</li>
-				<li>
-					网站的大部分页面html、css、javascript代码都是自己写的，有点丑陋多多包涵🥹。笔记内容和视频部分的代码是用typora自动生成的（之前用typora记的markdown笔记，众所周知markdown文件可以导出为网页）。在此特别鸣谢typora。
-				</li>
-				<li>
-					刷题页面目前仅支持单选题和不定项选择题两种题型，可以实现点击查看答案、提交评测、计算分数等功能，技术尚不成熟。
-				</li>
-				<li>
-					搭建了两个相同的网站，网址以xyz结尾的是在云服务器上搭建的，以github.io结尾的是在github上搭建的
-				</li>
-			</ol>
-			<p><a href="http://www.algorithmpark.xyz/">http://www.algorithmpark.xyz/</a>的搭建过程：</p>
-			<ul>
-				<li>
-					特别鸣谢matrix提供的服务器，服务器上安装好了Ubuntu系统并且拥有一个校内IPv4地址（所以只能通过校园网访问），在服务器上部署nginx，并上传了网页的代码。
-				</li>
-				<li>
-					购买了一个域名algorithmpark.xyz，这种以xyz结尾的域名很便宜，这样就能通过域名访问本站了
-				</li>
-			</ul>
-			<p><a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a>的搭建过程：</p>
-			<ul>
-				<li>
-					github支持搭建小型网站的功能。在github上新建一个团队(organization)名叫algorithmpark，为团队创建名为algorithmpark.github.io的仓库(repository)，并上传网页代码
-				</li>
-				<li>
-					<a href="https://github.com/algorithmpark/algorithmpark.github.io" target="_blank" title="仓库地址">网页代码仓库</a>
-				</li>
-			</ul>
-			<p>
-				由于algorithmpark.xyz服务器没有公网IP，只能使用校园网访问（但是速度更快），而github上的镜像站访问不需要校园网，建议收藏网址：<a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a>
-			</p>
-			<br>
-			<hr>
-			<p>一些有用的学习网站链接：</p>
+            <p>致力于打造更适合大学生的上网导航！</p>
+            <div id="search">
+            <form action="https://www.baidu.com/s" target="_blank">
+                <a href="http://www.baidu.com/">
+                    <img src="pictures/nevigation/baidu.gif" alt="Baidu" align="bottom" border="0">
+                </a>
+                <input type="text" name="wd" size=30 placeholder="百度搜索"/><input type="submit"  value="百度一下"/>
+            </form>
+            </div>   
+            <center>
+                <form method=get action="http://www.google.com/search" target="_blank">
+                    <table><tr><td>
+                    <a href="http://www.google.com/intl/zh-CN/" target="_blank">
+                    <img src="pictures/nevigation/google.gif" 
+                    border="0" alt="Google" align="absmiddle"></a>
+                    <input type=text name=q size=29 maxlength=255 value="" placeholder="谷歌搜索">
+                    <input type=submit name=btnG value="Google搜索">
+                    </td></tr></table>
+                    </form>
+            </center>
+            
 
-		</article>
-		<div class="wrapper">
-		<a href="https://developer.mozilla.org/zh-CN/" title="打开MDN-web开发者指南" target="_blank"><img src="./pictures/MDN.png"/></a>
-		</div>
-		<div class="wrapper">
-			<a href="https://www.csdn.net/" title="打开CSDN-专业开发者社区" target="_blank"><img src="./pictures/CSDN.png" id="CSDN"/></a>
-		</div>
+            
+        </article>
+        <section>
+            <article>
+              <h2>算法OJ</h2>
+                <p><a href="https://leetcode.cn/problemset/all/" target="_blank" class="lists"><img src="pictures/nevigation/leetcode.png" style="zoom:60%;" class="mpic"></a> 全球极客挚爱的技术成长平台</p>
+                <p><a href="https://www.luogu.com.cn/" target="_blank" class="lists"><img src="pictures/nevigation/luogu.png" style="zoom:45%;" ></a> 计算机教育科学新生态</p>
+                <p><a href="https://codeforces.com/" target="_blank" class="lists"><img src="pictures/nevigation/codeforces.png" style="zoom:30%;" ></a> CodeForces</p>
+                <p><a href="https://atcoder.jp/" target="_blank" class="lists"><img src="pictures/nevigation/atcoder.png" style="zoom:50%;" ></a> AtCoder</p>
+                <p><a href="https://matrix.sysu.edu.cn/home" target="_blank" class="lists"><img src="pictures/nevigation/matrix.png" style="zoom:70%;" ></a> Matrix-The art of coding</p>
+                <p><a href="https://ac.nowcoder.com/" target="_blank" class="lists"><img src="pictures/nevigation/nowcoder.png" style="zoom:50%;" ></a> 牛客竞赛OJ</p>
+
+
+            </article>
+      
+            <article>
+              <h2>资料网课</h2>
+              <p><a href="https://www.cnki.net/" target="_blank" class="lists"><img src="pictures/nevigation/cnki.png" style="zoom:50%;" ></a> 中国知网</p>
+              <p><a href="https://www.wikipedia.org/" target="_blank" class="lists"><img src="pictures/nevigation/wikipedia.png" style="zoom:40%;" ></a> 维基百科</p>
+              <p><a href="https://scholar.google.com/" target="_blank" class="lists"><img src="pictures/nevigation/google scholar.png" style="zoom:30%;" ></a> 谷歌学术搜索</p>
+              <p><a href="https://www.zhihu.com/" target="_blank" class="lists"><img src="pictures/nevigation/zhihu.png" style="zoom:55%;" ></a> 知乎 -有问题,就会有答案</p>
+              <p><a href="https://www.icourse163.org/" target="_blank" class="lists"><img src="pictures/nevigation/mooc.png" style="zoom:50%;" ></a>中国大学慕课</p>
+              <p><a href="https://www.bilibili.com/" target="_blank" class="lists"><img src="pictures/nevigation/bilibili.png" style="zoom:60%;" ></a>哔哩哔哩</p>
+
+            </article>
+      
+            <article>
+              <h2>技术社区</h2>
+              <p><a href="https://www.csdn.net/" target="_blank" class="lists"><img src="pictures/nevigation/csdn.png" style="zoom:70%;" ></a> CSDN - 专业开发者社区</p>
+              <p><a href="https://developer.mozilla.org/zh-CN/" target="_blank" class="lists"><img src="pictures/nevigation/mdn.png" style="zoom:60%;" ></a> MDN |Web开发者指南</p>
+              <p><a href="https://github.com/" target="_blank" class="lists"><img src="pictures/nevigation/github.png" style="zoom:60%;" ></a> Github</p>
+              <p><a href="https://ww2.mathworks.cn/" target="_blank" class="lists"><img src="pictures/nevigation/mathworks.png" style="zoom:60%;" ></a> MATLAB&Simulink官网</p>
+              <p><a href="https://ww2.mathworks.cn/help/index.html" target="_blank" class="lists"><img src="pictures/nevigation/mathworks.png" style="zoom:60%;" ></a> 帮助中心</p>
+              <p><a href="https://stackoverflow.com/" target="_blank" class="lists"><img src="pictures/nevigation/stackoverflow.png" style="zoom:60%;" ></a> Stackoverflow</p>
+              <p><a href="https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5" target="_blank" class="lists"><img src="pictures/nevigation/cppreference.png" style="zoom:70%;" ></a> C++参考手册</p>
+
+            </article>
+            <article>
+                <h2>刷题练习</h2>
+                <p><a href="https://www.pigai.org/" target="_blank" class="lists"><img src="pictures/nevigation/pigai.png" style="zoom:40%;" ></a> 批改网-秒批作文</p>
+                <p><a href="https://welearn.sflep.com/" target="_blank" class="lists"><img src="pictures/nevigation/welearn.png" style="zoom:60%;" ></a> Welearn随行课堂</p>
+                <p><a href="https://neumathe.cn/#/index" target="_blank" class="lists"><img src="pictures/nevigation/neumathe.png" style="zoom:60%;" ></a> neumathe数学刷题网站</p>
+                <p><a href="https://www.chaoxing.com/" target="_blank" class="lists"><img src="pictures/nevigation/chaoxing.png" style="zoom:55%;" ></a> 超星学习通</p>
+            </article>
+        
+              
+          </section>
+          <p>请收藏我们网址：<a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a></p>
+          <p>如果你正在使用中大校园网，可以通过<a href="http://www.algorithmpark.xyz/">http://www.algorithmpark.xyz/</a>更加快速地访问</p>
 	</body>
 </html>
