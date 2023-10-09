@@ -91,6 +91,7 @@
                 
             }
 		</style>
+        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 	</head>
 	<body>
 		<div id="top">
@@ -196,5 +197,15 @@
           <p>请收藏我们网址：<a href="https://algorithmpark.github.io/">https://algorithmpark.github.io/</a></p>
           <p>如果你正在使用中大校园网，可以通过<a href="http://algorithmpark.xyz/">http://algorithmpark.xyz/</a>更加快速地访问 (特别鸣谢matrix提供的服务器)</p>
           <p>本站<a href="https://github.com/algorithmpark/algorithmpark.github.io" target="_blank">代码仓库</a></p>
+          <hr>
+          <p>评论区：</p>
+          <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'SXd6l6SLhjxuaZxHnv9OjxRg-MdYXbMMI',
+                appKey: '5wAEid15O5qD0INz4QOgj1xa'
+            })
+    </script>
 	</body>
 </html>
