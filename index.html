@@ -91,7 +91,10 @@
                 
             }
 		</style>
-        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+      />
 	</head>
 	<body>
 		<div id="top">
@@ -200,13 +203,14 @@
           <p>本站<a href="https://github.com/algorithmpark/algorithmpark.github.io" target="_blank">代码仓库</a></p>
           <hr>
           <p>评论区：</p>
-          <div id="vcomments"></div>
-        <script>
-            new Valine({
-                el: '#vcomments',
-                appId: 'SXd6l6SLhjxuaZxHnv9OjxRg-MdYXbMMI',
-                appKey: '5wAEid15O5qD0INz4QOgj1xa'
-            })
-    </script>
+          <div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://algorithmpark-comment-cbh0bug8h-algorithmpark.vercel.app/',
+    });
+  </script>
 	</body>
 </html>
