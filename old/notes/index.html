@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ch">
+	<head>
+		<meta charset="utf-8"/>
+		<title>笔记|算法乐园AlgorithmPark</title>
+		<meta
+  			name="description"
+ 		 	content="A website that teaches you algorithm and knowledge about computer science" />
+		<style>
+			/*标题栏部分*/
+			body{
+                margin: auto;
+                padding: 1em;
+                width: 90%;
+                /* text-align: center; */
+                background-color: rgba(243,242,238, 1);
+            }
+			#top{
+				/* text-align: center; */
+                border:1.4px solid rgb(20, 169, 192);
+                padding: 0.5em;
+				padding-left: 5px;
+                max-width: 800px;
+				min-width: 500px;
+                margin: auto;
+				border-radius: 8px;
+
+				display:grid;
+				/* grid-template-columns: 70px 100px 50px 100px 100px 100px; */
+				grid-template-columns: 13% 20% 10% 19% 19% 19%;
+				background: linear-gradient(217deg, rgba(255,0,0,.1), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.1), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.1), rgba(0,0,255,0) 70.71%);
+			}
+			#top .navigate{
+				color:rgb(9, 9, 182);
+				background-color: rgba(239, 220, 141,0.6);
+				font-weight: bold;
+				font-size: 1.3em;
+				/* width:50px; */
+				width:70%;
+                padding:7px;
+                margin:0 auto;
+                text-align:center;
+				border: 2mm ridge rgba(203, 220, 50, 0.6);
+                /* border-bottom: solid yellow; */
+			}
+			#top #nav2{/*当前所在页面*/
+				border-bottom: solid rgba(239, 220, 141,0.3);
+				background-color: rgb(231, 206, 109);
+				margin-top:4%;
+			}
+			#top #topName{
+				/* font-size:1.3em; */
+				min-width: 85px;
+			}
+			/*鼠标效果*/
+			#top a:hover {
+				background-color: rgba(203, 220, 50, 0.6)!important;
+			}
+			/*主体部分*/
+			article{
+				display: flex;
+				flex-flow: wrap;
+			}
+			.bigshadow{
+            font-size: 1.5em;
+            text-shadow:
+            -1px -1px 1px #aaa,
+            0px 4px 1px rgba(0, 0, 0, 0.5),
+            4px 4px 5px rgba(0, 0, 0, 0.7),
+            0px 0px 7px rgba(0, 0, 0, 0.4);
+           }
+			.wrapper{
+				height: 15em;
+				display: grid;
+				grid-template-columns:240px 180px;
+				align-items: center;
+			}
+			
+			.wrapper a{
+				width: 200px;
+                height:210px;
+                /* margin:1.5em auto; */
+                /* max-width: 500px; */
+				/* border:3px solid; */
+			}
+			.wrapper img{
+				object-fit: contain;
+                width:100%;
+                height:100%;
+				margin:0 auto;
+			}
+			.wrapper a:hover{
+				width:220px;
+				height: 220px;
+			}
+	
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<span><img src="../favicon.ico" alt="logo" class="logo"></span>
+			<span class="navigate" id="topName">算法乐园</span>
+			<span></span>
+			<a class="navigate" class="buttons" id="nav1" href="/old">主页</a>
+			<a class="navigate" class="buttons" id="nav2" href="/old/notes/">笔记</a>
+			<a class="navigate" class="buttons" id="nav3" href="/old/problemset">刷题</a>
+		</div>
+		<br>
+		<br>
+		<article>
+		<div class="wrapper">
+			<a href="../videos/" title="点击观看" target="_blank"><img src="../pictures/video.jpeg"/></a>
+			<span class="bigshadow">数据结构与算法（教学视频）</span>
+		</div>
+		<div class="wrapper">
+			<a href="./algorithm-notes/" title="基础算法总结"><img src="../pictures/brainstorm.gif"/></a>
+			<span class="bigshadow">基础算法总结</span>
+		</div>
+		<div class="wrapper">
+			<a href="./python-notes/" title="python笔记"><img src="../pictures/python.jpg"/></a>
+			<span class="bigshadow">python笔记</span>
+		</div>
+		<div class="wrapper">
+			<a href="./cppSTL/" title="C++ STL总结"><img src="../pictures/C++.jpeg"/></a>
+			<span class="bigshadow">C++ STL总结</span>
+		</div>
+		<div class="wrapper">
+			<a href="./linux/" title="linux笔记"><img src="../pictures/linux.png"/></a>
+			<span class="bigshadow">linux笔记</span>
+		</div>
+		<div class="wrapper">
+			<a href="./markdown/" title="markdown教程"><img src="../pictures/markdown.jpeg"/></a>
+			<span class="bigshadow">markdown教程</span>
+		</div>
+		<div class="wrapper">
+			<a href="./Matlab-notes/" title="Matlab教程"><img src="../pictures/matlab.jpg"/></a>
+			<span class="bigshadow">Matlab总结</span>
+		</div>
+		<div class="wrapper">
+			<a href="./scala/" title="Scala教程"><img src="../pictures/scala.webp"/></a>
+			<span class="bigshadow">Scala教程</span>
+		</div>
+		<div class="wrapper">
+			<a href="./probability-and-statistics/" title="概率论与数理统计"><img src="../pictures/posibility.png"/></a>
+			<span class="bigshadow">概率论与数理统计</span>
+		</div>
+		<div class="wrapper">
+			<a href="./principles-of-computer-composition/" title="计算机组成原理"><img src="../pictures/computer-composition.png"/></a>
+			<span class="bigshadow">计算机组成原理</span>
+		</div>
+		</article>
+	</body>
+</html>

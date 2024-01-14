@@ -1,0 +1,2203 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="linux入门指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux">
+<meta property="og:url" content="https://github.algorithmpark.xyz/2023/07/05/linux/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="linux入门指南">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.algorithmpark.xyz/img/linux.png">
+<meta property="article:published_time" content="2023-07-05T14:02:13.000Z">
+<meta property="article:modified_time" content="2024-01-13T12:30:53.500Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://github.algorithmpark.xyz/img/linux.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>linux - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"github.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="linux"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-05 14:02" pubdate>
+          2023年7月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          90 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">linux</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-01-13T12:30:53+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>linux笔记</h1>
+<p><strong>CJL_sysu</strong></p>
+<h2 id="配置-WSL">配置:WSL</h2>
+<p>WSL(windows subsystem for Linux)</p>
+<p>使用WSL获得Ubuntu系统环境</p>
+<p>WSL作为Windows10系统带来的全新特性，正在逐步颠覆开发人员既有的选择。</p>
+<ul>
+<li>
+<p>传统方式获取Linux操作系统环境，是安装完整的虚拟机，如VMware</p>
+</li>
+<li>
+<p>使用WSL，可以以非常轻量化的方式，得到Linux系统环境</p>
+</li>
+</ul>
+<p>目前,开发者正在逐步抛弃以虚拟机的形式获取Linux系统环境,而在逐步拥抱WSL环境。</p>
+<p>所以，课程也紧跟当下趋势，为同学们讲解如何使用WSL，简单、快捷的获得Linux系统环境。</p>
+<p>所以，为什么要用WSL，其实很简单：</p>
+<ul>
+<li>
+<p>开发人员都在用，大家都用的，我们也要学习</p>
+</li>
+<li>
+<p>实在是太方便了，简单、好用、轻量化、省内存</p>
+</li>
+</ul>
+<h2 id="1-ls"><a target="_blank" rel="noopener" href="http://1.ls">1.ls</a></h2>
+<p>list show</p>
+<h3 id="ls-a-l-h-Linux路径">ls [-a -l -h] [Linux路径]</h3>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tcl">[cjl-linux@localhost ~]$ ls /<br>bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  <span class="hljs-keyword">proc</span><span class="hljs-title">  root</span> <span class="hljs-title"> run</span> <span class="hljs-title"> sbin</span> <span class="hljs-title"> srv</span> <span class="hljs-title"> sys</span> <span class="hljs-title"> tmp</span> <span class="hljs-title"> usr</span> <span class="hljs-title"> var</span><br></code></pre></td></tr></table></figure>
+<h3 id="a表示显示隐藏文件"><code>-a</code>表示显示隐藏文件</h3>
+<p>.点开头的文件默认隐藏</p>
+<pre>[cjl-linux@localhost ~]$ ls -a
+<font color="#005FFF">.</font>  <font color="#005FFF">..</font>  .bash_history  .bash_logout  .bash_profile  .bashrc  <font color="#005FFF">.cache</font>  <font color="#005FFF">.config</font>  <font color="#005FFF">.dbus</font>  <font color="#005FFF">Desktop</font>  <font color="#005FFF">Documents</font>  <font color="#005FFF">Downloads</font>  .esd_auth  .ICEauthority  <font color="#005FFF">.local</font>  <font color="#005FFF">.mozilla</font>  <font color="#005FFF">Music</font>  <font color="#005FFF">Pictures</font>  <font color="#005FFF">.pki</font>  <font color="#005FFF">Public</font>  <font color="#005FFF">Templates</font>  <font color="#005FFF">Videos</font>
+</pre>
+<h3 id="l表示以列表-竖向排列方式-展示内容-并展示更多信息"><code>-l</code>表示以列表(竖向排列方式)展示内容,并展示更多信息</h3>
+<pre>[cjl-linux@localhost ~]$ ls -l
+total 0
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Desktop</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Documents</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Downloads</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Music</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Pictures</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Public</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Templates</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux 6 May 26 07:01 <font color="#005FFF">Videos</font>
+</pre>
+<h3 id="l和-a可以共用"><code>-l</code>和<code>-a</code>可以共用</h3>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">l</span> -<span class="hljs-keyword">a</span><br><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">la</span><br><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">al</span><br></code></pre></td></tr></table></figure>
+<pre>[cjl-linux@localhost ~]$ ls -la
+total 32
+drwx------. 16 cjl-linux cjl-linux 4096 May 27 03:27 <font color="#005FFF">.</font>
+drwxr-xr-x.  3 root      root        23 May 26 06:59 <font color="#005FFF">..</font>
+-rw-------.  1 cjl-linux cjl-linux   51 May 27 03:53 .bash_history
+-rw-r--r--.  1 cjl-linux cjl-linux   18 Oct 30  2018 .bash_logout
+-rw-r--r--.  1 cjl-linux cjl-linux  193 Oct 30  2018 .bash_profile
+-rw-r--r--.  1 cjl-linux cjl-linux  231 Oct 30  2018 .bashrc
+drwx------. 17 cjl-linux cjl-linux 4096 May 26 07:09 <font color="#005FFF">.cache</font>
+drwxr-xr-x. 14 cjl-linux cjl-linux  261 May 26 07:01 <font color="#005FFF">.config</font>
+drwx------.  3 cjl-linux cjl-linux   25 May 26 07:01 <font color="#005FFF">.dbus</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Desktop</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Documents</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Downloads</font>
+-rw-------.  1 cjl-linux cjl-linux   16 May 26 07:01 .esd_auth
+-rw-------.  1 cjl-linux cjl-linux  934 May 27 03:27 .ICEauthority
+drwx------.  3 cjl-linux cjl-linux   19 May 26 07:01 <font color="#005FFF">.local</font>
+drwxr-xr-x.  6 cjl-linux cjl-linux   81 May 26 07:02 <font color="#005FFF">.mozilla</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Music</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Pictures</font>
+drwxrw----.  3 cjl-linux cjl-linux   19 May 26 07:08 <font color="#005FFF">.pki</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Public</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Templates</font>
+drwxr-xr-x.  2 cjl-linux cjl-linux    6 May 26 07:01 <font color="#005FFF">Videos</font>
+</pre>
+<hr>
+<pre>[cjl-linux@localhost ~]$ ls -la /
+total 24
+dr-xr-xr-x.  17 root root  224 May 26 06:58 <font color="#005FFF">.</font>
+dr-xr-xr-x.  17 root root  224 May 26 06:58 <font color="#005FFF">..</font>
+lrwxrwxrwx.   1 root root    7 May 26 06:42 <font color="#00FFFF">bin</font> -&gt; <font color="#005FFF">usr/bin</font>
+dr-xr-xr-x.   5 root root 4096 May 27 02:42 <font color="#005FFF">boot</font>
+drwxr-xr-x.  19 root root 3280 May 27 03:26 <font color="#005FFF">dev</font>
+drwxr-xr-x. 143 root root 8192 May 27 03:26 <font color="#005FFF">etc</font>
+drwxr-xr-x.   3 root root   23 May 26 06:59 <font color="#005FFF">home</font>
+lrwxrwxrwx.   1 root root    7 May 26 06:42 <font color="#00FFFF">lib</font> -&gt; <font color="#005FFF">usr/lib</font>
+lrwxrwxrwx.   1 root root    9 May 26 06:42 <font color="#00FFFF">lib64</font> -&gt; <font color="#005FFF">usr/lib64</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">media</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">mnt</font>
+drwxr-xr-x.   3 root root   16 May 26 06:49 <font color="#005FFF">opt</font>
+dr-xr-xr-x. 225 root root    0 May 27 03:26 <font color="#005FFF">proc</font>
+dr-xr-x---.   3 root root  151 May 26 07:00 <font color="#005FFF">root</font>
+drwxr-xr-x.  41 root root 1260 May 27 03:28 <font color="#005FFF">run</font>
+lrwxrwxrwx.   1 root root    8 May 26 06:42 <font color="#00FFFF">sbin</font> -&gt; <font color="#005FFF">usr/sbin</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">srv</font>
+dr-xr-xr-x.  13 root root    0 May 27 03:26 <font color="#005FFF">sys</font>
+drwxrwxrwt.  20 root root 4096 May 27 03:53 <span style="background-color:#8AE234"><font color="#000000">tmp</font></span>
+drwxr-xr-x.  13 root root  155 May 26 06:42 <font color="#005FFF">usr</font>
+drwxr-xr-x.  21 root root 4096 May 26 07:00 <font color="#005FFF">var</font>
+</pre>
+<h3 id="h用易于阅读的方式列出文件大小-如K-M-G"><code>-h</code>用易于阅读的方式列出文件大小,如<code>K</code>,<code>M</code>,<code>G</code></h3>
+<p><code>-h</code>必须搭配<code>-l</code>使用</p>
+<pre>[cjl-linux@localhost ~]$ ls -lh /
+total 24K
+lrwxrwxrwx.   1 root root    7 May 26 06:42 <font color="#00FFFF">bin</font> -&gt; <font color="#005FFF">usr/bin</font>
+dr-xr-xr-x.   5 root root 4.0K May 27 02:42 <font color="#005FFF">boot</font>
+drwxr-xr-x.  19 root root 3.3K May 27 03:26 <font color="#005FFF">dev</font>
+drwxr-xr-x. 143 root root 8.0K May 27 03:26 <font color="#005FFF">etc</font>
+drwxr-xr-x.   3 root root   23 May 26 06:59 <font color="#005FFF">home</font>
+lrwxrwxrwx.   1 root root    7 May 26 06:42 <font color="#00FFFF">lib</font> -&gt; <font color="#005FFF">usr/lib</font>
+lrwxrwxrwx.   1 root root    9 May 26 06:42 <font color="#00FFFF">lib64</font> -&gt; <font color="#005FFF">usr/lib64</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">media</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">mnt</font>
+drwxr-xr-x.   3 root root   16 May 26 06:49 <font color="#005FFF">opt</font>
+dr-xr-xr-x. 230 root root    0 May 27 03:26 <font color="#005FFF">proc</font>
+dr-xr-x---.   3 root root  151 May 26 07:00 <font color="#005FFF">root</font>
+drwxr-xr-x.  41 root root 1.3K May 27 03:28 <font color="#005FFF">run</font>
+lrwxrwxrwx.   1 root root    8 May 26 06:42 <font color="#00FFFF">sbin</font> -&gt; <font color="#005FFF">usr/sbin</font>
+drwxr-xr-x.   2 root root    6 Apr 10  2018 <font color="#005FFF">srv</font>
+dr-xr-xr-x.  13 root root    0 May 27 03:26 <font color="#005FFF">sys</font>
+drwxrwxrwt.  20 root root 4.0K May 27 03:53 <span style="background-color:#8AE234"><font color="#000000">tmp</font></span>
+drwxr-xr-x.  13 root root  155 May 26 06:42 <font color="#005FFF">usr</font>
+drwxr-xr-x.  21 root root 4.0K May 26 07:00 <font color="#005FFF">var</font>
+</pre>
+<h2 id="2-cd和pwd命令">2.cd和pwd命令</h2>
+<p>cd:change directory</p>
+<p><code>cd [linux路径]</code></p>
+<ul>
+<li>cd不需要选项,只有参数,表示要切换到哪个目录</li>
+<li>cd命令直接执行,不写参数,表示回到用户的home目录</li>
+</ul>
+<pre>[cjl-linux@localhost ~]$ ls
+<font color="#005FFF">Desktop</font>  <font color="#005FFF">Documents</font>  <font color="#005FFF">Downloads</font>  <font color="#005FFF">Music</font>  <font color="#005FFF">Pictures</font>  <font color="#005FFF">Public</font>  <font color="#005FFF">Templates</font>  <font color="#005FFF">Videos</font>
+[cjl-linux@localhost ~]$ cd /
+[cjl-linux@localhost /]$ ls
+<font color="#00FFFF">bin</font>  <font color="#005FFF">boot</font>  <font color="#005FFF">dev</font>  <font color="#005FFF">etc</font>  <font color="#005FFF">home</font>  <font color="#00FFFF">lib</font>  <font color="#00FFFF">lib64</font>  <font color="#005FFF">media</font>  <font color="#005FFF">mnt</font>  <font color="#005FFF">opt</font>  <font color="#005FFF">proc</font>  <font color="#005FFF">root</font>  <font color="#005FFF">run</font>  <font color="#00FFFF">sbin</font>  <font color="#005FFF">srv</font>  <font color="#005FFF">sys</font>  <span style="background-color:#8AE234"><font color="#000000">tmp</font></span>  <font color="#005FFF">usr</font>  <font color="#005FFF">var</font>
+[cjl-linux@localhost /]$ cd
+[cjl-linux@localhost ~]$ ls
+<font color="#005FFF">Desktop</font>  <font color="#005FFF">Documents</font>  <font color="#005FFF">Downloads</font>  <font color="#005FFF">Music</font>  <font color="#005FFF">Pictures</font>  <font color="#005FFF">Public</font>  <font color="#005FFF">Templates</font>  <font color="#005FFF">Videos</font>
+</pre>
+<p><code>pwd</code>=print work directory</p>
+<p>通过<code>ls</code>来验证当前工作目录是不恰当的</p>
+<p>可以通过<code>pwd</code>命令查看当前所在的工作目录</p>
+<pre>[cjl-linux@localhost ~]$ pwd
+/home/cjl-linux
+[cjl-linux@localhost ~]$ cd /
+[cjl-linux@localhost /]$ pwd
+/
+[cjl-linux@localhost /]$ cd /bin
+[cjl-linux@localhost bin]$ pwd
+/bin
+</pre>
+<h2 id="3-相对路径和绝对路径和特殊路径符">3.相对路径和绝对路径和特殊路径符</h2>
+<ul>
+<li><code>cd /home/cjl-linux/Desktop</code>是绝对路径</li>
+<li><code>cd Desktop</code>是相对路径</li>
+</ul>
+<p>返回上一级</p>
+<p>特殊路径符</p>
+<ul>
+<li><code>.</code>表示当前目录<code>cd ./Desktop</code>表示切换到当前目录下的Desktop目录内,和<code>cd Desktop</code>效果一致</li>
+<li><code>..</code>表示上一级目录,例如<code>cd ../..</code>切换到上二级目录</li>
+<li><code>~</code>表示HOME目录,例如<code>cd ~/Desktop</code>切换到HOME内的Desktop目录</li>
+</ul>
+<h2 id="4-mkdir创建目录">4.<code>mkdir</code>创建目录</h2>
+<p><code>mkdir</code>==Make Directory</p>
+<p>语法:<code>mkdir [-p] Linux路径</code></p>
+<p>Linux路径可用绝对路径和相对路径</p>
+<p>-p选项可选,表示自动创建不存在的父目录,适用于创建连续多层级的目录</p>
+<pre>[cjl-linux@localhost ~]$ mkdir test01
+[cjl-linux@localhost ~]$ ls
+<font color="#005FFF">Desktop</font>  <font color="#005FFF">Documents</font>  <font color="#005FFF">Downloads</font>  <font color="#005FFF">Music</font>  <font color="#005FFF">Pictures</font>  <font color="#005FFF">Public</font>  <font color="#005FFF">Templates</font>  <font color="#005FFF">test01</font>  <font color="#005FFF">Videos</font>
+</pre>
+<pre>[cjl-linux@localhost ~]$ mkdir -p ./test01/01/02/03
+</pre>
+<p>注意:创建文件夹需要修改权限,只能在home目录内进行,涉及到权限问题,home外无法成功</p>
+<pre>[cjl-linux@localhost test01]$ mkdir /mytest
+mkdir: cannot create directory ‘/mytest’: Permission denied
+</pre>
+<h2 id="5-文件操作命令touch-cat-more">5.文件操作命令<code>touch</code>,<code>cat</code>,<code>more</code></h2>
+<p>touch创建文件</p>
+<p><code>touch Linux路径</code></p>
+<p>touch命令无选项,参数必填,表示要创建的文件路径,相对,绝对,特殊路径符均可以使用</p>
+<pre>[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>
+[cjl-linux@localhost test01]$ touch test.txt
+[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>  test.txt
+</pre>
+<p>linux中文件一般为黑色,文件夹为蓝色</p>
+<p>cat,more查看文件内容</p>
+<p><code>cat linux路径</code> cat没有选项,只有必填参数,参数表示被查看的文件路径,相对,绝对,特殊路径符都可以使用</p>
+<p><code>Ctrl +L</code>可以清空屏幕</p>
+<pre>[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>  test.txt
+[cjl-linux@localhost test01]$ cat test.txt
+#include&lt;iostream&gt;
+using namespace std;
+int main()
+{
+	cout&lt;&lt;&quot;hello world!&quot;&lt;&lt;endl;
+	return 0;
+}
+</pre>
+<p>more命令可以查看文件内容,与cat不同的是:</p>
+<ul>
+<li>cat是直接将内容全部显示出来</li>
+<li>more支持翻页,如果文件内容过多,可以一页页地展示</li>
+</ul>
+<p>可以尝试查看<code>more /etc/services</code></p>
+<p>空格翻页,q退出查看</p>
+<h2 id="6-cp复制-mv移动-rm删除命令">6.<code>cp</code>复制,<code>mv</code>移动,<code>rm</code>删除命令</h2>
+<h3 id="cp命令">cp命令:</h3>
+<p><code>cp [-r] 参数1 参数2</code></p>
+<p>-r选项可选,用于复制文件夹使用,表示递归</p>
+<p>参数1,Linux路径,表示被复制的文件或文件夹</p>
+<p>参数2,Linux路径,表示要复制去的地方</p>
+<pre>[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>  test.txt
+[cjl-linux@localhost test01]$ cp test.txt test2.txt
+[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>  test2.txt  test.txt
+</pre>
+<pre>[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">20230528</font>  test2.txt  test.txt
+[cjl-linux@localhost test01]$ cp -r 01 01cpy
+[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">01cpy</font>  <font color="#005FFF">20230528</font>  test2.txt  test.txt
+</pre>
+<h3 id="mv命令">mv命令</h3>
+<p>mv命令来自move</p>
+<p><code>mv 参数1 参数2</code> 没有可选的选项</p>
+<p>参数1表示被移动的文件或文件夹</p>
+<p>参数2表示要移动去的地方,如果目标不存在,则进行改名,确保目标存在</p>
+<pre>[cjl-linux@localhost test01]$ ls
+<font color="#005FFF">01</font>  <font color="#005FFF">01cpy</font>  <font color="#005FFF">20230528</font>  test2.txt  test.txt
+[cjl-linux@localhost test01]$ mv test.txt 01/02/
+[cjl-linux@localhost test01]$ cd 01/02
+[cjl-linux@localhost 02]$ ls
+<font color="#005FFF">03</font>  test.txt
+</pre>
+<p><code>mv</code>可以用于改名</p>
+<pre>[cjl-linux@localhost Desktop]$ ls
+test3.txt
+[cjl-linux@localhost Desktop]$ mv test3.txt test.txt
+[cjl-linux@localhost Desktop]$ ls
+test.txt
+</pre>
+<p>移动文件夹</p>
+<pre>[cjl-linux@localhost Desktop]$ mv ../test01/01 .
+</pre>
+<h3 id="rm命令">rm命令</h3>
+<p>rm来自单词remove</p>
+<p><code>rm [-r -f] 参数1 参数2 参数3 ....</code></p>
+<p>同cp命令一样,-r选项用于删除文件夹</p>
+<p>-f表示force,强制删除(不会弹出提示确认信息)</p>
+<ul>
+<li>普通用户删除内容不会弹出提示,只有root管理员用户删除内容会有提示</li>
+<li>所以一般用户用不到-f选项</li>
+</ul>
+<p>参数1,参数2,参数3…表示要删除的文件或1文件夹路径,用空格分开</p>
+<pre>[cjl-linux@localhost Desktop]$ ls
+<font color="#005FFF">01</font>  test01.txt  test.txt
+[cjl-linux@localhost Desktop]$ rm test.txt
+[cjl-linux@localhost Desktop]$ ls
+<font color="#005FFF">01</font>  test01.txt
+</pre>
+<p>rm支持通配符*,用来模糊匹配</p>
+<ul>
+<li>test*匹配任何以test开头的内容</li>
+<li>*test匹配任何以test结尾的内容</li>
+<li><code>*test*</code>表示匹配任何包含test的内容</li>
+</ul>
+<p>可以通过<code>su - root</code>,并输入密码123456(和普通用户默认一样)临时切换到root用户体验</p>
+<p>通过输入exit命令,退回普通用户(临时用root,用完记得退出)</p>
+<pre>[root@localhost test01]# ls
+<font color="#005FFF">01cpy</font>  <font color="#005FFF">20230528</font>  test1.txt  test2.txt  test3.txt
+[root@localhost test01]# rm test1.txt
+rm: remove regular file ‘test1.txt’? y
+[root@localhost test01]# ls
+<font color="#005FFF">01cpy</font>  <font color="#005FFF">20230528</font>  test2.txt  test3.txt
+</pre>
+<h2 id="7-查找命令which和find">7.查找命令<code>which</code>和<code>find</code></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs linux">cjl@debian:~$ which pwd<br>/usr/bin/pwd<br></code></pre></td></tr></table></figure>
+<pre>[cjl-linux@localhost ~]$ which pwd
+/usr/bin/pwd
+</pre>
+<p><code>cd</code>,<code>pwd</code>等命令相当于二进制程序，可以用<code>which</code>命令找到它们文件的存放地址</p>
+<p>which只针对  <strong>命令</strong>  的程序文件查找</p>
+<p>find用于按文件名查找文件，语法：</p>
+<p><code>find 起始路径 -name &quot;被查找文件名&quot;</code></p>
+<p>为了在整个系统进行搜索，要切换到root用户获得管理员权限<code>su - root</code>或<code>su root</code>(亲测可行)</p>
+<p><code>su</code>命令意思是switch user</p>
+<p>在根目录查找名字为test的文件</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs elixir">root<span class="hljs-variable">@debian</span><span class="hljs-symbol">:/home/cjl</span><span class="hljs-comment"># find / -name &quot;test&quot;</span><br>/usr/lib/python3.<span class="hljs-number">11</span>/test<br>/usr/bin/test<br>root<span class="hljs-variable">@debian</span><span class="hljs-symbol">:/home/cjl</span><span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+<pre>[cjl-linux@localhost ~]$ su root
+Password: 
+[root@localhost cjl-linux]# find / -name &quot;test&quot;
+find: ‘/run/user/1000/gvfs’: Permission denied
+/usr/bin/test
+/usr/lib/modules/3.10.0-957.el7.x86_64/kernel/drivers/ntb/test
+/usr/lib/alsa/init/test
+/usr/lib64/python2.7/test
+/usr/lib64/python2.7/unittest/test
+/usr/share/espeak-data/voices/test
+/usr/src/kernels/3.10.0-957.el7.x86_64/drivers/ntb/test
+/usr/src/kernels/3.10.0-957.el7.x86_64/include/config/test
+/usr/src/kernels/3.10.0-957.el7.x86_64/lib/raid6/test
+</pre>
+<h3 id="通配符">通配符</h3>
+<p>使用通配符*来做模糊查询</p>
+<p><code>test*</code>匹配任何以<code>test</code>开头的内容</p>
+<p><code>*test</code>匹配任何以<code>test</code>结尾的内容</p>
+<p><code>*test*</code>匹配任何包含<code>test</code>的内容</p>
+<pre>[root@localhost ~]# find / -name &quot;*test&quot;
+</pre>
+<p>…</p>
+<h3 id="find命令按照大小查找">find命令按照大小查找</h3>
+<p><code>find 起始路径 -size +|-n [kMG]</code></p>
+<p>+,-表示大于和小于</p>
+<p>n表示大小数字</p>
+<p>kMG表示大小单位,  k(<strong>小写字母</strong>)表示kB ,  M表示MB,   G表示GB</p>
+<p>查找小于10kB的文件:<code>find / -size -10k</code></p>
+<p>查找大于100MB的文件:<code>find / -size +100M</code></p>
+<p>查找大于1GB的文件:<code>find / -size +1G</code></p>
+<p>注:   文件很多输出不停   ,   用快捷键<code>ctrl+C</code>可以强制停止输出`</p>
+<h3 id="passwd修改密码">passwd修改密码</h3>
+<p>在root用户下</p>
+<p><code>passwd</code>修改root密码</p>
+<p><code>passwd cjl-linux</code>修改用户cjl-linux的密码</p>
+<h2 id="8-grep和wc和管道符">8.grep和wc和管道符</h2>
+<h3 id="grep命令过滤文件内容">grep命令过滤文件内容</h3>
+<p><code>grep [-n] 关键字 文件路径</code></p>
+<ul>
+<li>
+<p>-n  可选,表示在结果中显示匹配的行的行号</p>
+</li>
+<li>
+<p>参数,关键字,必填,表示过滤的关键字, 带有空格或其他特殊符号,建议使用“  ”将关键字包围起来</p>
+</li>
+<li>
+<p>参数,文件路径,必填,表示要过滤的内容的文件路径,==可作为内容输入端口==</p>
+</li>
+</ul>
+<pre>[cjl-linux@localhost ~]$ cat test.txt
+114514 1919810
+itheima is a brand of itcast
+itcast stock code is 003032
+[cjl-linux@localhost ~]$ grep &quot;itheima&quot; test.txt
+<font color="#EF2929"><b>itheima</b></font> is a brand of itcast
+[cjl-linux@localhost ~]$ grep &quot;itcast&quot; test.txt
+itheima is a brand of <font color="#EF2929"><b>itcast</b></font>
+<font color="#EF2929"><b>itcast</b></font> stock code is 003032
+[cjl-linux@localhost ~]$ grep -n &quot;code&quot; test.txt
+<font color="#4E9A06">3</font><font color="#06989A">:</font>itcast stock <font color="#EF2929"><b>code</b></font> is 003032
+</pre>
+<h3 id="wc命令统计内容数量-统计文件信息">wc命令统计内容数量(统计文件信息)</h3>
+<p>可以通过<code>wc</code>命令统计文件的行数、单词数量等</p>
+<p>语法: <code>wc [-c  -m -l -w]  文件路径</code></p>
+<ul>
+<li>选项，-c，统计bytes数量</li>
+<li>选项,  -m，统计字符数量</li>
+<li>选项，-l，统计行数</li>
+<li>选项，-w，统计单词数量</li>
+<li>参数，文件路径，被统计的文件，==可作为内容输入端口==</li>
+</ul>
+<pre>[cjl-linux@localhost ~]$ cat test.txt
+114514 1919810
+itheima is a brand of itcast
+itcast stock code is 003032
+[cjl-linux@localhost ~]$ wc test.txt
+ 3 13 72 test.txt
+</pre>
+<p>3表示行数    13表示单词数量(按照空格划分)    59字节数</p>
+<p>包含选项:</p>
+<pre>[cjl-linux@localhost ~]$ wc -c test.txt
+72 test.txt
+[cjl-linux@localhost ~]$ wc -m test.txt
+72 test.txt
+[cjl-linux@localhost ~]$ wc -l test.txt
+3 test.txt
+[cjl-linux@localhost ~]$ wc -w test.txt
+13 test.txt
+</pre>
+<h3 id="管道符的概念和使用">管道符的概念和使用</h3>
+<p>管道符：|</p>
+<p>管道符的含义是:将管道符左边命令的结果,作为右边命令的输入</p>
+<pre>[cjl-linux@localhost ~]$ grep itheima test.txt
+<font color="#EF2929"><b>itheima</b></font> is a brand of itcast
+[cjl-linux@localhost ~]$ cat test.txt | grep itheima
+<font color="#EF2929"><b>itheima</b></font> is a brand of itcast
+[cjl-linux@localhost ~]$ cat test.txt | wc -l
+3
+</pre>
+<pre>[cjl-linux@localhost ~]$ ls
+<font color="#005FFF">Desktop</font>  <font color="#005FFF">Documents</font>  <font color="#005FFF">Downloads</font>  <font color="#005FFF">Music</font>  <font color="#005FFF">Pictures</font>  <font color="#005FFF">Public</font>  <font color="#005FFF">Templates</font>  <font color="#005FFF">test01</font>  test.txt  <font color="#005FFF">Videos</font>
+[cjl-linux@localhost ~]$ ls | grep test
+<font color="#EF2929"><b>test</b></font>01
+<font color="#EF2929"><b>test</b></font>.txt
+</pre>
+<p>管道符可以嵌套</p>
+<pre>[cjl-linux@localhost ~]$ cat test.txt | grep itcast
+itheima is a brand of <font color="#EF2929"><b>itcast</b></font>
+<font color="#EF2929"><b>itcast</b></font> stock code is 003032
+[cjl-linux@localhost ~]$ cat test.txt | grep itcast | grep itheima
+<font color="#EF2929"><b>itheima</b></font> is a brand of itcast
+</pre>
+<h2 id="9-echo-tail-重定向符">9.echo-tail-重定向符</h2>
+<h3 id="使用echo命令输出内容">使用echo命令输出内容</h3>
+<p>可以使用echo命令在命令行内输出指定内容</p>
+<p>语法：<code>echo 输出的内容</code></p>
+<p>无需选项，只有一个参数，表示要输出的内容，复杂内容可以用“  ”包围</p>
+<p>演示：在终端上显示： Hello Linux</p>
+<pre>[cjl-linux@localhost ~]$ echo &quot;Hello Linux&quot;
+Hello Linux
+</pre>
+<p>带有空格或 \ 等特殊符号，建议使用双引号包围</p>
+<p>因为不包围的话，空格后很容易被识别为参数2，尽管echo不受影响，但是要养成习惯哦</p>
+<pre>[cjl-linux@localhost ~]$ echo Hello Linux
+Hello Linux
+</pre>
+<h3 id="反引号ˋ的使用">反引号<code>ˋ</code>的使用</h3>
+<p>看一下如下命令:echo pwd</p>
+<pre>[cjl-linux@localhost ~]$ echo pwd
+pwd
+</pre>
+<p>本意是想，输出当前的工作路径，但是pwd被作为普通字符输出了。</p>
+<p>我们可以通过将命令用反引号（通常也称之为飘号)`将其包围</p>
+<p>被`包围的内容，会被作为命令执行，而非普通字符</p>
+<pre>[cjl-linux@localhost ~]$ echo `pwd`
+/home/cjl-linux
+</pre>
+<h3 id="重定向符号的使用">重定向符号的使用</h3>
+<p>两个特殊符号，重定向符： &gt;和&gt;&gt;</p>
+<ul>
+<li>
+<p><code>&gt;</code>,将左侧命令的结果，覆盖写入到符号右侧指定的文件中</p>
+</li>
+<li>
+<p><code>&gt;&gt;</code>，将左侧命令的结果，追加写入到符号右侧指定的文件中</p>
+</li>
+</ul>
+<p>示例1:   <code>&gt;</code>    覆盖内容</p>
+<pre>[cjl-linux@localhost ~]$ cat test.txt
+114514 1919810
+[cjl-linux@localhost ~]$ echo &quot;hello linux&quot; &gt; test.txt
+[cjl-linux@localhost ~]$ cat test.txt
+hello linux
+</pre>
+<p>示例2:   <code>&gt;&gt;</code>   追加内容</p>
+<pre>[cjl-linux@localhost ~]$ echo &quot;114514 1919810&quot; &gt;&gt; test.txt
+[cjl-linux@localhost ~]$ cat test.txt
+hello linux
+114514 1919810
+</pre>
+<pre>[cjl-linux@localhost ~]$ ls &gt;&gt; test.txt
+[cjl-linux@localhost ~]$ cat test.txt
+hello linux
+114514 1919810
+Desktop
+Documents
+Downloads
+Music
+Pictures
+Public
+Templates
+test01
+test.txt
+Videos
+</pre>
+<h3 id="tail命令跟踪文件更改">tail命令跟踪文件更改</h3>
+<p>使用tail命令，可以查看文件尾部内容，跟踪文件的最新更改，语法如下：</p>
+<p><code>tail [-f -num] Linux路径</code></p>
+<ul>
+<li>
+<p>参数，Linux路径，表示被跟踪的文件路径</p>
+</li>
+<li>
+<p>选项，-f，表示持续跟踪文件的最新更改(follow)</p>
+<p>(这个程序不会自动结束,如果在文件尾部追加内容,屏幕上会自动更新文件的内容)</p>
+<p>快捷键<code>Ctrl+C</code>可以停止该命令的执行</p>
+</li>
+<li>
+<p>选项，-num，表示，查看尾部多少行，不填默认10行</p>
+</li>
+</ul>
+<pre>[cjl-linux@localhost ~]$ ls &gt; test.txt
+[cjl-linux@localhost ~]$ ls / &gt;&gt;test.txt
+[cjl-linux@localhost ~]$ tail test.txt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+</pre>
+<p>只看5行:</p>
+<pre>[cjl-linux@localhost ~]$ tail -5 test.txt
+srv
+sys
+tmp
+usr
+var</pre>
+<h2 id="10-VI编辑器">10. VI编辑器</h2>
+<p>vi\vim编辑器介绍</p>
+<p>vi\vim是visual interface的简称，是Linux中最经典的文本编辑器</p>
+<p>同图形化界面中的文本编辑器一样,vi是命令行下对文本文件进行编辑的绝佳选择。</p>
+<p>vim 是 vi 的加强版本，兼容 vi 的所有指令，不仅能编辑文本，而且还具有 shell 程序编辑的功能，可以不同颜色的字体来辨别语法的正确性，极大方便了程序的设计和编辑性。</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/010.png" srcset="/img/loading.gif" lazyload alt="010"></p>
+<p>命令模式</p>
+<p>如果需要通过vi/vim编辑器编辑文件，请通过如下命令：</p>
+<p><code>vi 文件路径</code></p>
+<p><code>vim 文件路径</code></p>
+<p>vim兼容全部的vi功能，后续全部使用vim命令</p>
+<ul>
+<li>如果文件路径表示的文件==不存在==，那么此命令会用于==编辑新文件==</li>
+<li>如果文件路径表示的文件==存在==，那么此命令用于==编辑已有文件==</li>
+</ul>
+<p>通过vi/vim命令编辑文件，会打开一个新的窗口，此时这个窗口就是：命令模式窗口</p>
+<p>命令模式是vi编辑器的入口和出口，如上图</p>
+<ul>
+<li>进入vi编辑器会进入命令模式</li>
+<li>通过命令模式输入键盘指令，可以进入输入模式</li>
+<li>输入模式需要退回到命令模式,然后通过命令可以进入底线命令模式</li>
+</ul>
+<p>在命令模式下</p>
+<ul>
+<li>按两次y,再按一次p,可以复制粘贴当前行</li>
+<li>按两次d,可以删除当前行</li>
+<li>按一次u,可以撤销</li>
+</ul>
+<p>退出时输入wq  ,  w表示保存   ,   q表示退出</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/010-1.png" srcset="/img/loading.gif" lazyload alt="010-1"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/010-2.png" srcset="/img/loading.gif" lazyload alt="010-2"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/010-3.png" srcset="/img/loading.gif" lazyload alt="010-3"></p>
+<p>:set paste 开启时 可以保证在输入模式粘贴时格式不错乱</p>
+<h2 id="11-root用户">11.root用户</h2>
+<p>root用户（超级管理员）</p>
+<p>无论是Windows、MacoS、Linux均采用多用户的管理模式进行权限管理。</p>
+<p>在Linux系统中,拥有最大权限的账户名为: root (超级管理员)</p>
+<p>而在前期,我们一直使用的账户是普通的用户:cjl-linux</p>
+<p>普通用户的权限，一般在其HOME目录内是不受限的</p>
+<p>一旦出了HOME目录,大多数地方,普通用户仅有只读和执行权限,无修改权限</p>
+<h3 id="su和exit命令">su和exit命令</h3>
+<p>在前面，我们接触过su命令切换到root账户。</p>
+<p>su命令就是用于账户切换的系统命令,其来源英文单词： Switch User</p>
+<p>语法：<code>su [-] [用户名]</code></p>
+<ul>
+<li><code>-</code>符号是可选的,表示是否在切换用户后加载环境变量(后续讲解),==建议带上==</li>
+<li>参数：用户名，表示要切换的用户,用户名也可以省略,省略表示切换到root</li>
+<li>切换用户后，可以通过<code>exit</code>或<code>logout</code>命令退回上一个用户，也可以使用快捷键：<code>ctrl +d</code></li>
+<li>使用普通用户，切换到其它用户需要输入密码，如切换到root用户</li>
+<li>使用root用户切换到其它用户，无需密码，可以直接切换</li>
+</ul>
+<h3 id="sudo命令">sudo命令</h3>
+<p>在我们得知root密码的时候，可以通过su命令切换到root得到最大权限。</p>
+<p>但是我们不建议长期使用root用户，避免带来系统损坏。</p>
+<p>我们可以使用sudo命令，为普通的命令授权，临时以root身份执行。</p>
+<p>语法： <code>sudo 其它命令</code></p>
+<p>在其它命令之前，带上sudo，即可为这一条命令临时赋予root授权</p>
+<p>但是并不是所有的用户，都有权利使用sudo,我们==需要为普通用户配置sudo认证==</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/011-1.png" srcset="/img/loading.gif" lazyload alt="011-1"></p>
+<h2 id="12-用户和用户组">12. 用户和用户组</h2>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/012-1.png" srcset="/img/loading.gif" lazyload alt="012-1"></p>
+<h3 id="用户组管理">用户组管理</h3>
+<p>以下命令需root用户执行</p>
+<ul>
+<li>创建用户组</li>
+</ul>
+<p><code>groupadd 用户组名</code></p>
+<ul>
+<li>删除用户组</li>
+</ul>
+<p><code>groupdel 用户组名</code></p>
+<p>为后续演示，我们创建一个itcast用户组: groupadd itcast</p>
+<h3 id="用户管理">用户管理</h3>
+<p>以下命令需root用户执行</p>
+<ul>
+<li>
+<p>创建用户</p>
+<p><code>useradd [-g -d] 用户名</code></p>
+<ul>
+<li>选项：-g指定用户的组，不指定-g，会创建同名组并自动加入，指定-g需要组已经存在，如已存在同名组，必须使用-g</li>
+<li>选项：-d指定用户HOME路径，不指定，HOME目录默认在： /home/用户名</li>
+</ul>
+</li>
+<li>
+<p>删除用户</p>
+<p><code>userdel [-r] 用户名</code></p>
+<ul>
+<li>选项：-r，删除用户的HOME目录，不使用-r，删除用户时，HOME目录保留</li>
+</ul>
+</li>
+<li>
+<p>查看用户所属组</p>
+<p><code>id [用户名]</code></p>
+<ul>
+<li>参数:用户名,被查看的用户,如果不提供则查看自身</li>
+</ul>
+</li>
+<li>
+<p>修改用户所属组</p>
+<p><code>usermod -aG</code></p>
+<p>用户组 用户名，将指定用户加入指定用户组</p>
+</li>
+</ul>
+<pre>[root@localhost ~]# useradd test2 -g itcast -d /home/test222
+[root@localhost ~]# su - test2
+[test2@localhost ~]$ pwd
+/home/test222
+</pre>
+<pre>[root@localhost ~]# userdel test2
+[root@localhost ~]# cd /home
+[root@localhost home]# ls
+<font color="#005FFF">cjl-linux</font>  <font color="#005FFF">test222</font>
+</pre>
+<pre>[root@localhost home]# id 
+uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[root@localhost home]# id cjl-linux
+uid=1000(cjl-linux) gid=1000(cjl-linux) groups=1000(cjl-linux)</pre>
+<pre>[root@localhost home]# useradd test4
+[root@localhost home]# id test4
+uid=1001(test4) gid=1002(test4) groups=1002(test4)
+[root@localhost home]# usermod -aG itcast test4
+[root@localhost home]# id test4
+uid=1001(test4) gid=1002(test4) groups=1002(test4),1001(itcast)
+</pre>
+<ul>
+<li>
+<p>查看当前系统中有哪些用户</p>
+<p><code>getent passwd</code></p>
+<p>共有7份信息,  分别是:   用户名:   密码(x):  用户ID:   组ID:   描述信息(无用):  HOME目录:  执行终端(默认bash)</p>
+</li>
+<li>
+<p>查看当前系统中有哪些用户组</p>
+<p>语法： <code>getent group</code></p>
+<p>包含3份信息，组名称：组认证(显示为×)：组ID</p>
+</li>
+</ul>
+<h2 id="13-查看权限控制信息">13.查看权限控制信息</h2>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/13-1.png" srcset="/img/loading.gif" lazyload alt="13-1"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/13-2.png" srcset="/img/loading.gif" lazyload alt="13-2"></p>
+<pre>[cjl-linux@localhost ~]$ ls -l
+total 8
+drwxr-xr-x. 3 cjl-linux cjl-linux  34 May 29 19:18 <font color="#005FFF">Desktop</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Documents</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Downloads</font>
+-rw-rw-r--. 1 cjl-linux cjl-linux  72 Jul  7 06:42 hello.txt
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Music</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Pictures</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Public</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Templates</font>
+drwxrwxr-x. 4 cjl-linux cjl-linux  52 May 29 18:07 <font color="#005FFF">test01</font>
+-rw-rw-r--. 1 cjl-linux cjl-linux 168 Jul  7 06:16 test.txt
+drwxr-xr-x. 2 cjl-linux cjl-linux   6 May 26 07:01 <font color="#005FFF">Videos</font>
+</pre>
+<p>rwx</p>
+<p>那么，rwx到底代表什么呢？</p>
+<ul>
+<li>
+<p>r表示读权限</p>
+</li>
+<li>
+<p>w表示写权限</p>
+</li>
+<li>
+<p>x表示执行权限</p>
+</li>
+</ul>
+<p>针对文件、文件夹的不同, rwx的含义有细微差别</p>
+<ul>
+<li>
+<p>r,针对文件可以查看文件内容</p>
+<ul>
+<li>针对文件夹，可以查看文件夹内容，如ls命令</li>
+</ul>
+</li>
+<li>
+<p>w,针对文件表示可以修改此文件</p>
+<ul>
+<li>针对文件夹，可以在文件夹内：创建、删除、改名等操作</li>
+</ul>
+</li>
+<li>
+<p>x,针对文件表示可以将文件作为程序执行</p>
+<ul>
+<li>针对文件夹，表示可以更改工作目录到此文件夹，即cd进入</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-chmod命令修改权限信息">14.chmod命令修改权限信息</h2>
+<p>我们可以使用chmod命令,修改文件、文件夹的权限信息。</p>
+<p>注意，只有文件、文件夹的所属用户或root用户可以修改。</p>
+<p>语法： <code>chmod [-R] 权限 文件或文件夹</code></p>
+<ul>
+<li>选项：-R，对文件夹内的全部内容应用同样的操作</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li>
+<p><code>chmod u=rwx,g=rx,o=x hello.txt </code>，将文件权限修改为：rwxr-x–x</p>
+<ul>
+<li>其中：u表示user所属用户权限，g表示group组权限，o表示other其它用户权限</li>
+</ul>
+</li>
+<li>
+<p><code>chmod-R u=rwx,g=rx,o=x test</code>, 将文件夹test以及文件夹内全部内容权限设置为： rwxr-x–x</p>
+</li>
+</ul>
+<h3 id="权限的数字序号">权限的数字序号</h3>
+<p>除此之外，还有快捷写法：<code>chmod 751 hello.txt</code></p>
+<p>权限可以用3位数字来代表,第一位数字表示用户权限,第二位表示用户组权限,第三位表示其它用户权限。</p>
+<p>数字的细节如下：r记为4,w记为2,x记为1，可以有：</p>
+<ul>
+<li>
+<p>0:    无任何权限，  即  —</p>
+</li>
+<li>
+<p>1： 仅有×权限，    即 --x</p>
+</li>
+<li>
+<p>2:    仅有w权限 ,     即 -w-</p>
+</li>
+<li>
+<p>3:    有w和x权限,    即 -wx</p>
+</li>
+<li>
+<p>4： 仅有r权限,        即 r–</p>
+</li>
+<li>
+<p>5:    有r和x权限,     即 r-x</p>
+</li>
+<li>
+<p>6:    有r和w权限,    即 rw-</p>
+</li>
+<li>
+<p>7:    有全部权限,     即 rwx</p>
+</li>
+</ul>
+<p>所以751表示： rwx(7) r-x(5)–x(1)</p>
+<h2 id="chown命令修改所属用户">chown命令修改所属用户</h2>
+<p>chown命令change owner</p>
+<p>使用chown命令,可以修改文件、文件夹的所属用户和用户组</p>
+<p><strong>普通用户无法修改所属为其它用户或组，所以此命令只适用于root用户执行</strong></p>
+<p>语法: <code>chown [-R][用户][:][用户组]文件或文件夹</code></p>
+<ul>
+<li>
+<p>选项，-R， 同chmod，对文件夹内全部内容应用相同规则</p>
+</li>
+<li>
+<p>选项，用户，修改所属用户</p>
+</li>
+<li>
+<p>选项，用户组，修改所属用户组</p>
+</li>
+<li>
+<p>：用于分隔用户和用户组</p>
+</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li>
+<p><code>chown root hello.txt</code>, 将hello.txt所属用户修改为root</p>
+</li>
+<li>
+<p><code>chown :root hello.txt</code>,将hello.txt所属用户组修改为root</p>
+</li>
+<li>
+<p><code>chown root:itheima hello.txt</code>, 将hello.txt所属用户修改为root,用户组修改为itheima</p>
+</li>
+<li>
+<p><code>chown -R root test</code>，将文件夹test的所属用户修改为root并对文件夹内全部内容应用同样规则</p>
+</li>
+</ul>
+<h2 id="15-linux各类小技巧快捷键">15.linux各类小技巧快捷键</h2>
+<h3 id="ctrl-c-强制停止">ctrl + c 强制停止</h3>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/15-1.png" srcset="/img/loading.gif" lazyload alt="15-1"></p>
+<h3 id="ctrl-d退出或登出">ctrl+d退出或登出</h3>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/15-2.png" srcset="/img/loading.gif" lazyload alt="15-2"></p>
+<pre>[root@localhost ~]# python
+Python 2.7.5 (default, Oct 30 2018, 23:45:53) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-36)] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; print(&quot;hello world&quot;)
+hello world
+</pre>
+<h3 id="history查看历史命令">history查看历史命令</h3>
+<p>可以查看历史输入过的全部命令（序号越大，时间距离现在越近）</p>
+<pre>[cjl-linux@localhost ~]$ history | grep ch
+   72  tou<font color="#EF2929"><b>ch</b></font> test.txt
+  131  whi<font color="#EF2929"><b>ch</b></font> pwd
+  136  whi<font color="#EF2929"><b>ch</b></font> cd
+  143  tou<font color="#EF2929"><b>ch</b></font> test.txt
+  163  e<font color="#EF2929"><b>ch</b></font>o &quot;Hello Linux&quot;
+  164  e<font color="#EF2929"><b>ch</b></font>o Hello Linux
+  165  e<font color="#EF2929"><b>ch</b></font>o pwd
+  166  e<font color="#EF2929"><b>ch</b></font>o `pwd`
+  168  e<font color="#EF2929"><b>ch</b></font>o &quot;114514 1919810&quot;&gt; test.txt
+  170  e<font color="#EF2929"><b>ch</b></font>o &quot;hello linux&quot; &gt; test.txt
+  172  e<font color="#EF2929"><b>ch</b></font>o &quot;114514 1919810&quot; &gt;&gt; test.txt
+  201  <font color="#EF2929"><b>ch</b></font>mod u=rwx,g=r,o=w test.txt
+  211  <font color="#EF2929"><b>ch</b></font>mod 700 test.txt
+  219  history | grep <font color="#EF2929"><b>ch</b></font>
+</pre>
+<p>使用！自动匹配最近执行过的命令（用!py代替python)   py是第一个以py开头的命令</p>
+<pre>  220  python
+  221  history
+  222  pwd
+  223  ls
+  224  ls -l
+  225  history
+[cjl-linux@localhost ~]$ !py
+python
+Python 2.7.5 (default, Oct 30 2018, 23:45:53) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-36)] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</pre>
+<h3 id="ctrl-r历史命令搜索">ctrl+r历史命令搜索</h3>
+<p>如果搜索到的内容是你需要的，那么：</p>
+<ul>
+<li>回车键可以直接执行</li>
+<li>键盘左右键，可以得到此命令（不执行）</li>
+</ul>
+<p>会在history自下而上搜索</p>
+<h3 id="光标移动快捷键">光标移动快捷键</h3>
+<ul>
+<li>
+<p>ctrl + a,跳到命令开头</p>
+</li>
+<li>
+<p>ctrl + e,跳到命令结尾</p>
+</li>
+<li>
+<p>ctrl+键盘左键,向左跳一个单词</p>
+</li>
+<li>
+<p>ctrl + 键盘右键,向右跳一个单词</p>
+</li>
+</ul>
+<h3 id="ctrl-L清屏">ctrl+L清屏</h3>
+<p>clear也有同样效果</p>
+<h2 id="16-软件安装">16.软件安装</h2>
+<h3 id="yum进行软件安装-centOS">yum进行软件安装(centOS)</h3>
+<p>Linux系统的应用商店</p>
+<p>操作系统安装软件有许多种方式，一般分为：</p>
+<ul>
+<li>
+<p>下载安装包自行安装</p>
+<ul>
+<li>
+<p>如 win系统使用 exe文 件、Msi文 件等</p>
+</li>
+<li>
+<p>如Mac系 统 使用 dmg文 件、pkg文 件 等</p>
+</li>
+</ul>
+</li>
+<li>
+<p>系统的应用商店内安装</p>
+<ul>
+<li>
+<p>如 win系 统 有 Microsoft Store商 店</p>
+</li>
+<li>
+<p>如Mac系 统有AppStore商店</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Linux系统同样支持这两种方式,我们首先,先来学习使用: Linux命令行内的&quot;应用商店&quot;, yum命令安装软件</p>
+<p>.rpm是linux的软件安装包格式</p>
+<p>yum:RPM包软件管理器，用于自动化安装配置Linux软件，并可以自动解决依赖问题。</p>
+<p>语法: <code>yum [-y] [install | remove | search]软件名称</code></p>
+<ul>
+<li>
+<p>选项： -y， 自动确认，无需手动确认安装或卸载过程</p>
+</li>
+<li>
+<p>install: 安装</p>
+</li>
+<li>
+<p>remove: 卸载</p>
+</li>
+<li>
+<p>search: 搜索</p>
+</li>
+</ul>
+<p>yum命令需要root权限哦，可以su切换到root,或使用sudo提权。</p>
+<p>yum命令需要联网</p>
+<h3 id="apt进行软件安装-Ubuntu-debian">apt进行软件安装(Ubuntu,debian)</h3>
+<p>前面学习的各类Linux命令，都是通用的。但是软件安装，CentOS系统和Ubuntu是使用不同的包管理器。</p>
+<p>CentOS使用yum管理器，Ubuntu使用apt管理器</p>
+<p>通过前面学习的WSL环境，我们可以得到Ubuntu运行环境。</p>
+<p>语法：<code>apt [-y] [install | removesearch] 软件名称</code></p>
+<p>用法和yum一致，同样需要root权限</p>
+<ul>
+<li>apt install wget, 安装wget</li>
+<li>apt remove wget, 移除wget</li>
+<li>apt search wget, 搜索wget</li>
+</ul>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs haxe">cjl<span class="hljs-meta">@debian:$ sudo su-root</span><br>[sudo] password <span class="hljs-keyword">for</span> cjl: <span class="hljs-type"></span><br>root<span class="hljs-meta">@debian:# apt install wget </span><br>Reading <span class="hljs-keyword">package</span> lists... Done <br>Building dependency tree... Done <br>Reading state information... Done <br>wget <span class="hljs-keyword">is</span> already the <span class="hljs-keyword">new</span><span class="hljs-type">est</span> version (<span class="hljs-number">1.21</span><span class="hljs-number">.3</span><span class="hljs-number">-1</span>+b2).<br><span class="hljs-number">0</span> upgraded, <span class="hljs-number">0</span> <span class="hljs-keyword">new</span><span class="hljs-type">ly</span> installed, <span class="hljs-number">0</span> to remove and <span class="hljs-number">0</span> not upgraded.<br></code></pre></td></tr></table></figure>
+<h2 id="17-systemctl控制软件启动关闭">17.systemctl控制软件启动关闭</h2>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/17-01.png" srcset="/img/loading.gif" lazyload alt="17-01"></p>
+<pre>[cjl-linux@localhost ~]$ systemctl status firewalld
+<font color="#8AE234"><b>●</b></font> firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: <font color="#8AE234"><b>active (running)</b></font> since Sat 2023-07-08 02:01:30 PDT; 1h 57min ago
+     Docs: man:firewalld(1)
+ Main PID: 6557 (firewalld)
+    Tasks: 2
+   CGroup: /system.slice/firewalld.service
+           └─6557 /usr/bin/python -Es /usr/sbin/firewalld --nofork --nopid
+</pre>
+<p>systemctl命令</p>
+<p>除了内置的服务以外，部分第三方软件安装后也可以以systemctl进行控制。</p>
+<ul>
+<li>yum install -y ntp, 安装ntp软件</li>
+</ul>
+<p>可以通过ntpd服务名，配合systemctl进行控制</p>
+<ul>
+<li>yum install -y httpd, 安装apache服务器软件</li>
+</ul>
+<p>可以通过httpd服务名，配合systemctl进行控制</p>
+<pre>[root@localhost ~]# yum install -y ntp
+[root@localhost ~]# systemctl status ntpd
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+</pre>
+<p>部分软件安装后没有自动集成到systemctl中，我们可以手动添加。</p>
+<p>这部分内容在后续章节和大家详细讲解。</p>
+<h2 id="18-ln软链接-快捷方式">18.ln软链接(快捷方式)</h2>
+<p>In命令创建软连接</p>
+<p>在系统中创建软链接,可以将文件、文件夹链接到其它位置。</p>
+<p>类似Windows系统中的_快捷方式_</p>
+<p>语法： <code>ln -s 参数1 参数2</code></p>
+<ul>
+<li>
+<p>-s选项，创建软连接</p>
+</li>
+<li>
+<p>参数1：被链接的文件或文件夹</p>
+</li>
+<li>
+<p>参数2: 要链接去的目的地</p>
+</li>
+</ul>
+<p>实例：</p>
+<ul>
+<li>
+<p>In -s /etc/yum.conf ~/yum.conf</p>
+</li>
+<li>
+<p>In -s /etc/yum ~/yum</p>
+</li>
+</ul>
+<p>注：<code>~</code>表示HOME目录</p>
+<pre>[cjl-linux@localhost etc]$ ln -s /etc/yum.conf ~/yum.conf
+[cjl-linux@localhost etc]$ cd ~/
+[cjl-linux@localhost ~]$ ls -l
+total 8
+drwxr-xr-x. 3 cjl-linux cjl-linux 34 May 29 19:18 <font color="#005FFF">Desktop</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Documents</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Downloads</font>
+-rw-rw-r--. 1 cjl-linux cjl-linux 72 Jul  7 06:42 hello.txt
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Music</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Pictures</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Public</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Templates</font>
+drwxrwxr-x. 4 cjl-linux cjl-linux 52 May 29 18:07 <font color="#005FFF">test01</font>
+-rwx------. 1 root      cjl-linux 57 Jul  7 22:46 <font color="#00AF00">test.txt</font>
+drwxr-xr-x. 2 cjl-linux cjl-linux  6 May 26 07:01 <font color="#005FFF">Videos</font>
+lrwxrwxrwx. 1 cjl-linux cjl-linux 13 Jul  8 04:22 <font color="#00FFFF">yum.conf</font> -&gt; /etc/yum.conf
+</pre>
+<h2 id="19-日期和时区">19.日期和时区</h2>
+<h3 id="date-命令查看日期时间">date 命令查看日期时间</h3>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/19-1.png" srcset="/img/loading.gif" lazyload alt="19-1"></p>
+<pre>[cjl-linux@localhost ~]$ date
+2023年 07月 08日 星期六 04:42:29 PDT
+[cjl-linux@localhost ~]$ date +%Y-%m-%d
+2023-07-08
+[cjl-linux@localhost ~]$ date &quot;+%Y-%m-%d %H:%M:%S&quot;
+2023-07-08 04:45:13
+[cjl-linux@localhost ~]$ date +&quot;%Y-%m-%d %H:%M:%S&quot;
+2023-07-08 04:45:39
+</pre>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/19-2.png" srcset="/img/loading.gif" lazyload alt="19-2"></p>
+<h3 id="修改linux系统的时区">修改linux系统的时区</h3>
+<pre>[cjl-linux@localhost ~]$ su - 
+密码：
+上一次登录：六 7月  8 04:38:25 PDT 2023pts/0 上
+[root@localhost ~]# rm -f /etc/localtime 
+[root@localhost ~]# ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+[root@localhost ~]# date
+Sat Jul  8 19:59:18 CST 2023
+</pre>
+<h3 id="手动使用ntp进行时间同步和校准">手动使用ntp进行时间同步和校准</h3>
+<pre>[root@localhost ~]# ntpdate -u ntp.aliyun.com
+ 8 Jul 20:04:29 ntpdate[14028]: adjust time server 203.107.6.88 offset 0.001643 sec
+</pre>
+<h2 id="20-IP地址和主机名">20.IP地址和主机名</h2>
+<h3 id="IP地址">IP地址</h3>
+<p>每一台联网的电脑都会有一个地址，用于和其它计算机进行通讯</p>
+<p>IP地址主要有2个版本, V4版本和V6版本(V6很少用,课程暂不涉及)</p>
+<p>IPv4版本的地址格式是: a.b.c.d,其中abcd表示0-255的数字,如192.168.88.101就是一个标准的IP地址</p>
+<p>可以通过命令: ifconfig,查看本机的ip地址,如无法使用ifconfig命令,可以安装: yum -y install net-tools</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cjl</span>@CJL的Huawei:~$ ifconfig<br><span class="hljs-attribute">eth0</span>: flags=<span class="hljs-number">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="hljs-number">1500</span><br>        <span class="hljs-attribute">inet</span> <span class="hljs-number">172.22.139.108</span>  netmask <span class="hljs-number">255.255.240.0</span>  broadcast <span class="hljs-number">172.22.143.255</span><br>        <span class="hljs-attribute">inet6</span> fe80::<span class="hljs-number">215</span>:<span class="hljs-number">5</span>dff:febf:<span class="hljs-number">629</span>b  prefixlen <span class="hljs-number">64</span>  scopeid <span class="hljs-number">0</span>x20&lt;link&gt;<br>        <span class="hljs-attribute">ether</span> <span class="hljs-number">00</span>:<span class="hljs-number">15</span>:<span class="hljs-number">5</span>d:bf:<span class="hljs-number">62</span>:<span class="hljs-number">9</span>b  txqueuelen <span class="hljs-number">1000</span>  (Ethernet)<br>        <span class="hljs-attribute">RX</span> packets <span class="hljs-number">179</span>  bytes <span class="hljs-number">219537</span> (<span class="hljs-number">219</span>.<span class="hljs-number">5</span> KB)<br>        <span class="hljs-attribute">RX</span> errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span>  overruns <span class="hljs-number">0</span>  frame <span class="hljs-number">0</span><br>        <span class="hljs-attribute">TX</span> packets <span class="hljs-number">98</span>  bytes <span class="hljs-number">6788</span> (<span class="hljs-number">6</span>.<span class="hljs-number">7</span> KB)<br>        <span class="hljs-attribute">TX</span> errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span> overruns <span class="hljs-number">0</span>  carrier <span class="hljs-number">0</span>  collisions <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>可知IP地址为<code>172.22.139.108</code></p>
+<h3 id="特殊IP地址">特殊IP地址</h3>
+<ul>
+<li>127.0.0.1   用于指代本机</li>
+<li>0.0.0.0     ,特殊IP地址
+<ul>
+<li>可以用于指代本机</li>
+<li>可以在端口绑定中用来确定绑定关系(后续讲解)</li>
+<li>在一些IP地址限制中，表示所有IP的意思，如放行规则设置为0.0.0.0，表示允许任意IP访问</li>
+</ul>
+</li>
+</ul>
+<h3 id="主机名">主机名</h3>
+<p>每一台电脑除了对外联络地址（IP地址)以外,也可以有一个名字，称之为主机名</p>
+<p>无论是Windows或Linux系统,都可以给系统设置主机名</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby">cjl<span class="hljs-variable">@CJL</span>的<span class="hljs-title class_">Huawei</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>hostname<br><span class="hljs-variable constant_">CJL</span>的<span class="hljs-title class_">Huawei</span><br></code></pre></td></tr></table></figure>
+<h3 id="修改主机名">修改主机名</h3>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/20-1.png" srcset="/img/loading.gif" lazyload alt="20-1"></p>
+<pre>[root@localhost ~]# hostname
+localhost.localdomain
+[root@localhost ~]# hostnamectl set-hostname &quot;CJL Linux&quot;
+[root@localhost ~]# hostname
+cjllinux
+</pre>
+<h3 id="域名解析">域名解析</h3>
+<p>IP地址实在是难以记忆， 有没有什么办法可以通过主机名或替代的字符地址去代替数字化的IP地址呢？</p>
+<p>实际上，我们一直都是通过字符化的地址去访问服务器，很少指定IP地址</p>
+<p>比如,我们在浏览器内打开: <a target="_blank" rel="noopener" href="http://www.baidu.com">www.baidu.com</a>,会打开百度的网址</p>
+<p>其中，<a target="_blank" rel="noopener" href="http://www.baidu.com">www.baidu.com</a>，是百度的网址，我们称之为：域名</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/20-2.png" srcset="/img/loading.gif" lazyload alt="20-2"></p>
+<h2 id="21-配置linux固定IP地址">21.配置linux固定IP地址</h2>
+<h3 id="为什么需要固定IP">为什么需要固定IP</h3>
+<p>当前我们虚拟机的Linux操作系统，其IP地址是通过DHCP服务获取的。</p>
+<p>DHCP:动态获取IP地址,即每次重启设备后都会获取一次,可能导致IP地址频繁变更</p>
+<p>原因1:办公电脑IP地址变化无所谓,但是我们要远程连接到Linux系统,如果IP地址经常变化我们就要频繁修改适配很麻烦</p>
+<p>原因2:在刚刚我们配置了虚拟机IP地址和主机名的映射,如果IP频繁更改,我们也需要频繁更新映射关系</p>
+<p>综上所述，我们需要IP地址固定下来，不要变化了。</p>
+<p>在VMware Workstation中配置固定IP</p>
+<p>配置固定IP需要2个大步骤：</p>
+<ol>
+<li>在VMware Workstation (或Fusion)中配置IP地址网关和网段(IP地址的范围)</li>
+<li>在Linux系统中手动修改配置文件,固定IP</li>
+</ol>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/21-1.png" srcset="/img/loading.gif" lazyload alt="21-1"></p>
+<pre>[cjl-linux@cjllinux etc]$ ifconfig
+ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.88.130  netmask 255.255.255.0  broadcast 192.168.88.255
+</pre>
+<h2 id="21-网络请求和下载">21.网络请求和下载</h2>
+<h3 id="1-掌握使用ping命令检查服务器是否可联通">1.掌握使用ping命令检查服务器是否可联通</h3>
+<p>可以通过ping命令,检查指定的网络服务器是否是可联通状态</p>
+<p>语法： <code>ping [-c num] ip或主机名</code></p>
+<p>选项： -c， 检查的次数，不使用-c选项，将无限次数持续检查</p>
+<p>参数：ip或主机名，被检查的服务器的ip地址或主机名地址</p>
+<h3 id="2-掌握使用wget命令下载文件">2.掌握使用wget命令下载文件</h3>
+<p>wget是非交互式的文件下载器,可以在命令行内下载网络文件</p>
+<p>语法： <code>wget [-b] url</code></p>
+<p>选项：-b,可选，后台下载，会将日志写入到当前工作目录的wget-log</p>
+<p>文件参数：url，下载链接</p>
+<h3 id="3-掌握使用curl命令发起网络请求">3.掌握使用curl命令发起网络请求</h3>
+<p>示例：</p>
+<p>向cip.cc发起网络请求: <code>curl cip.cc</code></p>
+<p>向python.itheima.com发起网络请求: <code>curl python.itheima.com</code>(会得到网站的html代码)</p>
+<p>通过curl下载hadoop-3.3.0安装包: <code>curl-O http://archive.apache.org/dist/hadoop/common/hadoop3.3.0/hadoop-3.3.0.tar.gz</code></p>
+<pre>[cjl-linux@cjllinux ~]$ curl cip.cc
+IP	: 58.249.112.87
+地址	: 中国  广东  广州
+运营商	: 联通</pre>
+<p>数据二	: 广东省广州市 | 联通</p>
+<p>数据三	: 中国广东省广州市 | 联通</p>
+<p>URL	: <a target="_blank" rel="noopener" href="http://www.cip.cc/58.249.112.87">http://www.cip.cc/58.249.112.87</a></p>
+<h2 id="22-端口">22.端口</h2>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/22-1.png" srcset="/img/loading.gif" lazyload alt="22-1"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/22-2.png" srcset="/img/loading.gif" lazyload alt="22-2"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/22-3.png" srcset="/img/loading.gif" lazyload alt="image-20230711193430563"></p>
+<p>1.什么是端口？</p>
+<p>端口是指计算机和外部交互的出入口，可以分为物理端口和虚拟端口</p>
+<ul>
+<li>
+<p>物理端口：USB、HDMI、DP、VGA、RJ45等</p>
+</li>
+<li>
+<p>虚拟端口：操作系统和外部交互的出入口</p>
+</li>
+</ul>
+<p>IP只能确定计算机,通过端口才能锁定要交互的程序</p>
+<p>2.端口的划分</p>
+<ul>
+<li>
+<p>公认端口：1~1023，用于系统内置或常用知名软件绑定使用</p>
+</li>
+<li>
+<p>注册端口：1024~49151，用于松散绑定使用（用户自定义）</p>
+</li>
+<li>
+<p>动态端口：49152~65535，用于临时使用（多用于出口)</p>
+</li>
+</ul>
+<p>3.查看端口占用</p>
+<ul>
+<li>
+<p><code>nmap IP地址</code>，查看指定IP的对外暴露端口</p>
+</li>
+<li>
+<p>``netstat-anp | grep 端口号`,查看本机指定端口号的占用情况</p>
+</li>
+</ul>
+<h2 id="23-进程">23.进程</h2>
+<p>程序运行在操作系统中,是被操作系统所管理的。</p>
+<p>为管理运行的程序，每一个程序在运行的时候，便被操作系统注册为系统中的一个：进程</p>
+<p>并会为每一个进程都分配一个独有的:进程ID(进程号)</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/23-1.png" srcset="/img/loading.gif" lazyload alt="23-1"></p>
+<h3 id="关闭进程">关闭进程</h3>
+<p>在Windows系统中,可以通过任务管理器选择进程后,点击结束进程从而关闭它。</p>
+<p>同样，在Linux中，可以通过kill命令关闭进程。</p>
+<p>语法: <code>kill [-9] 进程ID</code></p>
+<p>选项：-9，表示强制关闭进程。不使用此选项会向进程发送信号要求其关闭，但是否关闭看进程自身的处理机制。</p>
+<p>命令关闭:</p>
+<p>窗口1:</p>
+<pre>[cjl-linux@cjllinux ~]$ tail
+已终止</pre>
+<p>窗口2:</p>
+<pre>[cjl-linux@cjllinux ~]$ ps -ef | grep tail
+cjl-lin+  11617   9258  0 22:03 pts/0    00:00:00 <font color="#EF2929"><b>tail</b></font>
+cjl-lin+  11619  11517  0 22:03 pts/1    00:00:00 grep --color=auto <font color="#EF2929"><b>tail</b></font>
+[cjl-linux@cjllinux ~]$ kill 11617
+</pre>
+<p>强制关闭:</p>
+<p>窗口1:</p>
+<pre>[cjl-linux@cjllinux ~]$ tail
+已杀死
+</pre>
+<p>窗口2:</p>
+<pre>[cjl-linux@cjllinux ~]$ ps -ef | grep tail
+cjl-lin+  11662   9258  0 22:05 pts/0    00:00:00 <font color="#EF2929"><b>tail</b></font>
+cjl-lin+  11665  11517  0 22:05 pts/1    00:00:00 grep --color=auto <font color="#EF2929"><b>tail</b></font>
+[cjl-linux@cjllinux ~]$ kill -9 11662</pre>
+<h2 id="24-主机状态监控">24.主机状态监控</h2>
+<h3 id="top查看系统资源占用">top查看系统资源占用</h3>
+<p>可以通过top命令查看CPU、内存使用情况,类似Windows的任务管理器</p>
+<p>默认每5秒刷新一次,语法：直接输入top即可,按q或ctrl + c退出</p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/24-1.png" srcset="/img/loading.gif" lazyload alt="24-1"></p>
+<p><img src="./linux%E7%AC%94%E8%AE%B0.assets/24-2.png" srcset="/img/loading.gif" lazyload alt="24-2"></p>
+<h3 id="top命令选项">top命令选项</h3>
+<p>top命令也支持选项：</p>
+<p>选项 	功能</p>
+<p>-p 		只显示某个进程的信息</p>
+<p>-d	 	设置刷新时间，默认是5s</p>
+<p>-c 		显示产生进程的完整命令,默认是进程名</p>
+<p>-n 		指定刷新次数,比如<code>top -n 3</code>,刷新输出3次后退出</p>
+<p>-b 		以非交互非全屏模式运行，以批次的方式执行top，一般配合-n指定输出几次统计信息，将输出重定向到指定文件,比如 <code>top -b -n 3 &gt; /tmp/top.tmp</code></p>
+<p>-i 	 	不显示任何闲置（idle)或无用（zombie) 的进程</p>
+<p>-u 		查找特定用户启动的进程</p>
+<h3 id="top交互式选项">top交互式选项</h3>
+<p>当top以交互式运行(非-b选项启动),可以用以下交互式命令进行控制</p>
+<p>按键    	功能</p>
+<p>h键 		按下h键，会显示帮助画面</p>
+<p>c键 		按下c键,会显示产生进程的完整命令,等同于-c参数,再次按下c键,变为默认显示</p>
+<p>f键 	 	按下f键,可以选择需要展示的项目</p>
+<p>M键		按下M键,根据驻留内存大小(RES)排序</p>
+<p>P键 		按下P键，根据CPU使用百分比大小进行排序</p>
+<p>T键 		按下T键，根据时间/累计时间进行排序</p>
+<p>E键 		按下E键，切换顶部内存显示单位</p>
+<p>e键 		按下e键，切换进程内存显示单位</p>
+<p>l键 		 按下l键，切换显示平均负载和启动时间信息。</p>
+<p>i键 	 	按下i键,不显示闲置或无用的进程,等同于-i参数，再次按下,变为默认显示</p>
+<p>t键 	 	按下t键，切换显示CPU状态信息m键按下m键，切换显示内存信息</p>
+<h3 id="df磁盘信息监控">df磁盘信息监控</h3>
+<p>使用df命令,可以查看硬盘的使用情况</p>
+<p>语法： <code>df [-h]</code></p>
+<p>选项： -h,以更加人性化的单位显示</p>
+<pre>[cjl-linux@cjllinux ~]$ df -h
+文件系统        容量  已用  可用 已用% 挂载点
+/dev/sda3        38G  6.0G   32G   16% /
+devtmpfs        895M     0  895M    0% /dev
+tmpfs           910M     0  910M    0% /dev/shm
+tmpfs           910M   11M  900M    2% /run
+tmpfs           910M     0  910M    0% /sys/fs/cgroup
+/dev/sda1       297M  157M  140M   53% /boot
+tmpfs           182M   32K  182M    1% /run/user/1000
+</pre>
+<p>磁盘信息监控</p>
+<p>可以使用iostat查看CPU、磁盘的相关信息</p>
+<p>语法:<code>iostat [-x] [num1] [num2]</code></p>
+<p>选项： -x， 显示更多信息</p>
+<p>num1:数字,刷新间隔,</p>
+<p>num2:数字,刷新几次</p>
+<p><strong>(后面的图片都存在云端了，感谢黑马程序员:smile:)</strong></p>
+<h3 id="iostat命令">iostat命令</h3>
+<p>查看CPU、磁盘的相关信息</p>
+<p><img src="https://image-set.oss-cn-zhangjiakou.aliyuncs.com/img-out/2022/10/27/20221027221440.png" srcset="/img/loading.gif" lazyload alt="image-20221027221439990"></p>
+<p><img src="https://image-set.oss-cn-zhangjiakou.aliyuncs.com/img-out/2022/10/27/20221027221514.png" srcset="/img/loading.gif" lazyload alt="image-20221027221514237"></p>
+<h3 id="sar命令">sar命令</h3>
+<p>查看网络统计</p>
+<p><img src="https://image-set.oss-cn-zhangjiakou.aliyuncs.com/img-out/2022/10/27/20221027221545.png" srcset="/img/loading.gif" lazyload alt="image-20221027221545822"></p>
+<h2 id="25-环境变量">25.环境变量</h2>
+<p>在讲解which命令的时候,我们知道使用的一系列命令其实本质上就是一个个的可执行程序。</p>
+<p>比如，cd命令的本体就是: /usr/bin/cd这个程序文件。</p>
+<p>我们是否会有疑问，为何无论当前工作目录在哪里，都能执行: /usr/bin/cd这个程序呢？</p>
+<p>环境变量是操作系统（Windows、Linux、Mac）在运行的时候，记录的一些关键性信息，用以辅助系统运行。</p>
+<p>在Linux系统中执行：env命令即可查看当前系统中记录的环境变量</p>
+<p>环境变量是一种KeyValue型结构</p>
+<h3 id="环境变量：PATH">环境变量：PATH</h3>
+<p>在前面提出的问题中，我们说无论当前工作目录是什么，都能执行/usr/bin/cd这个程序，这个就是借助环境变量中：PATH这个项目的值来做到的。</p>
+<pre>[cjl-linux@cjllinux ~]$ env | grep PATH
+<font color="#EF2929"><b>PATH</b></font>=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/cjl-linux/.local/bin:/home/cjl-linux/bin
+WINDOW<font color="#EF2929"><b>PATH</b></font>=1
+</pre>
+<p>当执行任何命令，都会按照顺序，从上述路径中搜索要执行的程序的本体</p>
+<p>比如执行cd命令，就从第三个目录/usr/bin中搜索到了cd命令，并执行</p>
+<h3 id="符号">$符号</h3>
+<p>可以取出指定的环境变量的值</p>
+<p>语法：<code>$变量名</code></p>
+<p>示例：</p>
+<p><code>echo $PATH</code>，输出PATH环境变量的值</p>
+<p><code>echo $&#123;PATH&#125;ABC</code>，输出PATH环境变量的值以及ABC</p>
+<p>如果变量名和其它内容混淆在一起，可以使用${}</p>
+<pre>[cjl-linux@cjllinux ~]$ echo $PATH
+/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/cjl-linux/.local/bin:/home/cjl-linux/bin</pre>
+<h3 id="自行设置环境变量">自行设置环境变量</h3>
+<p>PATH记录了执行程序的搜索路径</p>
+<p>可以将自定义路径加入PATH内，实现自定义命令在任意地方均可执行的效果</p>
+<ul>
+<li>
+<p>临时设置：export 变量名=变量值</p>
+<pre>[cjl-linux@cjllinux ~]$ export MYNAME=CJL
+[cjl-linux@cjllinux ~]$ echo &quot;$MYNAME is handsome&quot;
+CJL is handsome
+</pre>
+<p>重启终端窗口后，临时设置的环境变量就不再可用</p>
+</li>
+<li>
+<p>永久设置：</p>
+<ul>
+<li>
+<p>针对用户，设置用户HOME目录内：<code>~/.bashrc</code>文件</p>
+<pre><font color="#3465A4"># .bashrc</font>
+<font color="#3465A4"># Source global definitions</font>
+<font color="#AF5F00">if [</font> <font color="#AF5F00">-f</font> /etc/bashrc <font color="#AF5F00">]</font>; <font color="#AF5F00">then</font>
+<font color="#AF5F00">        . </font>/etc/bashrc
+<font color="#AF5F00">fi</font>
+<p><font color="#3465A4"># Uncomment the following line if you don't like systemctl's auto-paging feature:</font><br>
+<font color="#3465A4"># export SYSTEMD_PAGER=</font></p>
+<p><font color="#3465A4"># User specific aliases and functions</font><br>
+<font color="#AF5F00">export</font><font color="#06989A"> MYNAME=CJL</font></p>
+<p>然后用<code>source .bashrc</code>使更改生效</p>
+</li>
+<li>
+<p>针对全局，设置<code>/etc/profile</code></p>
+</li>
+<li>
+<p>并通过语法：source 配置文件，进行立刻生效，或重新登录FinalShell生效</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义环境变量PATH">自定义环境变量PATH</h3>
+<p>环境变量PATH这个项目里面记录了系统执行命令的搜索路径。</p>
+<p>这些搜索路径我们也可以自行添加到PATH中去。</p>
+<p>测试：</p>
+<p>•在当前HOME目录内创建文件夹，myenv，在文件夹内创建文件mkhaha</p>
+<p>•通过vim编辑器，在mkhaha文件内填入：echo 哈哈哈哈哈</p>
+<p>完成上述操作后，随意切换工作目录，执行mkhaha命令尝试一下，会发现无法执行</p>
+<p>•修改PATH的值</p>
+<p>临时修改PATH：export PATH=$PATH:/home/itheima/myenv，再次执行mkhaha，无论在哪里都能执行了</p>
+<p>或将export PATH=$PATH:/home/itheima/myenv，填入用户环境变量文件或系统环境变量文件中去</p>
+<h2 id="26-上传和下载">26.上传和下载</h2>
+<p>我们可以通过FinalShell工具，方便地和虚拟机进行数据交换。</p>
+<p>在FinalShell软件的下方窗体中，提供了Linux的文件系统视图，可以方便的：</p>
+<p>•浏览文件系统，找到合适的文件，右键点击下载，即可传输到本地电脑</p>
+<p>•浏览文件系统，找到合适的目录，将本地电脑的文件拓展进入，即可方便的上传数据到Linux中</p>
+<h3 id="rz-sz命令">rz,sz命令</h3>
+<p>当然，除了通过FinalShell的下方窗体进行文件的传输以外，也可以通过rz、sz命令进行文件传输。</p>
+<p>rz、sz命令需要安装，可以通过：yum -y install lrzsz，即可安装。</p>
+<p>rz命令，进行上传，语法：直接输入rz即可</p>
+<p>sz命令进行下载，语法：sz 要下载的文件</p>
+<h2 id="27-压缩文件">27.压缩文件</h2>
+<p>市面上有非常多的压缩格式</p>
+<p>•zip格式：Linux、Windows、MacOS，常用</p>
+<p>•7zip：Windows系统常用</p>
+<p>•rar：Windows系统常用</p>
+<p>•tar：Linux、MacOS常用</p>
+<p>•gzip：Linux、MacOS常用</p>
+<p>在Windows系统中常用的软件如：winrar、bandizip等软件，都支持各类常见的压缩格式，这里不多做讨论。</p>
+<p>我们现在要学习，如何在Linux系统中操作：tar、gzip、zip这三种压缩格式</p>
+<p>完成文件的压缩、解压操作</p>
+<h3 id="tar命令">tar命令</h3>
+<p>Linux和Mac系统常用有2种压缩格式，后缀名分别是：</p>
+<p>•.tar，称之为tarball，归档文件，即简单的将文件组装到一个.tar的文件内，并没有太多文件体积的减少，仅仅是简单的封装</p>
+<p>•.gz，也常见为.tar.gz，gzip格式压缩文件，即使用gzip压缩算法将文件压缩到一个文件内，可以极大的减少压缩后的体积</p>
+<p>针对这两种格式，使用tar命令均可以进行压缩和解压缩的操作</p>
+<p>语法：</p>
+<p>•-c，(create)创建压缩文件，用于压缩模式</p>
+<p>•-v，显示压缩、解压过程，用于查看进度</p>
+<p>•-x，解压模式</p>
+<p>•-f，要创建的文件，或要解压的文件，-f选项必须在所有选项中位置处于最后一个</p>
+<p>•-z，gzip模式，不使用-z就是普通的tarball格式</p>
+<p>•-C，选择解压的目的地，用于解压模式</p>
+<h4 id="压缩">压缩</h4>
+<p>tar的常用组合为：</p>
+<p>•tar -cvf test.tar 1.txt 2.txt 3.txt</p>
+<p>将1.txt 2.txt 3.txt 压缩到test.tar文件内</p>
+<p>•tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</p>
+<p>将1.txt 2.txt 3.txt 压缩到test.tar.gz文件内，使用gzip模式</p>
+<p>注意：</p>
+<p>•-z选项如果使用的话，一般处于选项位第一个</p>
+<p>•-f选项，必须在选项位最后一个</p>
+<h4 id="解压">解压</h4>
+<p>常用的tar解压组合有</p>
+<p>•tar -xvf test.tar</p>
+<p>解压test.tar，将文件解压至当前目录</p>
+<p>•tar -xvf test.tar -C /home/itheima</p>
+<p>解压test.tar.gz，将文件解压至指定目录（/home/itheima）</p>
+<p>•tar -zxvf test.tar.gz -C /home/itheima</p>
+<p>以Gzip模式解压test.tar.gz，将文件解压至指定目录（/home/itheima）</p>
+<p>注意：</p>
+<p>•-f选项，必须在选项组合体的最后一位</p>
+<p>•-z选项，建议在开头位置</p>
+<p>•-C选项单独使用，和解压所需的其它参数分开</p>
+<h3 id="zip命令压缩">zip命令压缩</h3>
+<p>可以使用zip命令，压缩文件为zip压缩包</p>
+<p>语法：</p>
+<p>•-r，被压缩的包含文件夹的时候，需要使用-r选项，和rm、cp等命令的-r效果一致</p>
+<p>示例：</p>
+<p>•zip test.zip a.txt b.txt c.txt</p>
+<p>将a.txt b.txt c.txt 压缩到test.zip文件内</p>
+<p>•zip -r test.zip test itheima a.txt</p>
+<p>将test、itheima两个文件夹和a.txt文件，压缩到test.zip文件内</p>
+<h4 id="unzip命令解压">unzip命令解压</h4>
+<p>使用unzip命令，可以方便的解压zip压缩包</p>
+<p>语法：</p>
+<p>•-d，指定要解压去的位置，同tar的-C选项</p>
+<p>•参数，被解压的zip压缩包文件</p>
+<p>示例：</p>
+<p>•unzip test.zip，将test.zip解压到当前目录</p>
+<p>•unzip test.zip -d /home/itheima，将test.zip解压到指定文件夹内（/home/itheima）</p>
+<p>注意:同名内容会被替换</p>
+<h2 id="28-ssh命令">28.ssh命令</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh [用户名]@[IP地址] <br></code></pre></td></tr></table></figure>
+<h2 id="29-给命令起别名">29.给命令起别名</h2>
+<p>编辑~/.bashrc</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># .bashrc</span><br><br><span class="hljs-comment"># User specific aliases and functions</span><br><br><span class="hljs-built_in">alias</span> <span class="hljs-built_in">rm</span>=<span class="hljs-string">&#x27;rm -i&#x27;</span><br><span class="hljs-built_in">alias</span> <span class="hljs-built_in">cp</span>=<span class="hljs-string">&#x27;cp -i&#x27;</span><br><span class="hljs-built_in">alias</span> <span class="hljs-built_in">mv</span>=<span class="hljs-string">&#x27;mv -i&#x27;</span><br><span class="hljs-built_in">alias</span> dps=<span class="hljs-string">&#x27;docker ps --format &quot;table &#123;&#123;.ID&#125;&#125;\t&#123;&#123;.Image&#125;&#125;\t&#123;&#123;.Ports&#125;&#125;\t&#123;&#123;.Names&#125;&#125;&quot;&#x27;</span><br><span class="hljs-built_in">alias</span> dis=<span class="hljs-string">&quot;docker images&quot;</span><br><br><span class="hljs-built_in">alias</span> 别名 = <span class="hljs-string">&quot;你的命令&quot;</span><br><br><br><span class="hljs-comment"># Source global definitions</span><br><span class="hljs-keyword">if</span> [ -f /etc/bashrc ]; <span class="hljs-keyword">then</span><br>        . /etc/bashrc<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+<p>然后执行<code>source ~/.bashrc</code></p>
+<h2 id="30-磁盘挂载">30.磁盘挂载</h2>
+<p><code>fdisk -l</code> 查看当前的磁盘</p>
+<p><code>df -h</code> 查看当前硬盘的挂载情况</p>
+<ol>
+<li>
+<p>格式化数据盘</p>
+<p>例如要挂载/dev/vdb, 执行<code>mkfs.ext4 /dev/vdb</code></p>
+</li>
+<li>
+<p>创建将要挂载的目录，例如<code>mkdir /data1</code></p>
+</li>
+<li>
+<p>将新数据盘挂载在该目录下</p>
+<p><code>mount /dev/vdb /data1</code></p>
+</li>
+<li>
+<p>使用<code>df -h</code>，看是否挂载成功</p>
+</li>
+<li>
+<p>设置系统重启后自动挂载数据盘</p>
+<p><code>echo '/dev/vdb /data1 ext4 defaults 0 0' &gt;&gt; /etc/fstab</code></p>
+<p><code>cat /etc/fstab</code>查看是否设置成功</p>
+</li>
+</ol>
+<h2 id="31-nginx">31. nginx</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install nginx<br>ps -ef | grep nginx <span class="hljs-comment"># 查看nginx的进程</span><br>lsof -i:80  <span class="hljs-comment"># 查看80端口的占用情况</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx -s quit</td>
+<td>优雅停止</td>
+</tr>
+<tr>
+<td>nginx -s stop</td>
+<td>立即停止</td>
+</tr>
+<tr>
+<td>nginx -s reload</td>
+<td>重载配置文件，修改配置文件后需要执行这个以让配置文件生效</td>
+</tr>
+<tr>
+<td>nginx -s reopen</td>
+<td>重新打开日志文件</td>
+</tr>
+<tr>
+<td>nginx -V</td>
+<td>查看nginx的安装目录、编译参数等</td>
+</tr>
+<tr>
+<td>nginx -t</td>
+<td>检查nginx配置文件是否有语法错误</td>
+</tr>
+</tbody>
+</table>
+<p>输入<code>nginx -V</code>，可以看到<code>--conf-path=/etc/nginx/nginx.conf</code>为配置文件地址，</p>
+<p>上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">/var/www$ sudo <span class="hljs-built_in">chmod</span> -R 777 html<br>/var/www$ sudo <span class="hljs-built_in">chmod</span> -R 755 html<br></code></pre></td></tr></table></figure>
+<h3 id="配置https">配置https</h3>
+<p>在server块中加入：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> ssl ;<br>        <span class="hljs-comment">#listen [::]:443 ssl default_server;</span><br>        <span class="hljs-comment">#server_name localhost;</span><br>        <span class="hljs-attribute">ssl_certificate</span>      /var/www/cert/algorithmpark.xyz.pem;<br>        <span class="hljs-attribute">ssl_certificate_key</span>  /var/www/cert/algorithmpark.xyz.key;<br>        <span class="hljs-attribute">ssl_session_timeout</span>  <span class="hljs-number">5m</span>;<br>        <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span> TLSv1.<span class="hljs-number">3</span>;<br>        <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<br>        <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br></code></pre></td></tr></table></figure>
+<p>然后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nginx -t  <span class="hljs-comment"># 检查语法错误</span><br>sudo nginx -s reload  <span class="hljs-comment"># 重启nginx</span><br>sudo nginx  <span class="hljs-comment"># 看有没有异常</span><br></code></pre></td></tr></table></figure>
+<p>如果nginx的端口被占用了，执行下面的语句杀死占用的进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo lsof -i:80<br>sudo <span class="hljs-built_in">kill</span> 进程号<br>sudo nginx<br></code></pre></td></tr></table></figure>
+<p>在server块外面添加以下内容，设置重定向，以让来自http的请求自动跳转到https</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs perl">server&#123;<br>        <span class="hljs-keyword">listen</span> <span class="hljs-number">80</span>;<br>        server_name algorithmpark.xyz www.algorithmpark.xyz;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">301</span> https:<span class="hljs-regexp">//</span>$server_name$request_uri;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="32-jupyter-notebook">32. jupyter notebook</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip3 install --upgrade pip<br>pip3 install jupyter<br>sudo jupyter notebook --generate-config<br></code></pre></td></tr></table></figure>
+<pre>Writing default config to: /root/.jupyter/jupyter_notebook_config.py</pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /root/.jupyter/jupyter_notebook_config.py<br></code></pre></td></tr></table></figure>
+<p>添加以下内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">c.NotebookApp.ip=<span class="hljs-string">&#x27;*&#x27;</span> <span class="hljs-comment">##访问ip，一般为服务器公网或者私网ip</span><br>c.NotebookApp.open_browser = <span class="hljs-literal">False</span><br>c.NotebookApp.port =<span class="hljs-number">8002</span> <span class="hljs-comment">##指定的访问配置端口</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> jupyter notebook --allow-root&amp;<br></code></pre></td></tr></table></figure>
+<p>nohup 全称：no hang up（不挂起）。也就是说，当前交互命令行退出的时候，程序还在运行。</p>
+<p>nohup Command [Arg…] [ &amp;] 最后的&quot; &amp;&quot;：表示后台运行，不霸占交互命令行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">tail</span> -f nohup.out  <span class="hljs-comment"># 查看jupyter notebook的log</span><br></code></pre></td></tr></table></figure>
+<p>如何杀死jupyter进程？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef|grep jupyter<br><span class="hljs-built_in">kill</span> 进程号<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%93%E4%B8%9A%E6%8A%80%E8%83%BD/" class="category-chain-item">专业技能</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>linux</div>
+      <div>https://github.algorithmpark.xyz/2023/07/05/linux/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月5日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年1月13日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/31/video/data-structures-and-algorithms/index/" title="data-structures-and-algorithms">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">data-structures-and-algorithms</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/04/algorithm-notes/index/" title="algorithm-notes">
+                        <span class="hidden-mobile">algorithm-notes</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
