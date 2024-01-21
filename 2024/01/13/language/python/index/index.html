@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.algorithmpark.xyz/img/python.jpg">
 <meta property="article:published_time" content="2024-01-13T07:52:53.000Z">
-<meta property="article:modified_time" content="2024-01-13T12:36:09.706Z">
+<meta property="article:modified_time" content="2024-01-19T01:01:28.891Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://github.algorithmpark.xyz/img/python.jpg">
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"github.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"github.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-01-13T12:36:09+00:00
+                    本文最后更新于 2024-01-19T01:01:28+00:00
                   
                   
 
@@ -347,7 +347,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="python笔记">python笔记</h2>
+                <h1>python笔记</h1>
 <h2 id="pycharm常用快捷键">pycharm常用快捷键</h2>
 <table>
 <thead>
@@ -1131,7 +1131,7 @@ Raises ValueError if the value is not present.(报错)</p>
 <p>利用copy深拷贝</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>a=np.arange(<span class="hljs-number">4</span>)<br>b=a.copy()<br><span class="hljs-built_in">print</span>(b <span class="hljs-keyword">is</span> a)<br><span class="hljs-built_in">print</span>(a)<br>a[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>]=[<span class="hljs-number">22</span>,<span class="hljs-number">33</span>]<br><span class="hljs-built_in">print</span>(a)<br><span class="hljs-built_in">print</span>(b)<br></code></pre></td></tr></table></figure>
 <figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs tap">False<br>[0<span class="hljs-number"> 1 </span>2 3]<br>[<span class="hljs-number"> 0 </span>22<span class="hljs-number"> 33 </span> 3]<br>[0<span class="hljs-number"> 1 </span>2 3]<br></code></pre></td></tr></table></figure>
-<h2 id="pandas教程">pandas教程</h2>
+<h1>pandas教程</h1>
 <h2 id="表格基础">表格基础</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>s=pd.Series([<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,np.nan,<span class="hljs-number">44</span>,<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(s)<br></code></pre></td></tr></table></figure>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">0</span>     <span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">1</span>     <span class="hljs-number">3</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">2</span>     <span class="hljs-number">6</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">3</span>     NaN<br><span class="hljs-attribute">4</span>    <span class="hljs-number">44</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">5</span>     <span class="hljs-number">1</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">dtype</span>: float64<br></code></pre></td></tr></table></figure>
@@ -1258,7 +1258,7 @@ Raises ValueError if the value is not present.(报错)</p>
 <h3 id="suffixes处理会重复的列">suffixes处理会重复的列</h3>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># handle overlapping</span><br>boys = pd.DataFrame(&#123;<span class="hljs-string">&#x27;k&#x27;</span>: [<span class="hljs-string">&#x27;K0&#x27;</span>, <span class="hljs-string">&#x27;K1&#x27;</span>, <span class="hljs-string">&#x27;K2&#x27;</span>], <span class="hljs-string">&#x27;age&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]&#125;)<br>girls = pd.DataFrame(&#123;<span class="hljs-string">&#x27;k&#x27;</span>: [<span class="hljs-string">&#x27;K0&#x27;</span>, <span class="hljs-string">&#x27;K0&#x27;</span>, <span class="hljs-string">&#x27;K3&#x27;</span>], <span class="hljs-string">&#x27;age&#x27;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]&#125;)<br>res = pd.merge(boys, girls, on=<span class="hljs-string">&#x27;k&#x27;</span>, suffixes=[<span class="hljs-string">&#x27;_boy&#x27;</span>, <span class="hljs-string">&#x27;_girl&#x27;</span>], how=<span class="hljs-string">&#x27;inner&#x27;</span>)<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache">    <span class="hljs-attribute">k</span>  age_boy  age_girl<br><span class="hljs-attribute">0</span>  K0        <span class="hljs-number">1</span>         <span class="hljs-number">4</span><br><span class="hljs-attribute">1</span>  K0        <span class="hljs-number">1</span>         <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
-<h2 id="pytorch教程">pytorch教程</h2>
+<h1>pytorch教程</h1>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hE411t7RN?vd_source=0746909e8642dc821f4dc86699071129">参考视频</a></p>
 <h2 id="conda管理环境">conda管理环境</h2>
 <p>打开anaconda prompt</p>
@@ -1363,7 +1363,7 @@ Raises ValueError if the value is not present.(报错)</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月13日</div>
+          <div>2024年1月19日</div>
         </div>
       
       
@@ -1393,6 +1393,12 @@ Raises ValueError if the value is not present.(报错)</p>
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/01/19/operating-system/index/" title="操作系统笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">操作系统笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
