@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.algorithmpark.xyz/img/operating-system.png">
 <meta property="article:published_time" content="2024-01-19T09:17:40.000Z">
-<meta property="article:modified_time" content="2024-01-21T01:54:00.003Z">
+<meta property="article:modified_time" content="2024-01-30T14:36:34.502Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://github.algorithmpark.xyz/img/operating-system.png">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k 字
+          15k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          70 分钟
+          122 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-01-21T01:54:00+00:00
+                    本文最后更新于 2024-01-30T14:36:34+00:00
                   
                   
 
@@ -1000,10 +1000,333 @@ id3 ---&gt;id5[允许一个时间段内由多个进程同时对它们进行访�
 <h4 id="记录型信号量">记录型信号量</h4>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*记录型信号量的定义*/</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">int</span> value;<span class="hljs-comment">//剩余资源数</span><br>    Struct process *L; <span class="hljs-comment">//等待队列</span><br>&#125; semaphore;<br><span class="hljs-comment">/*某进程需要使用资源时,通过 wait 原语申请*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">wait</span> <span class="hljs-params">(semaphore S)</span> &#123;<br>    S.value--;<br>    <span class="hljs-keyword">if</span> (S.value &lt; <span class="hljs-number">0</span> ) &#123; <br>        block (S.L);<span class="hljs-comment">//自我阻塞，将当前运行的进程从运行态变为阻塞态</span><br>    &#125;<br>&#125;<br><span class="hljs-comment">/*进程使用完资源后,通过 signal 原语释放*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">signal</span> <span class="hljs-params">(semaphore S)</span>&#123;<br>    S.value++;<br>    <span class="hljs-keyword">if</span> (S.value &lt;= <span class="hljs-number">0</span>) &#123;<br>        wakeup(S.L);<br>    &#125;<br>&#125;<br><span class="hljs-comment">//进程代码</span><br>...<br>wait(S);<br>使用打印机<br>signal(S);<br>...<br></code></pre></td></tr></table></figure>
 <h3 id="用信号量实现进程互斥、同步、前驱关系">用信号量实现进程互斥、同步、前驱关系</h3>
+<h4 id="实现进程互斥">实现进程互斥</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex=<span class="hljs-number">1</span>;<span class="hljs-comment">//初始化信号量</span><br>P1()&#123;<br>    P(mutex);<span class="hljs-comment">//使用临界资源前加锁</span><br>    临界区代码;<br>    V(mutex);<span class="hljs-comment">//使用临界资源后解锁</span><br>&#125;<br>P2()&#123;<br>    P(mutex);<br>    临界区代码;<br>    V(mutex);<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="实现进程同步">实现进程同步</h4>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*信号量机制实现同步*/</span><br>semaphore S=<span class="hljs-number">0</span>; <span class="hljs-comment">//初始化同步信号量，初始值为0</span><br>P1()&#123;<br>    代码<span class="hljs-number">1</span>;<br>    代码<span class="hljs-number">2</span>;<br>    V(S);<br>    代码<span class="hljs-number">3</span>;<br>&#125;<br>P2()&#123;<br>    P(S);<br>    代码<span class="hljs-number">4</span>;<br>    代码<span class="hljs-number">5</span>;<br>    代码<span class="hljs-number">6</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>可以保证代码4一定在代码2之后执行</p>
 <h4 id="实现前驱关系">实现前驱关系</h4>
+<pre><code class=" mermaid">graph TD;
+id1(S1)--a--&gt;id2(S2)
+id1 --b--&gt; id3(S3)
+id2--c--&gt;id4(S4)
+id2 --d--&gt; id5(S5)
+id4--e--&gt;id6(S6)
+id5--f--&gt;id6
+id3--g--&gt;id6
+</code></pre>
+<p>实现方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c">P1()&#123;<br>    S1;<br>    V(a);<br>    V(b);<br>&#125;<br>P2()&#123;<br>    P(a);<br>    S2;<br>    V(c);<br>    V(d);<br>&#125;<br>P3()&#123;<br>    P(b);<br>    S3;<br>    V(g);<br>&#125;<br>P4()&#123;<br>    P(c);<br>    S4;<br>    V(e);<br>&#125;<br>P5()&#123;<br>    P(d);<br>    S5;<br>    V(f);<br>&#125;<br>P6()&#123;<br>    P(e);<br>    P(f);<br>    P(g);<br>    S6;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="生产者-消费者问题">生产者-消费者问题</h3>
+<p>系统中有一组生产者进程和一组消费者进程,生产者进程每次生产一个产品放入缓冲区,消费者进程每次从缓冲区中取出一个产品并使用。(注:这里的“产品”理解为某种数据)</p>
+<p>生产者、消费者共享一个初始为空、大小为n的缓冲区。</p>
+<ul>
+<li>
+<p>只有缓冲区没满时，生产者才能把产品放入缓冲区，否则必须等待。</p>
+</li>
+<li>
+<p>只有缓冲区不空时,消费者才能从中取出产品,否则必须等待。</p>
+</li>
+<li>
+<p>缓冲区是临界资源，各进程必须互斥地访问。</p>
+</li>
+</ul>
+<pre><code class=" mermaid">graph LR;
+id1[有产品,缓冲区没空,V]--full--&gt;id2[P,消费者消费];
+id3[缓冲区没满,V]--empty--&gt;id4[P,生产者生产]
+</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex = <span class="hljs-number">1</span>; <span class="hljs-comment">//互斥信号量,实现对缓冲区的互斥访问</span><br>semaphore empty = n; <span class="hljs-comment">//同步信号量,表示空闲缓冲区的数量</span><br>semaphore full = <span class="hljs-number">0</span>;<span class="hljs-comment">//同步信号量,表示产品的数量,也即非空缓冲区的数量</span><br>producer()&#123;<span class="hljs-comment">//生产者</span><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>    	生产一个产品;<br>    	P(empty);<span class="hljs-comment">//消耗一个空闲缓冲区</span><br>    	P(mutex);<br>    	把产品放入缓冲区;<br>    	V(mutex);<br>    	V(full);<span class="hljs-comment">//增加一个产品</span><br>    &#125;<br>&#125;<br>consumer()&#123;<span class="hljs-comment">//消费者</span><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(full);<span class="hljs-comment">//消耗一个产品</span><br>        P(mutex);<br>        从缓冲区取出一个产品;<br>        V(mutex);<br>        V(empty);<span class="hljs-comment">//增加一个空闲缓冲区</span><br>        使用产品;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>为了避免死锁，实现互斥的P操作一定要在实现同步的P操作之后。</p>
+<p>上面的例子中，如果颠倒<code>P(empty);</code>和<code>P(mutex);</code>的顺序就会造成死锁</p>
+<p>但是<code>V(mutex);</code>和<code>V(full);</code>的顺序可以交换</p>
+<p>生产产品和使用产品的代码可以放在PV操作之间，但是为了让临界区的代码尽可能短，一般不会将这些代码放在PV操作之间</p>
+<h3 id="多生产者-多消费者问题">多生产者-多消费者问题</h3>
+<p>桌子上有一只盘子,每次只能向其中放入一个水果。</p>
+<p>爸爸专向盘子中放苹果,妈妈专向盘子中放橘子,儿子专等着吃盘子中的橘子,女儿专等着吃盘子中的苹果。</p>
+<p>只有盘子空时,爸爸或妈妈才可向盘子中放一个水果。仅当盘子中有自己需要的水果时,儿子或女儿可以从盘子中取出水果。</p>
+<p>互斥关系：对缓冲区(盘子)的访问要互斥地进行</p>
+<p>同步关系（一前一后）：</p>
+<ol>
+<li>
+<p>父亲将苹果放入盘子后,女儿才能取苹果</p>
+</li>
+<li>
+<p>母亲将橘子放入盘子后,儿子才能取橘子</p>
+</li>
+<li>
+<p>只有盘子为空时,父亲或母亲才能放入水果</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex = <span class="hljs-number">1</span>; <span class="hljs-comment">//实现互斥访问盘子(缓冲区)</span><br>semaphore apple = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个苹果</span><br>semaphore orange = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个橘子</span><br>semaphore plate = <span class="hljs-number">1</span>;<span class="hljs-comment">//盘子中还可以放多少个水果</span><br>dad()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍎;<br>        P(plate);<br>        P(mutex);<br>        把🍎放入盘子;<br>        V(mutex);<br>        V(apple);<br>    &#125;<br>&#125;<br>mom&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍊;<br>        P(plate);<br>        P(mutex);<br>        把🍊放入盘子;<br>        V(mutex);<br>        V(orange);<br>    &#125;<br>&#125;<br>daughter&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(apple);<br>        P(mutex);<br>        从盘中取走🍎;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍎;<br>    &#125;<br>&#125;<br>son&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(orange);<br>        P(mutex);<br>        从盘中取走🍊;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍊;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在这个例子中，不用mutex，也可以实现对盘子的互斥访问</p>
+<h3 id="吸烟者问题">吸烟者问题</h3>
+<p>假设一个系统有三个抽烟者进程和一个供应者进程。每个抽烟者不停地卷烟并抽掉它,但是要卷起并抽掉一支烟,抽烟者需要有三种材料:烟草、纸和胶水。</p>
+<p>三个抽烟者中,第一个拥有烟草、第二个拥有纸、第三个拥有胶水。</p>
+<p>供应者进程无限地提供三种材料,供应者每次将两种材料放桌子上, 拥有剩下那种材料的抽烟者卷一根烟并抽掉它,并给供应者进程一个信号告诉完成了,供应者就会放另外两种材料再桌上，这个过程一直重复（让三个抽烟者轮流地抽烟）</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240123153351132.png" srcset="/img/loading.gif" lazyload alt="image-20240123153351132"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore offer1 = <span class="hljs-number">0</span>; <span class="hljs-comment">//桌上组合一的数量</span><br>semaphore offer2 = <span class="hljs-number">0</span>; <span class="hljs-comment">//桌上组合二的数量</span><br>semaphore offer3 = <span class="hljs-number">0</span>; <span class="hljs-comment">//桌上组合三的数量</span><br>semaphore finish = <span class="hljs-number">0</span>; <span class="hljs-comment">//抽烟是否完成</span><br><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<span class="hljs-comment">//用于实现“三个抽烟者轮流抽烟”</span><br>provider()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">if</span>(i==<span class="hljs-number">0</span>)&#123;<br>            把组合一放在桌儿上;<br>            V(offer1);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i==<span class="hljs-number">1</span>)&#123;<br>            把组合二放在桌儿上;<br>            V(offer2);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            把组合三放在桌儿上;<br>            V(offer3);<br>        &#125;<br>    &#125;<br>    i=(i+<span class="hljs-number">1</span>)%<span class="hljs-number">3</span>;<br>    P(finish);<br>&#125;<br>smoker1()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(offer1);<br>        从桌上拿走组合一;卷烟;抽掉;<br>        V(finish);<br>    &#125;<br>&#125;<br>smoker2()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(offer2);<br>        从桌上拿走组合二;卷烟;抽掉;<br>        V(finish);<br>    &#125;<br>&#125;<br>smoker3()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(offer3);<br>        从桌上拿走组合三;卷烟;抽掉;<br>        V(finish);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="读者写者问题">读者写者问题</h3>
+<p>有读者和写者两组并发进程,共享一个文件。</p>
+<p>当两个或两个以上的读进程同时访问共享数据时不会产生副作用,但若某个写进程和其他进程(读进程或写进程)同时访问共享数据时则可能导致数据不一致的错误。</p>
+<p>因此要求:</p>
+<ol>
+<li>
+<p>允许多个读者可以同时对文件执行读操作;</p>
+</li>
+<li>
+<p>只允许一个写者往文件中写信息</p>
+</li>
+<li>
+<p>任一写者在完成写操作之前不允许其他读者或写者工作</p>
+</li>
+<li>
+<p>写者执行写操作前,应让已有的读者和写者全部退出。</p>
+</li>
+</ol>
+<p>实现代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore rw=<span class="hljs-number">1</span>;<span class="hljs-comment">//用于实现对共享文件的互斥访问</span><br><span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<span class="hljs-comment">//记录当前有几个读进程在访问文件</span><br>semaphore mutex = <span class="hljs-number">1</span>;<span class="hljs-comment">//用于保证对count变量的互斥访问</span><br>semaphore w = <span class="hljs-number">1</span>;<span class="hljs-comment">//用于实现“读写公平”</span><br>writer()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(w);<br>        P(rw);<br>        写文件;<br>        V(rw);<br>        V(w);<br>    &#125;<br>&#125;<br>reader()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(w);<br>        P(mutex);<br>        <span class="hljs-keyword">if</span>(count==<span class="hljs-number">0</span>)<br>            P(rw);<br>        count++;<br>        V(mutex);<br>        V(w);<br>        读文件;<br>        P(mutex);<br>        count--;<br>        <span class="hljs-keyword">if</span>(count==<span class="hljs-number">0</span>)<br>            V(rw);<br>        V(mutex);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="哲学家进餐问题">哲学家进餐问题</h3>
+<p>一张圆桌上坐着5名哲学家,每两个哲学家之间的桌上摆一根筷子,桌子的中间是一碗米饭。</p>
+<p>哲学家们倾注毕生的精力用于思考和进餐,哲学家在思考时,并不影响他人。只有当哲学家饥饿时,才试图拿起左、右两根筷子(一根一根地拿起)。</p>
+<p>如果筷子已在他人手上,则需等待。饥饿的哲学家只有同时拿起两根筷子才可以开始进餐,当进餐完毕后,放下筷子继续思考。</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240124160526493.png" srcset="/img/loading.gif" lazyload alt="哲学家进餐"></p>
+<p>要求：避免死锁</p>
+<p>解决方案</p>
+<p>①可以对哲学家进程施加一些限制条件，比如最多允许四个哲学家同时进餐。这样可以保证至少有一个哲学家是可以拿到左右两只筷子的</p>
+<p>②要求奇数号哲学家先拿左边的筷子，然后再拿右边的筷子,而偶数号哲学家刚好相反。用这种方法可以保证如果相邻的两个奇偶号哲学家都想吃饭，那么只会有其中一个可以拿起第一只筷子,另一个会直接阻塞。这就避免了占有一支后再等待另一只的情况。</p>
+<p>③仅当一个哲学家左右两支筷子都可用时才允许他抓起筷子。</p>
+<h3 id="管程">管程</h3>
+<p>为什么要引入管程？</p>
+<p>解决信号量机制编程麻烦、易出错的问题</p>
+<p>组成：</p>
+<ul>
+<li>共享数据结构</li>
+<li>组成对数据结构初始化的语句</li>
+<li>一组用来访问数据结构的过程（函数)</li>
+</ul>
+<p>基本特征：</p>
+<ul>
+<li>各外部进程/线程只能通过管程提供的特定“入口&quot;才能访问共享数据</li>
+<li>每次仅允许一个进程在管程内执行某个内部过程</li>
+</ul>
+<p>补充：</p>
+<ul>
+<li>各进程必须互斥访问管程的特性是由编译器实现的</li>
+<li>可在管程中设置条件变量及等待/唤醒操作以解决同步问题</li>
+</ul>
+<h2 id="2-4-死锁">2.4 死锁</h2>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126163425186.png" srcset="/img/loading.gif" lazyload alt="死锁"></p>
+<h3 id="预防死锁">预防死锁</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126171410797.png" srcset="/img/loading.gif" lazyload alt="image-20240126171410797"></p>
+<h4 id="破坏互斥条件">破坏互斥条件</h4>
+<p>如果把只能互斥使用的资源改造为允许共享使用,则系统不会进入死锁状态。</p>
+<p>比如:<code>SPOOLing</code>技术。操作系统可以采用<code>SPOOLing</code>技术把独占设备在逻辑上改造成共享设备。比如,用<code>SPOOLing</code>技术将打印机改造为共享设备…</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126165335095.png" srcset="/img/loading.gif" lazyload alt="image-20240126165335095"></p>
+<p>该策略的缺点：并不是所有的资源都可以改造成可共享使用的资源。并且为了系统安全，很多地方还必须保护这种互斥性。因此，很多时候都无法破坏互斥条件。</p>
+<h4 id="破坏不剥夺条件">破坏不剥夺条件</h4>
+<p><strong>不剥夺条件:</strong></p>
+<p>进程所获得的资源在未使用完之前,不能由其他进程强行夺走,只能主动释放。</p>
+<p><strong>破坏不剥夺条件：</strong></p>
+<p>方案一:</p>
+<p>当某个进程请求新的资源得不到满足时,它必须立即释放保持的所有资源,待以后需要时再重新申请。也就是说,即使某些资源尚未使用完,也需要主动释放,从而破坏了不可剥夺条件。</p>
+<p>方案二:</p>
+<p>当某个进程需要的资源被其他进程所占有的时候,可以由操作系统协助,将想要的资源强行剥夺。这种方式一般需要考虑各进程的优先级(比如:剥夺调度方式,就是将处理机资源强行剥夺给优先级更高的进程使用)</p>
+<p><strong>该策略的缺点：</strong></p>
+<ol>
+<li>实现起来比较复杂。</li>
+<li>释放已获得的资源可能造成前一阶段工作的失效。因此这种方法一般只适用于易保存和恢复状态的资源，如CPU。</li>
+<li>反复地申请和释放资源会增加系统开销,降低系统吞吐量</li>
+<li>若采用方案一,意味着只要暂时得不到某个资源,之前获得的那些资源就都需要放弃,以后再重新申请。如果一直发生这样的情况,就会导致进程饥饿。</li>
+</ol>
+<h4 id="破坏请求和保持条件">破坏请求和保持条件</h4>
+<p><strong>请求和保持条件：</strong></p>
+<p>进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源又被其他进程占有，此时请求进程被阻塞，但又对自己已有的资源保持不放。</p>
+<p>可以采用<strong>静态分配方法</strong>,即进程在运行前一次申请完它所需要的全部资源,在它的资源未满足前,不让它投入运行。一旦投入运行后,这些资源就一直归它所有,该进程就不会再请求别的任何资源了。</p>
+<p>该策略实现起来简单,但也有明显的<strong>缺点</strong>:</p>
+<p>有些资源可能只需要用很短的时间，因此如果进程的整个运行期间都一直保持着所有资源，就会造成严重的资源浪费,资源利用率极低。另外,该策略也有可能导致某些进程饥饿。</p>
+<pre><code class=" mermaid">graph LR;
+id1(A类进程) ---&gt; id2[资源1]
+id5(C类进程) ---&gt; id2
+id5 ---&gt;id4
+id3(B类进程) ---&gt; id4[资源2]
+</code></pre>
+<h4 id="破坏循环等待条件">破坏循环等待条件</h4>
+<p>循环等待条件:</p>
+<p>存在一种进程资源的循环等待链,链中的每一个进程已获得的资源同时被下一个进程所请求。</p>
+<p>可采用顺序资源分配法。首先给系统中的资源编号,规定每个进程必须按编号递增的顺序请求资源,同类资源(即编号相同的资源)一次申请完。</p>
+<p>原理分析:一个进程只有已占有小编号的资源时,才有资格申请更大编号的资源。按此规则,已持有大编号资源的进程不可能逆向地回来申请小编号的资源,从而就不会产生循环等待的现象。</p>
+<p>该策略的缺点：</p>
+<ol>
+<li>不方便增加新的设备,因为可能需要重新分配所有的编号</li>
+<li>进程实际使用资源的顺序可能和编号递增顺序不一致,会导致资源浪费</li>
+<li>必须按规定次序申请资源,用户编程麻烦。</li>
+</ol>
+<h3 id="避免死锁">避免死锁</h3>
+<p>银行家算法</p>
+<p>银行家算法是荷兰学者Dijkstra为银行系统设计的,以确保银行在发放现金贷款时,不会发生不能满足所有客户需要的情况。后来该算法被用在操作系统中，用于避免死锁。</p>
+<p>核心思想:在进程提出资源申请时,先预判此次分配是否会导致系统进入不安全状态。如果会进入不安全状态,就暂时不答应这次请求,让该进程先阻塞等待。</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126173222368.png" srcset="/img/loading.gif" lazyload alt="银行家算法"></p>
+<p>银行家算法步骤:</p>
+<p>①检查此次申请是否超过了之前声明的最大需求数</p>
+<p>②检查此时系统剩余的可用资源是否还能满足这次请求</p>
+<p>③试探着分配，更改各数据结构</p>
+<p>④用安全性算法检查此次分配是否会导致系统进入不安全状态</p>
+<h3 id="死锁的检测和解除">死锁的检测和解除</h3>
+<p><strong>检测死锁的算法：</strong></p>
+<p>数据结构: 资源分配图</p>
+<p>1)在资源分配图中,找出既不阻塞又不是孤点的进程Pi (即找出一条有向边与它相连,且该有向边对应资源的申请数量小于等于系统中已有空闲资源数量。若所有的连接该进程的边均满足上述条件,则这个进程能继续运行直至完成,然后释放它所占有的所有资源)。消去它所有的请求边和分配边,使之称为孤立的结点。</p>
+<p>2)进程Pi所释放的资源,可以唤醒某些因等待这些资源而阻塞的进程,原来的阻塞进程可能变为非阻塞进程。根据 1)中的方法进行一系列简化后,若能消去途中所有的边,则称该图是可完全简化的。</p>
+<p>死锁定理:如果某时刻系统的资源分配图是不可完全简化的，那么此时系统死锁</p>
+<p><strong>死锁的解除</strong></p>
+<ol>
+<li>
+<p>资源剥夺法。挂起(暂时放到外存上)某些死锁进程,并抢占它的资源,将这些资源分配给其他的死锁进程。但是应防止被挂起的进程长时间得不到资源而饥饿。</p>
+</li>
+<li>
+<p>撤销进程法(或称终止进程法)。强制撤销部分、甚至全部死锁进程,并剥夺这些进程的资源。这种方式的优点是实现简单，但所付出的代价可能会很大。因为有些进程可能已经运行了很长时间,已经接近结束了,一旦被终止可谓功亏一篑,以后还得从头再来。</p>
+</li>
+<li>
+<p>进程回退法。让一个或多个死锁进程回退到足以避免死锁的地步。这就要求系统要记录进程的历史信息，设置还原点。</p>
+</li>
+</ol>
+<p><strong>决定对哪个进程动手</strong></p>
+<ol>
+<li>进程优先级</li>
+<li>已执行多长时间</li>
+<li>还要多久能完成</li>
+<li>进程已经使用了多少资源</li>
+<li>进程是交互式的还是批处理式的</li>
+</ol>
+<h2 id="3-1-内存">3.1 内存</h2>
+<h3 id="基础知识">基础知识</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126180906116.png" srcset="/img/loading.gif" lazyload alt="内存基础知识"></p>
+<h3 id="内存管理">内存管理</h3>
+<p>内存保护:</p>
+<p>方法一：在CPU中设置一对上、下限寄存器，存放进程的上、下限地址。进程的指令要访问某个地址时，CPU检查是否越界。</p>
+<p>方法二:采用重定位寄存器(又称基址寄存器)和界地址寄存器（又称限长寄存器）进行越界检查。重定位寄存器中存放的是进程的起始物理地址。界地址寄存器中存放的是进程的最大逻辑地址。</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240126181656279.png" srcset="/img/loading.gif" lazyload alt="内存管理"></p>
+<h3 id="覆盖与交换">覆盖与交换</h3>
+<p>解决内存大小不够的问题</p>
+<h4 id="覆盖技术">覆盖技术</h4>
+<p>覆盖技术的思想:将程序分为多个段(多个模块)。常用的段常驻内存,不常用的段在需要时调入内存。</p>
+<p>内存中分为一个“固定区”和若干个“覆盖区”。</p>
+<p>需要常驻内存的段放在“固定区”中,调入后就不再调出（除非运行结束）</p>
+<p>不常用的段放在“覆盖区”，需要用到时调入内存，用不到时调出内存</p>
+<p>必须由程序员声明覆盖结构,操作系统完成自动覆盖。缺点: 对用户不透明,增加了用户编程负担。覆盖技术只用于早期的操作系统中，现在已成为历史。</p>
+<h4 id="交换技术">交换技术</h4>
+<p>交换(对换)技术的设计思想:内存空间紧张时,系统将内存中某些进程暂时换出外存,把外存中某些已具备运行条件的进程换入内存(进程在内存与磁盘间动态调度)</p>
+<p>等同于 <a href="#%E8%B0%83%E5%BA%A6%E7%9A%84%E6%A6%82%E5%BF%B5%E3%80%81%E5%B1%82%E6%AC%A1">中级调度</a></p>
+<ol>
+<li>具有对换功能的操作系统中,通常把磁盘空间分为文件区和对换区两部分。文件区主要用于存放文件,主要追求存储空间的利用率,因此对文件区空间的管理采用离散分配方式；对换区空间只占磁盘空间的小部分，被换出的进程数据就存放在对换区。由于对换的速度直接影响到系统的整体速度,因此对换区空间的管理主要追求换入换出速度,因此通常对换区采用连续分配方式(学过文件管理章节后即可理解)。总之,对换区的I/O速度比文件区的更快。</li>
+<li>交换通常在许多进程运行且内存吃紧时进行,而系统负荷降低就暂停。例如:在发现许多进程运行时经常发生缺页,就说明内存紧张,此时可以换出一些进程；如果缺页率明显下降,就可以暂停换出。</li>
+<li>可优先换出阻塞进程;可换出优先级低的进程;为了防止优先级低的进程在被调入内存后很快又被换出,有的系统还会考虑进程在内存的驻留时间……</li>
+</ol>
+<p>(注意: PCB会常驻内存,不会被换出外存)</p>
+<h3 id="连续内存分配">连续内存分配</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240128215535781.png" srcset="/img/loading.gif" lazyload alt="连续内存分配"></p>
+<h3 id="动态分区分配算法">动态分区分配算法</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>算法思想</th>
+<th>分区排列顺序</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首次适应</td>
+<td>优先使用更小的分区,以保留更多大分区空闲分区</td>
+<td>以容量递增次序排列</td>
+<td>会有更多的大分区被保留下来，更能满足大进程需求</td>
+<td>会产生很多太小的、难以利用的碎片；算法开销大，回收分区后可能需要对空闲分区队列重新排序</td>
+</tr>
+<tr>
+<td>最佳适应</td>
+<td>优先使用更小的分区,以保留更多大分区</td>
+<td>空闲分区以容量递增次序排列</td>
+<td>会有更多的大分区被保留下来，更能满足大进程需求</td>
+<td>会产生很多太小的、难以利用的碎片；算法开销大，回收分区后可能需要对空闲分区队列重新排序</td>
+</tr>
+<tr>
+<td>最坏适应</td>
+<td>优先使用更大的分区，以防止产生太小的不可用的碎片</td>
+<td>空闲分区以容量递减次序排列</td>
+<td>可以减少难以利用的小碎片</td>
+<td>大分区容易被用完，不利于大进程；算法开销大（原因同上）</td>
+</tr>
+<tr>
+<td>邻近适应</td>
+<td>由首次适应演变而来，每次从上次查找结束位置开始查找</td>
+<td>空闲分区以地址递增次序排列（可排列成循环链表）</td>
+<td>不用每次都从低地址的小分区开始检索。算法开销小（原因同首次适应算法)</td>
+<td>会使高地址的大分区也被用完</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基本分页存储管理">基本分页存储管理</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240128220441376.png" srcset="/img/loading.gif" lazyload alt="分页存储管理"></p>
+<h3 id="两级页表">两级页表</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129075910196.png" srcset="/img/loading.gif" lazyload alt="两级页表"></p>
+<h2 id="4-1-文件">4.1 文件</h2>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129083459473.png" srcset="/img/loading.gif" lazyload alt="初识文件管理"></p>
+<h3 id="文件的逻辑结构">文件的逻辑结构</h3>
+<ul>
+<li>无结构文件
+<ul>
+<li>由二进制流或字符流组成,无明显的逻辑结构</li>
+</ul>
+</li>
+<li>有结构文件
+<ul>
+<li>由记录组成,分为定长记录、可变长记录</li>
+</ul>
+</li>
+</ul>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129085449954.png" srcset="/img/loading.gif" lazyload alt="有结构文件"></p>
+<h3 id="文件目录">文件目录</h3>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240130210910236.png" srcset="/img/loading.gif" lazyload alt="文件目录"></p>
+<h3 id="文件物理结构">文件物理结构</h3>
+<p>用户给出要访问的逻辑块号,操作系统找到该文件对应的目录项(FCB) …</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240130223624530.png" srcset="/img/loading.gif" lazyload alt="文件物理结构"></p>
+<h4 id="连续分配">连续分配</h4>
+<p>物理块号=起始块号+逻辑块号</p>
+<p>当然,还需要检查用户提供的逻辑块号是否合法(逻辑块号≥长度就不合法)</p>
+<p>优点：可以随机访问磁盘块</p>
+<p>缺点：</p>
+<ol>
+<li>物理上采用连续分配，存储空间利用率低，会产生难以利用的磁盘碎片可以用紧凑来处理碎片，但是需要耗费很大的时间代价。</li>
+<li>物理上采用连续分配的文件不方便拓展。</li>
+</ol>
+<h4 id="隐式链接分配">隐式链接分配</h4>
+<p>从目录项中找到起始块号(即0号块) ,将0号逻辑块读入内存，由此知道1号逻辑块存放的物理块号,于是读入1号逻辑块,再找到2号逻辑块的存放位置…以此类推。因此,读入i号逻辑块,总共需要i+1次磁盘I/O</p>
+<p>优点:很方便文件拓展,不会有碎片问题,外存利用率高。</p>
+<p>缺点:只支持顺序访问,不支持随机访问,查找效率低,指向下一个盘块的指针也需要耗费少量的存储空间。</p>
+<h4 id="显式链接分配">显式链接分配</h4>
+<p>把用于链接文件各物理块的指针显式地存放在一张表中，即文件分配表(FAT， File Allocation Table)。一个磁盘只会建立一张文件分配表。开机时文件分配表放入内存,并常驻内存。</p>
+<p>优点:很方便文件拓展,不会有碎片问题,外存利用率高,并且支持随机访问。相比于隐式链接来说,地址转换时不需要访问磁盘,因此文件的访问效率更高。</p>
+<p>缺点:文件分配表的需要占用一定的存储空间。</p>
+<h4 id="索引分配">索引分配</h4>
+<p>索引分配允许文件离散地分配在各个磁盘块中,系统会为每个文件建立一张索引表,索引表中记录了文件的各个逻辑块对应的物理块</p>
+<p>（索引表的功能类似于内存管理中的页表—-建立逻辑页面到物理页之间的映射关系)。索引表存放的磁盘块称为索引块。文件数据存放的磁盘块称为数据块。</p>
+<p>索引分配方式可以支持<strong>随机访问</strong>。<strong>文件拓展</strong>也很容易实现（只需要给文件分配一个空闲块,并增加一个索引表项即可)</p>
+<p>若文件太大,索引表项太多,可以采取以下<strong>三种方法解决</strong>:</p>
+<ol>
+<li>
+<p><strong>链接方案</strong>:如果索引表太大,一个索引块装不下,那么可以将多个索引块链接起来存放。</p>
+<p>缺点:若文件很大,索引表很长,就需要将很多个索引块链接起来。想要找到i号索引块,必须先依次读入0~i-1号索引块,这就导致磁盘I/O次数过多,查找效率低下。</p>
+</li>
+<li>
+<p><strong>多层索引</strong>：建立多层索引（原理类似于多级页表）。使第一层索引块指向第二层的索引块。还可根据文件大小的要求再建立第三层、第四层索引块。采用K层索引结构,且顶级索引表未调入内存,则访问一个数据块只需要K+1次读磁盘操作。</p>
+<p>缺点:即使是小文件,访问一个数据块依然需要K+1次读磁盘</p>
+</li>
+<li>
+<p><strong>混合索引</strong>:多种索引分配方式的结合。例如,一个文件的顶级索引表中,既包含直接地址索引(直接指向数据块),又包含一级间接索引(指向单层索引表)、还包含两级间接索引(指向两层索引表) 。</p>
+<p>优点:对于小文件来说,访问一个数据块所需的读磁盘次数更少。</p>
+</li>
+</ol>
 
                 
               </div>
@@ -1061,7 +1384,7 @@ id3 ---&gt;id5[允许一个时间段内由多个进程同时对它们进行访�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月21日</div>
+          <div>2024年1月30日</div>
         </div>
       
       
@@ -1092,12 +1415,18 @@ id3 ---&gt;id5[允许一个时间段内由多个进程同时对它们进行访�
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/01/30/language/pytorch/index/" title="pytorch">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">pytorch</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/13/language/python/index/" title="python-notes">
-                        <span class="hidden-mobile">python-notes</span>
+                      <a href="/2023/11/25/probability-and-statistics/" title="probability-and-statistics">
+                        <span class="hidden-mobile">probability-and-statistics</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

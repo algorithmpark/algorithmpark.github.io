@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.algorithmpark.xyz/img/computer-composition.png">
 <meta property="article:published_time" content="2023-10-02T08:58:51.000Z">
-<meta property="article:modified_time" content="2024-01-19T01:06:12.864Z">
+<meta property="article:modified_time" content="2024-01-31T09:01:17.316Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://github.algorithmpark.xyz/img/computer-composition.png">
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-01-19T01:06:12+00:00
+                    本文最后更新于 2024-01-31T09:01:17+00:00
                   
                   
 
@@ -348,8 +348,8 @@
               <div class="markdown-body">
                 
                 <h1>计算机组成原理</h1>
-<h1>第一章 计算机系统概述</h1>
-<h2 id="程序被翻译成不同的格式">程序被翻译成不同的格式</h2>
+<h2 id="第一章-计算机系统概述">第一章 计算机系统概述</h2>
+<h3 id="程序被翻译成不同的格式">程序被翻译成不同的格式</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230924214846800.png" srcset="/img/loading.gif" lazyload alt="image-20230924214846800"></p>
 <ul>
 <li>从<code>hello.c</code>到目标文件的转化是由编译系统完成<br>
@@ -357,7 +357,7 @@
 <li>编译系统是由：预处理器、编译器、汇编器和链接器构成</li>
 <li>翻译过程是由：预处理、编译、汇编和链接这四个阶段完成</li>
 </ul>
-<h2 id="计算机系统基本执行结构">计算机系统基本执行结构</h2>
+<h3 id="计算机系统基本执行结构">计算机系统基本执行结构</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230830191551124.png" srcset="/img/loading.gif" lazyload alt="image-20230830191551124"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230831201453225.png" srcset="/img/loading.gif" lazyload alt="image-20230831201453225"></p>
 <table>
@@ -431,11 +431,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="经典冯·诺依曼计算机框架">经典冯·诺依曼计算机框架</h2>
+<h3 id="经典冯·诺依曼计算机框架">经典冯·诺依曼计算机框架</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230830192247864.png" srcset="/img/loading.gif" lazyload alt="image-20230830192247864"></p>
 <p>现代计算机组成</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230830192339823.png" srcset="/img/loading.gif" lazyload alt="image-20230830192339823"></p>
-<h3 id="主存储器">主存储器</h3>
+<h4 id="主存储器">主存储器</h4>
 <img src="./计算机组成原理.assets/image-20230831172009928.png" srcset="/img/loading.gif" lazyload alt="image-20230831172009928" style="zoom:50%;" />
 <table>
 <thead>
@@ -461,7 +461,7 @@
 </code></pre>
 <p>存储单元是一串二进制代码，也称存储字</p>
 <p>存储元件指单个二进制位</p>
-<h3 id="CPU">CPU</h3>
+<h4 id="CPU">CPU</h4>
 <ul>
 <li>
 <p>处理器(CPU - Central Processing Unit)</p>
@@ -497,7 +497,7 @@
 <li>改变IS以减少指令条数会使时钟周期变长</li>
 <li>即使是在同一台机器上解决同一个问题，最少指令条数的程序不一定执行的最快</li>
 </ul>
-<h3 id="运算器的组成部分">运算器的组成部分</h3>
+<h4 id="运算器的组成部分">运算器的组成部分</h4>
 <p>运算器是计算机中执行各种算术和逻辑运算操作的部件，通常由以下几个部分组成：</p>
 <ul>
 <li><strong>算术逻辑单元（ALU）</strong>：负责执行基本的算术和逻辑运算，如加、减、乘、除、与、或、非、异或等。</li>
@@ -507,7 +507,7 @@
 <li><strong>通用寄存器组</strong>：用来存放程序中用到的数据，可以被软件设计者访问。</li>
 <li><strong>内部总线</strong>：用来连接各个部件的信息通道，传输运算过程中的数据。</li>
 </ul>
-<h3 id="几种驱动方式">几种驱动方式</h3>
+<h4 id="几种驱动方式">几种驱动方式</h4>
 <p>控制流驱动方式、数据流控制方式、微程序控制方式、多指令多数据流方式是计算机的不同工作方式，它们各有特点和优缺点。下面我简单介绍一下：</p>
 <ul>
 <li>控制流驱动方式是指由指令去控制数据的存取和运算，即指令→数据。这是冯·诺依曼机的基本工作方式，也是最常见的计算机工作方式。控制流驱动方式的优点是结构简单，易于实现；缺点是指令执行顺序固定，不适合并行处理。</li>
@@ -515,7 +515,7 @@
 <li>微程序控制方式是指用一组微指令来实现一条机器指令的功能，即机器指令→微指令。这是一种在硬件和软件之间增加了一层抽象的工作方式，也称为微程序计算机。微程序控制方式的优点是能够扩展和修改指令系统，提高兼容性；缺点是增加了执行时间，降低了速度。</li>
 <li>多指令多数据流方式是指同时执行多条不同的指令，并对应地处理多个不同的数据，即多条指令→多个数据。这是一种利用多个处理器并行工作的工作方式，也称为多处理机或并行计算机。多指令多数据流方式的优点是能够大幅提高计算性能，适合处理复杂问题；缺点是需要协调各个处理器之间的通信和同步，增加了设计难度。</li>
 </ul>
-<h3 id="相联存储器">相联存储器</h3>
+<h4 id="相联存储器">相联存储器</h4>
 <p>是一种特殊的存储器，它可以根据存储内容而不是地址来进行存取。相联存储器的优点是可以快速地查找数据，因为它可以同时比较多个存储单元的内容。相联存储器的缺点是成本高，容量小，复杂度高。</p>
 <p>相联存储器的工作原理是这样的：</p>
 <ul>
@@ -529,8 +529,8 @@
 <li>在虚拟存储器中，用来作为段表、页表或快表（TLB）的存储器，用来实现快速地转换虚拟地址和物理地址。</li>
 <li>在数据库和知识库中，用来实现快速地检索和查询数据。</li>
 </ul>
-<h2 id="衡量计算机性能的指标">衡量计算机性能的指标</h2>
-<h3 id="计算机有两种不同的性能">计算机有两种不同的性能</h3>
+<h3 id="衡量计算机性能的指标">衡量计算机性能的指标</h3>
+<h4 id="计算机有两种不同的性能">计算机有两种不同的性能</h4>
 <ul>
 <li>
 <p>完成单个任务的时间</p>
@@ -562,7 +562,7 @@
 <li>响应时间短的场合——事务处理系统(存/取款的速度要快)</li>
 <li>吞吐率高且响应时间短的场合——ATM、文件服务器、Web服务器等</li>
 </ul>
-<h3 id="CPU-性能的影响因素">CPU 性能的影响因素</h3>
+<h4 id="CPU-性能的影响因素">CPU 性能的影响因素</h4>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230924222348945.png" srcset="/img/loading.gif" lazyload alt="image-20230924222348945"></p>
 <table>
 <thead>
@@ -595,7 +595,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="小结">小结</h3>
+<h4 id="小结">小结</h4>
 <ul>
 <li>性能定义：用程序响应时间或系统吞吐率表示系统整体性能
 <ul>
@@ -628,7 +628,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="影响系统性能的硬件技术指标">影响系统性能的硬件技术指标</h3>
+<h4 id="影响系统性能的硬件技术指标">影响系统性能的硬件技术指标</h4>
 <p>1）主频</p>
 <ul>
 <li>定义：CPU的工作节拍是由时钟控制的，时钟不断产生固定频率的时钟脉冲，这个时钟的频率就是CPU的主频。</li>
@@ -675,8 +675,8 @@
 <li>主存越大，处理问题的速度越快</li>
 <li>与辅存交换次数越少，访存效率越高</li>
 </ul>
-<h2 id="并行计算">并行计算</h2>
-<h3 id="Amdahl定律">Amdahl定律</h3>
+<h3 id="并行计算">并行计算</h3>
+<h4 id="Amdahl定律">Amdahl定律</h4>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>s</mi><mo>+</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>s</mi></mrow><mi>N</mi></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">S_A=\frac 1 {s+\frac {1-s}{N}}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4015em;vertical-align:-1.0801em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2649em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.0801em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>: 为处理器数量</p>
@@ -689,7 +689,7 @@
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>→</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>s</mi></mrow><mi>N</mi></mfrac><mo>→</mo><mn>0</mn><mo separator="true">,</mo><msub><mi>S</mi><mi>A</mi></msub><mo>→</mo><mfrac><mn>1</mn><mi>s</mi></mfrac></mrow><annotation encoding="application/x-tex">N \to \infin,\frac{1-s}N\to 0,S_A\to \frac 1s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">S_A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>存在上限</p>
 <p>对计算机系统的某个部分采用并行优化措施后所获得的计算机性能的提高是有上限的，这个上限取决于串行部分所占的比例</p>
-<h3 id="Gustafson公式">Gustafson公式</h3>
+<h4 id="Gustafson公式">Gustafson公式</h4>
 <ul>
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mtext>′</mtext></mrow><annotation encoding="application/x-tex">s′</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord mathnormal">s</span><span class="mord">′</span></span></span></span>和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mtext>′</mtext></mrow><annotation encoding="application/x-tex">p′</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.75em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord">′</span></span></span></span>为程序串行部分与可并行化部分在并行系统上执行的时间占总时间的比例，N为处理器数量</li>
 <li>简便起见，设总时间为1，则<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>+</mo><msup><mi>p</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">s&#x27;+p&#x27;=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8352em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></li>
@@ -708,7 +708,7 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 <li>推论：只要问题规模可扩展，并行所带来的加速比就可扩展</li>
 </ul>
 <p>打破Amdahl定律的一个假设：问题规模不变,相对于Amdahl，Gustafson只是换了个看问题的角度而已，但超级计算机研制的道路豁然开朗</p>
-<h1>第二章 指令系统和数据存储</h1>
+<h2 id="第二章-指令系统和数据存储">第二章 指令系统和数据存储</h2>
 <p><strong>指令系统概述</strong></p>
 <p>兼容性：</p>
 <ul>
@@ -718,7 +718,7 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 <p><strong>两种类型指令系统计算机：CISC与RISC</strong></p>
 <p>Complex Instruction Set Computer 出现较早，大而全</p>
 <p>Reduced Instruction Set Computer John cock &amp; 小而精</p>
-<h2 id="指令格式">指令格式</h2>
+<h3 id="指令格式">指令格式</h3>
 <ul>
 <li>
 <p>与指令设计相关的问题</p>
@@ -744,14 +744,14 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 </li>
 </ul>
 <p>定长操作码/扩展操作码</p>
-<h2 id="寻址方式">寻址方式</h2>
-<h4 id="立即数寻址">立即数寻址</h4>
+<h3 id="寻址方式">寻址方式</h3>
+<h5 id="立即数寻址">立即数寻址</h5>
 <p>源操作数直接在指令中</p>
 <p>1.指令执行时间很短，无需访存<br>
 2.操作数的大小受地址字段长度的限制<br>
 3.广泛使用</p>
 <p>平时用的基本都是很小的数，特别是1和0用得最多, 这种方式访问速度更快</p>
-<h4 id="存储器直接寻址">存储器直接寻址</h4>
+<h5 id="存储器直接寻址">存储器直接寻址</h5>
 <p>操作数在存储器中，指令地址字段<br>
 直接给出操作数在存储器中的地址</p>
 <ol>
@@ -761,7 +761,7 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 </ol>
 <p>能够直接寻址的那一部分内存空间 可以给操作系统内核用，别的程序不允许使用</p>
 <p>操作系统内核是基本不变的，并且经常访问</p>
-<h4 id="寄存器直接寻址">寄存器直接寻址</h4>
+<h5 id="寄存器直接寻址">寄存器直接寻址</h5>
 <p>操作数在寄存器中，指令地址字段直接给出存放操作数的寄存器编号</p>
 <ol>
 <li>只需要很短的地址字段</li>
@@ -769,13 +769,13 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 <li>地址范围有限，可以编程使用的通用寄存器不多</li>
 <li>使用最多，是提高性能的常用手段</li>
 </ol>
-<h4 id="存储器间接寻址">存储器间接寻址</h4>
+<h5 id="存储器间接寻址">存储器间接寻址</h5>
 <p>操作数和操作数地址都在存储器中<br>
 指令地址字段直接给出操作数地址在存储器中的地址</p>
 <p>两次访存，速度慢<br>
 实际使用很少</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">EA = (A)，Operand = ((A))<br>例：<span class="hljs-keyword">MOV</span>  <span class="hljs-built_in">R1</span>, @(<span class="hljs-number">1000H</span>)<br></code></pre></td></tr></table></figure>
-<h4 id="寄存器间接寻址">寄存器间接寻址</h4>
+<h5 id="寄存器间接寻址">寄存器间接寻址</h5>
 <ul>
 <li>操作数在存储器中</li>
 <li>操作数地址在寄存器中</li>
@@ -784,7 +784,7 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 <p>比存储器间接寻址少访问存储器一次<br>
 寻址空间大，使用比较普遍</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">EA</span> <span class="hljs-operator">=</span> (R)，Operand <span class="hljs-operator">=</span> ((R))<br>例：MOV  AX，[BX]<br></code></pre></td></tr></table></figure>
-<h4 id="偏移寻址">偏移寻址</h4>
+<h5 id="偏移寻址">偏移寻址</h5>
 <ul>
 <li>
 <p><strong>相对寻址</strong></p>
@@ -819,11 +819,11 @@ Scaled Speedup&amp;=\frac{s&#x27;+p&#x27;\times N}{s&#x27;+p&#x27;}\\
 <p>变址寄存器的内容由用户设定，在程序执行过程中其值可变，而指令字中的形式地址A是不可变的！</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925082325685.png" srcset="/img/loading.gif" lazyload alt="image-20230925082325685"></p>
 <p>变址寻址是指有效地址EA等于指令字中的形式地址A与变址寄存器IX 的内容之和,即EA= (IX) + A,其中IX为变址寄存器(专用),也可用通用寄存器作为变址寄存器。图为采用专用寄存器IX的变址寻址示意图。</p>
-<h4 id="堆栈寻址">堆栈寻址</h4>
+<h5 id="堆栈寻址">堆栈寻址</h5>
 <p>堆栈是存储器（或专用寄存器组）中一块特定的、按后进先出（LIFO）原则管理的存储区,该存储区中读/写单元的地址是用一个特定的寄存器给出的,该寄存器称为堆栈指针(SP)。堆栈可分为硬堆栈与软堆栈两种。</p>
 <p>寄存器堆栈又称硬堆栈。寄存器堆栈的成本较高,不适合做大容量的堆栈;而从主存中划出一段区域来做堆栈是最合算且最常用的方法,这种堆栈称为软堆栈。</p>
 <p>在采用堆栈结构的计算机系统中，大部分指令表面上都表现为无操作数指令的形式，因为操作数地址都隐含使用了SP。通常情况下,在读/写堆栈中的一个单元的前后都伴有自动完成对SP 内容的增量或减量操作。</p>
-<h4 id="复合寻址">复合寻址</h4>
+<h5 id="复合寻址">复合寻址</h5>
 <ul>
 <li>
 <p>先间接</p>
@@ -844,7 +844,7 @@ EA =((X)+ A)</li>
 </ul>
 </li>
 </ul>
-<h4 id="寻址方式的确定">寻址方式的确定</h4>
+<h5 id="寻址方式的确定">寻址方式的确定</h5>
 <ul>
 <li>
 <p>在操作码中隐含寻址方式</p>
@@ -854,7 +854,7 @@ EA =((X)+ A)</li>
 <p>专门的寻址方式位显式给出：如：X86指令</p>
 </li>
 </ul>
-<h4 id="总结">总结</h4>
+<h5 id="总结">总结</h5>
 <ul>
 <li>立即数寻址 MOV  AX , 500H</li>
 <li>直接寻址 MOV  AX, [500H]</li>
@@ -863,7 +863,7 @@ EA =((X)+ A)</li>
 <li>基址寻址 MOV AX, 500H[BX]</li>
 </ul>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925105219699.png" srcset="/img/loading.gif" lazyload alt="image-20230925105219699"></p>
-<h2 id="数据在计算机中的表示">数据在计算机中的表示</h2>
+<h3 id="数据在计算机中的表示">数据在计算机中的表示</h3>
 <p>为什么计算机内部所有信息都采用二进制编码表示？</p>
 <ol>
 <li>制造二个稳定态的物理器件比较容易</li>
@@ -871,7 +871,7 @@ EA =((X)+ A)</li>
 <li>与逻辑命题对应，便于逻辑运算，并能方便地用逻辑电路实现算术运算</li>
 </ol>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231001165337343.png" srcset="/img/loading.gif" lazyload alt="image-20231001165337343"></p>
-<h3 id="浮点表示">浮点表示</h3>
+<h4 id="浮点表示">浮点表示</h4>
 <p>浮点数标准IEEE 754</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925112717303.png" srcset="/img/loading.gif" lazyload alt="image-20230925112717303"></p>
 <table>
@@ -900,7 +900,7 @@ EA =((X)+ A)</li>
 </table>
 <p>SP(单精度)浮点数: $ (-1)^S × (1 + f ) × 2^{(Exponent-127)}$</p>
 <p>DP(双精度)浮点数: $ (-1)^S × (1 + f ) × 2^{(Exponent-1023)}$</p>
-<h4 id="阶码">阶码</h4>
+<h5 id="阶码">阶码</h5>
 <p>阶码用移码表示，移码比补码更容易比较大小，便于浮点数加减运算时进行对阶操作</p>
 <p>n为阶码位数，则偏置常数为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{n-1}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
 <p>偏置常数为：<br>
@@ -908,7 +908,7 @@ EA =((X)+ A)</li>
 单精度规格化数阶码范围为<br>
 0000 0001 (-126) ~ 11111110 (127)</p>
 <p>全0和全1的编码留做它用</p>
-<h4 id="特殊浮点数">特殊浮点数</h4>
+<h5 id="特殊浮点数">特殊浮点数</h5>
 <table>
 <thead>
 <tr>
@@ -953,7 +953,7 @@ EA =((X)+ A)</li>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">-\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">∞</span></span></span></span>：1 11111111 00000000000000000000000</p>
 <p>非规格化数可表示<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.00</mn><mo>…</mo><mn>01</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>126</mn></mrow></msup></mrow><annotation encoding="application/x-tex">0.00…01×2^{-126}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0.00</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">01</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">126</span></span></span></span></span></span></span></span></span></span></span></span>至<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.11</mn><mo>…</mo><mn>11</mn><mo>×</mo><msup><mn>2</mn><mrow><mo>−</mo><mn>126</mn></mrow></msup></mrow><annotation encoding="application/x-tex">0.11…11×2^{-126}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0.11</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">11</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">126</span></span></span></span></span></span></span></span></span></span></span></span>之间的数</p>
 <p>打破第一位为1的限制，牺牲精度换更大的表示范围</p>
-<h3 id="数据度量单位">数据度量单位</h3>
+<h4 id="数据度量单位">数据度量单位</h4>
 <table>
 <thead>
 <tr>
@@ -990,7 +990,7 @@ EA =((X)+ A)</li>
 </tr>
 </tbody>
 </table>
-<h3 id="大端和小端存储">大端和小端存储</h3>
+<h4 id="大端和小端存储">大端和小端存储</h4>
 <ul>
 <li>
 <p>大端方式(Big Endian)：MSB(Most Significant Bit，最高有效位)所在的地址是数的地址（先存最高位）<br>
@@ -1007,7 +1007,7 @@ e.g. Intel 80x86, DEC VAX</p>
 <p>音频、视频和图像等文件格式或处理程序都涉及字节的顺序问题<br>
 例： Little endian：GIF, PC Paintbrush, Microsoft RTF等<br>
 Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
-<h3 id="数据对齐">数据对齐</h3>
+<h4 id="数据对齐">数据对齐</h4>
 <ul>
 <li>按边界对齐 (假定字的宽度为32位，存储器按字节编址)
 <ul>
@@ -1018,13 +1018,13 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </li>
 <li>不按边界对齐</li>
 </ul>
-<h3 id="数据校验">数据校验</h3>
+<h4 id="数据校验">数据校验</h4>
 <ul>
 <li>奇偶校验码</li>
 <li>海明码</li>
 <li>循环冗余码（现在应用广，特别是网络上）</li>
 </ul>
-<h3 id="定点小数">定点小数</h3>
+<h4 id="定点小数">定点小数</h4>
 <ul>
 <li>
 <p>定点整数：小数点位于最右侧</p>
@@ -1050,9 +1050,9 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <p>1,110 -&gt; 1,0001110 (原码)</p>
 </li>
 </ul>
-<h2 id="MIPS指令集">MIPS指令集</h2>
+<h3 id="MIPS指令集">MIPS指令集</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925123624596.png" srcset="/img/loading.gif" lazyload alt="image-20230925123624596"></p>
-<h1>第三章 数据运算</h1>
+<h2 id="第三章-数据运算">第三章 数据运算</h2>
 <ul>
 <li>
 <p>按位运算</p>
@@ -1143,10 +1143,10 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </ul>
 </li>
 </ul>
-<h2 id="补码基本运算-加减">补码基本运算(加减)</h2>
+<h3 id="补码基本运算-加减">补码基本运算(加减)</h3>
 <p>补码加法器的基本实现</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925150310944.png" srcset="/img/loading.gif" lazyload alt="image-20230925150310944"></p>
-<h3 id="溢出问题">溢出问题</h3>
+<h4 id="溢出问题">溢出问题</h4>
 <ul>
 <li>OF (Overflow Flag)溢出标志。溢出时为1,否则置0.</li>
 <li>SF (Sign Flag)符号标志。结果为负时置1,否则置0.</li>
@@ -1173,7 +1173,7 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </tr>
 </tbody>
 </table>
-<h2 id="加法器">加法器</h2>
+<h3 id="加法器">加法器</h3>
 <ul>
 <li>
 <p>串行进位加法器</p>
@@ -1205,8 +1205,8 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <p>组内并行，组间传递</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925152207693.png" srcset="/img/loading.gif" lazyload alt="image-20230925152207693"></p>
 <p>四个组同时计算，需要算两轮，首先各自独立算C4,C8,C12,C16，再根据得到的C4,C8,C12,C16重新算一遍，需要两个时钟周期</p>
-<h2 id="移码的加减运算">移码的加减运算</h2>
-<p>注意：此处的移码和[IEEE754标准中的移码](# 浮点移码)不同，使用不一样的偏置常数，所以运算法则不同，请注意区分</p>
+<h3 id="移码的加减运算">移码的加减运算</h3>
+<p>注意：此处的移码和[IEEE754标准中的移码](## 浮点移码)不同，使用不一样的偏置常数，所以运算法则不同，请注意区分</p>
 <p>此处的移码运算：以8位移码为例，偏置常数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>7</mn></msup><mo>=</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">2^7=128</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">128</span></span></span></span>,</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><mo>+</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msub><mi>E</mi><mn>1</mn></msub><mo>+</mo><msub><mi>E</mi><mn>2</mn></msub><mo>+</mo><mn>128</mn><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>−</mo><mn>128</mn><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mn>1000000</mn><msub><mn>0</mn><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msub><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
 {[E_1+E_2]_移} &amp;=E_1+E_2+128\mod 2^8\\
@@ -1227,9 +1227,9 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <li>减法：先将减数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>E</mi><mn>2</mn><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub></mrow><annotation encoding="application/x-tex">[E2]_移</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord">2</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">移</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 求补(各位取反，末位加1)，再与被减数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>E</mi><mn>1</mn><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub></mrow><annotation encoding="application/x-tex">[E1]_移</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord">1</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">移</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>进行模<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>相加，对结果的符号取反</li>
 <li>溢出判断：进行模<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>相加时，如果两个加数的符号相同，且与和数的符号也相同，则发生溢出</li>
 </ol>
-<h2 id="原码乘法">原码乘法</h2>
+<h3 id="原码乘法">原码乘法</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/%E4%B9%98%E6%B3%95.gif" srcset="/img/loading.gif" lazyload alt="乘法"></p>
-<h2 id="补码乘法-Booth乘法">补码乘法(Booth乘法)</h2>
+<h3 id="补码乘法-Booth乘法">补码乘法(Booth乘法)</h3>
 <p>例：C=A＊B<br>
 被乘数	<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>A</mi><msub><mo stretchy="false">]</mo><mtext>补</mtext></msub><mo>=</mo><msub><mi>A</mi><mn>01</mn></msub><msub><mi>A</mi><mn>02</mn></msub><msub><mi>A</mi><mn>1</mn></msub><msub><mi>A</mi><mn>2</mn></msub><mo>…</mo><msub><mi>A</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">[A]_补=A_{01} A_{02}A_1A_2…A_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">A</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">01</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">02</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
 乘数	    <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>B</mi><msub><mo stretchy="false">]</mo><mtext>补</mtext></msub><mo>=</mo><msub><mi>B</mi><mn>0</mn></msub><msub><mi>B</mi><mn>1</mn></msub><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">[B]_补=B_0B_1B_2…B_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
@@ -1270,10 +1270,10 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </tr>
 </tbody>
 </table>
-<h2 id="快速加法">快速加法</h2>
+<h3 id="快速加法">快速加法</h3>
 <p>存储进位加法器CSA： 将进位在本级加法器中保存，留待以后级进行计算。又称伪加器</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20230925180128545.png" srcset="/img/loading.gif" lazyload alt="image-20230925180128545"></p>
-<h2 id="浮点数的计算">浮点数的计算</h2>
+<h3 id="浮点数的计算">浮点数的计算</h3>
 <ul>
 <li>Representation(表示)
 <ul>
@@ -1287,7 +1287,7 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <li>Exceptions (异常处理)</li>
 <li>Errors(误差)与精度控制</li>
 </ul>
-<h3 id="加法">加法</h3>
+<h4 id="加法">加法</h4>
 <p>进行尾数加法运算前，必须“对阶”！</p>
 <p>IEEE754尾数右移时，需要注意的是什么？</p>
 <p>1、要将隐含的“1”移到小数部分，空出位补0；<br>
@@ -1331,7 +1331,7 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <p><strong>朝<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">+\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">+</span><span class="mord">∞</span></span></span></span>方向舍入</strong></p>
 <p><strong>朝<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">-\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">∞</span></span></span></span>方向舍入</strong></p>
 <p><strong>朝0方向舍入</strong></p>
-<h3 id="溢出">溢出</h3>
+<h4 id="溢出">溢出</h4>
 <ul>
 <li>
 <p>阶码上溢</p>
@@ -1355,9 +1355,9 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 尾数域右端移出去，丢失了有效信息</p>
 </li>
 </ul>
-<h3 id="乘除法">乘除法</h3>
-<h4 id="浮点移码">浮点移码</h4>
-<p>IEEE754标准中的移码计算法则和[前面的移码运算法则](# 移码的加减运算)不同，使用不一样的偏置常数，所以运算法则不同，请注意区分</p>
+<h4 id="乘除法">乘除法</h4>
+<h5 id="浮点移码">浮点移码</h5>
+<p>IEEE754标准中的移码计算法则和[前面的移码运算法则](## 移码的加减运算)不同，使用不一样的偏置常数，所以运算法则不同，请注意区分</p>
 <p class="katex-block "><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><mo>+</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msub><mi>E</mi><mn>1</mn></msub><mo>+</mo><msub><mi>E</mi><mn>2</mn></msub><mo>+</mo><mn>127</mn><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>−</mo><mn>127</mn><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>1</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mo stretchy="false">[</mo><msub><mi>E</mi><mn>2</mn></msub><msub><mo stretchy="false">]</mo><mtext>移</mtext></msub><mo>+</mo><mn>1000000</mn><msub><mn>1</mn><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msub><mspace></mspace><mspace width="1em"/><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mtext> </mtext><mtext> </mtext><msup><mn>2</mn><mn>8</mn></msup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
 {[E_1+E_2]_移} &amp;=E_1+E_2+127\mod 2^8\\
 &amp;=[E_1]_移+[E_2]_移-127\mod 2^8\\
@@ -1372,7 +1372,7 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.5723em;vertical-align:-2.0362em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5362em;"><span style="top:-4.6721em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">移</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.1479em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.6238em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.0362em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5362em;"><span style="top:-4.6721em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">127</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span><span style="top:-3.1479em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">127</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">([</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">补</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">127</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">127</span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span><span style="top:-1.6238em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">移</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">移</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">0111111</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">2</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mspace allowbreak"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">mod</span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.0362em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
 <p>加法：相当于移码相加的结果对符号位取反后再加一</p>
 <p>减法：相当于移码相减的结果对符号位取反后再减一</p>
-<h4 id="规格化：">规格化：</h4>
+<h5 id="规格化：">规格化：</h5>
 <p>规格化原则<br>
 当尾数高位为0，左规<br>
 当尾数产生进位，右规</p>
@@ -1386,8 +1386,8 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 </li>
 </ul>
 <p>(考试重点)</p>
-<h1>计组实验</h1>
-<h2 id="RISC-V指令集">RISC-V指令集</h2>
+<h2 id="计组实验">计组实验</h2>
+<h3 id="RISC-V指令集">RISC-V指令集</h3>
 <p><a target="_blank" rel="noopener" href="https://www.cs.cornell.edu/courses/cs3410/2019sp/riscv/interpreter/#">在线 RISC-V 整数指令集解释器</a></p>
 <p>六种基本指令格式：</p>
 <ol>
@@ -1409,22 +1409,22 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 <li>Branches: <code>BEQ</code>, <code>BNE</code>,<code>BLT</code>, <code>BGE</code>, <code>BLTU</code>, <code>BGEU</code></li>
 </ul>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231027073124564.png" srcset="/img/loading.gif" lazyload alt="image-20231027073124564"></p>
-<h3 id="Arithmetics">Arithmetics</h3>
+<h4 id="Arithmetics">Arithmetics</h4>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">addi a0,a0,1<br>addi a1,a1,2<br>add a2,a0,a1<br>sub a3,a1,a2<br></code></pre></td></tr></table></figure>
 <p>带立即数：</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231017122311122.png" srcset="/img/loading.gif" lazyload alt="image-20231017122311122"></p>
 <p>不带立即数：</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231017123011030.png" srcset="/img/loading.gif" lazyload alt="image-20231017123011030"></p>
-<h3 id="Logical">Logical</h3>
+<h4 id="Logical">Logical</h4>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">addi a0,a0,1<br>addi a1,a1,2<br>or a3,a1,a0<br></code></pre></td></tr></table></figure>
-<h3 id="sets">sets</h3>
+<h4 id="sets">sets</h4>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">addi a0,a0,1<br>addi a1,a1,2<br>slt a2,a0,a1<br>slti a3,a1,6<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>SLT</code> set on lower than</li>
 <li><code>SLTI</code>最后一个数为立即数</li>
 <li><code>SLTU</code>和<code>SLTIU</code>用于无符号数</li>
 </ul>
-<h3 id="shifts">shifts</h3>
+<h4 id="shifts">shifts</h4>
 <ul>
 <li><code>SRA</code> shift right arithmetic</li>
 <li><code>SRAI</code> shift right arithmetic immediate</li>
@@ -1437,8 +1437,8 @@ Big endian：Adobe Photoshop, JPEG, MacPaint等</p>
 Srli rd, rs1, imm表示shift right logical imm，表示逻辑右移，也是填充0<br>
 Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右移的时候，填充符号位。</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231017122702842.png" srcset="/img/loading.gif" lazyload alt="image-20231017122702842"></p>
-<h3 id="Memory">Memory</h3>
-<h3 id="PC">PC</h3>
+<h4 id="Memory">Memory</h4>
+<h4 id="PC">PC</h4>
 <ul>
 <li>
 <p><code>LUI</code> Load upper imm.</p>
@@ -1450,24 +1450,24 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </li>
 </ul>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/risc-v.png" srcset="/img/loading.gif" lazyload alt="risc-v"></p>
-<h2 id="chisel">chisel</h2>
-<h3 id="运算符">:=运算符</h3>
+<h3 id="chisel">chisel</h3>
+<h4 id="运算符">:=运算符</h4>
 <p>在chisel中，:=运算符用于给可变对象重新赋值，例如Wire或Reg。它是一种特殊的方法，可以在硬件描述中表示连接或驱动的语义。它与=运算符不同，=运算符用于给不可变对象初始化赋值，例如val变量或常量。:=运算符的优先级与=运算符相同，都是最低的。你可以参考以下两个网页了解更多关于chisel中=和:=的区别和用法：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/567818196">Chisel 入门引导教程</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/Frederick_Bala/article/details/108375915">chisel中=和:=的区别</a>。</p>
-<h3 id="">+&amp;</h3>
+<h4 id="">+&amp;</h4>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// a +&amp; b includes the carry, a + b does not</span><br>  io.sum := io.in0 +&amp; io.in1<br></code></pre></td></tr></table></figure>
 <p>代码见3.1节</p>
-<h3 id="32个32位寄存器组">32个32位寄存器组</h3>
+<h4 id="32个32位寄存器组">32个32位寄存器组</h4>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// A Register of a vector of UInts</span><br>    <span class="hljs-keyword">val</span> reg = <span class="hljs-type">RegInit</span>(<span class="hljs-type">VecInit</span>(<span class="hljs-type">Seq</span>.fill(<span class="hljs-number">32</span>)(<span class="hljs-number">0.</span><span class="hljs-type">U</span>(<span class="hljs-number">32.</span><span class="hljs-type">W</span>))))<br></code></pre></td></tr></table></figure>
 <p>见3.2节</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RegisterFile</span>(<span class="hljs-params">readPorts: <span class="hljs-type">Int</span></span>) <span class="hljs-keyword">extends</span> <span class="hljs-title">Module</span> </span>&#123;<br>    require(readPorts &gt;= <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">val</span> io = <span class="hljs-type">IO</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">Bundle</span> &#123;<br>        <span class="hljs-keyword">val</span> wen   = <span class="hljs-type">Input</span>(<span class="hljs-type">Bool</span>())<br>        <span class="hljs-keyword">val</span> waddr = <span class="hljs-type">Input</span>(<span class="hljs-type">UInt</span>(<span class="hljs-number">5.</span><span class="hljs-type">W</span>))<br>        <span class="hljs-keyword">val</span> wdata = <span class="hljs-type">Input</span>(<span class="hljs-type">UInt</span>(<span class="hljs-number">32.</span><span class="hljs-type">W</span>))<br>        <span class="hljs-keyword">val</span> raddr = <span class="hljs-type">Input</span>(<span class="hljs-type">Vec</span>(readPorts, <span class="hljs-type">UInt</span>(<span class="hljs-number">5.</span><span class="hljs-type">W</span>)))<br>        <span class="hljs-keyword">val</span> rdata = <span class="hljs-type">Output</span>(<span class="hljs-type">Vec</span>(readPorts, <span class="hljs-type">UInt</span>(<span class="hljs-number">32.</span><span class="hljs-type">W</span>)))<br>    &#125;)<br>    <br>    <span class="hljs-comment">// A Register of a vector of UInts</span><br>    <span class="hljs-keyword">val</span> reg = <span class="hljs-type">RegInit</span>(<span class="hljs-type">VecInit</span>(<span class="hljs-type">Seq</span>.fill(<span class="hljs-number">32</span>)(<span class="hljs-number">0.</span><span class="hljs-type">U</span>(<span class="hljs-number">32.</span><span class="hljs-type">W</span>))))<br>    <br>        when (io.wen) &#123;<br>        reg(io.waddr) := io.wdata<br>    &#125;<br>    <span class="hljs-keyword">for</span> (i &lt;- <span class="hljs-number">0</span> until readPorts) &#123;<br>        when (io.raddr(i) === <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>            io.rdata(i) := <span class="hljs-number">0.</span><span class="hljs-type">U</span><br>        &#125; .otherwise &#123;<br>            io.rdata(i) := reg(io.raddr(i))<br>        &#125;<br>    &#125;<br><br>    <br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="中断">中断</h2>
+<h3 id="中断">中断</h3>
 <ul>
 <li><code>mepc</code>：保存的是中断或者异常处理完成后，CPU返回并开始执行的地址。所以对于异常和中断，<code>mepc</code> 的保存内容需要注意。</li>
 <li><code>mcause</code>：保存的是导致中断或者异常的原因，具体内容请查阅特权级手册里的相关内容。</li>
 <li><code>mstatus</code>：在响应中断时，需要将 <code>mstatus</code> 寄存器中的 <code>MPIE</code> 标志位设置为 <code>0</code>，禁用中断。</li>
 </ul>
 <p>然后从 <code>mtvec</code> 获取中断处理程序的地址，跳转到该地址执行进一步的中断处理。</p>
-<h3 id="CSR和CLINT">CSR和CLINT</h3>
+<h4 id="CSR和CLINT">CSR和CLINT</h4>
 <p>在RISC-V架构的CPU中，CSR（Control and Status Registers）和CLINT（Core Local Interruptor）是两个重要的组成部分。CSR是一类控制和状态寄存器，属于CPU自带的一类寄存器，用于控制和监视CPU的运行状态。CLINT是一个内存映射设备，用于处理器核之间的中断和定时器功能。下面是它们的工作原理：</p>
 <ul>
 <li>CSR：在机器模式下，这些存储器主要包括以下六类：
@@ -1515,7 +1515,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </li>
 </ul>
 <p>当MSIP寄存器被写入时，会向处理器核发送一个软件中断请求。当MTIME计数达到MTIMECMP设置的值时，会向处理器核发送一个定时器中断请求。</p>
-<h4 id="CSR指令">CSR指令</h4>
+<h5 id="CSR指令">CSR指令</h5>
 <p>翻译自非特权级手册第九章</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231103092649198.png" srcset="/img/loading.gif" lazyload alt="image-20231103092649198"></p>
 <p>符号说明：以下用<code>[csr]</code>表示在CSR寄存器组中编号为<code>csr</code>的寄存器中存储的值</p>
@@ -1553,7 +1553,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </li>
 </ul>
 <p><code>csr[11:10]</code>为11的是只读寄存器，为10,01,00的是读写寄存器</p>
-<h2 id="vivado新手入门">vivado新手入门</h2>
+<h3 id="vivado新手入门">vivado新手入门</h3>
 <p>器件选择<code>xc7a35tcpg236-1</code></p>
 <ol>
 <li>
@@ -1590,13 +1590,13 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </blockquote>
 <p>bin文件目录:<code>D:/vivado/vivado_ducuments/AndLogic/AndLogic.runs/impl_1/AndLogic.bin</code></p>
 <p>(<code>D:/vivado/vivado_ducuments/AndLogic</code>为项目目录)</p>
-<h2 id="1-第一个程序">1.第一个程序</h2>
-<h3 id="与门逻辑">与门逻辑</h3>
+<h3 id="1-第一个程序">1.第一个程序</h3>
+<h4 id="与门逻辑">与门逻辑</h4>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps</span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////</span><br><span class="hljs-comment">// Company: </span><br><span class="hljs-comment">// Engineer: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Create Date: 2023/09/28 07:51:14</span><br><span class="hljs-comment">// Design Name: </span><br><span class="hljs-comment">// Module Name: AndLogic</span><br><span class="hljs-comment">// Project Name: </span><br><span class="hljs-comment">// Target Devices: </span><br><span class="hljs-comment">// Tool Versions: </span><br><span class="hljs-comment">// Description: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Dependencies: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Revision:</span><br><span class="hljs-comment">// Revision 0.01 - File Created</span><br><span class="hljs-comment">// Additional Comments:</span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////</span><br><br><br><span class="hljs-keyword">module</span> AndLogic(<br>    <span class="hljs-keyword">input</span> CLK,<br>    <span class="hljs-keyword">input</span> Data1,<br>    <span class="hljs-keyword">input</span> Data2,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> Result<br>    );<br>    <br>    <span class="hljs-keyword">always</span>@(<span class="hljs-keyword">posedge</span> CLK)<span class="hljs-keyword">begin</span><br>        Result &lt;= Data1 &amp;&amp; Data2;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">endmodule</span><br><br></code></pre></td></tr></table></figure>
-<h3 id="译码器">译码器</h3>
+<h4 id="译码器">译码器</h4>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps</span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////</span><br><span class="hljs-comment">// Company: </span><br><span class="hljs-comment">// Engineer: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Create Date: 2023/09/28 07:51:14</span><br><span class="hljs-comment">// Design Name: </span><br><span class="hljs-comment">// Module Name: AndLogic</span><br><span class="hljs-comment">// Project Name: </span><br><span class="hljs-comment">// Target Devices: </span><br><span class="hljs-comment">// Tool Versions: </span><br><span class="hljs-comment">// Description: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Dependencies: </span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">// Revision:</span><br><span class="hljs-comment">// Revision 0.01 - File Created</span><br><span class="hljs-comment">// Additional Comments:</span><br><span class="hljs-comment">// </span><br><span class="hljs-comment">//////////////////////////////////////////////////////////////////////////////////</span><br><br><span class="hljs-comment">//译码器</span><br><span class="hljs-keyword">module</span> AndLogic(<br>    <span class="hljs-keyword">input</span> CLK,<br>    <span class="hljs-keyword">input</span> d1,<br>    <span class="hljs-keyword">input</span> d2,<br>    <span class="hljs-keyword">input</span> d3,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r0,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r1,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r2,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r3,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r4,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r5,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r6,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> r7<br>    );<br>    <br>    <span class="hljs-keyword">always</span>@(<span class="hljs-keyword">posedge</span> CLK)<span class="hljs-keyword">begin</span><br>        r0=~d3 &amp;&amp; ~d2 &amp;&amp; ~d1;<br>        r1=~d3 &amp;&amp; ~d2 &amp;&amp; d1;<br>        r2=~d3 &amp;&amp; d2 &amp;&amp; ~d1;<br>        r3=~d3 &amp;&amp; d2 &amp;&amp; d1;<br>        r4=d3 &amp;&amp; ~d2 &amp;&amp; ~d1;<br>        r5=d3 &amp;&amp; ~d2 &amp;&amp; d1;<br>        r6=d3 &amp;&amp; d2 &amp;&amp; ~d1;<br>        r7=d3 &amp;&amp; d2 &amp;&amp; d1;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">endmodule</span><br><br></code></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs xdc">set_property PACKAGE_PIN W5 [get_ports CLK]<br>set_property PACKAGE_PIN R2 [get_ports Data1]<br>set_property PACKAGE_PIN T1 [get_ports Data2]<br>set_property PACKAGE_PIN L1 [get_ports Result]<br>set_property IOSTANDARD LVCMOS33 [get_ports Data1]<br>set_property IOSTANDARD LVCMOS33 [get_ports Data2]<br>set_property IOSTANDARD LVCMOS33 [get_ports CLK]<br>set_property IOSTANDARD LVCMOS33 [get_ports Result]<br><br><br>set_property PACKAGE_PIN U1 [get_ports d1]<br>set_property PACKAGE_PIN T1 [get_ports d2]<br>set_property PACKAGE_PIN R2 [get_ports d3]<br>set_property PACKAGE_PIN U16 [get_ports r0]<br>set_property PACKAGE_PIN E19 [get_ports r1]<br>set_property PACKAGE_PIN U19 [get_ports r2]<br>set_property PACKAGE_PIN V19 [get_ports r3]<br>set_property PACKAGE_PIN W18 [get_ports r4]<br>set_property PACKAGE_PIN U15 [get_ports r5]<br>set_property PACKAGE_PIN U14 [get_ports r6]<br>set_property PACKAGE_PIN V14 [get_ports r7]<br>set_property IOSTANDARD LVCMOS33 [get_ports d1]<br>set_property IOSTANDARD LVCMOS33 [get_ports d2]<br>set_property IOSTANDARD LVCMOS33 [get_ports d3]<br>set_property IOSTANDARD LVCMOS33 [get_ports r0]<br>set_property IOSTANDARD LVCMOS33 [get_ports r1]<br>set_property IOSTANDARD LVCMOS33 [get_ports r2]<br>set_property IOSTANDARD LVCMOS33 [get_ports r3]<br>set_property IOSTANDARD LVCMOS33 [get_ports r4]<br>set_property IOSTANDARD LVCMOS33 [get_ports r5]<br>set_property IOSTANDARD LVCMOS33 [get_ports r7]<br>set_property IOSTANDARD LVCMOS33 [get_ports r6]<br></code></pre></td></tr></table></figure>
-<h2 id="2-七段显示学号">2.七段显示学号</h2>
+<h3 id="2-七段显示学号">2.七段显示学号</h3>
 <p>首先创建文件<code>xuehao.v</code></p>
 <p>七段数码管：</p>
 <img src="./计算机组成原理.assets/image-20231003185917731.png" srcset="/img/loading.gif" lazyload alt="image-20231003185917731" style="zoom:53%;" />
@@ -1610,7 +1610,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p>xuehao.v</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps</span><br><span class="hljs-keyword">module</span> xuehao(<br>    <span class="hljs-keyword">input</span> CLK,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span>[<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]seg,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span>[<span class="hljs-number">6</span>:<span class="hljs-number">0</span>]AToG<br>    );<br>    <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]x;<br>    <span class="hljs-keyword">reg</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]tmp;<br>    <span class="hljs-comment">//学号 8421</span><br>    <span class="hljs-comment">//位选</span><br>    <span class="hljs-keyword">always</span>@(<span class="hljs-keyword">posedge</span> CLK)<span class="hljs-keyword">begin</span><br>        <span class="hljs-keyword">case</span>(tmp)<br>            <span class="hljs-number">0</span>: <span class="hljs-keyword">begin</span> x=<span class="hljs-number">8</span>; seg=<span class="hljs-number">4&#x27;b0111</span>;<span class="hljs-keyword">end</span><br>            <span class="hljs-number">1</span>: <span class="hljs-keyword">begin</span> x=<span class="hljs-number">4</span>; seg=<span class="hljs-number">4&#x27;b1011</span>;<span class="hljs-keyword">end</span><br>            <span class="hljs-number">2</span>: <span class="hljs-keyword">begin</span> x=<span class="hljs-number">2</span>; seg=<span class="hljs-number">4&#x27;b1101</span>;<span class="hljs-keyword">end</span><br>            <span class="hljs-number">3</span>: <span class="hljs-keyword">begin</span> x=<span class="hljs-number">1</span>; seg=<span class="hljs-number">4&#x27;b1110</span>;<span class="hljs-keyword">end</span><br>        <span class="hljs-keyword">endcase</span><br>        <span class="hljs-keyword">if</span>(tmp==<span class="hljs-number">3</span>)<br>            tmp=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">else</span><br>            tmp=tmp+<span class="hljs-number">1</span>;<br>    <br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-comment">//段选</span><br>    <span class="hljs-keyword">always</span>@(*) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//星号表示只要下面涉及到的变量发生改变就会执行</span><br>        <span class="hljs-keyword">case</span>(x)<br>        <span class="hljs-number">0</span>: AToG = <span class="hljs-number">7&#x27;b0000001</span>;<br>        <span class="hljs-number">1</span>: AToG = <span class="hljs-number">7&#x27;b1001111</span>;<br>        <span class="hljs-number">2</span>: AToG = <span class="hljs-number">7&#x27;b0010010</span>;<br>        <span class="hljs-number">3</span>: AToG = <span class="hljs-number">7&#x27;b0000110</span>;<br>        <span class="hljs-number">4</span>: AToG = <span class="hljs-number">7&#x27;b1001100</span>;<br>        <span class="hljs-number">5</span>: AToG = <span class="hljs-number">7&#x27;b0100100</span>;<br>        <span class="hljs-number">6</span>: AToG = <span class="hljs-number">7&#x27;b0100000</span>;<br>        <span class="hljs-number">7</span>: AToG = <span class="hljs-number">7&#x27;b0001111</span>;<br>        <span class="hljs-number">8</span>: AToG = <span class="hljs-number">7&#x27;b0000000</span>;<br>        <span class="hljs-number">9</span>: AToG = <span class="hljs-number">7&#x27;b0000100</span>;<br>        <span class="hljs-number">&#x27;hA</span>: AToG = <span class="hljs-number">7&#x27;b0001000</span>;<br>        <span class="hljs-number">&#x27;hB</span>: AToG = <span class="hljs-number">7&#x27;b1100000</span>;<br>        <span class="hljs-number">&#x27;hC</span>: AToG = <span class="hljs-number">7&#x27;b0110001</span>;<br>        <span class="hljs-number">&#x27;hD</span>: AToG = <span class="hljs-number">7&#x27;b1000010</span>;<br>        <span class="hljs-number">&#x27;hE</span>: AToG = <span class="hljs-number">7&#x27;b0110000</span>;<br>        <span class="hljs-number">&#x27;hF</span>: AToG = <span class="hljs-number">7&#x27;b0111000</span>;<br>        <span class="hljs-keyword">default</span>: AToG = <span class="hljs-number">7&#x27;b0000001</span>; <span class="hljs-comment">// 0</span><br>        <span class="hljs-keyword">endcase</span><br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231003205832116.png" srcset="/img/loading.gif" lazyload alt="image-20231003205832116"></p>
-<h2 id="3-实现ALU">3.实现ALU</h2>
+<h3 id="3-实现ALU">3.实现ALU</h3>
 <p>输入：两个四位数据输入 运算符</p>
 <p>输出：运算结果，符号标志位，0标志位</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231004075331791.png" srcset="/img/loading.gif" lazyload alt="image-20231004075331791"></p>
@@ -1624,7 +1624,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </ul>
 </li>
 </ul>
-<h3 id="4位无符号加法器">4位无符号加法器</h3>
+<h4 id="4位无符号加法器">4位无符号加法器</h4>
 <p>top.v</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps</span><br><span class="hljs-keyword">module</span> top(<br>    <span class="hljs-keyword">input</span> CLK,<br>    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] in,<br>    <span class="hljs-keyword">input</span> left,<br>    <span class="hljs-keyword">input</span> right,<br>    <span class="hljs-keyword">output</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] seg,<br>    <span class="hljs-keyword">output</span> [<span class="hljs-number">6</span>:<span class="hljs-number">0</span>] AToG,<br>    <span class="hljs-keyword">output</span> CF<br>    );<br>    <span class="hljs-keyword">reg</span> status=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">wire</span> clk_out;<br>    <span class="hljs-keyword">wire</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>]data;<br>    <span class="hljs-keyword">always</span>@(*)<span class="hljs-keyword">begin</span><br>        <span class="hljs-keyword">if</span> (left==<span class="hljs-number">1</span>&amp;&amp;right==<span class="hljs-number">0</span>)<br>            status=<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(left==<span class="hljs-number">0</span>&amp;&amp;right==<span class="hljs-number">1</span>)<br>            status=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">else</span><br>            status=status;<br>    <span class="hljs-keyword">end</span><br>    my_alu my_alu1(<br>    <span class="hljs-variable">.CLK</span>(CLK),<br>    <span class="hljs-variable">.status</span>(status),<br>    <span class="hljs-variable">.inp</span>(in),<br>    <span class="hljs-variable">.data</span>(data),<br>    <span class="hljs-variable">.CF</span>(CF)<br>    );<br>    CLK_div clk_div1(<br>        <span class="hljs-variable">.CLK_in</span>(CLK),<br>        <span class="hljs-variable">.CLK_out</span>(clk_out)<br>    );<br>    Xianshi xianshi1(<br>        <span class="hljs-variable">.CLK</span>(clk_out),<br>        <span class="hljs-variable">.Data</span>(data),<br>        <span class="hljs-variable">.seg</span>(seg),<br>        <span class="hljs-variable">.AToG</span>(AToG)<br>    );<br>    <br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 <p>CLK_div.v</p>
@@ -1635,7 +1635,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps</span><br><span class="hljs-keyword">module</span> Xianshi(<br>    <span class="hljs-keyword">input</span> CLK,<br>    <span class="hljs-keyword">input</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] Data,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] seg,<br>    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">6</span>:<span class="hljs-number">0</span>] AToG<br>    );<br>    <span class="hljs-keyword">reg</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>]tmp;<br>    <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]x;<br>    <span class="hljs-comment">//位选</span><br>    <span class="hljs-keyword">always</span>@(<span class="hljs-keyword">posedge</span> CLK)<span class="hljs-keyword">begin</span><br>            <span class="hljs-keyword">case</span>(tmp)<br>                <span class="hljs-number">0</span>: <span class="hljs-keyword">begin</span> x=Data[<span class="hljs-number">15</span>:<span class="hljs-number">12</span>]; seg=<span class="hljs-number">4&#x27;b0111</span>;<span class="hljs-keyword">end</span><br>                <span class="hljs-number">1</span>: <span class="hljs-keyword">begin</span> x=Data[<span class="hljs-number">11</span>:<span class="hljs-number">8</span>]; seg=<span class="hljs-number">4&#x27;b1011</span>;<span class="hljs-keyword">end</span><br>                <span class="hljs-number">2</span>: <span class="hljs-keyword">begin</span> x=Data[<span class="hljs-number">7</span>:<span class="hljs-number">4</span>]; seg=<span class="hljs-number">4&#x27;b1101</span>;<span class="hljs-keyword">end</span><br>                <span class="hljs-number">3</span>: <span class="hljs-keyword">begin</span> x=Data[<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]; seg=<span class="hljs-number">4&#x27;b1110</span>;<span class="hljs-keyword">end</span><br>            <span class="hljs-keyword">endcase</span><br>            <span class="hljs-keyword">if</span>(tmp==<span class="hljs-number">3</span>)<br>                tmp=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">else</span><br>                tmp=tmp+<span class="hljs-number">1</span>;<br>        <br>    <span class="hljs-keyword">end</span><br>    <br>    <span class="hljs-comment">//段选</span><br>    <span class="hljs-keyword">always</span>@(*) <span class="hljs-keyword">begin</span> <span class="hljs-comment">//星号表示只要下面涉及到的变量发生改变就会执行</span><br>            <span class="hljs-keyword">case</span>(x)<br>            <span class="hljs-number">0</span>: AToG = <span class="hljs-number">7&#x27;b0000001</span>;<br>            <span class="hljs-number">1</span>: AToG = <span class="hljs-number">7&#x27;b1001111</span>;<br>            <span class="hljs-number">2</span>: AToG = <span class="hljs-number">7&#x27;b0010010</span>;<br>            <span class="hljs-number">3</span>: AToG = <span class="hljs-number">7&#x27;b0000110</span>;<br>            <span class="hljs-number">4</span>: AToG = <span class="hljs-number">7&#x27;b1001100</span>;<br>            <span class="hljs-number">5</span>: AToG = <span class="hljs-number">7&#x27;b0100100</span>;<br>            <span class="hljs-number">6</span>: AToG = <span class="hljs-number">7&#x27;b0100000</span>;<br>            <span class="hljs-number">7</span>: AToG = <span class="hljs-number">7&#x27;b0001111</span>;<br>            <span class="hljs-number">8</span>: AToG = <span class="hljs-number">7&#x27;b0000000</span>;<br>            <span class="hljs-number">9</span>: AToG = <span class="hljs-number">7&#x27;b0000100</span>;<br>            <span class="hljs-number">&#x27;hA</span>: AToG = <span class="hljs-number">7&#x27;b0001000</span>;<br>            <span class="hljs-number">&#x27;hB</span>: AToG = <span class="hljs-number">7&#x27;b1100000</span>;<br>            <span class="hljs-number">&#x27;hC</span>: AToG = <span class="hljs-number">7&#x27;b0110001</span>;<br>            <span class="hljs-number">&#x27;hD</span>: AToG = <span class="hljs-number">7&#x27;b1000010</span>;<br>            <span class="hljs-number">&#x27;hE</span>: AToG = <span class="hljs-number">7&#x27;b0110000</span>;<br>            <span class="hljs-number">&#x27;hF</span>: AToG = <span class="hljs-number">7&#x27;b0111000</span>;<br>            <span class="hljs-keyword">default</span>: AToG = <span class="hljs-number">7&#x27;b0000001</span>; <span class="hljs-comment">// 0</span><br>            <span class="hljs-keyword">endcase</span><br>        <span class="hljs-keyword">end</span><br>   <br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 <p>constraint.xdc</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs xdc">set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[6]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[5]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[4]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[3]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[2]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[1]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;AToG[0]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[15]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[14]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[13]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[12]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[11]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[10]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[9]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[8]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[7]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[6]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[5]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[4]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[3]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[2]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[1]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;in[0]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;seg[3]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;seg[2]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;seg[1]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports &#123;seg[0]&#125;]<br>set_property IOSTANDARD LVCMOS33 [get_ports CLK]<br>set_property PACKAGE_PIN W7 [get_ports &#123;AToG[6]&#125;]<br>set_property PACKAGE_PIN W6 [get_ports &#123;AToG[5]&#125;]<br>set_property PACKAGE_PIN U8 [get_ports &#123;AToG[4]&#125;]<br>set_property PACKAGE_PIN V8 [get_ports &#123;AToG[3]&#125;]<br>set_property PACKAGE_PIN U5 [get_ports &#123;AToG[2]&#125;]<br>set_property PACKAGE_PIN V5 [get_ports &#123;AToG[1]&#125;]<br>set_property PACKAGE_PIN U7 [get_ports &#123;AToG[0]&#125;]<br>set_property PACKAGE_PIN R2 [get_ports &#123;in[15]&#125;]<br>set_property PACKAGE_PIN T1 [get_ports &#123;in[14]&#125;]<br>set_property PACKAGE_PIN U1 [get_ports &#123;in[13]&#125;]<br>set_property PACKAGE_PIN W2 [get_ports &#123;in[12]&#125;]<br>set_property PACKAGE_PIN R3 [get_ports &#123;in[11]&#125;]<br>set_property PACKAGE_PIN T2 [get_ports &#123;in[10]&#125;]<br>set_property PACKAGE_PIN T3 [get_ports &#123;in[9]&#125;]<br>set_property PACKAGE_PIN V2 [get_ports &#123;in[8]&#125;]<br>set_property PACKAGE_PIN W13 [get_ports &#123;in[7]&#125;]<br>set_property PACKAGE_PIN W14 [get_ports &#123;in[6]&#125;]<br>set_property PACKAGE_PIN V15 [get_ports &#123;in[5]&#125;]<br>set_property PACKAGE_PIN W15 [get_ports &#123;in[4]&#125;]<br>set_property PACKAGE_PIN W17 [get_ports &#123;in[3]&#125;]<br>set_property PACKAGE_PIN W16 [get_ports &#123;in[2]&#125;]<br>set_property PACKAGE_PIN V16 [get_ports &#123;in[1]&#125;]<br>set_property PACKAGE_PIN V17 [get_ports &#123;in[0]&#125;]<br>set_property PACKAGE_PIN W4 [get_ports &#123;seg[3]&#125;]<br>set_property PACKAGE_PIN V4 [get_ports &#123;seg[2]&#125;]<br>set_property PACKAGE_PIN U4 [get_ports &#123;seg[1]&#125;]<br>set_property PACKAGE_PIN U2 [get_ports &#123;seg[0]&#125;]<br>set_property PACKAGE_PIN W5 [get_ports CLK]<br><br>set_property PACKAGE_PIN U16 [get_ports CF]<br>set_property PACKAGE_PIN W19 [get_ports left]<br>set_property PACKAGE_PIN T17 [get_ports right]<br>set_property IOSTANDARD LVCMOS33 [get_ports CF]<br>set_property IOSTANDARD LVCMOS33 [get_ports left]<br>set_property IOSTANDARD LVCMOS33 [get_ports right]<br><br></code></pre></td></tr></table></figure>
-<h3 id="四位多功能ALU">四位多功能ALU</h3>
+<h4 id="四位多功能ALU">四位多功能ALU</h4>
 <ul>
 <li>0000加法</li>
 <li>0001减法</li>
@@ -1646,12 +1646,12 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>0110 按位或</li>
 <li>0111按位异或</li>
 </ul>
-<h1>第四章 存储系统</h1>
+<h2 id="第四章-存储系统">第四章 存储系统</h2>
 <blockquote>
 <p>特别鸣谢：本章笔记由<code>jxr</code>友情提供</p>
 </blockquote>
-<h2 id="存储器的基础知识">存储器的基础知识</h2>
-<h3 id="存储器的分类">存储器的分类</h3>
+<h3 id="存储器的基础知识">存储器的基础知识</h3>
+<h4 id="存储器的分类">存储器的分类</h4>
 <p>存储器可以按不同的标准进行分类</p>
 <ul>
 <li>按层次可以分为主存（内存）、辅存（外存）和cache</li>
@@ -1668,7 +1668,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </ul>
 </li>
 </ul>
-<h3 id="存储器的性能评价">存储器的性能评价</h3>
+<h4 id="存储器的性能评价">存储器的性能评价</h4>
 <p>评价存储器的性能的指标有三个：容量、成本和速度</p>
 <ul>
 <li>
@@ -1684,16 +1684,16 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </blockquote>
 </li>
 </ul>
-<h3 id="存储器的层次结构">存储器的层次结构</h3>
+<h4 id="存储器的层次结构">存储器的层次结构</h4>
 <p>为了解决容量、成本和速度之间的矛盾，存储器采取了层次结构。分为cache、主存和辅存。层次依次递减，层次越高速度越快，价格越高，容量越小。</p>
 <ul>
 <li>cache和主存主要为了解决CPU速度和主存速度不匹配的问题。</li>
 <li>主存和辅存主要为了解决主存容量不够大的问题。</li>
 </ul>
 <p>CPU可以和主存和cache进行数据交换。cache和主存，主存和辅存之间可以进行数据交换。</p>
-<h2 id="主存">主存</h2>
+<h3 id="主存">主存</h3>
 <p>主存是用DRAM芯片组成的，cache使用SRAM芯片组成的。</p>
-<h3 id="DRAM和SRAM">DRAM和SRAM</h3>
+<h4 id="DRAM和SRAM">DRAM和SRAM</h4>
 <p>SRAM芯片由双稳态触发器（六晶体管MOS）制成。读写速度快，价格高。不需要刷新。</p>
 <p>DRAM芯片由单个晶体管制成。价格低，读写速度慢。通过电容中的电荷来保存信息，需要刷新。</p>
 <p>刷新的方法有三种：</p>
@@ -1704,7 +1704,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </ol>
 <p>其中SRAM芯片没有地址引脚复用，还需要片选和读写控制线（1或2根），电源线和接地线，数据线。</p>
 <p>DRAM芯片由地址引脚服用，还需要行地址选择信号，列地址选择信号，读写控制线（1或2根），电源线和接地线，数据线。</p>
-<h3 id="ROM">ROM</h3>
+<h4 id="ROM">ROM</h4>
 <p>ROM掉电不丢失数据</p>
 <p>ROM分为</p>
 <ul>
@@ -1714,7 +1714,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>Flash：是EPROM的发展，写入的速度更快。</li>
 <li>SSD（固态硬盘）：由Flash和控制单元组成，写入速度快，可擦除重写</li>
 </ul>
-<h3 id="多模块存储器">多模块存储器</h3>
+<h4 id="多模块存储器">多模块存储器</h4>
 <p>为了增大数据带宽。可以用单体多字存储器、高位交叉存储器、低位交叉存储器。</p>
 <ul>
 <li>
@@ -1738,7 +1738,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </ul>
 </li>
 </ul>
-<h2 id="主存储器与CPU的连接">主存储器与CPU的连接</h2>
+<h3 id="主存储器与CPU的连接">主存储器与CPU的连接</h3>
 <p>CPU通过数据总线、地址总线、控制总线与主存储器相连接。</p>
 <ul>
 <li>数据总线的位数和工作频率的乘积是是数据传输率</li>
@@ -1755,9 +1755,9 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>线选法是通过<strong>高位地址</strong>线直连片选端</li>
 <li>译码片选法是通过三八译码器等译码器将<strong>高位地址</strong>译码产生片选信号</li>
 </ul>
-<h2 id="外部存储器">外部存储器</h2>
+<h3 id="外部存储器">外部存储器</h3>
 <p>外部存储器主要有磁盘存储器和固态硬盘两种。</p>
-<h3 id="磁盘存储器">磁盘存储器</h3>
+<h4 id="磁盘存储器">磁盘存储器</h4>
 <p>磁盘存储器由磁盘驱动器、磁盘控制器和盘片组成。</p>
 <p>存储时间=寻道时间+旋转延迟时间+存取时间（一般取平均）</p>
 <ul>
@@ -1768,15 +1768,15 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p>数据传输率=磁盘转数*磁道容量</p>
 <p>数据存取的最小单位是扇区</p>
 <p>格式化后容量会变小</p>
-<h3 id="固态硬盘">固态硬盘</h3>
+<h4 id="固态硬盘">固态硬盘</h4>
 <p>固态硬盘是基于闪存的存储器。写的时间很慢，读取的时间较快。数据是以页为单位存取的。写的次数多之后闪存块会磨损。</p>
-<h2 id="cache">cache</h2>
+<h3 id="cache">cache</h3>
 <p>cache利用了局部性原理：时间局部性原理和空间局部性原理，提高了CPU访问主存的速度。</p>
 <ul>
 <li>时间局部性原理：现在访问的数据可能在最近的未来再次访问</li>
 <li>空间局部性原理：现在访问的数据附近的数据可能在最近的未来再次访问</li>
 </ul>
-<h3 id="cache的工作原理">cache的工作原理</h3>
+<h4 id="cache的工作原理">cache的工作原理</h4>
 <p>在进行读操作的时候</p>
 <ul>
 <li>如果数据在cache中，则称为命中。</li>
@@ -1805,7 +1805,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>替换策略</li>
 <li>写入策略</li>
 </ol>
-<h3 id="cache的数据查找">cache的数据查找</h3>
+<h4 id="cache的数据查找">cache的数据查找</h4>
 <ol>
 <li>
 <p>查找主存地址所在的行/组号</p>
@@ -1817,9 +1817,9 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <blockquote>
 <p>比如8路组相连，tag位20位，则需要8个20位的比较器进行并行比较</p>
 </blockquote>
-<h3 id="cache的地址映射">cache的地址映射</h3>
+<h4 id="cache的地址映射">cache的地址映射</h4>
 <p>cache的地址映射分为直接映射、组相连映射和全相连映射</p>
-<h4 id="直接映射">直接映射</h4>
+<h5 id="直接映射">直接映射</h5>
 <p>cache中每一块单独成一行。主存的每一块只能装入cache中的唯一位置。</p>
 <p><strong>主存地址</strong>的结构如下</p>
 <table>
@@ -1844,7 +1844,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <blockquote>
 <p>因为主存块号是块内地址之前的位数决定的，mod cache行数之后得到的就是主存地址在cache中对应的行号</p>
 </blockquote>
-<h4 id="组相连映射">组相连映射</h4>
+<h5 id="组相连映射">组相连映射</h5>
 <p>cache中多个块成一个组。主存中的每一块只能装到固定组中的任意一块中。一组中有r块，则称为r路组相连映射。</p>
 <p><strong>主存地址</strong>的结构如下</p>
 <table>
@@ -1866,7 +1866,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </tbody>
 </table>
 <p>其中 主存地址的行号也可以通过以下方式计算：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>组号</mtext><mo>=</mo><mtext>主存块号</mtext><mi>m</mi><mi>o</mi><mi>d</mi><mtext>  </mtext><mi>c</mi><mi>a</mi><mi>c</mi><mi>h</mi><mi>e</mi><mtext>组数</mtext></mrow><annotation encoding="application/x-tex">组号=主存块号mod\;cache组数</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">组号</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord cjk_fallback">主存块号</span><span class="mord mathnormal">m</span><span class="mord mathnormal">o</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord cjk_fallback">组数</span></span></span></span></p>
-<h4 id="全相连映射">全相连映射</h4>
+<h5 id="全相连映射">全相连映射</h5>
 <p>cache中所有块在一个组内。主存中的每一块都可以装到cache中的任意一块中。</p>
 <p><strong>主存地址</strong>的结构如下</p>
 <table>
@@ -1885,7 +1885,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </tr>
 </tbody>
 </table>
-<h4 id="对比">对比</h4>
+<h5 id="对比">对比</h5>
 <table>
 <thead>
 <tr>
@@ -1925,7 +1925,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <blockquote>
 <p>抖动指的是集中访问的存储区超过了块大小，需要频繁进行替换。</p>
 </blockquote>
-<h3 id="cache的替换策略">cache的替换策略</h3>
+<h4 id="cache的替换策略">cache的替换策略</h4>
 <p>cache的替换策略主要有四种：随机替换、最先进来的最先替换（FIFO）、最近最少使用（LRU）、最不经常使用（LFU）算法。其中LRU算法最为常见，前两者并没有用到局部性原理。</p>
 <p>LRU算法：</p>
 <ul>
@@ -1933,7 +1933,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>如果未命中且有空行，则替换位置0，其他位+1</li>
 <li>如果未命中且没有空行，则将计数器最高的替换，并置0，其他位+1</li>
 </ul>
-<h3 id="cache的写回策略">cache的写回策略</h3>
+<h4 id="cache的写回策略">cache的写回策略</h4>
 <p>cache写命中的时候有两种策略：写回（write-back）和写穿（write-through）。来保持cache和主存中的内容一致。</p>
 <ul>
 <li>
@@ -1948,7 +1948,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>写分配：将数据装入cache中再执行写操作</li>
 <li>写不分配：将数据直接写入主存中</li>
 </ul>
-<h3 id="cache中的存储结构">cache中的存储结构</h3>
+<h4 id="cache中的存储结构">cache中的存储结构</h4>
 <p>cache每一块都分为两部分：标记项和数据项。标记项又分成四部分：有效位、脏位、替换控制位、tag位。</p>
 <table>
 <thead>
@@ -1970,12 +1970,12 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </tr>
 </tbody>
 </table>
-<h2 id="虚拟存储器">虚拟存储器</h2>
+<h3 id="虚拟存储器">虚拟存储器</h3>
 <p>虚拟存储器和cache一样利用了局部性原理。将虚拟地址空间中的地址映射到物理地址空间中的地址。</p>
 <p>主要有页式虚拟存储器、段式虚拟存储器和段页式虚拟存储器。</p>
 <p>CPU使用虚地址的时候，先由辅助硬件（操作系统）找到实地址和虚地址之间的关系。然后用实地址去访问主存，如果命中，则可以直接访问；如果没有命中，就需要将这个存储单元对应的一页调入主存当中（实际空间的页大小和虚拟空间的页大小是一样的）。如果主存已满就需要进行替换。主存中存储的数据是辅存中的副本。</p>
 <p>虚拟存储器是存储在主存当中的，所以要提高命中率，采取全相连映射。同时为了减少不必要的写操作，提高系统性能，所以写主存的策略采取写回策略。</p>
-<h3 id="页式虚拟存储器">页式虚拟存储器</h3>
+<h4 id="页式虚拟存储器">页式虚拟存储器</h4>
 <p>页式虚拟存储器将虚拟地址分为两部分。</p>
 <table>
 <thead>
@@ -1986,16 +1986,16 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </thead>
 </table>
 <p>其中虚拟页号可以通过查页表得到主存页号，将主存页号和页内地址拼接起来之后就能得到主存地址。然后就可以在主存的某一页中进行查找。</p>
-<h4 id="快表（TLB）">快表（TLB）</h4>
+<h5 id="快表（TLB）">快表（TLB）</h5>
 <p>因为访问主存速度较慢，所以可以将经常访问到的页表项放入一个cache中。放在主存中的也称为慢表。</p>
 <ul>
 <li>如果快表采取全相连映射，则快表的tag就是虚拟页号。</li>
 <li>如果快表采取组相连映射，则虚拟页号的低位是组号，高位是tag</li>
 </ul>
 <p>当访问数据的时候，先访问快表，如果命中，就直接得到实际地址，无需访问慢表；如果不命中，就在慢表中查找，如果慢表命中则更新快表，得到实际地址；如果慢表不命中，需要辅存和主存进行交换后再将数据给CPU，同时更新慢表和快表。</p>
-<h4 id="虚存和cache">虚存和cache</h4>
+<h5 id="虚存和cache">虚存和cache</h5>
 <p>当同时有虚存和cache的时候，先查虚存（TLB和慢表），如果得到实际地址，就访问cache，如果cache中有，则传递给CPU；如果cache中没有，则在主存中找并更新cache。如果得不到实际地址，则去辅存中寻找，并装入主存，更新cache和虚存。</p>
-<h3 id="段式虚拟存储器">段式虚拟存储器</h3>
+<h4 id="段式虚拟存储器">段式虚拟存储器</h4>
 <p>段式虚拟存储器将虚拟地址分为两部分。</p>
 <table>
 <thead>
@@ -2006,14 +2006,14 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </thead>
 </table>
 <p>其中段号可以通过查段表得到主存该段起始地址，将主存该段起始地址和段内地址相加起来之后就能得到主存地址。然后就可以在主存中进行查找。</p>
-<h3 id="页段式虚拟存储器">页段式虚拟存储器</h3>
+<h4 id="页段式虚拟存储器">页段式虚拟存储器</h4>
 <p>页段式虚拟存储器将虚拟地址分为段号，段内页号和页表地址。主存和辅存也是以页为单位进行交换。</p>
 <blockquote>
 <p>在这种方式下，虚拟地址首先被分为段号和段内地址两部分；然后段内地址再被进一步分为页号和页内地址。这样就需要两级映射：先通过段表找到段的基址，再通过页表找到页的物理地址。最后将这个物理地址和页内地址结合起来就可以访问到实际的数据了。</p>
 </blockquote>
-<h1>第五章 中央处理器</h1>
+<h2 id="第五章-中央处理器">第五章 中央处理器</h2>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231004194113247.png" srcset="/img/loading.gif" lazyload alt="image-20231004194113247"></p>
-<h2 id="CPU的功能和基本结构">CPU的功能和基本结构</h2>
+<h3 id="CPU的功能和基本结构">CPU的功能和基本结构</h3>
 <p>1.指令控制。完成取指令、分析指令和执行指令的操作，即程序的顺序控制。</p>
 <p>2.操作控制。一条指令的功能往往是由若干操作信号的组合来实现的。CPU管理并产生由内存取出的每条指令的操作信号，把各种操作信号送往相应的部件，从而控制这些部件按指令的要求进行动作。</p>
 <p>3.时间控制。对各种操作加以时间上的控制。时间控制要为每条指令按时间顺序提供应有的控制信号。</p>
@@ -2037,7 +2037,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p>性能较高，基本不存在数据冲突现象，但结构复杂，硬件量大，不易实现。专用数据通路方式：根据指令执行过程中的数据和地址的流动方向安排连接线路。</p>
 </li>
 </ul>
-<h3 id="ALU算术逻辑单元内部基本结构">ALU算术逻辑单元内部基本结构</h3>
+<h4 id="ALU算术逻辑单元内部基本结构">ALU算术逻辑单元内部基本结构</h4>
 <p>1.算术逻辑单元:主要功能是进行算术/逻辑运算。</p>
 <p>2.通用寄存器组：如AX、BX、CX、DX、SP等，用于存放操作数（包括源操作数、目的操作数及中间结果）和各种地址信息等。SP是堆栈指针，用于指示栈顶的地址。</p>
 <p>3.暂存寄存器:用于暂存从主存读来的数据,这个数据不能存放在通用寄存器中,否则会破坏其原有内容。</p>
@@ -2045,7 +2045,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p>5.程序状态字寄存器：保留由算术逻辑运算指令或测试指令的结果而建立的各种状态信息,如溢出标志(OP)、符号标志（SF)、零标志（ZF)、进位标志(CF)等。PSW中的这些位参与并决定微操作的形成。</p>
 <p>6,移位器:对运算结果进行移位运算。</p>
 <p>7,计数器:控制乘除运算的操作步数。</p>
-<h3 id="CU控制器基本结构">CU控制器基本结构</h3>
+<h4 id="CU控制器基本结构">CU控制器基本结构</h4>
 <p>1.程序计数器：用于指出下一条指令在主存中的存放地址。CPU就是根据PC的内容去主存中取指令的。因程序中指令(通常)是顺序执行的,所以PC有自增功能。</p>
 <p>2,指令寄存器:用于保存当前正在执行的那条指令。</p>
 <p>3,指令译码器:仅对操作码字段进行译码,向控制器提供特定的操作信号。</p>
@@ -2056,7 +2056,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231004204715687.png" srcset="/img/loading.gif" lazyload alt="image-20231004204715687"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231004205122082.png" srcset="/img/loading.gif" lazyload alt="image-20231004205122082"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231005112648332.png" srcset="/img/loading.gif" lazyload alt="image-20231005112648332"></p>
-<h2 id="数据通路">数据通路</h2>
+<h3 id="数据通路">数据通路</h3>
 <ul>
 <li>
 <p>单总线结构</p>
@@ -2076,7 +2076,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>执行周期    EX=1    (Execute Cycle)</li>
 <li>中断周期    INT=1    (Interrupt Cycle)</li>
 </ul>
-<h3 id="MIPS的数据通路">MIPS的数据通路</h3>
+<h4 id="MIPS的数据通路">MIPS的数据通路</h4>
 <p>CPU执行过程</p>
 <ul>
 <li>取指令</li>
@@ -2094,14 +2094,14 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>Load</li>
 <li>r-指令</li>
 </ul>
-<h2 id="硬布线控制器的设置">硬布线控制器的设置</h2>
+<h3 id="硬布线控制器的设置">硬布线控制器的设置</h3>
 <p>根据指令操作码、目前的机器周期、节拍信号、机器状态条件,即可确定现在这个节拍下应该发出哪些“微命令”</p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231005150844171.png" srcset="/img/loading.gif" lazyload alt="image-20231005150844171"></p>
-<h2 id="微程序控制器">微程序控制器</h2>
+<h3 id="微程序控制器">微程序控制器</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231006075235556.png" srcset="/img/loading.gif" lazyload alt="image-20231006075235556"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231006141747712.png" srcset="/img/loading.gif" lazyload alt="image-20231006141747712"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231007075608895.png" srcset="/img/loading.gif" lazyload alt="image-20231007075608895"></p>
-<h2 id="指令流水线">指令流水线</h2>
+<h3 id="指令流水线">指令流水线</h3>
 <p>机器周期的一种经典设置</p>
 <p>这是经典MIPS架构提出的五段式</p>
 <table>
@@ -2181,7 +2181,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </li>
 </ol>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231007092842875.png" srcset="/img/loading.gif" lazyload alt="image-20231007092842875"></p>
-<h3 id="流水线的分类">流水线的分类</h3>
+<h4 id="流水线的分类">流水线的分类</h4>
 <ol>
 <li>
 <p><strong>部件功能级、处理机级和处理机间级流水线</strong></p>
@@ -2209,7 +2209,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <p><strong>非线性流水线</strong>存在反馈回路,从输入到输出过程中,某些功能段将数次通过流水线,这种流水线适合进行线性递归的运算。</p>
 </li>
 </ol>
-<h3 id="流水线的多发技术">流水线的多发技术</h3>
+<h4 id="流水线的多发技术">流水线的多发技术</h4>
 <ol>
 <li>
 <p>超标量技术</p>
@@ -2230,12 +2230,12 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 </ol>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231007095656648.png" srcset="/img/loading.gif" lazyload alt="image-20231007095656648"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231007095835609.png" srcset="/img/loading.gif" lazyload alt="image-20231007095835609"></p>
-<h3 id="五段式指令流水线">五段式指令流水线</h3>
+<h4 id="五段式指令流水线">五段式指令流水线</h4>
 <img src="./计算机组成原理.assets/image-20231007173352240.png" srcset="/img/loading.gif" lazyload alt="image-20231007173352240" style="zoom:80%;" />
 <p>①IF取指→②ID译码&amp;取数→③EX执行→④M访存→⑤WB写回寄存器</p>
 <p>考试中常见的五类指令：</p>
 <p>运算类指令、LOAD指令、STORE指令、条件转移指令、无条件转移指令</p>
-<h4 id="运算类指令">运算类指令</h4>
+<h5 id="运算类指令">运算类指令</h5>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ADD Rs,Rd  			;加法指令(两个寄存器相加)<br>ADD #996,Rd			;加法指令(寄存器与立即数相加)<br>SHL Rd 				;算术右移指令<br></code></pre></td></tr></table></figure>
 <p>①IF取指→②ID译码&amp;取数→③EX执行→<s>④M访存</s>→⑤WB写回寄存器</p>
 <ul>
@@ -2245,7 +2245,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>M：空段</li>
 <li>WB：将运算结果写回指定寄存器</li>
 </ul>
-<h4 id="LOAD指令">LOAD指令</h4>
+<h5 id="LOAD指令">LOAD指令</h5>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">LOAD Rd,996(Rs)		;(996+(Rs))→Rd<br></code></pre></td></tr></table></figure>
 <p>①IF取指→②ID译码&amp;取数→③EX执行→④M访存→⑤WB写回寄存器</p>
 <ul>
@@ -2256,7 +2256,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>WB：将取出的数写回寄存器</li>
 </ul>
 <p>通常，RISC处理器只有“取数LOAD”和“存数STORE”指令才能访问主存</p>
-<h4 id="STORE指令">STORE指令</h4>
+<h5 id="STORE指令">STORE指令</h5>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">STORE Rs,996(Rd)	;Rs→(996+(Rd))<br></code></pre></td></tr></table></figure>
 <p>①IF取指→②ID译码&amp;取数→③EX执行→④M访存→<s>⑤WB写回寄存器</s></p>
 <ul>
@@ -2266,7 +2266,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>M：写入数据Cache</li>
 <li>WB：空段</li>
 </ul>
-<h4 id="条件转移指令">条件转移指令</h4>
+<h5 id="条件转移指令">条件转移指令</h5>
 <p>①IF取指→②ID译码&amp;取数→③EX执行→④M访存→<s>⑤WB写回寄存器</s></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">beq Rs,Rt,#偏移量<br>bne Rs,Rt,#偏移量<br></code></pre></td></tr></table></figure>
 <ul>
@@ -2277,7 +2277,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>WB：空段</li>
 </ul>
 <p>很多教材把写回PC的功能段称为&quot;WrPC段” ,其耗时比M段更短,可安排在M段时间内完成</p>
-<h4 id="无条件转移指令">无条件转移指令</h4>
+<h5 id="无条件转移指令">无条件转移指令</h5>
 <p>①IF取指→②ID译码&amp;取数→③EX执行→<s>④M访存</s>→<s>⑤WB写回寄存器</s></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">jmp #偏移量<br></code></pre></td></tr></table></figure>
 <ul>
@@ -2287,7 +2287,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
 <li>M：空段</li>
 <li>WB：空段</li>
 </ul>
-<h2 id="多处理器系统">多处理器系统</h2>
+<h3 id="多处理器系统">多处理器系统</h3>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231008092815203.png" srcset="/img/loading.gif" lazyload alt="image-20231008092815203"></p>
 <p><img src="./%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86.assets/image-20231009073704131.png" srcset="/img/loading.gif" lazyload alt="image-20231009073704131"></p>
 
@@ -2347,7 +2347,7 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月19日</div>
+          <div>2024年1月31日</div>
         </div>
       
       
@@ -2388,8 +2388,8 @@ Srai rd, rs1, imm表示shift right arithmetic imm，表示算数右移，即右�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/31/video/data-structures-and-algorithms/index/" title="data-structures-and-algorithms">
-                        <span class="hidden-mobile">data-structures-and-algorithms</span>
+                      <a href="/2023/09/02/language/pandas/index/" title="pandas教程">
+                        <span class="hidden-mobile">pandas教程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
