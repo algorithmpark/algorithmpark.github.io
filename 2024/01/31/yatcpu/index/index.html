@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/riscv-cpu.png">
 <meta property="article:published_time" content="2024-01-31T17:09:24.000Z">
-<meta property="article:modified_time" content="2024-01-31T09:11:42.388Z">
+<meta property="article:modified_time" content="2024-02-07T12:19:43.976Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/riscv-cpu.png">
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-01-31T09:11:42+00:00
+                    本文最后更新于 2024-02-07T12:19:43+00:00
                   
                   
 
@@ -621,7 +621,7 @@
 <li>运行<code>simpletest.asmbin</code>，检验中断功能</li>
 </ol>
 <h4 id="波形图-5">波形图</h4>
-<p>前三个测试的波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
+<p>前三个测试的波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
 <p>以下是对第四个测试的分析</p>
 <h5 id="jump-to-trap-handler-and-then-return">jump to trap handler and then return</h5>
 <p>根据<code>simpletest.c</code>的代码，这个程序首先往内存<code>0x4</code>写入数据<code>0xDEADBEEF</code>，然后使用函数<code>enable_interrupt()</code>允许中断发生，定义中断处理函数<code>trap_handler</code>，会往内存<code>0x4</code>写入数据<code>0x2022</code></p>
@@ -681,7 +681,7 @@
 <p><code>CPU.scala</code></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// Lab3(Flush)</span><br>ctrl.io.<span class="hljs-type">JumpFlag</span> := ex.io.if_jump_flag<br>if2id.io.flush := ctrl.io.<span class="hljs-type">Flush</span><br>id2ex.io.flush := ctrl.io.<span class="hljs-type">Flush</span><br><span class="hljs-comment">// Lab3(Flush) End</span><br></code></pre></td></tr></table></figure>
 <h4 id="测试用例和波形图-lab4ThreeStageCPU">测试用例和波形图(lab4ThreeStageCPU)</h4>
-<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
+<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
 <h5 id="solve-control-hazards">solve control hazards</h5>
 <p>这个测试用例检验了寄存器和内存存数,取数的能力</p>
 <p><img src="./%E8%AE%A1%E7%BB%84%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A.assets/image-20240116094157242.png" srcset="/img/loading.gif" lazyload alt="image-20240116094157242"></p>
@@ -692,8 +692,8 @@
 <h4 id="填空代码-7">填空代码</h4>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// Lab3(Stall)</span><br>io.if_flush := <span class="hljs-literal">false</span>.<span class="hljs-type">B</span><br>io.id_flush := <span class="hljs-literal">false</span>.<span class="hljs-type">B</span><br>io.pc_stall := <span class="hljs-literal">false</span>.<span class="hljs-type">B</span><br>io.if_stall := <span class="hljs-literal">false</span>.<span class="hljs-type">B</span><br>when(io.jump_flag)&#123;<br>  io.if_flush := <span class="hljs-literal">true</span>.<span class="hljs-type">B</span><br>  io.id_flush := <span class="hljs-literal">true</span>.<span class="hljs-type">B</span><br>&#125;.elsewhen((io.reg_write_enable_ex &amp;&amp; (io.rd_ex === io.rs1_id || io.rd_ex === io.rs2_id) &amp;&amp; io.rd_ex =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>)<br>|| (io.reg_write_enable_mem &amp;&amp; (io.rd_mem === io.rs1_id || io.rd_mem === io.rs2_id) &amp;&amp; io.rd_mem =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>)<br>)&#123;<br>  io.id_flush := <span class="hljs-literal">true</span>.<span class="hljs-type">B</span><br>  io.pc_stall := <span class="hljs-literal">true</span>.<span class="hljs-type">B</span><br>  io.if_stall := <span class="hljs-literal">true</span>.<span class="hljs-type">B</span><br>&#125;<br><span class="hljs-comment">// Lab3(Stall) End</span><br></code></pre></td></tr></table></figure>
 <h4 id="测试用例和波形图-3">测试用例和波形图</h4>
-<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
-<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab4ThreeStageCPU)">点击跳转</a></p>
+<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
+<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab4ThreeStageCPU">点击跳转</a></p>
 <h3 id="FiveStageCPUForward">FiveStageCPUForward</h3>
 <h4 id="填空代码-8">填空代码</h4>
 <p><code>control.scala</code></p>
@@ -703,8 +703,8 @@
 <p><code>Execute.scala</code></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// Lab3(Forward)</span><br><span class="hljs-comment">//在执行单元中根据旁路单元的控制信号使用对应的旁路数据</span><br>  <span class="hljs-keyword">val</span> reg1_data = <span class="hljs-type">Mux</span>(io.reg1_forward === <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span>, io.forward_from_mem,<br>    <span class="hljs-type">Mux</span>(io.reg1_forward === <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span>,io.forward_from_wb,io.reg1_data)<br>  )<br>  <span class="hljs-keyword">val</span> reg2_data = <span class="hljs-type">Mux</span>(io.reg2_forward === <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span>,io.forward_from_mem,<br>    <span class="hljs-type">Mux</span>(io.reg2_forward === <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span>,io.forward_from_wb,io.reg2_data)<br>  )<br>  <span class="hljs-comment">// Lab3(Forward) End</span><br></code></pre></td></tr></table></figure>
 <h4 id="测试用例和波形图-4">测试用例和波形图</h4>
-<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
-<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab4ThreeStageCPU)">点击跳转</a></p>
+<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
+<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab4ThreeStageCPU">点击跳转</a></p>
 <h3 id="FiveStageCPUFinal">FiveStageCPUFinal</h3>
 <h4 id="自制数据冒险的指令序列样例">自制数据冒险的指令序列样例</h4>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0000: add x1, x0, x0<br>0004: sub x2, x0, x1<br>0008: and x1, x1, x2<br>000C: jalr x4, x1, 0<br>0010: or x5, x3, x4<br></code></pre></td></tr></table></figure>
@@ -929,8 +929,8 @@
 <p><code>Forwarding.scala</code></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// Lab3(Final)</span><br><span class="hljs-comment">//io.reg1_forward_ex</span><br>when(io.reg_write_enable_mem &amp;&amp; io.rs1_ex === io.rd_mem &amp;&amp; io.rd_mem =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg1_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span><br>&#125;.elsewhen(io.reg_write_enable_wb &amp;&amp; io.rs1_ex === io.rd_wb &amp;&amp; io.rd_wb =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg1_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span><br>&#125;.otherwise &#123;<br>  io.reg1_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">NoForward</span><br>&#125;<br><span class="hljs-comment">//io.reg2_forward_ex</span><br>when(io.reg_write_enable_mem &amp;&amp; io.rs2_ex === io.rd_mem &amp;&amp; io.rd_mem =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg2_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span><br>&#125;.elsewhen(io.reg_write_enable_wb &amp;&amp; io.rs2_ex === io.rd_wb &amp;&amp; io.rd_wb =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg2_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span><br>&#125;.otherwise &#123;<br>  io.reg2_forward_ex := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">NoForward</span><br>&#125;<br><span class="hljs-comment">//io.reg1_forward_id</span><br>when(io.reg_write_enable_mem &amp;&amp; io.rs1_id === io.rd_mem &amp;&amp; io.rd_mem =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>)&#123;<br>  io.reg1_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span><br>&#125;.elsewhen(io.reg_write_enable_wb &amp;&amp; io.rs1_id === io.rd_wb &amp;&amp; io.rd_wb =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg1_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span><br>&#125;.otherwise &#123;<br>  io.reg1_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">NoForward</span><br>&#125;<br><span class="hljs-comment">//io.reg2_forward_id</span><br>when(io.reg_write_enable_mem &amp;&amp; io.rs2_id === io.rd_mem &amp;&amp; io.rd_mem =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg2_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromMEM</span><br>&#125;.elsewhen(io.reg_write_enable_wb &amp;&amp; io.rs2_id === io.rd_wb &amp;&amp; io.rd_wb =/= <span class="hljs-number">0.</span><span class="hljs-type">U</span>) &#123;<br>  io.reg2_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">ForwardFromWB</span><br>&#125;.otherwise &#123;<br>  io.reg2_forward_id := <span class="hljs-type">ForwardingType</span>.<span class="hljs-type">NoForward</span><br>&#125;<br><span class="hljs-comment">// Lab3(Final) End</span><br></code></pre></td></tr></table></figure>
 <h4 id="测试用例和波形图-5">测试用例和波形图</h4>
-<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
-<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab4ThreeStageCPU)">点击跳转</a></p>
+<p>前三个测试的测试用例和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
+<p>第四个测试的测试用例和波形图和lab3的ThreeStageCPU的第四个波形图相同，这里不再重复分析，<a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab4ThreeStageCPU">点击跳转</a></p>
 <h3 id="改进的建议-2">改进的建议</h3>
 <p>“扩展：使用旁路减少阻塞”  的表格有问题</p>
 <table>
@@ -1074,12 +1074,12 @@
 <li>1个周期后(44ps)，检查rom_adress是否保持为0x1，3个周期后(49ps)，读取数据结束，检查load_finished为true</li>
 </ul>
 <h4 id="threeStageCPUTest">threeStageCPUTest</h4>
-<p>第1、2、4个测试和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
+<p>第1、2、4个测试和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
 <p>第3个测试用例代码存在问题：</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scala">c.io.regs_debug_read_address.poke(<span class="hljs-number">5.</span><span class="hljs-type">U</span>)<br>c.io.regs_debug_read_data.expect(<span class="hljs-number">100000000.</span><span class="hljs-type">U</span>)<br>c.io.regs_debug_read_address.poke(<span class="hljs-number">6.</span><span class="hljs-type">U</span>)<br>c.io.regs_debug_read_data.expect(<span class="hljs-number">0xBEEF</span>.<span class="hljs-type">U</span>)<br></code></pre></td></tr></table></figure>
 <p>poke和expect缺少c.clock.step()语句，在波形图中无法从regs_debug_read_data得到期望数据</p>
 <h4 id="fiveStageCPUTest">fiveStageCPUTest</h4>
-<p>第1、2、4个测试和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE(lab1CPUTest)">点击跳转</a></p>
+<p>第1、2、4个测试和波形图和lab1的CPUTest的三个波形图相同，这里不再重复分析，<a href="#%E6%B3%A2%E5%BD%A2%E5%9B%BE-lab1CPUTest">点击跳转</a></p>
 <p>第三个测试用例同threeStageCPUTest</p>
 
                 
@@ -1138,7 +1138,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月31日</div>
+          <div>2024年2月7日</div>
         </div>
       
       
@@ -1169,6 +1169,12 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/02/08/language/rust/index/" title="rust笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">rust笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
@@ -1185,6 +1191,50 @@
             </div>
 
             
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
           </article>
         </div>
       </div>
