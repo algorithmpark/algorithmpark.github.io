@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/linux.png">
 <meta property="article:published_time" content="2023-07-05T14:02:13.000Z">
-<meta property="article:modified_time" content="2024-01-13T12:30:53.500Z">
+<meta property="article:modified_time" content="2024-03-19T12:47:05.371Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/linux.png">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k 字
+          12k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          90 分钟
+          99 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-01-13T12:30:53+00:00
+                    本文最后更新于 2024-03-19T12:47:05+00:00
                   
                   
 
@@ -1468,6 +1468,8 @@ IP	: 58.249.112.87
 <p>为管理运行的程序，每一个程序在运行的时候，便被操作系统注册为系统中的一个：进程</p>
 <p>并会为每一个进程都分配一个独有的:进程ID(进程号)</p>
 <p><img src="./linux%E7%AC%94%E8%AE%B0.assets/23-1.png" srcset="/img/loading.gif" lazyload alt="23-1"></p>
+<p>查看进程树</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pstree<br></code></pre></td></tr></table></figure>
 <h3 id="关闭进程">关闭进程</h3>
 <p>在Windows系统中,可以通过任务管理器选择进程后,点击结束进程从而关闭它。</p>
 <p>同样，在Linux中，可以通过kill命令关闭进程。</p>
@@ -1695,6 +1697,9 @@ CJL is handsome
 <p>注意:同名内容会被替换</p>
 <h2 id="28-ssh命令">28.ssh命令</h2>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh [用户名]@[IP地址] <br></code></pre></td></tr></table></figure>
+<h3 id="ssh端口转发">ssh端口转发</h3>
+<p><strong>SSH命令后不登录B主机，仅启用ssh隧道，仅监听A主机127.0.0.1地址，关闭A主机终端后隧道不会断开</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -f -N -L A转发port:B主机IP:B目的端口 root@B主机<br>ssh -f -N -L 7001:192.168.134.30:22 node1@192.168.134.30<br>ssh -f -N -L 7001:172.18.198.224:22 root@172.18.198.224<br></code></pre></td></tr></table></figure>
 <h2 id="29-给命令起别名">29.给命令起别名</h2>
 <p>编辑~/.bashrc</p>
 <p>示例：</p>
@@ -1784,6 +1789,243 @@ CJL is handsome
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">tail</span> -f nohup.out  <span class="hljs-comment"># 查看jupyter notebook的log</span><br></code></pre></td></tr></table></figure>
 <p>如何杀死jupyter进程？</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps -ef|grep jupyter<br><span class="hljs-built_in">kill</span> 进程号<br></code></pre></td></tr></table></figure>
+<h2 id="33-ANSI转义序列">33.ANSI转义序列</h2>
+<p>主要用途是在命令行中打印彩色字符</p>
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\033[31mhello_red\033[0m&quot;</span><br><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\x1b[31mhello_red\x1b[0m&quot;</span><br></code></pre></td></tr></table></figure>
+<pre><font color="#C01C28">hello_red</font></pre>
+<pre><font color="#C01C28">hello_red</font></pre>
+<p>这里的\033是八进制数，\x1b是十六进制数，二者等价（在有些地方可能只能用\x1b）</p>
+<p>颜色设置方法</p>
+<table>
+<thead>
+<tr>
+<th>前景色</th>
+<th>背景色</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>40</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td>31</td>
+<td>41</td>
+<td>红色</td>
+</tr>
+<tr>
+<td>32</td>
+<td>42</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td>33</td>
+<td>43</td>
+<td>黃色</td>
+</tr>
+<tr>
+<td>34</td>
+<td>44</td>
+<td>蓝色</td>
+</tr>
+<tr>
+<td>35</td>
+<td>45</td>
+<td>紫红色</td>
+</tr>
+<tr>
+<td>36</td>
+<td>46</td>
+<td>青蓝色</td>
+</tr>
+<tr>
+<td>37</td>
+<td>47</td>
+<td>白色</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\033[42;31mGreen and Red\033[0m&quot;</span><br></code></pre></td></tr></table></figure>
+<pre><span style="background-color:#26A269"><font color="#C01C28">Green and Red</font></span></pre>
+<p>其他功能的控制码</p>
+<table>
+<thead>
+<tr>
+<th>ansi控制码</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\033[0m</code></td>
+<td>关闭所有属性 ，也就是说此控制码前面的控制码将会失效，此控制码中的0可以省略。</td>
+</tr>
+<tr>
+<td><code>\033[1m</code></td>
+<td>加粗</td>
+</tr>
+<tr>
+<td><code>\033[4m</code></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code>\033[5m</code></td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td><code>\033[7m</code></td>
+<td>反显 ，撞色显示，显示为白底黑字，或者显示为黑底白字</td>
+</tr>
+<tr>
+<td><code>\033[8m</code></td>
+<td>消隐 ，字符颜色将会与背景颜色相同（隐藏字符）</td>
+</tr>
+<tr>
+<td><code>\033[2J</code></td>
+<td>清空整个屏幕并将光标移动到左上角</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-使用gdb">34. 使用gdb</h2>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EK411g7Li">推荐的教程视频</a></p>
+<p>gdb支持的语言</p>
+<ul>
+<li>Ada</li>
+<li>Assembly</li>
+<li>C</li>
+<li>C++</li>
+<li>D</li>
+<li>Fortran</li>
+<li>Go</li>
+<li>Objective-C</li>
+<li>OpenCL</li>
+<li>Modula-2</li>
+<li>Pascal</li>
+<li>Rust</li>
+</ul>
+<h3 id="安装gdb">安装gdb</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install gdb<br></code></pre></td></tr></table></figure>
+<p>检查是否成功安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb --version<br></code></pre></td></tr></table></figure>
+<h3 id="使用gdb">使用gdb</h3>
+<p>首先创建下面的程序用于测试</p>
+<p>test.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> arr[<span class="hljs-number">7</span>] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">9</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> add = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; ++i)<br>    &#123;<br>        add += i;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, add);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>为了能够调试，记得编译时加上<code>-g</code>参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -g test.c -o test.out<br></code></pre></td></tr></table></figure>
+<p>进入调试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb ./test.out<br></code></pre></td></tr></table></figure>
+<h3 id="gdb常用命令">gdb常用命令</h3>
+<p>输入<code>man gdb</code>可以查看教程</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简写</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>l</td>
+<td>列出源码</td>
+</tr>
+<tr>
+<td>break</td>
+<td>b</td>
+<td>设置断点</td>
+</tr>
+<tr>
+<td>run</td>
+<td>r</td>
+<td>从头开始运行程序</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>c</td>
+<td>从停止处继续运行程序</td>
+</tr>
+<tr>
+<td>next</td>
+<td>n</td>
+<td>向前执行一句(不进入被调用函数中)</td>
+</tr>
+<tr>
+<td>step</td>
+<td>s</td>
+<td>向前执行一句(可进入被调用函数中)</td>
+</tr>
+<tr>
+<td>return</td>
+<td>ret</td>
+<td>从当前函数返回</td>
+</tr>
+<tr>
+<td>print</td>
+<td>p</td>
+<td>显示变量或表达式的值</td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>显示内存值</td>
+</tr>
+<tr>
+<td>backtrace</td>
+<td>bt</td>
+<td>显示调用栈</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>q</td>
+<td>退出gdb</td>
+</tr>
+<tr>
+<td>symbol-file</td>
+<td>sy</td>
+<td>从可执行文件中加载符号表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="断点">断点</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 给main函数设置断点</span><br>b main<br><span class="hljs-comment"># 给第7行设置断点</span><br>b 7<br><span class="hljs-comment"># 查看所有断点</span><br>info b<br></code></pre></td></tr></table></figure>
+<h3 id="查看变量的值">查看变量的值</h3>
+<p>例如，在执行道第5行的时候</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">(gdb) n<br>5           int add = 0;<br>(gdb) p arr[0]<br><span class="hljs-variable">$1</span> = 1<br>(gdb) p arr[1]<br><span class="hljs-variable">$2</span> = 9<br>(gdb) p arr<br><span class="hljs-variable">$3</span> = &#123;1, 9, 1, 9, 8, 1, 0&#125;<br>(gdb) p &amp;arr<br><span class="hljs-variable">$4</span> = (int (*)[7]) 0x7fffffffdf00<br>(gdb) p &amp;arr[1]<br><span class="hljs-variable">$5</span> = (int *) 0x7fffffffdf04<br></code></pre></td></tr></table></figure>
+<h3 id="执行shell命令">执行shell命令</h3>
+<p>在gdb中可以执行shell命令，只需在命令前加上shell就行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">(gdb) shell <span class="hljs-built_in">ls</span><br>hello1.out  hello.c  hello.o  hello.out  test.c  test.out<br>(gdb) shell <span class="hljs-built_in">cat</span> test.c<br><span class="hljs-comment">#include &lt;stdio.h&gt;</span><br>int <span class="hljs-function"><span class="hljs-title">main</span></span>()<br>&#123;<br>    int arr[7] = &#123;1, 9, 1, 9, 8, 1, 0&#125;;<br>    int add = 0;<br>    <span class="hljs-keyword">for</span> (int i = 0; i &lt;= 100; ++i)<br>    &#123;<br>        add += i;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, add);<br>    <span class="hljs-built_in">return</span> 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="日志功能">日志功能</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> logging on<br></code></pre></td></tr></table></figure>
+<p>可以将调试过程保存到gdb.txt</p>
+<h3 id="watchpoint">watchpoint</h3>
+<p>可以监视指定变量值的变化</p>
+<p>添加watchpoint: <code>watch 变量</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">(gdb) n<br>8               add += i;<br>(gdb) watch i<br>Hardware watchpoint 2: i<br>(gdb) n<br>6           <span class="hljs-keyword">for</span> (int i = 0; i &lt;= 100; ++i)<br>(gdb) n<br><br>Hardware watchpoint 2: i<br><br>Old value = 2<br>New value = 3<br>0x00005555555551cf <span class="hljs-keyword">in</span> main () at test.c:6<br>6           <span class="hljs-keyword">for</span> (int i = 0; i &lt;= 100; ++i)<br></code></pre></td></tr></table></figure>
+<h3 id="调试core文件">调试core文件</h3>
+<p>首先需要开启生成core文件的权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看所有限制</span><br><span class="hljs-built_in">ulimit</span> -a<br><span class="hljs-comment"># 允许生成core文件</span><br><span class="hljs-built_in">ulimit</span> -c unlimited<br></code></pre></td></tr></table></figure>
+<p>设置core文件路径，设置在当前目录下</p>
+<ul>
+<li>%e为可执行文件名（不包含路径前缀）</li>
+<li>%p为进程号</li>
+<li>%s表示引起转储的信号数。当程序异常退出时，操作系统会发送一个信号，例如 <code>SIGSEGV</code>（段错误）或 <code>SIGBUS</code>。<code>%s</code> 将被替换为相应的信号数。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;./core-%e-%p-%s&quot;</span> &gt; /proc/sys/kernel/core_pattern<br></code></pre></td></tr></table></figure>
+<p>编写一段会出错的代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-type">int</span> *a = <span class="hljs-literal">NULL</span>;<br>    *a = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -g test_error.c -o test_error.out<br>./test_error.out<br></code></pre></td></tr></table></figure>
+<p>查看运行崩溃原因</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb ./test_error.out core-test_error.out-8773-11<br></code></pre></td></tr></table></figure>
+<h3 id="调试正在运行的程序">调试正在运行的程序</h3>
+<p>创建test02.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">unsigned</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>    &#123;<br>        i += <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -g test02.c -o test02.out<br><span class="hljs-comment"># 后台执行test02.out，会输出一个进程号</span><br>./test02.out &amp;<br><span class="hljs-comment"># 开始调试</span><br>gdb -p 进程号<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -1841,7 +2083,7 @@ CJL is handsome
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月13日</div>
+          <div>2024年3月19日</div>
         </div>
       
       
