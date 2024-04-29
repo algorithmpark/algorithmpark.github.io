@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/linux.png">
 <meta property="article:published_time" content="2023-07-05T14:02:13.000Z">
-<meta property="article:modified_time" content="2024-04-08T01:05:39.287Z">
+<meta property="article:modified_time" content="2024-04-16T05:17:42.949Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/linux.png">
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-04-08T01:05:39+00:00
+                    本文最后更新于 2024-04-16T05:17:42+00:00
                   
                   
 
@@ -2032,6 +2032,9 @@ CJL is handsome
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">unsigned</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>    &#123;<br>        i += <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -g test02.c -o test02.out<br><span class="hljs-comment"># 后台执行test02.out，会输出一个进程号</span><br>./test02.out &amp;<br><span class="hljs-comment"># 开始调试</span><br>gdb -p 进程号<br></code></pre></td></tr></table></figure>
+<h2 id="35-du">35. du</h2>
+<p>查看文件夹的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">du</span> -lh --max-depth=1<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -2089,7 +2092,7 @@ CJL is handsome
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月8日</div>
+          <div>2024年4月16日</div>
         </div>
       
       

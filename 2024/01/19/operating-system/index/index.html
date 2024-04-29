@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
 <meta property="article:published_time" content="2024-01-19T09:17:40.000Z">
-<meta property="article:modified_time" content="2024-04-15T07:53:03.525Z">
+<meta property="article:modified_time" content="2024-04-29T01:43:07.828Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
@@ -287,7 +287,7 @@
         
         
         
-          166 分钟
+          167 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-04-15T07:53:03+00:00
+                    本文最后更新于 2024-04-29T01:43:07+00:00
                   
                   
 
@@ -988,6 +988,7 @@ id3 ---&gt;id5[允许一个时间段内由多个进程同时对它们进行访�
 </ol>
 <h3 id="进程互斥的软件实现方法">进程互斥的软件实现方法</h3>
 <h4 id="单标志法">单标志法</h4>
+<p>也称严格备选(strict Alternation)</p>
 <p>算法思想：两个进程在<strong>访问完临界区后</strong>会把使用临界区的权限转交给另一个进程。也就是说<strong>每个进程进入临界区的权限只能被另一个进程赋予</strong></p>
 <p>实现代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> turn = <span class="hljs-number">0</span>; <span class="hljs-comment">//turn 表示当前允许进入临界区的进程号</span><br></code></pre></td></tr></table></figure>
@@ -997,6 +998,7 @@ id3 ---&gt;id5[允许一个时间段内由多个进程同时对它们进行访�
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span>(turn != <span class="hljs-number">1</span>);<br>critical section;<br>turn = <span class="hljs-number">0</span>;<br>remainder section;<br></code></pre></td></tr></table></figure>
 <p>该算法可以实现“同一时刻最多只允许一个进程访问临界区”</p>
 <p>只能按<code>P0→P1→P0→P1→...</code> 这样轮流访问。这种必须“轮流访问”带来的问题是,如果此时允许进入临界区的进程是P0,而P0一直不访问临界区,那么虽然此时临界区空闲,但是并不允许P1访问。因此,单标志法存在的主要问题是:违背“空闲让进”原则。</p>
+<p>如果一个进程想要连续两次访问临界区，这种方法无法实现</p>
 <h4 id="双标志先检查法">双标志先检查法</h4>
 <p>算法思想：设置一个布尔型数组flag[]，数组中各个元素用来<strong>标记各进程想进入临界区的意愿</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> flag[<span class="hljs-number">2</span>];<br>flag[<span class="hljs-number">0</span>] = <span class="hljs-literal">false</span>;<br>flag[<span class="hljs-number">1</span>] = <span class="hljs-literal">false</span>;<br></code></pre></td></tr></table></figure>
@@ -1123,7 +1125,7 @@ id3[缓冲区没满,V]--empty--&gt;id4[P,生产者生产]
 <p>只有盘子为空时,父亲或母亲才能放入水果</p>
 </li>
 </ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex = <span class="hljs-number">1</span>; <span class="hljs-comment">//实现互斥访问盘子(缓冲区)</span><br>semaphore apple = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个苹果</span><br>semaphore orange = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个橘子</span><br>semaphore plate = <span class="hljs-number">1</span>;<span class="hljs-comment">//盘子中还可以放多少个水果</span><br>dad()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍎;<br>        P(plate);<br>        P(mutex);<br>        把🍎放入盘子;<br>        V(mutex);<br>        V(apple);<br>    &#125;<br>&#125;<br>mom&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍊;<br>        P(plate);<br>        P(mutex);<br>        把🍊放入盘子;<br>        V(mutex);<br>        V(orange);<br>    &#125;<br>&#125;<br>daughter&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(apple);<br>        P(mutex);<br>        从盘中取走🍎;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍎;<br>    &#125;<br>&#125;<br>son&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(orange);<br>        P(mutex);<br>        从盘中取走🍊;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍊;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c">semaphore mutex = <span class="hljs-number">1</span>; <span class="hljs-comment">//实现互斥访问盘子(缓冲区)</span><br>semaphore apple = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个苹果</span><br>semaphore orange = <span class="hljs-number">0</span>; <span class="hljs-comment">//盘子中有几个橘子</span><br>semaphore plate = <span class="hljs-number">1</span>;<span class="hljs-comment">//盘子中还可以放多少个水果</span><br>dad()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍎;<br>        P(plate);<br>        P(mutex);<br>        把🍎放入盘子;<br>        V(mutex);<br>        V(apple);<br>    &#125;<br>&#125;<br>mom()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        准备一个🍊;<br>        P(plate);<br>        P(mutex);<br>        把🍊放入盘子;<br>        V(mutex);<br>        V(orange);<br>    &#125;<br>&#125;<br>daughter()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(apple);<br>        P(mutex);<br>        从盘中取走🍎;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍎;<br>    &#125;<br>&#125;<br>son()&#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        P(orange);<br>        P(mutex);<br>        从盘中取走🍊;<br>        V(mutex);<br>        V(plate);<br>        吃掉🍊;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在这个例子中，不用mutex，也可以实现对盘子的互斥访问</p>
 <h3 id="吸烟者问题">吸烟者问题</h3>
 <p>假设一个系统有三个抽烟者进程和一个供应者进程。每个抽烟者不停地卷烟并抽掉它,但是要卷起并抽掉一支烟,抽烟者需要有三种材料:烟草、纸和胶水。</p>
@@ -1877,7 +1879,7 @@ id3(B类进程) ---&gt; id4[资源2]
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月15日</div>
+          <div>2024年4月29日</div>
         </div>
       
       
