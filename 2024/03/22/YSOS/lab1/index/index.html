@@ -1,0 +1,1288 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="中山大学操作系统实验课程实验报告lab1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YSOS-rust lab1">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/03/22/YSOS/lab1/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="中山大学操作系统实验课程实验报告lab1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+<meta property="article:published_time" content="2024-03-22T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-14T10:32:31.707Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>YSOS-rust lab1 - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="YSOS-rust lab1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-22 08:00" pubdate>
+          2024年3月22日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">YSOS-rust lab1</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-05-14T10:32:31+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <!-- 注释语句：导出PDF时会在这里分页 -->
+<h1>YSOS-lab1</h1>
+<h2 id="1-实验要求">1. 实验要求</h2>
+<ol>
+<li>请参考 <a target="_blank" rel="noopener" href="https://ysos.gzti.me/general/specification/">代码与提交规范</a> 进行实验代码编写。</li>
+<li>依据 <a target="_blank" rel="noopener" href="https://ysos.gzti.me/labs/0x01/tasks/">实验任务</a> 完成实验。
+<ul>
+<li>代码编写任务：观察提供的代码，完善所有标记为 <code>FIXME:</code> 的部分，并验证结果是否符合预期。<strong>请在报告中介绍实现思路，截图展示关键结果。</strong></li>
+<li>思考任务：完成 “思考题” 和 “实验任务” 部分的内容，<strong>在报告中简要进行回答</strong>。<em>注：思考题可能也是理解代码、实现功能的重要提示。</em></li>
+<li>Bonus 加分项：学有余力的同学可以任选 Bonus 部分完成，尝试完成更多的功能，并在报告中进行展示。这部分内容不是必须的要求。</li>
+</ul>
+</li>
+<li>请在实验报告中涵盖相关任务的实现截图、实验任务对应问题的解答、实验过程中遇到的问题与解决方案等内容。</li>
+</ol>
+<h2 id="2-实验过程">2. 实验过程</h2>
+<h3 id="初始化项目">初始化项目</h3>
+<p><code>YatSenOS-Tutorial-Volume-2/src/0x00</code>文件夹复制到当前目录下，名称为<code>0x00</code></p>
+<p>将<code>YatSenOS-Tutorial-Volume-2/src/0x01</code>文件夹下的所有内容复制到<code>0x00</code>文件夹,替换其中重复的文件</p>
+<h3 id="编译内核ELF">编译内核ELF</h3>
+<p>在 <code>pkg/kernel</code> 目录下运行 <code>cargo build --release</code>，在<code>target</code>目录下得到<code>release/</code>、<code>.rustc_info.json</code>、<code>x86_64-unknown-none/</code></p>
+<p>执行<code>readelf -a target/x86_64-unknown-none/release/ysos_kernel &gt; readelf.txt</code>，可以查看编译产物的基本信息</p>
+<p><strong>实验任务</strong></p>
+<ol>
+<li>请查看编译产物的架构相关信息，与配置文件中的描述是否一致？</li>
+</ol>
+<p><code>readelf.txt</code>第9行<code>  Machine: Advanced Micro Devices X86-64</code>说明架构是X86-64, 和配置文件<code>pkg/kernel/config/x86_64-unknown-none.json</code>第8行<code>&quot;arch&quot;: &quot;x86_64&quot;</code>一致</p>
+<ol start="2">
+<li>找出内核的入口点，它是被如何控制的？结合源码、链接、加载的过程，谈谈你的理解。</li>
+</ol>
+<p><strong>源码:</strong></p>
+<ul>
+<li>在<code>pkg/kernel/src/main.rs</code>目录下定义了内核的入口</li>
+<li>它定义了一个 <strong>入口点</strong>（entry point），即 <code>boot::entry_point!(kernel_main);</code>。这表示在程序启动时，<code>kernel_main</code> 函数将被调用。</li>
+<li>查看<code>pkg/boot/src/lib.rs</code>中对<code>boot::entry_point!</code>宏的定义,
+<ul>
+<li>它要求入口函数必须拥有签名<code>fn(&amp;'static BootInfo) -&gt; !</code></li>
+<li>这个宏会创建一个名为 <code>_start</code> 的函数。链接器会将这个函数作为程序的入口点。</li>
+<li>使用这个宏的优势在于，它确保了函数和参数类型的正确性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>链接:</strong></p>
+<p>查看<code>pkg/kernel/config/kernel.ld</code>, 这是一个链接器脚本, 它定义了如何将不同的代码和数据段组合成最终的可执行内核映像</p>
+<p>其中第一行为<code>ENTRY(_start)</code>：这行指令指定了程序的入口点，即从 <code>_start</code> 标签处开始执行</p>
+<p><strong>加载:</strong></p>
+<ul>
+<li>
+<p>操作系统运行用户程序时将其映射到内存中；</p>
+</li>
+<li>
+<p>当它看到可执行文件中的<code>PT_INERP</code>时，操作系统将<code>PT_INTERP</code>指定的动态链接器映射进内存，并通过栈向其传递它所需要的参数，并跳到动态链接器的入口处开始执行；</p>
+</li>
+<li>
+<p>动态连接器的入口是<code>_start</code>, 这样源码中<code>_start</code>指定的<code>kernel_main</code> 函数就能开始执行</p>
+</li>
+</ul>
+<ol start="3">
+<li>请找出编译产物的 segments 的数量，并且<strong>用表格的形式</strong>说明每一个 segments 的权限、是否对齐等信息。</li>
+</ol>
+<p>执行<code>readelf -l target/x86_64-unknown-none/release/ysos_kernel</code>, 可以看到程序有8个segments</p>
+<ul>
+<li>R表示可读</li>
+<li>W表示可写</li>
+<li>E表示可执行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Segment</strong></th>
+<th style="text-align:left"><strong>权限</strong></th>
+<th style="text-align:left"><strong>对齐</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">00</td>
+<td style="text-align:left">R</td>
+<td style="text-align:left">0x1000</td>
+</tr>
+<tr>
+<td style="text-align:left">01</td>
+<td style="text-align:left">R E</td>
+<td style="text-align:left">0x1000</td>
+</tr>
+<tr>
+<td style="text-align:left">02</td>
+<td style="text-align:left">RW</td>
+<td style="text-align:left">0x1000</td>
+</tr>
+<tr>
+<td style="text-align:left">03</td>
+<td style="text-align:left">RW</td>
+<td style="text-align:left">0x1000</td>
+</tr>
+<tr>
+<td style="text-align:left">04</td>
+<td style="text-align:left">RW</td>
+<td style="text-align:left">0x8</td>
+</tr>
+<tr>
+<td style="text-align:left">05</td>
+<td style="text-align:left">R</td>
+<td style="text-align:left">0x1</td>
+</tr>
+<tr>
+<td style="text-align:left">06</td>
+<td style="text-align:left">R</td>
+<td style="text-align:left">0x4</td>
+</tr>
+<tr>
+<td style="text-align:left">07</td>
+<td style="text-align:left">RW</td>
+<td style="text-align:left">0x0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="在UEFI中加载内核">在UEFI中加载内核</h3>
+<p>代码见关键代码部分, [点击跳转](# 3. 关键代码)</p>
+<p>完成代码后，输入<code>python ysos.py build -p debug</code>以编译内核</p>
+<p>使用 <code>python ysos.py launch -d</code> 启动 QEMU 并进入调试模式，这时候 QEMU 将会等待 GDB 的连接。</p>
+<p>在<code>VScode</code>中安装好<code>CodeLLDB</code>，然后启动调试，就可以进入调试环境，如下面的截图</p>
+<p><img src="./lab2.assets/image-20240309144053301.png" srcset="/img/loading.gif" lazyload alt="image-20240309144053301"></p>
+<hr>
+<h3 id="实验任务">实验任务</h3>
+<p><strong>1.<code>set_entry</code> 函数做了什么？为什么它是 unsafe 的？</strong></p>
+<p>源码如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">unsafe</span> &#123;<br>    <span class="hljs-title function_ invoke__">set_entry</span>(elf.header.pt2.<span class="hljs-title function_ invoke__">entry_point</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>首先，代码调用了<code>elf.header.pt2.entry_point()</code>，可以在<code>/root/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xmas-elf-0.9.1/src/header.rs</code>查看函数的源码</p>
+<p>源码是一个<code>getter</code>宏: <code>getter!(entry_point, u64);</code> , 用于获取结构体字段值, 它会被展开为类似以下的形式：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; HeaderPt2&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">entry_point</span>(&amp;<span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u64</span> &#123;<br>        <span class="hljs-keyword">match</span> *<span class="hljs-keyword">self</span> &#123;<br>            HeaderPt2::<span class="hljs-title function_ invoke__">Header32</span>(h) =&gt; h.entry_point <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>,<br>            HeaderPt2::<span class="hljs-title function_ invoke__">Header64</span>(h) =&gt; h.entry_point <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>,<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看出, 调用<code>elf.header.pt2.entry_point()</code>会返回一个<code>u64</code>作为内核的入口地址, 它会被类型转换为<code>usize</code>类型</p>
+<p>在<code>pkg/boot/src/lib.rs</code>可以看到<code>set_entry()</code>函数的源码</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/// The entry point of kernel, set by BSP.</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">mut</span> ENTRY: <span class="hljs-type">usize</span> = <span class="hljs-number">0</span>;<br><span class="hljs-comment">/// This function is unsafe because the caller must ensure that the kernel entry point is valid.</span><br><span class="hljs-meta">#[inline(always)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">set_entry</span>(entry: <span class="hljs-type">usize</span>) &#123;<br>    ENTRY = entry;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看出, <code>set_entry()</code>函数需要修改静态可变变量<code>ENTRY</code>的值, 它可能会被多个线程同时改变，造成未定义的行为, 所以是危险的, 必须要放在unsafe块中才能通过编译.</p>
+<p>除此之外, 从代码注释可以看出, 函数不安全的原因是调用者必须保证内核跳转地址是有效的, 否则, 程序可能会跳转到未知的内存区域执行, 是不安全的</p>
+<hr>
+<p><strong>2.<code>jump_to_entry</code> 函数做了什么？要传递给内核的参数位于哪里？查询 <code>call</code> 指令的行为和 x86_64 架构的调用约定，借助调试器进行说明</strong></p>
+<p><code>jump_to_entry</code>函数首先判断变量<code>ENTRY</code>是否为0, 如果为0, 则说明内核入口<code>ENTRY</code>未被成功修改</p>
+<p>随后执行以下汇编指令:</p>
+<ul>
+<li>
+<p><code>mov rsp, &#123;&#125;</code>将栈指针 <code>rsp</code> 设置为 <code>stacktop</code> 的值</p>
+</li>
+<li>
+<p><code>call &#123;&#125;</code> 调用 <code>ENTRY</code> 所指向的函数。这里使用了 <code>rdi</code> 寄存器传递 <code>bootinfo</code>的地址</p>
+</li>
+</ul>
+<p>最后，有 <code>unreachable!()</code>。这是一个永远不会执行的代码，用于标记函数的返回类型为 <code>!</code>（即“never”类型）。这意味着函数不会正常返回，而是直接终止程序。</p>
+<p>如下是调试<code>jump_to_entry</code>函数可以看到的汇编代码</p>
+<p><img src="./lab2.assets/image-20240311112126861.png" srcset="/img/loading.gif" lazyload alt="image-20240311112126861"></p>
+<p>代码<code>asm!(&quot;mov rsp, &#123;&#125;; call &#123;&#125;&quot;, in(reg) stacktop, in(reg) ENTRY, in(&quot;rdi&quot;) bootinfo);</code>对应的汇编指令位于<code>043BB3D5</code>, 指令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">043BB3D5: 48 89 CF          movq  %rcx, %rdi<br><br>043BB3D8: 48 89 D4          movq  %rdx, %rsp<br><br>043BB3DB: FF D0            callq  *%rax<br></code></pre></td></tr></table></figure>
+<p><code>%rcx</code>是作为函数参数传入的<code>bootinfo</code>, 即<code>BootInfo</code>结构体的地址, 它被赋值给<code>%rdi</code></p>
+<p><code>%rdx</code>是作为函数参数传入的<code>stacktop</code>, 它被赋值给<code>%rsp</code>，<code>rsp</code> 寄存器指向了当前栈顶的地址，所以这句指令可以实现设置栈顶地址的目的</p>
+<p><code>callq *%rax</code> 会从 <code>%rax</code> 中加载一个**四字（64位）**作为地址，然后调用从该地址开始的函数。</p>
+<p>x86_64 架构的调用约定，用call调用函数时，前 6 个整型参数通过寄存器传递，分别存放在 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>。</p>
+<p><code>BootInfo</code>结构体的地址就被存在<code>%rdi</code>中，可以传递给内核</p>
+<hr>
+<p><strong>3.<code>entry_point!</code> 宏做了什么？内核为什么需要使用它声明自己的入口点？</strong></p>
+<p><code>entry_point!</code> 宏接受一个参数作为内核入口函数的函数名,它会生成一个新的函数, 名为<code>__impl_start</code>, 这个函数会验证传递的函数的签名, 确保它接受一个 <code>'static</code> 生命周期的 <code>BootInfo</code> 引用, 并且返回一个 <code>!</code> 类型</p>
+<p>然后, <code>__impl_start</code> 函数会调用传递的函数，将 <code>boot_info</code> 参数传递给它(<code>BootInfo</code>结构体的地址已经被存在<code>%rdi</code>寄存器中了, 它对应函数的第一个参数)</p>
+<p>内核为什么需要使用它声明自己的入口点?</p>
+<ul>
+<li>
+<p>链接器会将标记有<code>_start</code>的函数作为内核的入口点, 这个宏会让<code>__impl_start</code> 函数带上<code>_start</code>标记, 以便链接器找到内核入口</p>
+</li>
+<li>
+<p>比起直接创建一个标记了<code>_start</code>的函数, 这个宏还能保证内核入口函数接受的参数类型是正确的</p>
+</li>
+</ul>
+<hr>
+<p><strong>4.如何为内核提供直接访问物理内存的能力？你知道几种方式？代码中所采用的是哪一种？可以参考<a target="_blank" rel="noopener" href="https://os.phil-opp.com/paging-implementation">这篇文章</a>进行学习。</strong></p>
+<p>几种方式:</p>
+<ul>
+<li>
+<p>Identity Mapping: 页表的物理地址也是有效的虚拟地址</p>
+</li>
+<li>
+<p>Map at a Fixed Offset: 虚拟地址=物理地址+固定的偏移量</p>
+</li>
+<li>
+<p>Map the Complete Physical Memory: 映射整个物理内存到虚拟内存,这样内核就能够访问到任意物理内存</p>
+</li>
+<li>
+<p>Temporary Mapping: 对于物理内存非常小的设备，我们只能在需要访问页表帧时临时映射它们。</p>
+</li>
+<li>
+<p>Recursive Page Tables: 将页表中的条目映射到表本身</p>
+</li>
+</ul>
+<p>代码采用了Map the Complete Physical Memory方式,由<code>esp/EFI/BOOT/boot.conf</code>中的配置可知, 有一项为<code>physical_memory_offset=0xFFFF800000000000</code>, 设置了整个物理内存到虚拟内存的偏移量. <code>map_physical_memory</code>函数会根据这一设置映射物理内存</p>
+<hr>
+<p><strong>5.为什么 ELF 文件中不描述栈的相关内容？栈是如何被初始化的？它可以被任意放置吗？</strong></p>
+<p>因为ELF 文件的目标是让处理器正确执行我们编写的代码，而栈是在程序运行时动态分配的. 栈的大小和位置在运行时由操作系统决定，不是在编译或链接阶段确定的. 因此，ELF 文件不直接描述栈的内容，而是依赖于操作系统在加载时设置栈的相关信息.</p>
+<p>所以在加载内核时, 需要手动映射内核栈, 通过下面的代码实现</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">_page_range</span> = <span class="hljs-title function_ invoke__">map_range</span>(<br>        config.kernel_stack_address,<br>        <span class="hljs-keyword">match</span> config.kernel_stack_auto_grow&#123;<br>            <span class="hljs-number">0</span> =&gt; config.kernel_stack_size,<br>            _ =&gt; config.kernel_stack_auto_grow / <span class="hljs-number">4096</span>,<br>        &#125;,<br>        &amp;<span class="hljs-keyword">mut</span> page_table, &amp;<span class="hljs-keyword">mut</span> frame_allocator).<span class="hljs-title function_ invoke__">unwrap</span>();<br></code></pre></td></tr></table></figure>
+<p>它不能被任意放置, 而要根据配置文件中设置的栈起始地址<code>kernel_stack_address</code>, 栈初始分配大小<code>kernel_stack_auto_grow</code>和栈总大小<code>kernel_stack_size</code>决定</p>
+<hr>
+<h3 id="根据上述调试过程，回答以下问题，并给出你的回答与必要的截图：">根据上述调试过程，回答以下问题，并给出你的回答与必要的截图：</h3>
+<p><strong>请解释指令 <code>layout asm</code> 的功能。倘若想找到当前运行内核所对应的 Rust 源码，应该使用什么 GDB 指令？</strong></p>
+<p><code>layout asm</code> 是 <strong>GDB</strong> 中的一个强大命令，用于在调试会话期间显示汇编代码窗口, 可以在 GDB 中同时查看源代码和对应的汇编代码。效果如下图</p>
+<p><img src="./lab2.assets/image-20240317134817465.png" srcset="/img/loading.gif" lazyload alt="image-20240317134817465"></p>
+<p>使用<code>list</code>命令可以查看当前运行内核对应的rust源码,如下图</p>
+<p><img src="./lab2.assets/image-20240317134728885.png" srcset="/img/loading.gif" lazyload alt="image-20240317134728885"></p>
+<hr>
+<p><strong>假如在编译时没有启用 <code>DBG_INFO=true</code>，调试过程会有什么不同？</strong></p>
+<p>重新编译, 执行<code>python ysos.py build</code>(去掉了<code>-p debug</code>参数)</p>
+<p>然后执行<code>python ysos.py launch -d</code>, 启动<code>gdb</code></p>
+<p><img src="./lab2.assets/image-20240317135513628.png" srcset="/img/loading.gif" lazyload alt="image-20240317135513628"></p>
+<p>gdb窗口中只能显示汇编代码, 而无法显示rust源码</p>
+<p>默认情况下，编译生成的可执行文件中没有可供 <strong>GDB</strong> 调试使用的特殊信息。为了将必要的调试信息整合到可执行文件中，我们需要在编译阶段加上<code>DBG_INFO=true</code></p>
+<hr>
+<p><strong>你如何选择了你的调试环境？截图说明你在调试界面（TUI 或 GUI）上可以获取到哪些信息？</strong></p>
+<p>我使用了2种调试环境</p>
+<ol>
+<li>gef</li>
+</ol>
+<p>可以获得的信息如下图指出</p>
+<p><img src="./lab2.assets/image-20240317140236793.png" srcset="/img/loading.gif" lazyload alt="image-20240317140236793"></p>
+<ol start="2">
+<li>VScode</li>
+</ol>
+<p>可以获得的信息如下图指出</p>
+<p><img src="./lab2.assets/image-20240317140910551.png" srcset="/img/loading.gif" lazyload alt="image-20240317140910551"></p>
+<h3 id="UART和日志输出">UART和日志输出</h3>
+<table>
+<thead>
+<tr>
+<th>IO端口偏移</th>
+<th>DLAB的设置</th>
+<th>映射到该端口的寄存器</th>
+<th>Register mapped to this port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+0</td>
+<td>0</td>
+<td>数据寄存器。读取该寄存器是从接收缓冲区读取的。写入该寄存器将写入发送缓冲区。</td>
+<td><strong>Data</strong> register. Reading this registers read from the Receive buffer. Writing to this register writes to the Transmit buffer.</td>
+</tr>
+<tr>
+<td>+1</td>
+<td>0</td>
+<td>中断使能寄存器。</td>
+<td><strong>Interrupt Enable</strong> Register.</td>
+</tr>
+<tr>
+<td>+0</td>
+<td>1</td>
+<td>当 DLAB 设置为 1 时，这是用于设置波特率的除数值的最低有效字节。</td>
+<td>With DLAB set to 1, this is the least significant byte of the divisor value for setting the baud rate.</td>
+</tr>
+<tr>
+<td>+1</td>
+<td>1</td>
+<td>当 DLAB 设置为 1 时，这是除数值的最高有效字节。</td>
+<td>With DLAB set to 1, this is the most significant byte of the divisor value.</td>
+</tr>
+<tr>
+<td>+2</td>
+<td>-</td>
+<td>中断识别和 FIFO 控制寄存器</td>
+<td><strong>Interrupt Identification</strong> and FIFO control registers</td>
+</tr>
+<tr>
+<td>+3</td>
+<td>-</td>
+<td>线路控制寄存器。该寄存器的最高有效位是 DLAB。</td>
+<td><strong>Line Control</strong> Register. The most significant bit of this register is the DLAB.</td>
+</tr>
+<tr>
+<td>+4</td>
+<td>-</td>
+<td>调制解调器控制寄存器。</td>
+<td><strong>Modem Control</strong> Register.</td>
+</tr>
+<tr>
+<td>+5</td>
+<td>-</td>
+<td>线路状态寄存器。</td>
+<td><strong>Line Status</strong> Register.</td>
+</tr>
+<tr>
+<td>+6</td>
+<td>-</td>
+<td>调制解调器状态寄存器。</td>
+<td><strong>Modem Status</strong> Register.</td>
+</tr>
+<tr>
+<td>+7</td>
+<td>-</td>
+<td>暂存寄存器。</td>
+<td><strong>Scratch</strong> Register.</td>
+</tr>
+</tbody>
+</table>
+<p>编写串口驱动,代码见关键代码部分, [点击跳转](# 3.1-串口驱动的实现)</p>
+<p>设置日志输出格式,代码见关键代码部分, [点击跳转](# 3.2-日志输出)</p>
+<h3 id="思考题">思考题</h3>
+<p><strong>1.在 <code>pkg/kernel</code> 的 <code>Cargo.toml</code> 中，指定了依赖中 <code>boot</code> 包为 <code>default-features = false</code>，这是为了避免什么问题？请结合 <code>pkg/boot</code> 的 <code>Cargo.toml</code> 谈谈你的理解。</strong></p>
+<p><code>pkg/boot</code> 的 <code>Cargo.toml</code> 中有如下内容</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-section">[features]</span><br><span class="hljs-attr">boot</span> = [<span class="hljs-string">&quot;uefi/alloc&quot;</span>, <span class="hljs-string">&quot;uefi-services&quot;</span>]<br><span class="hljs-attr">default</span> = [<span class="hljs-string">&quot;boot&quot;</span>]<br></code></pre></td></tr></table></figure>
+<p>当在 <code>pkg/kernel</code> 的 <code>Cargo.toml</code> 指定依赖中 <code>boot</code> 包为 <code>default-features = false</code>, 上面的特性会被禁用</p>
+<p>根据<code>uefi-services</code>的官方文档, It includes a panic handler, a logger, and a global allocator.</p>
+<p>设置不包含它,可以避免自己定义的panic handler, logger 与之发生冲突</p>
+<p>另外,其使用的logger crate会使用到std crate, 与<code>#![no_std]</code> 冲突</p>
+<hr>
+<p><strong>2.在 <code>pkg/boot/src/main.rs</code> 中参考相关代码，聊聊 <code>max_phys_addr</code> 是如何计算的，为什么要这么做？</strong></p>
+<p>相关代码如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">mmap</span> = system_table<br>        .<span class="hljs-title function_ invoke__">boot_services</span>()<br>        .<span class="hljs-title function_ invoke__">memory_map</span>(mmap_storage)<br>        .<span class="hljs-title function_ invoke__">expect</span>(<span class="hljs-string">&quot;Failed to get memory map&quot;</span>);<br><br><span class="hljs-keyword">let</span> <span class="hljs-variable">max_phys_addr</span> = mmap<br>        .<span class="hljs-title function_ invoke__">entries</span>()<br>        .<span class="hljs-title function_ invoke__">map</span>(|m| m.phys_start + m.page_count * <span class="hljs-number">0x1000</span>)<br>        .<span class="hljs-title function_ invoke__">max</span>()<br>        .<span class="hljs-title function_ invoke__">unwrap</span>()<br>        .<span class="hljs-title function_ invoke__">max</span>(<span class="hljs-number">0x1_0000_0000</span>); <span class="hljs-comment">// include IOAPIC MMIO area</span><br></code></pre></td></tr></table></figure>
+<p>这段代码是在操作系统启动过程中，用于获取内存映射信息的</p>
+<ul>
+<li>
+<p>首先，从 <code>system_table</code> 中获取引导服务（<code>boot_services()</code>）。</p>
+</li>
+<li>
+<p>然后，调用 <code>memory_map(mmap_storage)</code> 来获取内存映射信息。这个函数返回一个内存映射的结构体，其中包含了系统中不同内存区域的信息。</p>
+</li>
+<li>
+<p>接下来，对内存映射的每个条目进行处理。对于每个条目m，计算了物理地址的上限（<code>max_phys_addr</code>）。具体计算如下：</p>
+<ul>
+<li>
+<p><code>m.phys_start</code> 表示该内存区域的起始物理地址。</p>
+</li>
+<li>
+<p><code>m.page_count</code> 表示该区域占用的页数（每页大小为 4KB，所以乘以 <code>0x1000</code>）。</p>
+</li>
+<li>
+<p>将这两者相加，得到了该内存区域的结束物理地址。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>接着，使用 <code>.max()</code> 函数找到了所有内存区域中的最大物理地址。这个值将作为系统的最大物理地址。</p>
+</li>
+<li>
+<p>最后，使用 <code>.max(0x1_0000_0000)</code> 来确保最大物理地址至少是 <code>0x1_0000_0000</code>（即 4GB）。这是因为在某些系统中，IOAPIC（输入输出高级可编程中断控制器）的内存映射区域位于这个地址之上。</p>
+</li>
+</ul>
+<hr>
+<p><strong>3.串口驱动是在进入内核后启用的，那么在进入内核之前，显示的内容是如何输出的？</strong></p>
+<p>在进入内核之前, 由引导加载程序，即UEFI负责实现串口驱动</p>
+<hr>
+<p><strong>4.在 QEMU 中，我们通过指定 <code>-nographic</code> 参数来禁用图形界面，这样 QEMU 会默认将串口输出重定向到主机的标准输出。</strong></p>
+<ul>
+<li>假如我们将 <code>Makefile</code> 中取消该选项，QEMU 的输出窗口会发生什么变化？请观察指令 <code>make run QEMU_OUTPUT=</code> 的输出，结合截图分析对应现象。</li>
+</ul>
+<p>现象:会弹出QEMU窗口, 输出在窗口中,但是进入内核后就停止了输出</p>
+<p><img src="./lab2.assets/image-20240317162208179.png" srcset="/img/loading.gif" lazyload alt="image-20240317162208179"></p>
+<ul>
+<li>在移除 <code>-nographic</code> 的情况下，如何依然将串口重定向到主机的标准输入输出？请尝试自行构造命令行参数，并查阅 QEMU 的文档，进行实验。</li>
+</ul>
+<p>执行下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/usr/bin/qemu-system-x86_64 -bios assets/OVMF.fd -net none -serial stdio -m 96M -drive format=raw,file=fat:rw:esp<br></code></pre></td></tr></table></figure>
+<p>其中关键是<code>-serial stdio</code>, 将串口重定向到主机的标准输入输出</p>
+<p>效果如下</p>
+<p><img src="./lab2.assets/image-20240317164129468.png" srcset="/img/loading.gif" lazyload alt="image-20240317164129468"></p>
+<p>可以在主机的控制台看到内核的输出</p>
+<h3 id="加分项">加分项</h3>
+<p>1.😋 线控寄存器的每一比特都有特定的含义，尝试使用 <code>bitflags</code> 宏来定义这些标志位，并在 <code>uart16550</code> 驱动中使用它们。</p>
+<p>参考文档<a target="_blank" rel="noopener" href="https://www.lammertbies.nl/comm/info/serial-uart">https://www.lammertbies.nl/comm/info/serial-uart</a>, 可以定义如下的bitflags宏</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-built_in">bitflags!</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">LCR</span>: <span class="hljs-type">u8</span> &#123;<br>        <span class="hljs-keyword">const</span> five_data_bits = <span class="hljs-number">0b00000000</span>;<br>        <span class="hljs-keyword">const</span> six_data_bits = <span class="hljs-number">0b00000001</span>;<br>        <span class="hljs-keyword">const</span> seven_data_bits = <span class="hljs-number">0b00000010</span>;<br>        <span class="hljs-keyword">const</span> eight_data_bits = <span class="hljs-number">0b00000011</span>;<br>        <span class="hljs-keyword">const</span> one_stop_bit = <span class="hljs-number">0b00000000</span>;<br>        <span class="hljs-keyword">const</span> no_parity = <span class="hljs-number">0b00000000</span>;<br>        <span class="hljs-keyword">const</span> odd_parity = <span class="hljs-number">0b00000100</span>;<br>        <span class="hljs-keyword">const</span> even_parity = <span class="hljs-number">0b00011000</span>;<br>        <span class="hljs-keyword">const</span> high_parity = <span class="hljs-number">0b00101000</span>;<br>        <span class="hljs-keyword">const</span> low_parity = <span class="hljs-number">0b00111000</span>;<br>        <span class="hljs-keyword">const</span> DLAB0 = <span class="hljs-number">0b00000000</span>;<br>        <span class="hljs-keyword">const</span> DLAB1 = <span class="hljs-number">0b10000000</span>;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在 <code>uart16550</code> 驱动中使用它们,代码如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">self</span>.line_control.<span class="hljs-title function_ invoke__">write</span>(LCR::DLAB1.<span class="hljs-title function_ invoke__">bits</span>());<br><span class="hljs-keyword">self</span>.interrupt_enable.<span class="hljs-title function_ invoke__">write</span>(LCR::eight_data_bits.<span class="hljs-title function_ invoke__">bits</span>() | LCR::no_parity.<span class="hljs-title function_ invoke__">bits</span>() | LCR::one_stop_bit.<span class="hljs-title function_ invoke__">bits</span>());<br></code></pre></td></tr></table></figure>
+<hr>
+<p>2.😋 尝试在进入内核并初始化串口驱动后，使用 escape sequence 来清屏，并编辑 <code>get_ascii_header()</code> 中的字符串常量，输出你的学号信息。</p>
+<p>对<code>pkg/kernel/src/drivers/serial.rs</code>添加如下,用于清屏</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;\x1b[2J&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>对<code>pkg/kernel/src/utils/mod.rs</code>修改如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs rust">    <span class="hljs-built_in">concat!</span>(<br>        <span class="hljs-string">r&quot;</span><br><span class="hljs-string">__  __      __  _____            ____  _____</span><br><span class="hljs-string">\ \/ /___ _/ /_/ ___/___  ____  / __ \/ ___/</span><br><span class="hljs-string"> \  / __ `/ __/\__ \/ _ \/ __ \/ / / /\__ \</span><br><span class="hljs-string"> / / /_/ / /_ ___/ /  __/ / / / /_/ /___/ /</span><br><span class="hljs-string">/_/\__,_/\__//____/\___/_/ /_/\____//____/</span><br><span class="hljs-string"></span><br><span class="hljs-string">                                       v</span><br><span class="hljs-string">                                CJL-22330004&quot;</span>,<br>        <span class="hljs-built_in">env!</span>(<span class="hljs-string">&quot;CARGO_PKG_VERSION&quot;</span>)<br>    )<br></code></pre></td></tr></table></figure>
+<p>效果如图</p>
+<p><img src="./lab2.assets/image-20240319205557667.png" srcset="/img/loading.gif" lazyload alt="image-20240319205557667"></p>
+<p>清屏是成功的,而且学号信息打印了出来</p>
+<hr>
+<p>3.🤔 尝试添加字符串型启动配置变量 <code>log_level</code>，并修改 <code>logger</code> 的初始化函数，使得内核能够根据启动参数进行日志输出。</p>
+<p>UEFI读取数字部分的参考文献:<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/73113685/how-do-i-read-user-input-in-uefi-rs-uefi-rust-wrapper">https://stackoverflow.com/questions/73113685/how-do-i-read-user-input-in-uefi-rs-uefi-rust-wrapper</a></p>
+<p>代码详见关键代码部分, [点击跳转](# 加分项3)</p>
+<p>UEFI执行过程中会停止, 要求用户输入一个数字表示log等级</p>
+<p><img src="./lab2.assets/image-20240322231046731.png" srcset="/img/loading.gif" lazyload alt="image-20240322231046731"></p>
+<p>如果输入3,代表info,结果如下, info可以正常输出</p>
+<p><img src="./lab2.assets/image-20240322231151162.png" srcset="/img/loading.gif" lazyload alt="image-20240322231151162"></p>
+<p>如果输入1, 代表Error,结果如下, info不能输出</p>
+<p><img src="./lab2.assets/image-20240322231255371.png" srcset="/img/loading.gif" lazyload alt="image-20240322231255371"></p>
+<hr>
+<p>4.🤔尝试使用调试器，在内核初始化之后（<code>ysos::init</code> 调用结束后）下断点，查看、记录并解释如下的信息：</p>
+<ul>
+<li>内核的栈指针、栈帧指针、指令指针等寄存器的值。</li>
+</ul>
+<p><img src="./lab2.assets/image-20240319212313247.png" srcset="/img/loading.gif" lazyload alt="image-20240319212313247"></p>
+<p>如图,分别输出了栈指针指向的内存地址及所在地址的数据, 栈帧指针指向的内存地址及所在地址的数据, 以及指令指针寄存器的值</p>
+<ul>
+<li>内核的代码段、数据段、BSS 段等在内存中的位置。</li>
+</ul>
+<p>执行<code>readelf -Sl esp/KERNEL.ELF </code>,结果如下图</p>
+<p><img src="./lab2.assets/image-20240322220335445.png" srcset="/img/loading.gif" lazyload alt="image-20240322220335445"></p>
+<hr>
+<p>5.<strong>🤔 “开发者是愿意用安全换取灵活的”，所以，我要把代码加载到栈上去，可当我妄图在栈上执行代码的时候，却得到了</strong> <code>Segment fault</code><strong>，你能解决这个问题吗？</strong></p>
+<p>如下图, 将代码加载到了栈上, 然后执行</p>
+<p>正常编译的结果会导致segment fault,但是如果在编译时加上<code>-z execstack</code>, 允许程序在栈上执行, 就不会导致segment fault, 还能正常输出</p>
+<p><img src="./lab2.assets/image-20240322214909968.png" srcset="/img/loading.gif" lazyload alt="image-20240322214909968"></p>
+<p>分别用两种编译方法, 使用readelf查看Program Headers的权限,如下图</p>
+<p><img src="./lab2.assets/image-20240322215524353.png" srcset="/img/loading.gif" lazyload alt="image-20240322215524353"></p>
+<p>只有第二张图编译的结果可以在栈上执行代码, 可以看出其<code>GNU_STACK</code>是具有执行权限的</p>
+<h2 id="3-关键代码">3. 关键代码</h2>
+<h3 id="2-1-加载相关文件">2.1-加载相关文件</h3>
+<p>加载配置文件</p>
+<p><code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 1. Load config</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = &#123; <br>        <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> Load config file */</span> <br>        <span class="hljs-comment">//打开并加载config文件</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">file</span> = <span class="hljs-title function_ invoke__">open_file</span>(bs, CONFIG_PATH);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">buf</span> = <span class="hljs-title function_ invoke__">load_file</span>(bs, &amp;<span class="hljs-keyword">mut</span> file);<br>        <span class="hljs-comment">//从config文件内容加载Config结构体</span><br>        crate::config::Config::<span class="hljs-title function_ invoke__">parse</span>(buf)<br>    &#125;;<br></code></pre></td></tr></table></figure>
+<p>加载内核 ELF</p>
+<p><code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 2. Load ELF files</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">elf</span> = &#123; <br>        <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> Load kernel elf file */</span> <br>        <span class="hljs-comment">//内核存储地址可以从config结构体读出</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">KERNEL_PATH</span> = config.kernel_path;<br>        <span class="hljs-comment">//读取内核文件</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">file</span> = <span class="hljs-title function_ invoke__">open_file</span>(bs, KERNEL_PATH);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">buf</span> = <span class="hljs-title function_ invoke__">load_file</span>(bs, &amp;<span class="hljs-keyword">mut</span> file);<br>        <span class="hljs-comment">//新建ElfFile结构体</span><br>        ElfFile::<span class="hljs-title function_ invoke__">new</span>(buf).<span class="hljs-title function_ invoke__">unwrap</span>()<br>    &#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="2-2-更新控制寄存器">2.2-更新控制寄存器</h3>
+<p><code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> root page table is readonly, disable write protect (Cr0)</span><br>    <span class="hljs-keyword">unsafe</span> &#123;<br>        <span class="hljs-comment">//WRITE_PROTECT: When set, it is not possible to write to read-only pages from ring 0.</span><br>        <span class="hljs-comment">//fn remove(&amp;mut self, other: Self)</span><br>        <span class="hljs-comment">//self &amp; !other</span><br>        Cr0::<span class="hljs-title function_ invoke__">update</span>(|f| f.<span class="hljs-title function_ invoke__">remove</span>(Cr0Flags::WRITE_PROTECT));<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="2-3-映射内核文件">2.3-映射内核文件</h3>
+<p><code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> map physical memory to specific virtual address offset</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">frame_allocator</span> = <span class="hljs-title function_ invoke__">UEFIFrameAllocator</span>(bs);<br>    <span class="hljs-title function_ invoke__">map_physical_memory</span>(config.physical_memory_offset, max_phys_addr, &amp;<span class="hljs-keyword">mut</span> page_table, &amp;<span class="hljs-keyword">mut</span> frame_allocator);<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> load and map the kernel elf file</span><br>    <span class="hljs-title function_ invoke__">load_elf</span>(&amp;elf, config.physical_memory_offset, &amp;<span class="hljs-keyword">mut</span> page_table, &amp;<span class="hljs-keyword">mut</span> frame_allocator).<span class="hljs-title function_ invoke__">unwrap</span>();<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> map kernel stack</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">_page_range</span> = <span class="hljs-title function_ invoke__">map_range</span>(<br>        config.kernel_stack_address,<br>        <span class="hljs-keyword">match</span> config.kernel_stack_auto_grow&#123;<br>            <span class="hljs-number">0</span> =&gt; config.kernel_stack_size,<br>            _ =&gt; config.kernel_stack_auto_grow / <span class="hljs-number">4096</span>,<br>        &#125;,<br>        &amp;<span class="hljs-keyword">mut</span> page_table, &amp;<span class="hljs-keyword">mut</span> frame_allocator).<span class="hljs-title function_ invoke__">unwrap</span>();<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> recover write protect (Cr0)</span><br>    <span class="hljs-keyword">unsafe</span> &#123;<br>        <span class="hljs-comment">//WRITE_PROTECT: When set, it is not possible to write to read-only pages from ring 0.</span><br>        <span class="hljs-comment">//fn insert(&amp;mut self, other: Self)</span><br>        <span class="hljs-comment">//The bitwise or (|) of the bits in two flags values.</span><br>        Cr0::<span class="hljs-title function_ invoke__">update</span>(|f| f.<span class="hljs-title function_ invoke__">insert</span>(Cr0Flags::WRITE_PROTECT));<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>补全<code>load_segment</code>函数: 根据段是否可读,可写,可执行的要求设置<code>page_table_flags</code></p>
+<p><code>pkg/elf/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> handle page table flags with segment flags</span><br>    <span class="hljs-comment">//unimplemented!(&quot;Handle page table flags with segment flags!&quot;);</span><br>    <span class="hljs-keyword">if</span> segment.<span class="hljs-title function_ invoke__">flags</span>().<span class="hljs-title function_ invoke__">is_read</span>()&#123;<br>        page_table_flags |= PageTableFlags::USER_ACCESSIBLE;<br>    &#125;<br>    <span class="hljs-keyword">if</span> segment.<span class="hljs-title function_ invoke__">flags</span>().<span class="hljs-title function_ invoke__">is_write</span>()&#123;<br>        page_table_flags |= PageTableFlags::WRITABLE;<br>    &#125;<br>    <span class="hljs-keyword">if</span> !segment.<span class="hljs-title function_ invoke__">flags</span>().<span class="hljs-title function_ invoke__">is_execute</span>()&#123;<br>        page_table_flags |= PageTableFlags::NO_EXECUTE;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="3-1-串口驱动的实现">3.1-串口驱动的实现</h3>
+<p><code>pkg/kernel/src/drivers/uart16550.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> core::fmt;<br><span class="hljs-keyword">use</span> x86_64::instructions::port::&#123;Port, PortReadOnly, PortWriteOnly&#125;;<br><span class="hljs-comment">/// A port-mapped UART 16550 serial interface.</span><br><span class="hljs-comment">//Fix: struct</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">SerialPort</span>&#123;<br>    data: Port&lt;<span class="hljs-type">u8</span>&gt;,<br>    interrupt_enable: PortWriteOnly&lt;<span class="hljs-type">u8</span>&gt;,<br>    interrupt_identification: PortWriteOnly&lt;<span class="hljs-type">u8</span>&gt;,<br>    line_control: PortWriteOnly&lt;<span class="hljs-type">u8</span>&gt;,<br>    modem_control: PortWriteOnly&lt;<span class="hljs-type">u8</span>&gt;,<br>    line_status: PortReadOnly&lt;<span class="hljs-type">u8</span>&gt;,<br>&#125;<br><br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">SerialPort</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">new</span>(port: <span class="hljs-type">u16</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-keyword">Self</span> &#123;<br>        <span class="hljs-comment">//FIX: init</span><br>        <span class="hljs-keyword">Self</span>&#123;<br>            data: Port::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">0</span>),<br>            interrupt_enable: PortWriteOnly::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">1</span>),<br>            interrupt_identification: PortWriteOnly::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">2</span>),<br>            line_control: PortWriteOnly::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">3</span>),<br>            modem_control: PortWriteOnly::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">4</span>),<br>            line_status: PortReadOnly::<span class="hljs-title function_ invoke__">new</span>(port + <span class="hljs-number">5</span>),<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/// Initializes the serial port.</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) &#123;<span class="hljs-comment">//这里原来是不可变借用，改成了可变借用</span><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Initialize the serial port</span><br>        <span class="hljs-keyword">unsafe</span>&#123;<br>            <span class="hljs-comment">// Disable all interrupts</span><br>            <span class="hljs-keyword">self</span>.interrupt_enable.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x00</span>);<br>            <span class="hljs-comment">// Enable DLAB (set baud rate divisor)</span><br>            <span class="hljs-keyword">self</span>.line_control.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x80</span>);<br>            <span class="hljs-comment">// Set divisor to 3 (lo byte) 38400 baud</span><br>            <span class="hljs-keyword">self</span>.data.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x03</span>);<br>            <span class="hljs-comment">// Set divisor to 3 (hi byte) 38400 baud</span><br>            <span class="hljs-keyword">self</span>.interrupt_enable.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x00</span>);<br>            <span class="hljs-comment">// 8 bits, no parity, one stop bit</span><br>            <span class="hljs-keyword">self</span>.line_control.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x03</span>);<br>            <span class="hljs-comment">// Enable FIFO, clear them, with 14-byte threshold</span><br>            <span class="hljs-keyword">self</span>.interrupt_identification.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0xc7</span>);<br>            <span class="hljs-comment">// IRQs enabled, RTS/DSR set</span><br>            <span class="hljs-keyword">self</span>.modem_control.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x0B</span>);<br>            <span class="hljs-comment">// Set in loopback mode, test the serial chip</span><br>            <span class="hljs-keyword">self</span>.modem_control.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x1e</span>);<br>            <span class="hljs-comment">// Test serial chip (send byte 0xAE and check if serial returns same byte)</span><br>            <span class="hljs-keyword">self</span>.data.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0xae</span>);<br>            <span class="hljs-comment">// Check if serial is faulty (i.e: not same byte as sent)</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.data.<span class="hljs-title function_ invoke__">read</span>()!= <span class="hljs-number">0xae</span>&#123;<br>                <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;serial is faulty&quot;</span>);<br>            &#125;<br>            <span class="hljs-comment">// If serial is not faulty set it in normal operation mode</span><br>            <span class="hljs-comment">// (not-loopback with IRQs enabled and OUT#1 and OUT#2 bits enabled)</span><br>            <span class="hljs-keyword">self</span>.modem_control.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x0f</span>);<br><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/// Sends a byte on the serial port.</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">send</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, data: <span class="hljs-type">u8</span>) &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Send a byte on the serial port</span><br>        <span class="hljs-keyword">unsafe</span>&#123;<br>            <span class="hljs-keyword">while</span> <span class="hljs-keyword">self</span>.line_status.<span class="hljs-title function_ invoke__">read</span>() &amp; <span class="hljs-number">0x20</span> ==<span class="hljs-number">0</span>&#123;&#125;<br>            <span class="hljs-keyword">self</span>.data.<span class="hljs-title function_ invoke__">write</span>(data);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/// Receives a byte on the serial port no wait.</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">receive</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">u8</span>&gt; &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Receive a byte on the serial port no wait</span><br>        <span class="hljs-keyword">unsafe</span>&#123;<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.line_status.<span class="hljs-title function_ invoke__">read</span>() &amp; <span class="hljs-number">1</span> !=<span class="hljs-number">0</span>&#123;<br>                <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-keyword">self</span>.data.<span class="hljs-title function_ invoke__">read</span>())<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-literal">None</span><br>            &#125;<br>            <br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">fmt</span>::Write <span class="hljs-keyword">for</span> <span class="hljs-title class_">SerialPort</span> &#123;<br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">write_str</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, s: &amp;<span class="hljs-type">str</span>) <span class="hljs-punctuation">-&gt;</span> fmt::<span class="hljs-type">Result</span> &#123;<br>        <span class="hljs-keyword">for</span> <span class="hljs-variable">byte</span> <span class="hljs-keyword">in</span> s.<span class="hljs-title function_ invoke__">bytes</span>() &#123;<br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">send</span>(byte);<br>        &#125;<br>        <span class="hljs-title function_ invoke__">Ok</span>(())<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="3-2-日志输出">3.2-日志输出</h3>
+<p><code>pkg/kernel/src/utils/logger.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> log::&#123;Metadata, Record, Level, LevelFilter&#125;;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>() &#123;<br>    <span class="hljs-keyword">static</span> LOGGER: Logger = Logger;<br>    log::<span class="hljs-title function_ invoke__">set_logger</span>(&amp;LOGGER).<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Configure the logger</span><br>    <span class="hljs-comment">//设置最高输出等级为Trace，以便查看所有log的效果</span><br>    log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Trace);<br><br>    info!(<span class="hljs-string">&quot;Logger Initialized.&quot;</span>);<br>&#125;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Logger</span>;<br><br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">log</span>::Log <span class="hljs-keyword">for</span> <span class="hljs-title class_">Logger</span> &#123;<br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">enabled</span>(&amp;<span class="hljs-keyword">self</span>, _metadata: &amp;Metadata) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">bool</span> &#123;<br>        <span class="hljs-literal">true</span><br>    &#125;<br><br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">log</span>(&amp;<span class="hljs-keyword">self</span>, record: &amp;Record) &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Implement the logger with serial output</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">enabled</span>(record.<span class="hljs-title function_ invoke__">metadata</span>()) &#123;<br>            <span class="hljs-comment">// println!(&quot;&#123;&#125; - &#123;&#125;&quot;, record.level(), record.args());</span><br>            <span class="hljs-keyword">match</span> record.<span class="hljs-title function_ invoke__">level</span>() &#123;<br>                Level::Error =&gt; <span class="hljs-built_in">println!</span>(<br>                    <span class="hljs-string">&quot;\x1b[31;1;4m[X] Error\x1b[0m  - \x1b[31mfrom &#123;&#125;, at line &#123;&#125;, &#123;&#125;\x1b[0m&quot;</span>,<br>                    record.<span class="hljs-title function_ invoke__">file_static</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">line</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">args</span>(),<br>                ),<br>                Level::Warn =&gt; <span class="hljs-built_in">println!</span>(<br>                    <span class="hljs-string">&quot;\x1b[33;1;4m[!] Warning\x1b[0m- \x1b[33mfrom &#123;&#125;, at line &#123;&#125;, &#123;&#125;\x1b[0m&quot;</span>,<br>                    record.<span class="hljs-title function_ invoke__">file_static</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">line</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">args</span>(),<br>                ),<br>                Level::Info =&gt; <span class="hljs-built_in">println!</span>(<br>                    <span class="hljs-string">&quot;\x1b[34;1;4m[+] Info\x1b[0m   - \x1b[34mfrom &#123;&#125;, at line &#123;&#125;, &#123;&#125;\x1b[0m&quot;</span>,<br>                    record.<span class="hljs-title function_ invoke__">file_static</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">line</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">args</span>(),<br>                ),<br>                Level::<span class="hljs-built_in">Debug</span> =&gt; <span class="hljs-built_in">println!</span>(<br>                    <span class="hljs-string">&quot;\x1b[36;1;4m[#] Debug\x1b[0m  - \x1b[36mfrom &#123;&#125;, at line &#123;&#125;, &#123;&#125;\x1b[0m&quot;</span>,<br>                    record.<span class="hljs-title function_ invoke__">file_static</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">line</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">args</span>(),<br>                ),<br>                Level::Trace =&gt; <span class="hljs-built_in">println!</span>(<br>                    <span class="hljs-string">&quot;\x1b[32;1;4m[%] Trace\x1b[0m  - \x1b[32mfrom &#123;&#125;, at line &#123;&#125;, &#123;&#125;\x1b[0m&quot;</span>,<br>                    record.<span class="hljs-title function_ invoke__">file_static</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">line</span>().<span class="hljs-title function_ invoke__">unwrap</span>(),<br>                    record.<span class="hljs-title function_ invoke__">args</span>(),<br>                ),<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">flush</span>(&amp;<span class="hljs-keyword">self</span>) &#123;&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="加分项3">加分项3</h3>
+<p><code>pkg/boot/src/main.rs</code>: 这段代码在UEFI启动阶段要求用户输入一个数字1-5, 表示<code>log_level</code>, 结果储存在u8变量level中</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//let log_level: u8 = 0;</span><br>info!(<span class="hljs-string">&quot;Please input a char from 1 to 5, which represents the log level from Error to Trace:&quot;</span>);<br><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">exit_flag</span> = <span class="hljs-literal">false</span>;<br><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">level</span>:<span class="hljs-type">u8</span> = <span class="hljs-number">5</span>;<br><span class="hljs-keyword">while</span> !exit_flag &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">key</span> = system_table.<span class="hljs-title function_ invoke__">stdin</span>().<span class="hljs-title function_ invoke__">read_key</span>().<span class="hljs-title function_ invoke__">unwrap</span>();<br>    <span class="hljs-keyword">match</span> key &#123;<br>        <span class="hljs-title function_ invoke__">Some</span>(k) =&gt;  &#123;<br>            <span class="hljs-keyword">match</span> k &#123;<br>                uefi::proto::console::text::Key::<span class="hljs-title function_ invoke__">Printable</span>(p) =&gt; &#123;<br>                    <span class="hljs-keyword">if</span> p == Char16::<span class="hljs-title function_ invoke__">try_from</span>(<span class="hljs-number">49u16</span>).<span class="hljs-title function_ invoke__">unwrap</span>() &#123;<br>                        level = <span class="hljs-number">1</span>;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> p == Char16::<span class="hljs-title function_ invoke__">try_from</span>(<span class="hljs-number">50u16</span>).<span class="hljs-title function_ invoke__">unwrap</span>() &#123;<br>                        level = <span class="hljs-number">2</span>;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> p == Char16::<span class="hljs-title function_ invoke__">try_from</span>(<span class="hljs-number">51u16</span>).<span class="hljs-title function_ invoke__">unwrap</span>() &#123;<br>                        level = <span class="hljs-number">3</span>;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> p == Char16::<span class="hljs-title function_ invoke__">try_from</span>(<span class="hljs-number">52u16</span>).<span class="hljs-title function_ invoke__">unwrap</span>() &#123;<br>                        level = <span class="hljs-number">4</span>;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> p == Char16::<span class="hljs-title function_ invoke__">try_from</span>(<span class="hljs-number">53u16</span>).<span class="hljs-title function_ invoke__">unwrap</span>() &#123;<br>                        level = <span class="hljs-number">5</span>;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125;<br>                &#125;<br>                uefi::proto::console::text::Key::<span class="hljs-title function_ invoke__">Special</span>(s) =&gt; &#123;<br>                    <span class="hljs-keyword">if</span> s == ScanCode::ESCAPE &#123;<br>                        exit_flag = <span class="hljs-literal">true</span>;<br>                    &#125;<br>                &#125;<br>            &#125;;             <br>        &#125;,<br>        <span class="hljs-literal">None</span> =&gt; &#123;&#125;<br>    &#125;;<br>&#125;;<br>info!(<span class="hljs-string">&quot;Your input log level is &#123;&#125;&quot;</span>, level);<br></code></pre></td></tr></table></figure>
+<p>结尾: 将level的地址传递给<code>jump_to_entry</code>函数</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">unsafe</span> &#123;<br>        <span class="hljs-title function_ invoke__">jump_to_entry</span>(&amp;bootinfo, stacktop, &amp;level);<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/boot/src/lib.rs</code>: 修改jump_to_entry函数, 将level的地址作为第二个参数传给内核(放在<code>rsi</code>寄存器中)</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">jump_to_entry</span>(bootinfo: *<span class="hljs-keyword">const</span> BootInfo, stacktop: <span class="hljs-type">u64</span>, log_level: *<span class="hljs-keyword">const</span> <span class="hljs-type">u8</span>) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    <span class="hljs-built_in">assert!</span>(ENTRY != <span class="hljs-number">0</span>, <span class="hljs-string">&quot;ENTRY is not set&quot;</span>);<br>    asm!(<span class="hljs-string">&quot;mov rsp, &#123;&#125;; call &#123;&#125;&quot;</span>, <span class="hljs-title function_ invoke__">in</span>(reg) stacktop, <span class="hljs-title function_ invoke__">in</span>(reg) ENTRY, <span class="hljs-title function_ invoke__">in</span>(<span class="hljs-string">&quot;rdi&quot;</span>) bootinfo, <span class="hljs-title function_ invoke__">in</span>(<span class="hljs-string">&quot;rsi&quot;</span>) log_level);<br>    <span class="hljs-built_in">unreachable!</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后修改entry_point宏, 允许内核main函数接收第二个参数</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[macro_export]</span><br><span class="hljs-built_in">macro_rules!</span> entry_point &#123;<br>    ($path:path) =&gt; &#123;<br>        <span class="hljs-meta">#[export_name = <span class="hljs-string">&quot;_start&quot;</span>]</span><br>        <span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">__impl_start</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> $crate::BootInfo, log:&amp;<span class="hljs-symbol">&#x27;static</span> <span class="hljs-type">u8</span>) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>            <span class="hljs-comment">// validate the signature of the program entry point</span><br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">f</span>: <span class="hljs-title function_ invoke__">fn</span>(&amp;<span class="hljs-symbol">&#x27;static</span> $crate::BootInfo,&amp;<span class="hljs-symbol">&#x27;static</span> <span class="hljs-type">u8</span>) <span class="hljs-punctuation">-&gt;</span> ! = $path;<br><br>            <span class="hljs-title function_ invoke__">f</span>(boot_info,log)<br>        &#125;<br>    &#125;;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/main.rs</code>修改<code>kernel_main</code>函数, 允许接收第二个参数,并传给<code>ysos::init</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kernel_main</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo, log_level: &amp;<span class="hljs-symbol">&#x27;static</span> <span class="hljs-type">u8</span>) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    info!(<span class="hljs-string">&quot;Log level: &#123;&#125;&quot;</span>, log_level);<br>    ysos::<span class="hljs-title function_ invoke__">init</span>(boot_info, *log_level);<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(_boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> BootInfo, log_level: <span class="hljs-type">u8</span>) &#123;<br>    drivers::serial::<span class="hljs-title function_ invoke__">init</span>(); <span class="hljs-comment">// init serial output</span><br>    logger::<span class="hljs-title function_ invoke__">init</span>(log_level); <span class="hljs-comment">// init logger system</span><br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/utils/logger.rs</code>根据数字设置不同的log等级</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(log_level: <span class="hljs-type">u8</span>) &#123;<br>    <span class="hljs-keyword">static</span> LOGGER: Logger = Logger;<br>    log::<span class="hljs-title function_ invoke__">set_logger</span>(&amp;LOGGER).<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Configure the logger</span><br>    <span class="hljs-comment">//设置最高输出等级为Trace，以便查看所有log的效果</span><br>    <span class="hljs-keyword">match</span> log_level &#123;<br>        <span class="hljs-number">1</span> =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Error),<br>        <span class="hljs-number">2</span> =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Warn),<br>        <span class="hljs-number">3</span> =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Info),<br>        <span class="hljs-number">4</span> =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::<span class="hljs-built_in">Debug</span>),<br>        <span class="hljs-number">5</span> =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Trace),<br>        _ =&gt; log::<span class="hljs-title function_ invoke__">set_max_level</span>(LevelFilter::Trace),<br>    &#125;<br><br>    info!(<span class="hljs-string">&quot;Logger Initialized.&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>如图,内核成功启动,并且输出了log</p>
+<p><img src="./lab2.assets/image-20240317143715599.png" srcset="/img/loading.gif" lazyload alt="image-20240317143715599"></p>
+<h2 id="5-总结">5. 总结</h2>
+<p>学习了如何编写boot引导启动操作系统内核, 并且学会了编写串口驱动, 对rust项目开发更加熟悉</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/courses/" class="category-chain-item">courses</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/courses/YSOS/" class="category-chain-item">YSOS</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>YSOS-rust lab1</div>
+      <div>https://blog.algorithmpark.xyz/2024/03/22/YSOS/lab1/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月22日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年5月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/04/01/video/April-Fool/index/" title="2024愚人节防诈骗指南">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2024愚人节防诈骗指南</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/07/YSOS/lab0/index/" title="YSOS-rust lab0">
+                        <span class="hidden-mobile">YSOS-rust lab0</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

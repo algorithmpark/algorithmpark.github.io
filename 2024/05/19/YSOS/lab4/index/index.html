@@ -1,0 +1,1088 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="中山大学操作系统实验课程实验报告lab0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YSOS-rust lab4">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/05/19/YSOS/lab4/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="中山大学操作系统实验课程实验报告lab0">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+<meta property="article:published_time" content="2024-05-19T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-14T10:20:20.214Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>YSOS-rust lab4 - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="YSOS-rust lab4"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-19 08:00" pubdate>
+          2024年5月19日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          54 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">YSOS-rust lab4</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-05-14T10:20:20+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <!-- 注释语句：导出PDF时会在这里分页 -->
+<h1>YSOS-lab4</h1>
+<h2 id="1-实验要求">1. 实验要求</h2>
+<ol>
+<li>了解用户态与内核态的区别、用户程序的加载与执行。</li>
+<li>补充页表、内存分配相关知识，了解使用链接器脚本编译能够被加载执行的程序。</li>
+<li>实现基本的系统调用。</li>
+<li>实现用户程序的加载与执行，并切换到用户态。</li>
+</ol>
+<h2 id="2-实验过程">2. 实验过程</h2>
+<h3 id="milestone1">milestone1</h3>
+<p>在一切配置顺利之后，应当可以使用 <code>cargo build</code> 在用户程序目录中正确地编译用户程序。</p>
+<p><img src="./lab5.assets/image-20240414151004520.png" srcset="/img/loading.gif" lazyload alt="image-20240414151004520"></p>
+<p>可以正常执行<code>cargo build</code></p>
+<h3 id="milestone2">milestone2</h3>
+<p>在 <code>kernel/src/main.rs</code> 初始化内核之后，尝试调用 <code>list_app</code> 函数，查看是否成功加载。</p>
+<p>在完成了关键代码部分的[实现加载程序文件](# 实现加载程序文件)部分后，启动内核，效果如下图</p>
+<p><img src="./lab5.assets/image-20240415103448641.png" srcset="/img/loading.gif" lazyload alt="image-20240415103448641"></p>
+<p>内核启动后尝试调用<code>proc::list_app();</code>，可以看到成功加载了一个名为<code>hello</code>的程序</p>
+<h3 id="milestone3">milestone3</h3>
+<p><img src="./lab5.assets/image-20240506212841729.png" srcset="/img/loading.gif" lazyload alt="image-20240506212841729"></p>
+<h3 id="踩坑记录">踩坑记录</h3>
+<p><img src="./lab5.assets/image-20240507151704542.png" srcset="/img/loading.gif" lazyload alt="image-20240507151704542"></p>
+<p>大致问题是，运行计算阶乘的测试程序时，如果输入的数很大，就需要分配一个很大的栈。</p>
+<p>从输出看，在缺页异常的时候可以正常扩容栈空间，但是遇到了PROTECTION_VIOLATION的问题</p>
+<p><img src="./lab5.assets/dc0935ef5b9c3539a7dc656c94b6664.png" srcset="/img/loading.gif" lazyload alt="dc0935ef5b9c3539a7dc656c94b6664"></p>
+<p>问题出在<code>pkg/kernel/src/proc/process.rs</code></p>
+<p><img src="./lab5.assets/image-20240507151750783.png" srcset="/img/loading.gif" lazyload alt="image-20240507151750783"></p>
+<p>扩大栈空间需要复用之前实现的函数<code>inc_stack_space</code>，但它是为内核设计的，没有赋予用户访问的权限，将用户权限修改为true即可解决</p>
+<h3 id="milestone4">milestone4</h3>
+<p><img src="./lab5.assets/image-20240507153929822.png" srcset="/img/loading.gif" lazyload alt="image-20240507153929822"></p>
+<h3 id="思考题">思考题</h3>
+<p><strong>1.是否可以在内核线程中使用系统调用？并借此来实现同样的进程退出能力？分析并尝试回答。</strong></p>
+<p>可以在内核线程中使用系统调用，在<code>kernel_main</code>中加入<code>syscall!(Syscall::Stat);</code>，效果如下</p>
+<p><img src="./lab5.assets/image-20240507155247732.png" srcset="/img/loading.gif" lazyload alt="image-20240507155247732"></p>
+<p>在<code>kernel_main</code>启动shell之前加入<code>syscall!(Syscall::Exit, 0);</code>，结果内核进程真的退出了</p>
+<p><img src="./lab5.assets/image-20240507160200797.png" srcset="/img/loading.gif" lazyload alt="image-20240507160200797"></p>
+<p>内核进程完成<code>kill_self</code>之后，会调用<code>manager.switch_next</code>，切换下一个进程，但是就绪队列里没有进程，结果是内核进程只能继续执行，在访问页表的时候触发了panic</p>
+<p>所以<strong>不能借此来实现内核进程的退出能力</strong></p>
+<hr>
+<p><strong>2.为什么需要克隆内核页表？在系统调用的内核态下使用的是哪一张页表？用户态程序尝试访问内核空间会被正确拦截吗？尝试验证你的实现是否正确。</strong></p>
+<p>为了隔离用户空间和内核空间，避免用户访问内核空间内存。另外，还可以让所有用户进程使用同样的虚拟地址而不会相互干扰</p>
+<p>在系统调用的内核态下使用的是内核的页表</p>
+<p>修改用户程序hello，让它去读取内核栈的数据</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:<span class="hljs-type">u8</span>;<br><span class="hljs-keyword">unsafe</span>&#123;<br>    <span class="hljs-comment">//读取0xFFFFFF0100000000内存的数据</span><br>    a = *(<span class="hljs-number">0xFFFFFF0100000000</span> <span class="hljs-keyword">as</span> *<span class="hljs-keyword">const</span> <span class="hljs-type">u8</span>);<br>&#125;    <br><span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;a = &#123;&#125;&quot;</span>, a);<br></code></pre></td></tr></table></figure>
+<p>运行结果如下</p>
+<p><img src="./lab5.assets/image-20240508095235983.png" srcset="/img/loading.gif" lazyload alt="image-20240508095235983"></p>
+<p><img src="./lab5.assets/image-20240508095309752.png" srcset="/img/loading.gif" lazyload alt="image-20240508095309752"></p>
+<p>所以，用户态程序尝试访问内核空间会被正确拦截</p>
+<hr>
+<p><strong>3.为什么在使用 <code>still_alive</code> 函数判断进程是否存活时，需要关闭中断？在不关闭中断的情况下，会有什么问题？</strong></p>
+<p>这个坑我上次实验就踩过了，所以在<code>still_alive</code>函数调用的<code>get_exit_code</code>函数中关闭了中断，就不需要在<code>still_alive</code>函数关闭中断</p>
+<p><strong>这样做是为了避免死锁的产生</strong></p>
+<p><code>pkg/kernel/src/proc/manager.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessManager</span> &#123;<br>	<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">get_exit_code</span>(&amp;<span class="hljs-keyword">self</span>, pid: &amp;ProcessId) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">i32</span>&gt; &#123;<br>        x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| &#123; <br>            <span class="hljs-keyword">match</span> <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">get_proc</span>(&amp;pid)&#123;<br>                <span class="hljs-title function_ invoke__">Some</span>(proc) =&gt; &#123;<br>                    <span class="hljs-keyword">match</span> proc.<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">exit_code</span>()&#123;<br>                        <span class="hljs-title function_ invoke__">Some</span>(code) =&gt; &#123;<br>                            <span class="hljs-title function_ invoke__">Some</span>(code <span class="hljs-keyword">as</span> <span class="hljs-type">i32</span>)<br>                        &#125;,<br>                        <span class="hljs-literal">None</span> =&gt; &#123;<br>                            <span class="hljs-literal">None</span><br>                        &#125;<br>                    &#125;<br>                &#125;,<br>                <span class="hljs-literal">None</span> =&gt; <span class="hljs-literal">None</span><br>            &#125;<br>        &#125;)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在执行<code>stack</code>的时候, 这个函数用于等待子进程退出, 当不使用<code>without_interrupts</code>时, 这段代码在第6行执行<code>proc.read()</code>会获得<code>proc</code>的读锁, 之后如果出现了时钟中断而读锁没有释放, 跳转到切换进程的代码.</p>
+<p>在切换进程的过程中会调用<code>pkg/kernel/src/proc/manager.rs</code>的<code>switch_next</code>函数, 其中有一句代码</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust">proc.<span class="hljs-title function_ invoke__">write</span>().<span class="hljs-title function_ invoke__">restore</span>(context);<br></code></pre></td></tr></table></figure>
+<p>需要获得<code>proc</code>写锁, 结果CPU会持续忙等, 等待读锁释放.</p>
+<p>因为<code>switch_next</code>函数执行前已经关闭了中断, 这意味着新的时钟中断无法打断这个忙等, 死锁形成了</p>
+<p>给<code>get_exit_code</code>添加<code>without_interrupts</code>之后, 就可以避免死锁发生</p>
+<hr>
+<p><strong>4.对于如下程序，使用 <code>gcc</code> 直接编译：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, World!\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>从本次实验及先前实验的所学内容出发，结合进程的创建、链接、执行、退出的生命周期，参考系统调用的调用过程（可以仅以 Linux 为例），解释程序的运行。</strong></p>
+<ul>
+<li>进程创建：克隆一份内核的页表，注册一个新的进程加入就绪队列，然后将程序的elf文件加载到内存中，映射进程使用的栈</li>
+<li>进程执行：操作系统的进程调度会选择该进程上处理机运行，运行的过程中需要调用<code>printf</code>库函数，库函数封装了对写操作的系统调用，用户程序只需将字符串放在内存中并传递地址和长度作为参数，由操作系统完成打印工作</li>
+<li>进程退出：程序运行结束后会触发进程退出的系统调用，操作系统会销毁进程申请的资源，然后将处理机让给其他进程</li>
+</ul>
+<hr>
+<p><strong>5.<code>x86_64::instructions::hlt</code> 做了什么？为什么这样使用？为什么不可以在用户态中的 <code>wait_pid</code> 实现中使用？</strong></p>
+<p><code>x86_64::instructions::hlt</code>用于实现内核的wait函数，它会被编译为HLT(halt)指令，这个指令的作用是将处理器置于空闲状态，直到下一个外部中断发生，这样可以降低CPU的功耗</p>
+<p>HLT是一种特权指令，只能在内核态使用，所以不可以在用户态中的 <code>wait_pid</code> 实现中使用</p>
+<hr>
+<p><strong>6.有同学在某个回南天迷蒙的深夜遇到了奇怪的问题：</strong></p>
+<p><strong>只有当进行用户输入（触发了串口输入中断）的时候，会触发奇怪的 Page Fault，然而进程切换、内存分配甚至 <code>fork</code> 等系统调用都很正常。</strong></p>
+<p><strong>经过近三个小时的排查，发现他将 TSS 中的 <code>privilege_stack_table</code> 相关设置注释掉了。</strong></p>
+<p><strong>请查阅资料，了解特权级栈的作用，实验说明这一系列中断的触发过程，尝试解释这个现象。</strong></p>
+<ul>
+<li><strong>可以使用 <code>intdbg</code> 参数，或 <code>ysos.py -i</code> 进行数据捕获。</strong></li>
+<li><strong>留意 <code>0x0e</code> 缺页异常和缺页之前的中断的信息。</strong></li>
+<li><strong>注意到一个不应当存在的地址……？</strong></li>
+</ul>
+<p><strong>或许你可以重新复习一下 Lab 2 的相关内容：</strong><a target="_blank" rel="noopener" href="https://os.phil-opp.com/double-fault-exceptions/">double-fault-exceptions</a></p>
+<p>注释掉 <code>privilege_stack_table</code> 之后，启动操作系统，按下键盘，观察到了 page fault 和 panic</p>
+<p>如下图，这是由访问<code>0xfffffffffffffff8</code>导致的，由栈的范围可以看出，当前正在执行用户进程，但是访问量一个不在用户栈的进程，从而引发page fault，且无法处理</p>
+<p><img src="./lab5.assets/image-20240509144253468.png" srcset="/img/loading.gif" lazyload alt="image-20240509144253468"></p>
+<h3 id="加分项123">加分项123</h3>
+<p><strong>1.😋尝试在 <code>ProcessData</code> 中记录代码段的占用情况，并统计当前进程所占用的页面数量，并在打印进程信息时，将进程的内存占用打印出来。</strong></p>
+<p>实现见关键代码部分，[点击跳转](# 加分项1：记录代码段占用情况)</p>
+<p>只需要修改原有的<code>print_process_list</code>函数，增加统计内存的功能</p>
+<hr>
+<p><strong>2.😋 尝试在 <code>kernel/src/memory/frames.rs</code> 中实现帧分配器的回收功能 <code>FrameDeallocator</code>，作为一个最小化的实现，你可以在 <code>Allocator</code> 使用一个 <code>Vec</code> 存储被释放的页面，并在分配时从中取出。</strong></p>
+<p>实现见关键代码部分，[点击跳转](# 加分项2：FrameDeallocator)</p>
+<p>用<code>Vec&lt;u32&gt;</code>数组存储回收的<code>Frame</code>，分配<code>Frame</code>时从数组中获取即可</p>
+<hr>
+<p><strong>3.🤔 基于帧回收器的实现，在 <code>elf</code> 中实现 <code>unmap_range</code> 函数，从页表中取消映射一段连续的页面，并使用帧回收器进行回收。之后，在合适的地方，结合 <code>ProcessData</code> 中存储的页面信息，利用这个函数实现进程栈的回收。其他进程资源（如页表、代码段、数据段等）的回收将会在后续实验中实现，目前暂时不需要考虑。</strong></p>
+<p>实现见关键代码部分，[点击跳转](# 加分项3：unmap_range)</p>
+<p>实现 <code>unmap_range</code> 函数，然后在进程销毁时调用，就可以实现回收栈了</p>
+<h3 id="milestone5">milestone5</h3>
+<p>在完成加分项123之前，如果连续运行三次<code>fac</code>计算999999的阶乘，会出现panic，原因是进程退出后栈没有回收，连续运行三次<code>fac</code>用完了物理内存</p>
+<p>完成加分项123后，可以回收已退出进程的栈，避免panic的发生</p>
+<p><img src="./lab5.assets/image-20240509133042146.png" srcset="/img/loading.gif" lazyload alt="image-20240509133042146"></p>
+<h3 id="加分项4">加分项4</h3>
+<p><strong>4.🤔 尝试利用 UefiRuntime 和 chrono crate，获取当前时间，并将其暴露给用户态，以实现 sleep 函数。</strong></p>
+<p>sleep实现见关键代码部分，[点击跳转](# 实现sleep)</p>
+<p>给用户程序加入sleep函数</p>
+<p><code>pkg/app/hello/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;before sleep&quot;</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">start</span> = <span class="hljs-title function_ invoke__">sys_time</span>();<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;:#?&#125;&quot;</span>,start);<br>    <span class="hljs-title function_ invoke__">sleep</span>(<span class="hljs-number">2000</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">end</span> = <span class="hljs-title function_ invoke__">sys_time</span>();<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;:#?&#125;&quot;</span>, end);<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Hello, world!!!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>两次打印之间确实停顿了2s</p>
+<p><img src="./lab5.assets/image-20240509102400529.png" srcset="/img/loading.gif" lazyload alt="image-20240509102400529"></p>
+<h2 id="3-关键代码">3. 关键代码</h2>
+<h3 id="实现加载程序文件">实现加载程序文件</h3>
+<h4 id="修改boot配置">修改boot配置</h4>
+<p><code>pkg/kernel/config/boot.conf</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust">load_apps=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>==注意：== 最开始写<code>load_apps=true</code>, 结果无法正常加载程序, 经过排查,发现读取配置的底层逻辑(在<code>pkg/boot/src/config.rs</code>)为</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">r10</span> = <span class="hljs-type">u64</span>::<span class="hljs-title function_ invoke__">from_str</span>(value).<span class="hljs-title function_ invoke__">unwrap_or</span>(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">match</span> key &#123;<br>    <span class="hljs-string">&quot;load_apps&quot;</span> =&gt; <span class="hljs-keyword">self</span>.load_apps = r10 != <span class="hljs-number">0</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>等号后面必须写数字来表示布尔值</p>
+<h4 id="修改boot代码">修改boot代码</h4>
+<p>修改<code>pkg/boot/src/lib.rs</code></p>
+<p>定义了数据类型<code>AppList</code>和<code>AppListRef</code>, 结构体<code>App</code>, 并增加<code>BootInfo</code>的内容</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> arrayvec::ArrayString;<br><span class="hljs-keyword">use</span> xmas_elf::ElfFile;<br><span class="hljs-keyword">const</span> MAX_APPLIST_LENGTH:<span class="hljs-type">usize</span> = <span class="hljs-number">16</span>;<br><span class="hljs-comment">/// App information</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">App</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-comment">/// The name of app</span><br>    <span class="hljs-keyword">pub</span> name: ArrayString&lt;MAX_APPLIST_LENGTH&gt;,<br>    <span class="hljs-comment">/// The ELF file</span><br>    <span class="hljs-keyword">pub</span> elf: ElfFile&lt;<span class="hljs-symbol">&#x27;a</span>&gt;,<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">AppList</span> = ArrayVec&lt;App&lt;<span class="hljs-symbol">&#x27;static</span>&gt;, MAX_APPLIST_LENGTH&gt;;<br><span class="hljs-comment">//pub type AppListRef = Option&lt;&amp;&#x27;static[App&lt;&#x27;static&gt;]&gt;;</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">AppListRef</span> = <span class="hljs-type">Option</span>&lt;&amp;<span class="hljs-symbol">&#x27;static</span> ArrayVec&lt;App&lt;<span class="hljs-symbol">&#x27;static</span>&gt;, MAX_APPLIST_LENGTH&gt;&gt;;<br><span class="hljs-comment">// pub type AppListRef&lt;&#x27;a&gt; = Option&lt;&amp;&#x27;a ArrayVec&lt;App&lt;&#x27;static&gt;,MAX_APPLIST_LENGTH&gt;&gt;;</span><br><span class="hljs-comment">/// This structure represents the information that the bootloader passes to the kernel.</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BootInfo</span> &#123;<br>    <span class="hljs-comment">/// The memory map</span><br>    <span class="hljs-keyword">pub</span> memory_map: MemoryMap,<br><br>    <span class="hljs-comment">/// The offset into the virtual address space where the physical memory is mapped.</span><br>    <span class="hljs-keyword">pub</span> physical_memory_offset: <span class="hljs-type">u64</span>,<br><br>    <span class="hljs-comment">/// UEFI SystemTable</span><br>    <span class="hljs-keyword">pub</span> system_table: SystemTable&lt;Runtime&gt;,<br>    <span class="hljs-comment">// Loaded apps</span><br>    <span class="hljs-keyword">pub</span> loaded_apps: <span class="hljs-type">Option</span>&lt;AppList&gt;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>修改<code>pkg/boot/src/fs.rs</code>, 增加<code>load_apps</code>函数</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/// Load apps into memory, when no fs implemented in kernel</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// List all file under &quot;APP&quot; and load them.</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">load_apps</span>(bs: &amp;BootServices) <span class="hljs-punctuation">-&gt;</span> AppList &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">root</span> = <span class="hljs-title function_ invoke__">open_root</span>(bs);<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">buf</span> = [<span class="hljs-number">0</span>; <span class="hljs-number">8</span>];<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">cstr_path</span> = uefi::CStr16::<span class="hljs-title function_ invoke__">from_str_with_buf</span>(<span class="hljs-string">&quot;\\APP\\&quot;</span>, &amp;<span class="hljs-keyword">mut</span> buf).<span class="hljs-title function_ invoke__">unwrap</span>();<br>    <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> get handle for \APP\ dir */</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">handle</span> = root<br>    .<span class="hljs-title function_ invoke__">open</span>(cstr_path, FileMode::Read, FileAttribute::<span class="hljs-title function_ invoke__">empty</span>()).<span class="hljs-title function_ invoke__">expect</span>(<span class="hljs-string">&quot;Failed to open /APP&quot;</span>)<br>    .<span class="hljs-title function_ invoke__">into_directory</span>().<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">apps</span> = ArrayVec::<span class="hljs-title function_ invoke__">new</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">entry_buf</span> = [<span class="hljs-number">0u8</span>; <span class="hljs-number">0x100</span>];<br><br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">info</span> = handle<br>            .<span class="hljs-title function_ invoke__">read_entry</span>(&amp;<span class="hljs-keyword">mut</span> entry_buf)<br>            .<span class="hljs-title function_ invoke__">expect</span>(<span class="hljs-string">&quot;Failed to read entry&quot;</span>);<br><br>        <span class="hljs-keyword">match</span> info &#123;<br>            <span class="hljs-title function_ invoke__">Some</span>(entry) =&gt; &#123;<br>                <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> get handle for app binary file */</span><br>                <span class="hljs-keyword">let</span> <span class="hljs-variable">file</span> = handle.<span class="hljs-title function_ invoke__">open</span>(entry.<span class="hljs-title function_ invoke__">file_name</span>(), FileMode::Read, FileAttribute::<span class="hljs-title function_ invoke__">empty</span>()).<span class="hljs-title function_ invoke__">expect</span>(<span class="hljs-string">&quot;Failed to open file&quot;</span>);<br><br>                <span class="hljs-keyword">if</span> file.<span class="hljs-title function_ invoke__">is_directory</span>().<span class="hljs-title function_ invoke__">unwrap_or</span>(<span class="hljs-literal">true</span>) &#123;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br><br>                <span class="hljs-keyword">let</span> <span class="hljs-variable">elf</span> = &#123;<br>                    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> load file with `load_file` function</span><br>                    <span class="hljs-keyword">let</span> <span class="hljs-variable">loaded_file</span> = <span class="hljs-title function_ invoke__">load_file</span>(bs, &amp;<span class="hljs-keyword">mut</span> file.<span class="hljs-title function_ invoke__">into_regular_file</span>().<span class="hljs-title function_ invoke__">unwrap</span>());<br>                    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> convert file to `ElfFile`</span><br>                    ElfFile::<span class="hljs-title function_ invoke__">new</span>(loaded_file).<span class="hljs-title function_ invoke__">expect</span>(<span class="hljs-string">&quot;Failed to parse ELF file&quot;</span>)<br>                &#125;;<br><br>                <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">name</span> = ArrayString::&lt;<span class="hljs-number">16</span>&gt;::<span class="hljs-title function_ invoke__">new</span>();<br>                entry.<span class="hljs-title function_ invoke__">file_name</span>().<span class="hljs-title function_ invoke__">as_str_in_buf</span>(&amp;<span class="hljs-keyword">mut</span> name).<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>                apps.<span class="hljs-title function_ invoke__">push</span>(App &#123; name, elf &#125;);<br>            &#125;<br>            <span class="hljs-literal">None</span> =&gt; <span class="hljs-keyword">break</span>,<br>        &#125;<br>    &#125;<br><br>    info!(<span class="hljs-string">&quot;Loaded &#123;&#125; apps&quot;</span>, apps.<span class="hljs-title function_ invoke__">len</span>());<br><br>    apps<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>修改<code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">efi_main</span>(image: uefi::Handle, <span class="hljs-keyword">mut</span> system_table: SystemTable&lt;Boot&gt;) <span class="hljs-punctuation">-&gt;</span> Status &#123;<br>    <span class="hljs-comment">// user apps</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">apps</span> = <span class="hljs-keyword">if</span> config.load_apps &#123;<br>        info!(<span class="hljs-string">&quot;Loading apps...&quot;</span>);<br>        <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-title function_ invoke__">load_apps</span>(system_table.<span class="hljs-title function_ invoke__">boot_services</span>()))<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        info!(<span class="hljs-string">&quot;Skip loading apps&quot;</span>);<br>        <span class="hljs-literal">None</span><br>    &#125;;<br>	<span class="hljs-comment">//......</span><br>	<span class="hljs-comment">// construct BootInfo</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">bootinfo</span> = BootInfo &#123;<br>        memory_map: mmap.<span class="hljs-title function_ invoke__">entries</span>().<span class="hljs-title function_ invoke__">copied</span>().<span class="hljs-title function_ invoke__">collect</span>(),<br>        physical_memory_offset: config.physical_memory_offset,<br>        system_table: runtime,<br>        loaded_apps: apps,<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="修改kernel代码">修改kernel代码</h4>
+<p>修改<code>pkg/boot/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kernel_main</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    ysos::<span class="hljs-title function_ invoke__">init</span>(boot_info);<br>    <span class="hljs-comment">//ysos::wait(spawn_init());</span><br>    proc::<span class="hljs-title function_ invoke__">list_app</span>();<br>    ysos::<span class="hljs-title function_ invoke__">shutdown</span>(boot_info);<br>&#125;<br><br><span class="hljs-comment">// pub fn spawn_init() -&gt; proc::ProcessId &#123;</span><br><span class="hljs-comment">//     // <span class="hljs-doctag">NOTE:</span> you may want to clear the screen before starting the shell</span><br><span class="hljs-comment">//     // print_serial!(&quot;\x1b[1;1H\x1b[2J&quot;);</span><br><br><span class="hljs-comment">//     proc::list_app();</span><br><span class="hljs-comment">//     proc::spawn(&quot;sh&quot;).unwrap()</span><br><span class="hljs-comment">// &#125;</span><br><br></code></pre></td></tr></table></figure>
+<p>修改<code>pkg/kernel/src/proc/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">app_list</span> = boot_info.loaded_apps.<span class="hljs-title function_ invoke__">as_ref</span>();<br>    manager::<span class="hljs-title function_ invoke__">init</span>(kproc, app_list);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>修改<code>pkg/kernel/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> BootInfo) &#123;<br>    proc::<span class="hljs-title function_ invoke__">init</span>(boot_info); <span class="hljs-comment">// init process manager</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>修改<code>pkg/kernel/src/proc/manager.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(init: Arc&lt;Process&gt;, app_list:AppListRef) &#123;<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> set init process as Running</span><br>    init.<span class="hljs-title function_ invoke__">write</span>().<span class="hljs-title function_ invoke__">resume</span>();<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> set processor&#x27;s current pid to init&#x27;s pid</span><br>    processor::<span class="hljs-title function_ invoke__">set_pid</span>(init.<span class="hljs-title function_ invoke__">pid</span>());<br>    PROCESS_MANAGER.<span class="hljs-title function_ invoke__">call_once</span>(|| ProcessManager::<span class="hljs-title function_ invoke__">new</span>(init, app_list));<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ProcessManager</span> &#123;<br>    processes: RwLock&lt;BTreeMap&lt;ProcessId, Arc&lt;Process&gt;&gt;&gt;,<br>    ready_queue: Mutex&lt;VecDeque&lt;ProcessId&gt;&gt;,<br>    app_list: boot::AppListRef,<br>&#125;<br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessManager</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">app_list</span>(&amp;<span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> AppListRef &#123;<br>        <span class="hljs-keyword">self</span>.app_list<br>    &#125;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">new</span>(init: Arc&lt;Process&gt;, app_list:AppListRef) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-keyword">Self</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">processes</span> = BTreeMap::<span class="hljs-title function_ invoke__">new</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">ready_queue</span> = VecDeque::<span class="hljs-title function_ invoke__">new</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">pid</span> = init.<span class="hljs-title function_ invoke__">pid</span>();<br><br>        trace!(<span class="hljs-string">&quot;Init &#123;:#?&#125;&quot;</span>, init);<br><br>        processes.<span class="hljs-title function_ invoke__">insert</span>(pid, init);<br>        <span class="hljs-keyword">Self</span> &#123;<br>            processes: RwLock::<span class="hljs-title function_ invoke__">new</span>(processes),<br>            ready_queue: Mutex::<span class="hljs-title function_ invoke__">new</span>(ready_queue),<br>            app_list: app_list,<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>==至此，可运行milestone2==</p>
+<h3 id="实现生成用户程序">实现生成用户程序</h3>
+<h4 id="将-ELF-文件从列表中取出，并生成用户程序：">将 ELF 文件从列表中取出，并生成用户程序：</h4>
+<p><code>pkg/kernel/src/proc/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">spawn</span>(name: &amp;<span class="hljs-type">str</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;ProcessId&gt; &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">app</span> = x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">app_list</span> = <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">app_list</span>()?;<br>        app_list.<span class="hljs-title function_ invoke__">iter</span>().<span class="hljs-title function_ invoke__">find</span>(|&amp;app| app.name.<span class="hljs-title function_ invoke__">eq</span>(name))<br>    &#125;)?;<br><br>    <span class="hljs-title function_ invoke__">elf_spawn</span>(name.<span class="hljs-title function_ invoke__">to_string</span>(), &amp;app.elf)<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">elf_spawn</span>(name: <span class="hljs-type">String</span>, elf: &amp;ElfFile) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;ProcessId&gt; &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">pid</span> = x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">manager</span> = <span class="hljs-title function_ invoke__">get_process_manager</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">process_name</span> = name.<span class="hljs-title function_ invoke__">to_lowercase</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">parent</span> = Arc::<span class="hljs-title function_ invoke__">downgrade</span>(&amp;manager.<span class="hljs-title function_ invoke__">current</span>());<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">pid</span> = manager.<span class="hljs-title function_ invoke__">spawn</span>(elf, name, <span class="hljs-title function_ invoke__">Some</span>(parent), <span class="hljs-literal">None</span>);<br><br>        debug!(<span class="hljs-string">&quot;Spawned process: &#123;&#125;#&#123;&#125;&quot;</span>, process_name, pid);<br>        pid<br>    &#125;);<br><br>    <span class="hljs-title function_ invoke__">Some</span>(pid)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在 <code>ProcessManager</code> 中，实现 <code>spawn</code> 函数：</p>
+<p><code>pkg/kernel/src/proc/manager.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessManager</span> &#123;<br>	<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">spawn</span>(<br>        &amp;<span class="hljs-keyword">self</span>,<br>        elf: &amp;ElfFile,<br>        name: <span class="hljs-type">String</span>,<br>        parent: <span class="hljs-type">Option</span>&lt;Weak&lt;Process&gt;&gt;,<br>        proc_data: <span class="hljs-type">Option</span>&lt;ProcessData&gt;,<br>    ) <span class="hljs-punctuation">-&gt;</span> ProcessId &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">kproc</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">get_proc</span>(&amp;KERNEL_PID).<span class="hljs-title function_ invoke__">unwrap</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">page_table</span> = kproc.<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">clone_page_table</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">page_table_mapper</span>: x86_64::structures::paging::OffsetPageTable&lt;<span class="hljs-symbol">&#x27;static</span>&gt; = page_table.<span class="hljs-title function_ invoke__">mapper</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">proc</span> = Process::<span class="hljs-title function_ invoke__">new</span>(name, parent, page_table, proc_data);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">pid</span> = proc.<span class="hljs-title function_ invoke__">pid</span>();<br><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">inner</span> = proc.<span class="hljs-title function_ invoke__">write</span>();<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> load elf to process pagetable</span><br>        inner.<span class="hljs-title function_ invoke__">load_elf</span>(elf, page_table_mapper);<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> alloc new stack for process</span><br>        <br>        inner.<span class="hljs-title function_ invoke__">set_stack_frame</span>(VirtAddr::<span class="hljs-title function_ invoke__">new_truncate</span>(elf.header.pt2.<span class="hljs-title function_ invoke__">entry_point</span>()), VirtAddr::<span class="hljs-title function_ invoke__">new_truncate</span>(STACK_INIT_TOP));<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> mark process as ready</span><br>        inner.<span class="hljs-title function_ invoke__">pause</span>();<br>        <span class="hljs-title function_ invoke__">drop</span>(inner);<br><br>        trace!(<span class="hljs-string">&quot;New &#123;:#?&#125;&quot;</span>, &amp;proc);<br><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> something like kernel thread</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">add_proc</span>(pid, proc);<br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">push_ready</span>(pid);<br>        pid<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>注释掉上个实验的<code>spawn_kernel_thread</code>，防止后续修改后的进程模型在执行内核线程时遇到意外的问题。</p>
+<p><code>pkg/kernel/src/proc/process.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessInner</span> &#123;<br>	<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">load_elf</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, elf:&amp;ElfFile, <span class="hljs-keyword">mut</span> mapper: x86_64::structures::paging::OffsetPageTable&lt;<span class="hljs-symbol">&#x27;static</span>&gt;)&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">alloc</span> = &amp;<span class="hljs-keyword">mut</span> *<span class="hljs-title function_ invoke__">get_frame_alloc_for_sure</span>();<br>        elf::<span class="hljs-title function_ invoke__">load_elf</span>(<br>            elf, <br>            *PHYSICAL_OFFSET.<span class="hljs-title function_ invoke__">get</span>().<span class="hljs-title function_ invoke__">unwrap</span>(), <br>            &amp;<span class="hljs-keyword">mut</span> mapper, <br>            alloc, <br>            <span class="hljs-literal">true</span><br>        ).<span class="hljs-title function_ invoke__">unwrap</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_segment</span> = elf::<span class="hljs-title function_ invoke__">map_range</span>(STACK_INIT_BOT, STACK_DEF_PAGE, &amp;<span class="hljs-keyword">mut</span> mapper, alloc, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>).<span class="hljs-title function_ invoke__">unwrap</span>();<br>        <span class="hljs-comment">//info!(&quot;stack segment: &#123;:?&#125;&quot;, stack_segment);</span><br>        <span class="hljs-keyword">self</span>.proc_data.<span class="hljs-title function_ invoke__">as_mut</span>().<span class="hljs-title function_ invoke__">unwrap</span>().<span class="hljs-title function_ invoke__">set_stack</span>(VirtAddr::<span class="hljs-title function_ invoke__">new</span>(STACK_INIT_TOP), STACK_DEF_PAGE);<br>        <span class="hljs-keyword">self</span>.proc_data.<span class="hljs-title function_ invoke__">as_mut</span>().<span class="hljs-title function_ invoke__">unwrap</span>().<span class="hljs-title function_ invoke__">set_max_stack</span>(VirtAddr::<span class="hljs-title function_ invoke__">new</span>(STACK_MAX - STACK_MAX_SIZE), STACK_MAX_PAGES);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="修改pkg-elf-src-lib-rs">修改<code>pkg/elf/src/lib.rs</code></h4>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">map_range</span>(<br>    addr: <span class="hljs-type">u64</span>,<br>    count: <span class="hljs-type">u64</span>,<br>    page_table: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">Mapper</span>&lt;Size4KiB&gt;,<br>    frame_allocator: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameAllocator</span>&lt;Size4KiB&gt;,<br>    user_access: <span class="hljs-type">bool</span>,<br>    no_execute: <span class="hljs-type">bool</span>,<br>)<br><span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;PageRange, MapToError&lt;Size4KiB&gt;&gt; &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">flags</span> = PageTableFlags::PRESENT | PageTableFlags::WRITABLE;<br><br>    <span class="hljs-keyword">if</span> user_access &#123;<br>        flags |= PageTableFlags::USER_ACCESSIBLE;<br>    &#125;<br>    <span class="hljs-keyword">if</span> no_execute&#123;<br>        flags |= PageTableFlags::NO_EXECUTE;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">load_elf</span>(<br>    elf: &amp;ElfFile,<br>    physical_offset: <span class="hljs-type">u64</span>,<br>    page_table: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">Mapper</span>&lt;Size4KiB&gt;,<br>    frame_allocator: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameAllocator</span>&lt;Size4KiB&gt;,<br>    user_access: <span class="hljs-type">bool</span>,<br>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;(), MapToError&lt;Size4KiB&gt;&gt; &#123;<br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">segment</span> <span class="hljs-keyword">in</span> elf.<span class="hljs-title function_ invoke__">program_iter</span>() &#123;<br>        <span class="hljs-keyword">if</span> segment.<span class="hljs-title function_ invoke__">get_type</span>().<span class="hljs-title function_ invoke__">unwrap</span>() != program::Type::Load &#123;<br>            <span class="hljs-keyword">continue</span>;<br>        &#125;<br><br>        <span class="hljs-title function_ invoke__">load_segment</span>(<br>            file_buf,<br>            physical_offset,<br>            &amp;segment,<br>            page_table,<br>            frame_allocator,<br>            user_access,<br>        )?<br>    &#125;<br><br>    <span class="hljs-title function_ invoke__">Ok</span>(())<br>&#125;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">load_segment</span>(<br>    file_buf: *<span class="hljs-keyword">const</span> <span class="hljs-type">u8</span>,<br>    physical_offset: <span class="hljs-type">u64</span>,<br>    segment: &amp;program::ProgramHeader,<br>    page_table: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">Mapper</span>&lt;Size4KiB&gt;,<br>    frame_allocator: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameAllocator</span>&lt;Size4KiB&gt;,<br>    user_access: <span class="hljs-type">bool</span>,<br>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;(), MapToError&lt;Size4KiB&gt;&gt; &#123;<br>    <span class="hljs-keyword">if</span> user_access &#123;<br>        page_table_flags |= PageTableFlags::USER_ACCESSIBLE;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="修改GDT">修改GDT</h4>
+<p><code>pkg/kernel/src/proc/context.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessContext</span> &#123;<br>	<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init_stack_frame</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, entry: VirtAddr, stack_top: VirtAddr) &#123;<br>        <span class="hljs-keyword">self</span>.value.stack_frame.stack_pointer = stack_top;<br>        <span class="hljs-keyword">self</span>.value.stack_frame.instruction_pointer = entry;<br>        <span class="hljs-keyword">self</span>.value.stack_frame.cpu_flags =<br>            RFlags::IOPL_HIGH | RFlags::IOPL_LOW | RFlags::INTERRUPT_FLAG;<br><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">selector</span> = <span class="hljs-title function_ invoke__">get_selector</span>();<br>        <span class="hljs-keyword">self</span>.value.stack_frame.code_segment = selector.code_selector;<br>        <span class="hljs-keyword">self</span>.value.stack_frame.stack_segment = selector.data_selector;<br><br>        trace!(<span class="hljs-string">&quot;Init stack frame: &#123;:#?&#125;&quot;</span>, &amp;<span class="hljs-keyword">self</span>.stack_frame);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">selector</span> = <span class="hljs-title function_ invoke__">get_user_selector</span>(); <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> implement this function</span><br><br>        <span class="hljs-keyword">self</span>.value.stack_frame.code_segment = selector.user_code_selector;<br>        <span class="hljs-keyword">self</span>.value.stack_frame.stack_segment = selector.user_data_selector;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/memory/gdt.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">const</span> SYSCALL_IST_INDEX: <span class="hljs-type">u16</span> = <span class="hljs-number">3</span>;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">const</span> IST_SIZES: [<span class="hljs-type">usize</span>; <span class="hljs-number">5</span>] = [<span class="hljs-number">0x1000</span>, <span class="hljs-number">0x1000</span>, <span class="hljs-number">0x1000</span>, <span class="hljs-number">0x1000</span>, <span class="hljs-number">0x1000</span>];<br><br>lazy_static! &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">ref</span> TSS: TaskStateSegment = &#123;<br>        tss.interrupt_stack_table[SYSCALL_IST_INDEX <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] = &#123;<br>            <span class="hljs-keyword">const</span> STACK_SIZE: <span class="hljs-type">usize</span> = IST_SIZES[<span class="hljs-number">4</span>];<br>            <span class="hljs-keyword">static</span> <span class="hljs-keyword">mut</span> STACK: [<span class="hljs-type">u8</span>; STACK_SIZE] = [<span class="hljs-number">0</span>; STACK_SIZE];<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_start</span> = VirtAddr::<span class="hljs-title function_ invoke__">from_ptr</span>(<span class="hljs-keyword">unsafe</span> &#123; STACK.<span class="hljs-title function_ invoke__">as_ptr</span>() &#125;);<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_end</span> = stack_start + STACK_SIZE <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>;<br>            info!(<br>                <span class="hljs-string">&quot;SYSCALL Stack  : 0x&#123;:016x&#125;-0x&#123;:016x&#125;&quot;</span>,<br>                stack_start.<span class="hljs-title function_ invoke__">as_u64</span>(),<br>                stack_end.<span class="hljs-title function_ invoke__">as_u64</span>()<br>            );<br>            stack_end<br>        &#125;;<br>        <span class="hljs-comment">// You can use `tss.interrupt_stack_table[DOUBLE_FAULT_IST_INDEX as usize]`</span><br><br>        tss<br>    &#125;;<br>&#125;<br><br>lazy_static! &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">ref</span> GDT: (GlobalDescriptorTable, KernelSelectors, UserSelectors) = &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">gdt</span> = GlobalDescriptorTable::<span class="hljs-title function_ invoke__">new</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">code_selector</span> = gdt.<span class="hljs-title function_ invoke__">append</span>(Descriptor::<span class="hljs-title function_ invoke__">kernel_code_segment</span>());<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">data_selector</span> = gdt.<span class="hljs-title function_ invoke__">append</span>(Descriptor::<span class="hljs-title function_ invoke__">kernel_data_segment</span>());<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">tss_selector</span> = gdt.<span class="hljs-title function_ invoke__">append</span>(Descriptor::<span class="hljs-title function_ invoke__">tss_segment</span>(&amp;TSS));<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">user_code_selector</span> = gdt.<span class="hljs-title function_ invoke__">append</span>(Descriptor::<span class="hljs-title function_ invoke__">user_code_segment</span>());<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">user_data_selector</span> = gdt.<span class="hljs-title function_ invoke__">append</span>(Descriptor::<span class="hljs-title function_ invoke__">user_data_segment</span>());<br>        (<br>            gdt,<br>            KernelSelectors &#123;<br>                code_selector,<br>                data_selector,<br>                tss_selector,<br>            &#125;,<br>            UserSelectors &#123;<br>                user_code_selector,<br>                user_data_selector,<br>            &#125;,<br>        )<br>    &#125;;<br>&#125;<br><span class="hljs-meta">#[derive(Debug)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">UserSelectors</span> &#123;<br>    <span class="hljs-keyword">pub</span> user_code_selector: SegmentSelector,<br>    <span class="hljs-keyword">pub</span> user_data_selector: SegmentSelector,<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">get_user_selector</span>() <span class="hljs-punctuation">-&gt;</span> &amp;<span class="hljs-symbol">&#x27;static</span> UserSelectors &#123;<br>    &amp;GDT.<span class="hljs-number">2</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现系统调用">实现系统调用</h3>
+<h4 id="补全中断注册函数和dispatcher">补全中断注册函数和<code>dispatcher</code></h4>
+<p><code>pkg/kernel/src/interrupt/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">mod</span> syscall;<br>lazy_static! &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">ref</span> IDT: InterruptDescriptorTable = &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">idt</span> = InterruptDescriptorTable::<span class="hljs-title function_ invoke__">new</span>();<br>        <span class="hljs-keyword">unsafe</span> &#123;<br>            exceptions::<span class="hljs-title function_ invoke__">register_idt</span>(&amp;<span class="hljs-keyword">mut</span> idt);<br>            clock::<span class="hljs-title function_ invoke__">register_idt</span>(&amp;<span class="hljs-keyword">mut</span> idt);<br>            serial::<span class="hljs-title function_ invoke__">register_idt</span>(&amp;<span class="hljs-keyword">mut</span> idt);<br>            syscall::<span class="hljs-title function_ invoke__">register_idt</span>(&amp;<span class="hljs-keyword">mut</span> idt);    <br>        &#125;<br>        idt<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>==注意==：不要漏了<code>syscall::register_idt(&amp;mut idt);</code>(困扰CJL一个下午)</p>
+<p><code>pkg/kernel/src/interrupt/syscall/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">register_idt</span>(idt: &amp;<span class="hljs-keyword">mut</span> InterruptDescriptorTable) &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> register syscall handler to IDT</span><br>    <span class="hljs-comment">//        - standalone syscall stack</span><br>    <span class="hljs-comment">//        - ring 3</span><br>    idt[consts::Interrupts::Syscall <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>]<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(syscall_handler)<br>        .<span class="hljs-title function_ invoke__">set_stack_index</span>(SYSCALL_IST_INDEX)<br>        .<span class="hljs-title function_ invoke__">set_privilege_level</span>(x86_64::PrivilegeLevel::Ring3);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">dispatcher</span>(context: &amp;<span class="hljs-keyword">mut</span> ProcessContext) &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">args</span> = super::syscall::SyscallArgs::<span class="hljs-title function_ invoke__">new</span>(<br>        Syscall::<span class="hljs-title function_ invoke__">from</span>(context.regs.rax),<br>        context.regs.rdi,<br>        context.regs.rsi,<br>        context.regs.rdx,<br>    );<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> you may want to trace syscall arguments</span><br>    <span class="hljs-comment">//trace!(&quot;&#123;&#125;&quot;, args);</span><br><br>    <span class="hljs-keyword">match</span> args.syscall &#123;<br>        <span class="hljs-comment">// fd: arg0 as u8, buf: &amp;[u8] (ptr: arg1 as *const u8, len: arg2)</span><br>        Syscall::Read =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> read from fd &amp; return length */</span><br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">sys_read</span>(&amp;args))<br>        &#125;,<br>        <span class="hljs-comment">// fd: arg0 as u8, buf: &amp;[u8] (ptr: arg1 as *const u8, len: arg2)</span><br>        Syscall::Write =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> write to fd &amp; return length */</span><br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">sys_write</span>(&amp;args))<br>        &#125;,<br><br>        <span class="hljs-comment">// None -&gt; pid: u16</span><br>        Syscall::GetPid =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> get current pid */</span> <br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">get_pid</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>)<br>        &#125;,<br><br>        <span class="hljs-comment">// path: &amp;str (ptr: arg0 as *const u8, len: arg1) -&gt; pid: u16</span><br>        Syscall::Spawn =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> spawn process from name */</span><br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">spawn_process</span>(&amp;args))<br>        &#125;,<br>        <span class="hljs-comment">// ret: arg0 as isize</span><br>        Syscall::Exit =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> exit process with retcode */</span><br>            <span class="hljs-title function_ invoke__">exit_process</span>(&amp;args, context)<br>        &#125;,<br>        <span class="hljs-comment">// pid: arg0 as u16 -&gt; status: isize</span><br>        Syscall::WaitPid =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> check if the process is running or get retcode */</span><br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">wait_pid</span>(&amp;args))<br>        &#125;,<br><br>        <span class="hljs-comment">// None</span><br>        Syscall::Stat =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> list processes */</span> <br>            <span class="hljs-title function_ invoke__">list_process</span>()<br>        &#125;,<br>        <span class="hljs-comment">// None</span><br>        Syscall::ListApp =&gt; &#123; <span class="hljs-comment">/* <span class="hljs-doctag">FIXME:</span> list available apps */</span><br>            <span class="hljs-title function_ invoke__">service_list_app</span>()<br>        &#125;,<br><br>        <span class="hljs-comment">// ----------------------------------------------------</span><br>        <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> following syscall examples are implemented</span><br>        <span class="hljs-comment">// ----------------------------------------------------</span><br><br>        <span class="hljs-comment">// layout: arg0 as *const Layout -&gt; ptr: *mut u8</span><br>        Syscall::Allocate =&gt; context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">sys_allocate</span>(&amp;args)),<br>        <span class="hljs-comment">// ptr: arg0 as *mut u8</span><br>        Syscall::Deallocate =&gt; <span class="hljs-title function_ invoke__">sys_deallocate</span>(&amp;args),<br>        <span class="hljs-comment">// Unknown</span><br>        Syscall::Unknown =&gt; warn!(<span class="hljs-string">&quot;Unhandled syscall: &#123;:x?&#125;&quot;</span>, context.regs.rax),<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="实现中断处理函数">实现中断处理函数</h4>
+<p><code>pkg/kernel/src/interrupt/syscall/service.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sys_write</span>(args: &amp;SyscallArgs) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">usize</span> &#123;<span class="hljs-comment">//arg0区分标准输出和错误输出，arg1为指针，arg2为字符串长度</span><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> get buffer and fd by args</span><br>    <span class="hljs-comment">//       - core::slice::from_raw_parts</span><br>    <span class="hljs-comment">//info!(&quot;at sys_write&quot;);</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">buf</span>: &amp;[<span class="hljs-type">u8</span>];<br>    <span class="hljs-keyword">unsafe</span>&#123;<br>        buf = core::slice::<span class="hljs-title function_ invoke__">from_raw_parts</span>(args.arg1 <span class="hljs-keyword">as</span> *<span class="hljs-keyword">const</span> <span class="hljs-type">u8</span>, args.arg2 <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>);<br>    &#125;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> call proc::write -&gt; isize</span><br>    <span class="hljs-comment">//let res = proc::write(args.syscall.clone() as u8, buf);</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = proc::<span class="hljs-title function_ invoke__">write</span>(args.arg0 <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>, buf);<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> return the result as usize</span><br>    res <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span><br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sys_read</span>(args: &amp;SyscallArgs) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">usize</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> just like sys_write</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">buf</span>;<br>    <span class="hljs-keyword">unsafe</span>&#123;<br>        buf = core::slice::<span class="hljs-title function_ invoke__">from_raw_parts_mut</span>(args.arg1 <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>, args.arg2 <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>);<br>    &#125;;<br>    <span class="hljs-comment">//let res = proc::read(args.syscall.clone() as u8, buf);</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = proc::<span class="hljs-title function_ invoke__">read</span>(args.arg0 <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>, buf);<br>    res <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span><br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">exit_process</span>(args: &amp;SyscallArgs, context: &amp;<span class="hljs-keyword">mut</span> ProcessContext) &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> exit process with retcode</span><br>    proc::<span class="hljs-title function_ invoke__">exit</span>(args.arg0 <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>, context)<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">list_process</span>() &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> list all processes</span><br>    proc::<span class="hljs-title function_ invoke__">print_process_list</span>();<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">get_pid</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u16</span>&#123;<br>    <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">current</span>().<span class="hljs-title function_ invoke__">pid</span>().<span class="hljs-number">0</span><br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">service_list_app</span>()&#123;<br>    proc::<span class="hljs-title function_ invoke__">list_app</span>();<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">wait_pid</span>(args: &amp;SyscallArgs)&#123;<br>    <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">get_exit_code</span>(&amp;<span class="hljs-title function_ invoke__">ProcessId</span>(args.arg0 <span class="hljs-keyword">as</span> <span class="hljs-type">u16</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现动态内存分配">实现动态内存分配</h3>
+<p><code>pkg/kernel/src/memory/user.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init_user_heap</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;(), MapToError&lt;Size4KiB&gt;&gt; &#123;<br>    elf::<span class="hljs-title function_ invoke__">map_range</span>(USER_HEAP_START <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>, USER_HEAP_PAGE <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>, mapper, frame_allocator, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">unwrap</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/memory/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) &#123;<br>	user::<span class="hljs-title function_ invoke__">init</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现标准输入输出">实现标准输入输出</h3>
+<h4 id="实现用户态库read-line">实现用户态库read_line</h4>
+<p><code>pkg/lib/src/io.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">Stdin</span> &#123;<br>	<span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">read_line</span>(&amp;<span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">String</span> &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> allocate string</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">s</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">new</span>();<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> read from input buffer</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">buf</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0</span>;<span class="hljs-number">4</span>];<br>        <span class="hljs-comment">//s = sys_read(1, buf);</span><br>        <span class="hljs-comment">//       - maybe char by char?</span><br>        <span class="hljs-keyword">loop</span>&#123;<br>            <span class="hljs-keyword">match</span> <span class="hljs-title function_ invoke__">sys_read</span>(<span class="hljs-number">0</span>, &amp;<span class="hljs-keyword">mut</span> buf)&#123;<br>                <span class="hljs-title function_ invoke__">Some</span>(n)=&gt;&#123;<br>                    <span class="hljs-keyword">if</span> n &gt; <span class="hljs-number">0</span>&#123;<br>                        <span class="hljs-keyword">let</span> <span class="hljs-variable">ch</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from_utf8_lossy</span>(&amp;buf).<span class="hljs-title function_ invoke__">to_string</span>().<span class="hljs-title function_ invoke__">remove</span>(<span class="hljs-number">0</span>);<br>                        <span class="hljs-keyword">match</span> ch&#123;<br>                            <span class="hljs-string">&#x27;\n&#x27;</span>|<span class="hljs-string">&#x27;\r&#x27;</span> =&gt; &#123;<br>                                self::<span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>                                <span class="hljs-keyword">break</span>;<br>                            &#125;,<br>                            <span class="hljs-string">&#x27;\x03&#x27;</span> =&gt;&#123;<span class="hljs-comment">//ctrl-C</span><br>                                s.<span class="hljs-title function_ invoke__">clear</span>();<br>                                self::<span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;^C\n&quot;</span>);<br>                                <span class="hljs-keyword">break</span>;<br>                            &#125;,<br>                            <span class="hljs-string">&#x27;\x08&#x27;</span> | <span class="hljs-string">&#x27;\x7f&#x27;</span> =&gt; &#123;<br>                                <span class="hljs-keyword">if</span> !s.<span class="hljs-title function_ invoke__">is_empty</span>() &#123;<br>                                    self::<span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;\x08\x20\x08&quot;</span>);<br>                                    s.<span class="hljs-title function_ invoke__">pop</span>();<br>                                &#125;<br>                            &#125;,<br>                            _ =&gt; &#123;<br>                                s.<span class="hljs-title function_ invoke__">push</span>(ch);<br>                            &#125;<br>                        &#125;<br>                    &#125;<br>                &#125;,<br>                <span class="hljs-literal">None</span>=&gt;&#123;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> handle backspace / enter...</span><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> return string</span><br>        s<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="内核态处理输入输出">内核态处理输入输出</h4>
+<p><code>pkg/kernel/src/proc/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">read</span>(fd: <span class="hljs-type">u8</span>, buf: &amp;<span class="hljs-keyword">mut</span> [<span class="hljs-type">u8</span>]) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">current</span>().<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">read</span>(fd, buf))<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">write</span>(fd: <span class="hljs-type">u8</span>, buf: &amp;[<span class="hljs-type">u8</span>]) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">current</span>().<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">write</span>(fd, buf))<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/proc/data.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">ProcessData</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">read</span>(&amp;<span class="hljs-keyword">self</span>, fd: <span class="hljs-type">u8</span>, buf: &amp;<span class="hljs-keyword">mut</span> [<span class="hljs-type">u8</span>]) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>        <span class="hljs-keyword">self</span>.resources.<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">read</span>(fd, buf)<br>    &#125;<br><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">write</span>(&amp;<span class="hljs-keyword">self</span>, fd: <span class="hljs-type">u8</span>, buf: &amp;[<span class="hljs-type">u8</span>]) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>        <span class="hljs-keyword">self</span>.resources.<span class="hljs-title function_ invoke__">write</span>().<span class="hljs-title function_ invoke__">write</span>(fd, buf)<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>修改 <code>ProcessData</code> 结构体，类似于环境变量的定义，添加一个“文件描述符表”：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[derive(Debug, Clone)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ProcessData</span> &#123;<br>    <span class="hljs-comment">// shared data</span><br>    <span class="hljs-title function_ invoke__">pub</span>(<span class="hljs-keyword">super</span>) env: Arc&lt;RwLock&lt;BTreeMap&lt;<span class="hljs-type">String</span>, <span class="hljs-type">String</span>&gt;&gt;&gt;,<br><br>    <span class="hljs-comment">// process specific data</span><br>    <span class="hljs-title function_ invoke__">pub</span>(<span class="hljs-keyword">super</span>) stack_segment: <span class="hljs-type">Option</span>&lt;PageRange&gt;,<br>    <span class="hljs-title function_ invoke__">pub</span>(<span class="hljs-keyword">super</span>) max_stack_segment: <span class="hljs-type">Option</span>&lt;PageRange&gt;,<br>    <span class="hljs-title function_ invoke__">pub</span>(<span class="hljs-keyword">super</span>) resources: Arc&lt;RwLock&lt;ResourceSet&gt;&gt;<br>&#125;<br><br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">Default</span> <span class="hljs-keyword">for</span> <span class="hljs-title class_">ProcessData</span> &#123;<br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">default</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-keyword">Self</span> &#123;<br>        <span class="hljs-keyword">Self</span> &#123;<br>            env: Arc::<span class="hljs-title function_ invoke__">new</span>(RwLock::<span class="hljs-title function_ invoke__">new</span>(BTreeMap::<span class="hljs-title function_ invoke__">new</span>())),<br>            stack_segment: <span class="hljs-literal">None</span>,<br>            max_stack_segment: <span class="hljs-literal">None</span>,<br>            resources: Arc::<span class="hljs-title function_ invoke__">new</span>(RwLock::<span class="hljs-title function_ invoke__">new</span>(ResourceSet::<span class="hljs-title function_ invoke__">default</span>())),<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/utils/resource.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> <span class="hljs-title class_">Resource</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">read</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, buf: &amp;<span class="hljs-keyword">mut</span> [<span class="hljs-type">u8</span>]) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;<span class="hljs-type">usize</span>&gt; &#123;<br>        <span class="hljs-keyword">match</span> <span class="hljs-keyword">self</span> &#123;<br>            Resource::<span class="hljs-title function_ invoke__">Console</span>(stdio) =&gt; <span class="hljs-keyword">match</span> stdio &#123;<br>                StdIO::Stdin =&gt; &#123;<br>                    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> just read from kernel input buffer</span><br>                    <span class="hljs-keyword">if</span> buf.<span class="hljs-title function_ invoke__">len</span>() &lt; <span class="hljs-number">4</span>&#123;<br>                        error!(<span class="hljs-string">&quot;buf length should &gt;= 4&quot;</span>);<br>                        <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-number">0</span>)<br>                    &#125;<br>                    <span class="hljs-keyword">else</span>&#123;<br>                        <span class="hljs-keyword">let</span> <span class="hljs-variable">k</span> = <span class="hljs-title function_ invoke__">try_pop_key</span>();<br>                        <span class="hljs-keyword">match</span> k&#123;<br>                            <span class="hljs-literal">None</span> =&gt; <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-number">0</span>),<br>                            <span class="hljs-title function_ invoke__">Some</span>(k) =&gt; &#123;<br>                                <span class="hljs-keyword">match</span> k&#123;<br>                                    DecodedKey::<span class="hljs-title function_ invoke__">RawKey</span>(r) =&gt;&#123;<br>                                        warn!(<span class="hljs-string">&quot;Rawkey &#123;:#?&#125; is not supported&quot;</span>,r);<br>                                        <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-number">0</span>)<br>                                    &#125;<br>                                    DecodedKey::<span class="hljs-title function_ invoke__">Unicode</span>(c) =&gt; &#123;<br>                                        <span class="hljs-title function_ invoke__">Some</span>(c.<span class="hljs-title function_ invoke__">encode_utf8</span>(&amp;<span class="hljs-keyword">mut</span> buf[<span class="hljs-number">0</span>..<span class="hljs-number">4</span>]).<span class="hljs-title function_ invoke__">len</span>())<br>                                    &#125;<br>                                &#125;<br>                            &#125;,<br>                        &#125;<br>                    &#125;<br>                    <br>                &#125;<br>                _ =&gt; <span class="hljs-literal">None</span>,<br>            &#125;,<br>            Resource::Null =&gt; <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-number">0</span>),<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现进程退出">实现进程退出</h3>
+<p><code>pkg/kernel/src/proc/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">exit</span>(ret: <span class="hljs-type">isize</span>, context: &amp;<span class="hljs-keyword">mut</span> ProcessContext) &#123;<br>    x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">manager</span> = <span class="hljs-title function_ invoke__">get_process_manager</span>();<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> implement this for ProcessManager</span><br>        manager.<span class="hljs-title function_ invoke__">kill_self</span>(ret);<br>        manager.<span class="hljs-title function_ invoke__">switch_next</span>(context);<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/proc/manager.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kill_self</span>(&amp;<span class="hljs-keyword">self</span>, ret: <span class="hljs-type">isize</span>) &#123;<br>    <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">kill</span>(processor::<span class="hljs-title function_ invoke__">get_pid</span>(), ret);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/lib/src/macros.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[macro_export]</span><br><span class="hljs-built_in">macro_rules!</span> entry &#123;<br>    ($<span class="hljs-keyword">fn</span>:ident) =&gt; &#123;<br>        <span class="hljs-meta">#[export_name = <span class="hljs-string">&quot;_start&quot;</span>]</span><br>        <span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">__impl_start</span>() &#123;<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">ret</span> = $<span class="hljs-title function_ invoke__">fn</span>();<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> after syscall, add lib::sys_exit(ret);</span><br>            lib::<span class="hljs-title function_ invoke__">sys_exit</span>(ret);<br>        &#125;<br>    &#125;;<br>&#125;<br><br><span class="hljs-meta">#[cfg_attr(not(test), panic_handler)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">panic</span>(info: &amp;core::panic::PanicInfo) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">location</span> = <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(location) = info.<span class="hljs-title function_ invoke__">location</span>() &#123;<br>        alloc::<span class="hljs-built_in">format!</span>(<br>            <span class="hljs-string">&quot;&#123;&#125;:&#123;&#125;:&#123;&#125;&quot;</span>,<br>            location.<span class="hljs-title function_ invoke__">file</span>(),<br>            location.<span class="hljs-title function_ invoke__">line</span>(),<br>            location.<span class="hljs-title function_ invoke__">column</span>()<br>        )<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-string">&quot;Unknown location&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()<br>    &#125;;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">msg</span> = <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(msg) = info.<span class="hljs-title function_ invoke__">message</span>() &#123;<br>        alloc::<span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, msg)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-string">&quot;No more message...&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()<br>    &#125;;<br>    errln!(<span class="hljs-string">&quot;\n\n\rERROR: panicked at &#123;&#125;\n\n\r&#123;&#125;&quot;</span>, location, msg);<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> after syscall, add lib::sys_exit(1);</span><br>    super::<span class="hljs-title function_ invoke__">sys_exit</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">unreachable!</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="实现main函数">实现<code>main</code>函数</h3>
+<p><code>pkg/app/hello/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> lib::*;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> lib;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Hello, world!!!&quot;</span>);<br>    <span class="hljs-number">233</span><br>&#125;<br><br>entry!(main);<br><br></code></pre></td></tr></table></figure>
+<p><code>pkg/app/hello/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> log::debug;<br><span class="hljs-keyword">use</span> ysos::*;<br><span class="hljs-keyword">use</span> ysos_kernel <span class="hljs-keyword">as</span> ysos;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> alloc;<br><br>boot::entry_point!(kernel_main);<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kernel_main</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    ysos::<span class="hljs-title function_ invoke__">init</span>(boot_info);<br>    <span class="hljs-title function_ invoke__">spawn_init</span>();<br>    <span class="hljs-comment">//loop&#123;&#125;</span><br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;[&gt;] &quot;</span>);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">line</span> = input::<span class="hljs-title function_ invoke__">get_line</span>();<br>        <span class="hljs-keyword">match</span> line.<span class="hljs-title function_ invoke__">trim</span>() &#123;<br>            <span class="hljs-string">&quot;exit&quot;</span> =&gt; <span class="hljs-keyword">break</span>,<br>            <span class="hljs-string">&quot;ps&quot;</span> =&gt; &#123;<br>                <span class="hljs-comment">//print!(&quot;\n&quot;);</span><br>                ysos::proc::<span class="hljs-title function_ invoke__">print_process_list</span>();<br>            &#125;<br>            _ =&gt; <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;[=] &#123;&#125;&quot;</span>, line),<br>        &#125;<br>    &#125;<br>    ysos::<span class="hljs-title function_ invoke__">shutdown</span>(boot_info);<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">spawn_init</span>() <span class="hljs-punctuation">-&gt;</span> proc::ProcessId &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> you may want to clear the screen before starting the shell</span><br>    <span class="hljs-comment">// print_serial!(&quot;\x1b[1;1H\x1b[2J&quot;);</span><br><br>    proc::<span class="hljs-title function_ invoke__">list_app</span>();<br>    proc::<span class="hljs-title function_ invoke__">spawn</span>(<span class="hljs-string">&quot;hello&quot;</span>).<span class="hljs-title function_ invoke__">unwrap</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>==至此，可运行milestone3==</p>
+<h3 id="在内核实现进程的创建和等待">在内核实现进程的创建和等待</h3>
+<p>这样，在内核调用<code>wait</code>，可以实现等待shell进程退出</p>
+<p><code>pkg/kernel/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">wait</span>(init: proc::ProcessId) &#123;<br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-keyword">if</span> proc::<span class="hljs-title function_ invoke__">still_alive</span>(init) &#123;<br>            <span class="hljs-comment">// Why? Check reflection question 5</span><br>            x86_64::instructions::<span class="hljs-title function_ invoke__">hlt</span>();<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/proc/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[inline]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">still_alive</span>(pid: ProcessId) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-comment">//x86_64::instructions::interrupts::without_interrupts(|| &#123;</span><br>        <span class="hljs-comment">// check if the process is still alive</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">pid</span> = <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">get_exit_code</span>(&amp;pid);<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">None</span> = pid &#123;<br>            <span class="hljs-literal">true</span><br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-literal">false</span><br>        &#125;<br>    <span class="hljs-comment">//&#125;)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现用户态的进程创建和等待">实现用户态的进程创建和等待</h3>
+<h4 id="用户态库的进程等待">用户态库的进程等待</h4>
+<p><code>pkg/lib/src/syscall.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[inline(always)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sys_wait_pid</span>(pid: <span class="hljs-type">u16</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> try to get the return value for process</span><br>    <span class="hljs-comment">//        loop until the process is finished</span><br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">status</span> = syscall!(Syscall::WaitPid, pid <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>;<br>        <span class="hljs-keyword">if</span> status != <span class="hljs-number">114514</span> &#123;<br>            <span class="hljs-comment">// Why? Check reflection question 5</span><br>            <span class="hljs-comment">//x86_64::instructions::hlt();</span><br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-number">0</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="系统调用支持进程创建和等待">系统调用支持进程创建和等待</h4>
+<p><code>pkg/kernel/src/interrupt/syscall/service.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">spawn_process</span>(args: &amp;SyscallArgs) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">usize</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> get app name by args</span><br>    <span class="hljs-comment">//       - core::str::from_utf8_unchecked</span><br>    <span class="hljs-comment">//       - core::slice::from_raw_parts</span><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> spawn the process by name</span><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> handle spawn error, return 0 if failed</span><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> return pid as usize</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">buf</span>: &amp;[<span class="hljs-type">u8</span>];<br>    <span class="hljs-keyword">unsafe</span>&#123;<br>        buf = core::slice::<span class="hljs-title function_ invoke__">from_raw_parts</span>(args.arg0 <span class="hljs-keyword">as</span> *<span class="hljs-keyword">const</span> <span class="hljs-type">u8</span>, args.arg1 <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>);<br>    &#125;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">name</span>;<br>    <span class="hljs-keyword">unsafe</span> &#123;<br>        name = core::<span class="hljs-type">str</span>::<span class="hljs-title function_ invoke__">from_utf8_unchecked</span>(buf);<br>    &#125;;<br>    <span class="hljs-comment">//debug!(&quot;name is &#123;&#125;&quot;,name);</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = proc::<span class="hljs-title function_ invoke__">spawn</span>(name);<br>    <span class="hljs-keyword">match</span> res &#123;<br>        <span class="hljs-title function_ invoke__">Some</span>(pid) =&gt; pid.<span class="hljs-number">0</span> <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>,<br>        <span class="hljs-literal">None</span> =&gt; <span class="hljs-number">0</span>,<br>    &#125;<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">wait_pid</span>(args: &amp;SyscallArgs)<span class="hljs-punctuation">-&gt;</span><span class="hljs-type">usize</span>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = <span class="hljs-title function_ invoke__">get_process_manager</span>().<span class="hljs-title function_ invoke__">get_exit_code</span>(&amp;<span class="hljs-title function_ invoke__">ProcessId</span>(args.arg0 <span class="hljs-keyword">as</span> <span class="hljs-type">u16</span>));<br>    <span class="hljs-keyword">match</span> res &#123;<br>        <span class="hljs-title function_ invoke__">Some</span>(code) =&gt; code <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>,<br>        <span class="hljs-literal">None</span> =&gt; <span class="hljs-number">114514</span>,<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现main函数-2">实现main函数</h3>
+<h4 id="内核">内核</h4>
+<p><code>pkg/kernel/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> log::debug;<br><span class="hljs-keyword">use</span> ysos::*;<br><span class="hljs-keyword">use</span> ysos_kernel <span class="hljs-keyword">as</span> ysos;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> alloc;<br><br>boot::entry_point!(kernel_main);<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kernel_main</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    ysos::<span class="hljs-title function_ invoke__">init</span>(boot_info);<br>    <span class="hljs-title function_ invoke__">wait</span>(<span class="hljs-title function_ invoke__">spawn_init</span>());<br>    ysos::<span class="hljs-title function_ invoke__">shutdown</span>(boot_info);<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">spawn_init</span>() <span class="hljs-punctuation">-&gt;</span> proc::ProcessId &#123;<br>    proc::<span class="hljs-title function_ invoke__">spawn</span>(<span class="hljs-string">&quot;shell&quot;</span>).<span class="hljs-title function_ invoke__">unwrap</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="shell">shell</h4>
+<p><code>pkg/app/shell/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> lib::*;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> lib;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;[&gt;] &quot;</span>);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">line</span> = <span class="hljs-title function_ invoke__">stdin</span>().<span class="hljs-title function_ invoke__">read_line</span>();<br>        <span class="hljs-keyword">match</span> line.<span class="hljs-title function_ invoke__">trim</span>() &#123;<br>            <span class="hljs-string">&quot;exit&quot;</span> =&gt; <span class="hljs-keyword">break</span>,<br>            <span class="hljs-string">&quot;app&quot;</span> =&gt; <span class="hljs-title function_ invoke__">sys_list_app</span>(),<br>            <span class="hljs-string">&quot;ps&quot;</span> =&gt; <span class="hljs-title function_ invoke__">sys_stat</span>(),<br>            <span class="hljs-string">&quot;hello&quot;</span> =&gt; &#123;<span class="hljs-title function_ invoke__">sys_wait_pid</span>(<span class="hljs-title function_ invoke__">sys_spawn</span>(<span class="hljs-string">&quot;hello&quot;</span>));&#125;,<br>            <span class="hljs-string">&quot;fac&quot;</span> =&gt; &#123;<span class="hljs-title function_ invoke__">sys_wait_pid</span>(<span class="hljs-title function_ invoke__">sys_spawn</span>(<span class="hljs-string">&quot;fac&quot;</span>));&#125;,<br>            <span class="hljs-string">&quot;clear&quot;</span> =&gt; &#123;<span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;\x1b[2J\x1b[1;1H&quot;</span>);&#125;,<br>            <span class="hljs-string">&quot;help&quot;</span> =&gt; &#123;<span class="hljs-title function_ invoke__">print_help</span>();&#125;,<br>            _ =&gt; <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;[=] &#123;&#125;&quot;</span>, line),<br>        &#125;<br>    &#125;<br>    <span class="hljs-number">0</span><br>&#125;<br><br>entry!(main);<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">print_help</span>()&#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;\x1b[34;1;4m[*] help:\x1b[0m</span><br><span class="hljs-string">    \x1b[34mYSOS shell 使用帮助\x1b[0m</span><br><span class="hljs-string">    author: CJL-22330004</span><br><span class="hljs-string">    \x1b[32m指令:</span><br><span class="hljs-string">    - exit: 退出</span><br><span class="hljs-string">    - ps: 展示当前所有进程</span><br><span class="hljs-string">    - app: 展示所有用户程序</span><br><span class="hljs-string">    - hello: 运行用户程序hello</span><br><span class="hljs-string">    - fac: 运行用户程序fac, 用于计算阶乘</span><br><span class="hljs-string">    - clear: 清屏</span><br><span class="hljs-string">    - help: 打印帮助信息\x1b[0m&quot;</span>);<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<h4 id="hello">hello</h4>
+<p><code>pkg/app/hello/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> lib::*;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> lib;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Hello, world!!!&quot;</span>);<br>    <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;Please input a line:&quot;</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">stdin1</span> = <span class="hljs-title function_ invoke__">stdin</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">s</span> = stdin1.<span class="hljs-title function_ invoke__">read_line</span>();<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, s);<br>    <br>    <span class="hljs-comment">//loop&#123;&#125;</span><br>    <span class="hljs-number">233</span><br>&#125;<br><br>entry!(main);<br><br></code></pre></td></tr></table></figure>
+<h4 id="fac">fac</h4>
+<p><code>pkg/app/fac/src/main.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> lib::*;<br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> lib;<br><span class="hljs-keyword">const</span> MOD: <span class="hljs-type">u64</span> = <span class="hljs-number">1000000007</span>;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">factorial</span>(n: <span class="hljs-type">u64</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u64</span> &#123;<br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-number">1</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        n * <span class="hljs-title function_ invoke__">factorial</span>(n - <span class="hljs-number">1</span>) % MOD<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">isize</span> &#123;<br>    <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;Input n: &quot;</span>);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">input</span> = lib::<span class="hljs-title function_ invoke__">stdin</span>().<span class="hljs-title function_ invoke__">read_line</span>();<br><br>    <span class="hljs-comment">// prase input as u64</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">n</span> = input.parse::&lt;<span class="hljs-type">u64</span>&gt;().<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>    <span class="hljs-keyword">if</span> n &gt; <span class="hljs-number">1000000</span> &#123;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;n must be less than 1000000&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// calculate factorial</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = <span class="hljs-title function_ invoke__">factorial</span>(n);<br><br>    <span class="hljs-comment">// print system status</span><br>    <span class="hljs-title function_ invoke__">sys_stat</span>();<br><br>    <span class="hljs-comment">// print result</span><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;The factorial of &#123;&#125; under modulo &#123;&#125; is &#123;&#125;.&quot;</span>, n, MOD, result);<br><br>    <span class="hljs-number">0</span><br>&#125;<br><br>entry!(main);<br><br><br></code></pre></td></tr></table></figure>
+<h3 id="实现sleep">实现sleep</h3>
+<h4 id="实现UefiRuntime">实现UefiRuntime</h4>
+<p><code>pkg/kernel/src/interrupt/clock.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs rust">once_mutex!(UEFI_SERVICE: UefiRuntime);<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> BootInfo) &#123;<br>    <span class="hljs-keyword">unsafe</span> &#123;<br>        <span class="hljs-title function_ invoke__">init_UEFI_SERVICE</span>(UefiRuntime::<span class="hljs-title function_ invoke__">new</span>(boot_info));<br>    &#125;<br>&#125;<br>guard_access_fn! &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-title function_ invoke__">get_uefi_runtime</span>(UEFI_SERVICE: UefiRuntime)<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">UefiRuntime</span> &#123;<br>    runtime_service: &amp;<span class="hljs-symbol">&#x27;static</span> RuntimeServices,<br>&#125;<br><br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">UefiRuntime</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">new</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> BootInfo) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-keyword">Self</span> &#123;<br>        <span class="hljs-keyword">Self</span> &#123;<br>            runtime_service: boot_info.system_table.<span class="hljs-title function_ invoke__">runtime_services</span>(),<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">get_time</span>(&amp;<span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> Time &#123;<br>        <span class="hljs-keyword">self</span>.runtime_service.<span class="hljs-title function_ invoke__">get_time</span>().<span class="hljs-title function_ invoke__">unwrap</span>()<br>    &#125;<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">now</span>() <span class="hljs-punctuation">-&gt;</span> NaiveDateTime &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">time</span> = <span class="hljs-title function_ invoke__">get_uefi_runtime_for_sure</span>().<span class="hljs-title function_ invoke__">get_time</span>();<br>    NaiveDate::<span class="hljs-title function_ invoke__">from_ymd_opt</span>(time.<span class="hljs-title function_ invoke__">year</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">i32</span>, time.<span class="hljs-title function_ invoke__">month</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>, time.<span class="hljs-title function_ invoke__">day</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>)<br>        .<span class="hljs-title function_ invoke__">unwrap_or_default</span>()<br>        .<span class="hljs-title function_ invoke__">and_hms_nano_opt</span>(<br>            time.<span class="hljs-title function_ invoke__">hour</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>,<br>            time.<span class="hljs-title function_ invoke__">minute</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>,<br>            time.<span class="hljs-title function_ invoke__">second</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>,<br>            time.<span class="hljs-title function_ invoke__">nanosecond</span>(),<br>        )<br>        .<span class="hljs-title function_ invoke__">unwrap_or_default</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> BootInfo) &#123;<br>    clock::<span class="hljs-title function_ invoke__">init</span>(boot_info);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="实现系统调用-2">实现系统调用</h4>
+<p><code>pkg/kernel/src/interrupt/syscall/mod.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust">Syscall::Time =&gt; &#123;<br>            context.<span class="hljs-title function_ invoke__">set_rax</span>(<span class="hljs-title function_ invoke__">sys_clock</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>)<br>        &#125;,<br></code></pre></td></tr></table></figure>
+<p><code>pkg/kernel/src/interrupt/syscall/service.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sys_clock</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i64</span>&#123;<br>    clock::<span class="hljs-title function_ invoke__">now</span>().<span class="hljs-title function_ invoke__">timestamp_nanos_opt</span>().<span class="hljs-title function_ invoke__">unwrap_or_default</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/lib/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sleep</span>(millisecs: <span class="hljs-type">i64</span>) &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">start</span> = <span class="hljs-title function_ invoke__">sys_time</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">dur</span> = Duration::<span class="hljs-title function_ invoke__">milliseconds</span>(millisecs);<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">current</span> = start;<br>    <span class="hljs-keyword">while</span> current - start &lt; dur &#123;<br>        current = <span class="hljs-title function_ invoke__">sys_time</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>pkg/lib/src/syscall.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#[inline(always)]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">sys_time</span>() <span class="hljs-punctuation">-&gt;</span> NaiveDateTime &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">time</span> = syscall!(Syscall::Time) <span class="hljs-keyword">as</span> <span class="hljs-type">i64</span>;<br>    <span class="hljs-keyword">const</span> BILLION: <span class="hljs-type">i64</span> = <span class="hljs-number">1_000_000_000</span>;<br>    NaiveDateTime::<span class="hljs-title function_ invoke__">from_timestamp_opt</span>(time / BILLION, (time % BILLION) <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>).<span class="hljs-title function_ invoke__">unwrap_or_default</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="加分项1：记录代码段占用情况">加分项1：记录代码段占用情况</h3>
+<p><code>pkg/kernel/src/proc/manager.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">print_process_list</span>(&amp;<span class="hljs-keyword">self</span>) &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">output</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;  PID | PPID | Process Name |  Ticks  | Status\n&quot;</span>);<br><br>    <span class="hljs-keyword">self</span>.processes<br>    .<span class="hljs-title function_ invoke__">read</span>()<br>    .<span class="hljs-title function_ invoke__">values</span>()<br>    .<span class="hljs-title function_ invoke__">filter</span>(|p| p.<span class="hljs-title function_ invoke__">read</span>().<span class="hljs-title function_ invoke__">status</span>() != ProgramStatus::Dead)<br>    .for_each(|p| output += <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;&#123;&#125;\n&quot;</span>, p).<span class="hljs-title function_ invoke__">as_str</span>());<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print memory usage of kernel heap</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">heap_used</span> = ALLOCATOR.<span class="hljs-title function_ invoke__">lock</span>().<span class="hljs-title function_ invoke__">used</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">heap_size</span> = HEAP_SIZE;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">user_heap_used</span> = USER_ALLOCATOR.<span class="hljs-title function_ invoke__">lock</span>().<span class="hljs-title function_ invoke__">used</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">user_heap_size</span> = USER_HEAP_SIZE;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">alloc</span> = <span class="hljs-title function_ invoke__">get_frame_alloc_for_sure</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">frames_used</span> = alloc.<span class="hljs-title function_ invoke__">frames_used</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">frames_recycled</span> = alloc.<span class="hljs-title function_ invoke__">recycled_count</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">frames_total</span> = alloc.<span class="hljs-title function_ invoke__">frames_total</span>();<br><br>    <span class="hljs-keyword">let</span> (sys_used, sys_used_unit) = crate::<span class="hljs-title function_ invoke__">humanized_size</span>(heap_used <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>);<br>    <span class="hljs-keyword">let</span> (sys_size, sys_size_unit) = crate::<span class="hljs-title function_ invoke__">humanized_size</span>(heap_size <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>);<br><br>    output += <span class="hljs-built_in">format!</span>(<br>        <span class="hljs-string">&quot;Kernel : &#123;:&gt;6.*&#125; &#123;&#125; / &#123;:&gt;6.*&#125; &#123;&#125; (&#123;:&gt;5.2&#125;%)\n&quot;</span>,<br>        <span class="hljs-number">2</span>,<br>        sys_used,<br>        sys_used_unit,<br>        <span class="hljs-number">2</span>,<br>        sys_size,<br>        sys_size_unit,<br>        heap_used <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> / heap_size <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * <span class="hljs-number">100.0</span><br>    )<br>    .<span class="hljs-title function_ invoke__">as_str</span>();<br><br>    <span class="hljs-keyword">let</span> (user_used, user_used_unit) = crate::<span class="hljs-title function_ invoke__">humanized_size</span>(user_heap_used <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>);<br>    <span class="hljs-keyword">let</span> (user_size, user_size_unit) = crate::<span class="hljs-title function_ invoke__">humanized_size</span>(user_heap_size <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>);<br><br>    output += <span class="hljs-built_in">format!</span>(<br>        <span class="hljs-string">&quot;User   : &#123;:&gt;6.*&#125; &#123;&#125; / &#123;:&gt;6.*&#125; &#123;&#125; (&#123;:&gt;5.2&#125;%)\n&quot;</span>,<br>        <span class="hljs-number">2</span>,<br>        user_used,<br>        user_used_unit,<br>        <span class="hljs-number">2</span>,<br>        user_size,<br>        user_size_unit,<br>        user_heap_used <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> / user_heap_size <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * <span class="hljs-number">100.0</span><br>    )<br>    .<span class="hljs-title function_ invoke__">as_str</span>();<br><br>    <span class="hljs-comment">// put used/total frames in MiB</span><br>    <span class="hljs-keyword">let</span> (used_size, used_unit) =<br>    crate::<span class="hljs-title function_ invoke__">humanized_size</span>((frames_used - frames_recycled) <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span> * PAGE_SIZE);<br>    <span class="hljs-keyword">let</span> (tot_size, tot_unit) = crate::<span class="hljs-title function_ invoke__">humanized_size</span>(frames_total <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span> * PAGE_SIZE);<br><br>    output += <span class="hljs-built_in">format!</span>(<br>        <span class="hljs-string">&quot;Memory : &#123;:&gt;6.*&#125; &#123;&#125; / &#123;:&gt;6.*&#125; &#123;&#125; (&#123;:&gt;5.2&#125;%) [&#123;&#125; recycled]\n&quot;</span>,<br>        <span class="hljs-number">2</span>,<br>        used_size,<br>        used_unit,<br>        <span class="hljs-number">2</span>,<br>        tot_size,<br>        tot_unit,<br>        (frames_used - frames_recycled) <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> / frames_total <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * <span class="hljs-number">100.0</span>,<br>        frames_recycled<br>    )<br>    .<span class="hljs-title function_ invoke__">as_str</span>();<br><br>    output += <span class="hljs-built_in">format!</span>(<span class="hljs-string">&quot;Queue  : &#123;:?&#125;\n&quot;</span>, <span class="hljs-keyword">self</span>.ready_queue.<span class="hljs-title function_ invoke__">lock</span>()).<span class="hljs-title function_ invoke__">as_str</span>();<br><br>    output += &amp;processor::<span class="hljs-title function_ invoke__">print_processors</span>();<br><br>    <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, output);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="加分项2：FrameDeallocator">加分项2：FrameDeallocator</h3>
+<p><code>pkg/kernel/src/memory/frames.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BootInfoFrameAllocator</span> &#123;<br>    size: <span class="hljs-type">usize</span>,<br>    used: <span class="hljs-type">usize</span>,<br>    frames: BootInfoFrameIter,<br>    recycled: <span class="hljs-type">Vec</span>&lt;<span class="hljs-type">u32</span>&gt;,<br>&#125;<br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">BootInfoFrameAllocator</span> &#123;<br>    <span class="hljs-comment">/// Create a FrameAllocator from the passed memory map.</span><br>    <span class="hljs-comment">///</span><br>    <span class="hljs-comment">/// This function is unsafe because the caller must guarantee that the passed</span><br>    <span class="hljs-comment">/// memory map is valid. The main requirement is that all frames that are marked</span><br>    <span class="hljs-comment">/// as `USABLE` in it are really unused.</span><br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>(memory_map: &amp;MemoryMap, size: <span class="hljs-type">usize</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-keyword">Self</span> &#123;<br>        BootInfoFrameAllocator &#123;<br>            size,<br>            frames: <span class="hljs-title function_ invoke__">create_frame_iter</span>(memory_map),<br>            used: <span class="hljs-number">0</span>,<br>            recycled: <span class="hljs-type">Vec</span>::<span class="hljs-title function_ invoke__">new</span>(),<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">recycled_count</span>(&amp;<span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">usize</span> &#123;<br>        <span class="hljs-keyword">self</span>.recycled.<span class="hljs-title function_ invoke__">len</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span><br>    &#125;<br>&#125;<br><span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameAllocator</span>&lt;Size4KiB&gt; <span class="hljs-keyword">for</span> <span class="hljs-title class_">BootInfoFrameAllocator</span> &#123;<br>    <span class="hljs-keyword">fn</span> <span class="hljs-title function_">allocate_frame</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;PhysFrame&gt; &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(frame) = <span class="hljs-keyword">self</span>.recycled.<span class="hljs-title function_ invoke__">pop</span>() &#123;<br>            <span class="hljs-title function_ invoke__">Some</span>(<span class="hljs-title function_ invoke__">u32_to_phys_frame</span>(frame))<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">self</span>.used += <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">self</span>.frames.<span class="hljs-title function_ invoke__">next</span>()<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameDeallocator</span>&lt;Size4KiB&gt; <span class="hljs-keyword">for</span> <span class="hljs-title class_">BootInfoFrameAllocator</span> &#123;<br>    <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">deallocate_frame</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, frame: PhysFrame) &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> deallocate frame (not for lab 2)</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">key</span> = <span class="hljs-title function_ invoke__">phys_frame_to_u32</span>(frame);<br>        <span class="hljs-keyword">self</span>.recycled.<span class="hljs-title function_ invoke__">push</span>(key);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> RS_ALIGN_4KIB: <span class="hljs-type">u64</span> = <span class="hljs-number">12</span>;<br><br><span class="hljs-comment">/// Assumes that the physical memory we have is less than 16TB</span><br><span class="hljs-comment">/// and we can store the 4KiB aligned address in a u32</span><br><span class="hljs-meta">#[inline(always)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">phys_frame_to_u32</span>(frame: PhysFrame) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u32</span> &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">key</span> = frame.<span class="hljs-title function_ invoke__">start_address</span>().<span class="hljs-title function_ invoke__">as_u64</span>() &gt;&gt; RS_ALIGN_4KIB;<br><br>    <span class="hljs-built_in">assert!</span>(key &lt;= <span class="hljs-type">u32</span>::MAX <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>);<br><br>    key <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span><br>&#125;<br><br><span class="hljs-meta">#[inline(always)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">u32_to_phys_frame</span>(key: <span class="hljs-type">u32</span>) <span class="hljs-punctuation">-&gt;</span> PhysFrame &#123;<br>    PhysFrame::<span class="hljs-title function_ invoke__">containing_address</span>(PhysAddr::<span class="hljs-title function_ invoke__">new</span>((key <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>) &lt;&lt; RS_ALIGN_4KIB))<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="加分项3：unmap-range">加分项3：unmap_range</h3>
+<p><code>pkg/elf/src/lib.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">unmap_range</span>(<br>    addr: <span class="hljs-type">u64</span>,<br>    pages: <span class="hljs-type">u64</span>,<br>    page_table: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">Mapper</span>&lt;Size4KiB&gt;,<br>    frame_deallocator: &amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">impl</span> <span class="hljs-title class_">FrameDeallocator</span>&lt;Size4KiB&gt;,<br>    do_dealloc: <span class="hljs-type">bool</span>,<br>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Result</span>&lt;(), UnmapError&gt; &#123;<br>    trace!(<span class="hljs-string">&quot;Unmapping stack at &#123;:#x&#125;&quot;</span>, addr);<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">range_start</span> = Page::<span class="hljs-title function_ invoke__">containing_address</span>(VirtAddr::<span class="hljs-title function_ invoke__">new</span>(addr));<br><br>    trace!(<br>        <span class="hljs-string">&quot;Mem range hint: &#123;:#x&#125; -&gt; &#123;:#x&#125;&quot;</span>,<br>        addr,<br>        page_table<br>            .<span class="hljs-title function_ invoke__">translate_page</span>(range_start)<br>            .<span class="hljs-title function_ invoke__">unwrap</span>()<br>            .<span class="hljs-title function_ invoke__">start_address</span>()<br>    );<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">range_end</span> = range_start + pages;<br><br>    trace!(<br>        <span class="hljs-string">&quot;Page Range: &#123;:?&#125;(&#123;&#125;)&quot;</span>,<br>        Page::<span class="hljs-title function_ invoke__">range</span>(range_start, range_end),<br>        pages<br>    );<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">page</span> <span class="hljs-keyword">in</span> Page::<span class="hljs-title function_ invoke__">range</span>(range_start, range_end) &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">info</span> = page_table.<span class="hljs-title function_ invoke__">unmap</span>(page)?;<br>        <span class="hljs-keyword">if</span> do_dealloc &#123;<br>            <span class="hljs-keyword">unsafe</span> &#123;<br>                frame_deallocator.<span class="hljs-title function_ invoke__">deallocate_frame</span>(info.<span class="hljs-number">0</span>);<br>            &#125;<br>        &#125;<br>        info.<span class="hljs-number">1</span>.<span class="hljs-title function_ invoke__">flush</span>();<br>    &#125;<br><br>    <span class="hljs-title function_ invoke__">Ok</span>(())<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后修改进程退出的代码，调用<code>clean_up_stack</code>函数销毁栈</p>
+<p><code>pkg/kernel/src/proc/process.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">clean_up_stack</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, pid: ProcessId) &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">page_table</span> = <span class="hljs-keyword">self</span>.page_table.<span class="hljs-title function_ invoke__">take</span>().<span class="hljs-title function_ invoke__">unwrap</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">mapper</span> = page_table.<span class="hljs-title function_ invoke__">mapper</span>();<br><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">frame_deallocator</span> = &amp;<span class="hljs-keyword">mut</span> *<span class="hljs-title function_ invoke__">get_frame_alloc_for_sure</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">start_count</span> = frame_deallocator.<span class="hljs-title function_ invoke__">recycled_count</span>();<br><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">proc_data</span> = <span class="hljs-keyword">self</span>.proc_data.<span class="hljs-title function_ invoke__">as_mut</span>().<span class="hljs-title function_ invoke__">unwrap</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">stack</span> = proc_data.stack_segment.<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>        debug!(<br>            <span class="hljs-string">&quot;Free stack for &#123;&#125;#&#123;&#125;: [&#123;:#x&#125; -&gt; &#123;:#x&#125;) (&#123;&#125; frames)&quot;</span>,<br>            <span class="hljs-keyword">self</span>.name,<br>            pid,<br>            stack.start.<span class="hljs-title function_ invoke__">start_address</span>(),<br>            stack.end.<span class="hljs-title function_ invoke__">start_address</span>(),<br>            stack.<span class="hljs-title function_ invoke__">count</span>()<br>        );<br><br>        elf::<span class="hljs-title function_ invoke__">unmap_range</span>(<br>            stack.start.<span class="hljs-title function_ invoke__">start_address</span>().<span class="hljs-title function_ invoke__">as_u64</span>(),<br>            stack.<span class="hljs-title function_ invoke__">count</span>() <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>,<br>            &amp;<span class="hljs-keyword">mut</span> mapper,<br>            frame_deallocator,<br>            <span class="hljs-literal">true</span>,<br>        )<br>        .<span class="hljs-title function_ invoke__">unwrap</span>();<br><br>    &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p>见milestone4，[点击跳转](# milestone4)</p>
+<h2 id="5-总结">5. 总结</h2>
+<p>了解了操作系统上如何运行用户程序和系统调用的实现</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/courses/" class="category-chain-item">courses</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/courses/YSOS/" class="category-chain-item">YSOS</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>YSOS-rust lab4</div>
+      <div>https://blog.algorithmpark.xyz/2024/05/19/YSOS/lab4/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年5月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/14/YSOS/index/" title="YSOS-rust 实验报告">
+                        <span class="hidden-mobile">YSOS-rust 实验报告</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

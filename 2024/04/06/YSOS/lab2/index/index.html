@@ -1,0 +1,1079 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="中山大学操作系统实验课程实验报告lab2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YSOS-rust lab2">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/04/06/YSOS/lab2/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="中山大学操作系统实验课程实验报告lab2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+<meta property="article:published_time" content="2024-04-06T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-14T10:11:47.818Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/ysos.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>YSOS-rust lab2 - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="YSOS-rust lab2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-06 08:00" pubdate>
+          2024年4月6日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">YSOS-rust lab2</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-05-14T10:11:47+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <!-- 注释语句：导出PDF时会在这里分页 -->
+<h1>YSOS-lab2</h1>
+<h2 id="1-实验要求">1. 实验要求</h2>
+<ol>
+<li>了解中断的作用、中断的分类、中断的处理过程。</li>
+<li>启用基于 APIC 的中断，注册 IDT 中断处理程序，实现时钟中断。</li>
+<li>注册内核堆分配器。（不实现内存分配算法，使用现有代码赋予内核堆分配能力）</li>
+<li>实现串口驱动的输入能力，尝试进行基础的 IO 操作和交互。</li>
+</ol>
+<h2 id="2-实验过程">2. 实验过程</h2>
+<h3 id="补全-TSS-的中断栈表">补全 TSS 的中断栈表</h3>
+<p>参照<code>tss.privilege_stack_table[0]</code>完成即可</p>
+<p>代码实现见关键代码部分, [点击跳转](# 实现<code>tss.interrupt_stack_table</code>)</p>
+<h3 id="注册中断处理程序">注册中断处理程序</h3>
+<p>代码实现见关键代码部分, [点击跳转](# 实现注册中断处理程序)</p>
+<h3 id="初始化APIC">初始化APIC</h3>
+<p>代码实现见关键代码部分, [点击跳转](# 实现初始化APIC)</p>
+<h3 id="时钟中断">时钟中断</h3>
+<p>代码实现见关键代码部分, [点击跳转](# 实现时钟中断)</p>
+<p>为了保证多线程环境下的安全性, 保证<code>COUNTER</code>原子地读写, 代码中采用了<code>AtomicU64</code>实现变量<code>COUNTER</code></p>
+<h3 id="调节时钟中断频率">调节时钟中断频率</h3>
+<p>内核运行结果如下</p>
+<p><img src="./lab3.assets/image-20240321111940730.png" srcset="/img/loading.gif" lazyload alt="image-20240321111940730"></p>
+<p>可以看出, 每打印10次 Hello world 出现一次时钟中断</p>
+<p>要实现中断频率减半,只需修改<code>pkg/kernel/src/interrupt/clock.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">clock_handler</span>(_sf: InterruptStackFrame) &#123;<br>    x86_64::instructions::interrupts::<span class="hljs-title function_ invoke__">without_interrupts</span>(|| &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-title function_ invoke__">inc_counter</span>() % <span class="hljs-number">0x10000</span> == <span class="hljs-number">0</span> &#123;<br>            info!(<span class="hljs-string">&quot;Tick! @&#123;&#125;&quot;</span>, <span class="hljs-title function_ invoke__">read_counter</span>());<br>        &#125;<br>        super::<span class="hljs-title function_ invoke__">ack</span>();<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>第三行修改为<code>if inc_counter() % 0x20000 == 0 &#123;</code></p>
+<p>重新编译和运行内核,如下图</p>
+<p><img src="./lab3.assets/image-20240321112535949.png" srcset="/img/loading.gif" lazyload alt="image-20240321112535949"></p>
+<p>可以看出, 每打印20次 Hello world 出现一次时钟中断, 中断频率减半了</p>
+<h3 id="串口输入中断">串口输入中断</h3>
+<p>代码实现见关键代码部分, [点击跳转](# 实现串口输入中断)</p>
+<p><strong>实现输入驱动<code>input.rs</code>:</strong></p>
+<ul>
+<li>使用 <code>crossbeam_queue::ArrayQueue</code> 作为缓冲区的实现, 它是一个无锁的、固定大小的队列, 可以在多线程环境下安全地进行读写操作。</li>
+<li>设置输入缓冲区<code>INPUT_BUF</code>的大小为128, 存储数据结构为<code>pc_keyboard::DecodedKey</code>, 这是一种可以容纳Unicode的数据结构, 保证串口输入对中文和emoji的支持</li>
+</ul>
+<p><strong>实现中断处理程序<code>serial.rs</code>:</strong></p>
+<p>当输入中断发生的时候, 会调用<code>receive</code>函数, 函数大致逻辑如下</p>
+<ul>
+<li>
+<p>首先创建一个Unicode缓冲区,用于处理UTF-8编码字符大小不定的情况, 缓冲区大小4字节</p>
+</li>
+<li>
+<p>进入一个循环,每次使用<code>get_serial_for_sure().receive()</code>从串口输入获取一个字节的数据, 写入Unicode缓冲区, 使用<code>from_utf8</code>函数判断Unicode缓冲区中的数据是否构成合法字符, 如果是合法字符则放入输入缓冲区,结束循环</p>
+</li>
+</ul>
+<h3 id="用户交互">用户交互</h3>
+<p>代码实现见关键代码部分, [点击跳转](# 实现用户交互)</p>
+<h3 id="思考题">思考题</h3>
+<p><strong>1.为什么需要在 <code>clock_handler</code> 中使用 <code>without_interrupts</code> 函数？如果不使用它, 可能会发生什么情况？</strong></p>
+<p>为了避免<code>clock_handler</code>在执行的过程中被其他中断打断, 如果不使用它, 可能出现的后果如下</p>
+<ol>
+<li>中断嵌套：如果在时钟中断处理函数中不关中断, 而又在该函数中触发了同一类型的中断（例如, 又发生了一个时钟中断）, 这会导致中断嵌套, 影响系统的响应性能</li>
+<li>时钟精度下降: 如果时钟中断被另一个耗时很长的中断打断, 会导致时钟不准</li>
+</ol>
+<hr>
+<p><strong>2.考虑时钟中断进行进程调度的场景, 时钟中断的频率应该如何设置？太快或太慢的频率会带来什么问题？请分别回答。</strong></p>
+<p>太快或太慢的频率会带来的问题如下</p>
+<ul>
+<li>
+<p><strong>过快的时钟中断频率</strong>：如果时钟中断频率过快，会导致中断处理程序的开销增加。这会占用CPU时间，使得系统在处理中断时花费更多的时间，从而降低了系统的性能。CPU将花费大部分时间在中断处理上，而不是执行实际的任务。</p>
+</li>
+<li>
+<p><strong>过慢的时钟中断频率</strong>：如果时钟中断频率过慢，会影响进程的调度粒度。进程可能长时间占用CPU，导致响应时间较长。进程可能在等待CPU时间时长时间处于等待状态。</p>
+</li>
+</ul>
+<p>在大多数情况下，100Hz的频率是一个不错的时钟中断频率, 既保证中断开销不至于过大, 保证系统的吞吐率, 又能保证用户能够感受到多个进程同时执行, 降低响应时延</p>
+<hr>
+<p><strong>3.在进行 <code>receive</code> 操作的时候, 为什么无法进行日志输出？如果强行输出日志, 会发生什么情况？谈谈你对串口、互斥锁的认识。</strong></p>
+<p>准确来说, 并非整个receive函数无法进行日志输出, 请参考下面的代码</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">receive</span>() &#123;<br>    info!(<span class="hljs-string">&quot;at receive start&quot;</span>);<span class="hljs-comment">//输出1</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">input_buffer</span>:<span class="hljs-type">Vec</span>&lt;<span class="hljs-type">u8</span>&gt; = <span class="hljs-type">Vec</span>::<span class="hljs-title function_ invoke__">with_capacity</span>(INPUT_BUFFER_SIZE);<br>    <span class="hljs-keyword">loop</span>&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">serial</span> = <span class="hljs-title function_ invoke__">get_serial_for_sure</span>();<span class="hljs-comment">//获取锁</span><br>        info!(<span class="hljs-string">&quot;at receive middle&quot;</span>);<span class="hljs-comment">//输出2</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">rec</span> = serial.<span class="hljs-title function_ invoke__">receive</span>();<br>        <span class="hljs-title function_ invoke__">drop</span>(serial);<span class="hljs-comment">//释放锁</span><br>        info!(<span class="hljs-string">&quot;at receive end&quot;</span>);<span class="hljs-comment">//输出3</span><br>		......<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>at receive start</code>和<code>at receive end</code>是可以正常输出的, <code>at receive middle</code>无法输出</p>
+<p>函数<code>get_serial_for_sure()</code>会使用互斥锁保护串口, <code>drop(serial)</code>会解除对互斥锁的保护</p>
+<p>串口设备属于静态的全局对象, 可能会被多个进程同时读写, 造成未定义的行为, 所以需要使用互斥锁保护</p>
+<p>在互斥锁保护期间, 日志输出无法取得互斥锁的所有权, 就无法正常输出</p>
+<hr>
+<p><strong>4.输入缓冲区在什么情况下会满？如果缓冲区满了, 用户输入的数据会发生什么情况？</strong></p>
+<p>我的实现使用了三个缓冲区, 分别是:</p>
+<ol>
+<li>
+<p><strong>Unicode输入缓冲区</strong>: 大小为4个字节, 用于将输入的字节流转为UTF-8字符保存到<strong>全局缓冲区</strong>. 只要输入的字符是UTF-8编码的, 该缓冲区就不会满, 否则, 遇到缓冲区满的情况, 缓冲区中的数据会视为非法数据而被丢弃</p>
+</li>
+<li>
+<p><strong>全局缓冲区:</strong> 用<code>ArrayQueue</code>实现的大小限定为128的缓冲区, 用于存储用户输入但还没有被处理程序读取的Unicode字符. 如果用户一直输入而没有处理程序(本次实验是<code>main</code>函数运行的<code>get_line()</code>)读取, 该缓冲区可能会满. 如果该缓冲区满了, 会触发警告输出, 新输入的字符会被舍弃</p>
+<p>在本次实验中该缓冲区不可能满, 因为<code>kernel</code>启动后就始终在调用<code>get_line()</code>函数读取<strong>全局缓冲区</strong>. 如果修改代码, <code>kernel</code>启动后可能会执行其他耗时更长的任务而有一段时间没有调用<code>get_line()</code>, 则全局缓冲区可能会满, 结果是会触发警告输出, 用户新输入的字符会被舍弃</p>
+</li>
+<li>
+<p><strong>处理程序缓冲区</strong>: 在本次实验是<code>get_line()</code>函数, 它会循环等待并读取<strong>全局缓冲区</strong>, 直到读取到换行字符结束循环. 它使用一个预留了128字符空间的<code>String</code>实现. 因为<code>String</code>具有自动扩容的功能, 该缓冲区不可能满.</p>
+</li>
+</ol>
+<hr>
+<p><strong>5.进行下列尝试, 并在报告中保留对应的触发方式及相关代码片段：</strong></p>
+<ul>
+<li>尝试用你的方式触发 Triple Fault，开启 <code>intdbg</code> 对应的选项，在 QEMU 中查看调试信息，分析 Triple Fault 的发生过程。</li>
+</ul>
+<p>在<code>kernel_main</code>函数中添加以下代码, 用于触发<code>page_fault</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">unsafe</span>&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:*<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span> = <span class="hljs-number">0x1000000000</span> <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">b</span>:<span class="hljs-type">u8</span> = *a + <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;b&#125;&quot;</span>);<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>在<code>pkg/kernel/src/interrupt/exceptions.rs</code>注释掉<code>page_fault</code>和<code>double_fault</code>的中断处理函数, 然后启动内核</p>
+<p>可以观察到, 内核一直在重启, 说明成功触发了<code>Triple Fault</code></p>
+<p>运行下面的指令启动QEMU并开启了interrupt debug, 可以看到中断记录如图</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/usr/bin/qemu-system-x86_64 -bios assets/OVMF.fd -net none -serial stdio -m 96M -d int -drive format=raw,file=fat:rw:esp<br></code></pre></td></tr></table></figure>
+<p><img src="./lab3.assets/image-20240326085635683.png" srcset="/img/loading.gif" lazyload alt="image-20240326085635683"></p>
+<p>查询<a target="_blank" rel="noopener" href="https://wiki.osdev.org/Exceptions">https://wiki.osdev.org/Exceptions</a> 可知:</p>
+<p>0xe对应Page Fault, 0xb对应Stack-Segment Fault, 0x8对应Double Fault</p>
+<p><code>Triple Fault</code>的发生过程为在触发<code>general_protection_fault</code>之后, CPU尝试在 IDT 中查找相应的处理函数, 由于找不到, 接着抛出了 <code>double fault</code> 异常, 找不到相应的处理函数, 就抛出了<code>Triple Fault</code>异常</p>
+<ul>
+<li>尝试触发 Double Fault，观察 Double Fault 的发生过程，尝试通过调试器定位 Double Fault 发生时使用的栈是否符合预期。</li>
+</ul>
+<p>触发方式同上, 不同点是保留<code>double_fault</code>的中断处理函数</p>
+<p>要查看double fault发生时的栈，首先确定栈的地址，可以从如图的输出中得到</p>
+<p><img src="./lab3.assets/image-20240330084843230.png" srcset="/img/loading.gif" lazyload alt="image-20240330084843230"></p>
+<p>使用<code>gdb</code>调试器，查看指定内存地址，就能看到栈的数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Page Fault</span><br>x /512xg 0xffffff00008c0150 <br><span class="hljs-comment"># Double Fault</span><br>x /512xg 0xffffff00008bf150 <br>x /2xg 0xffffff00008bf150 <br></code></pre></td></tr></table></figure>
+<p>结果如下图,可以看到double fault的栈里是有数据的, 说明此时触发了double fault, 而Page fault 的栈里没有数据, 因为Page Fault的处理函数被注释了</p>
+<p>double fault的栈</p>
+<p><img src="./lab3.assets/image-20240330084735274.png" srcset="/img/loading.gif" lazyload alt="image-20240330084735274"></p>
+<p>Page Fault的栈</p>
+<p><img src="./lab3.assets/image-20240330085102064.png" srcset="/img/loading.gif" lazyload alt="image-20240330085102064"></p>
+<ul>
+<li>通过访问非法地址触发 Page Fault，观察 Page Fault 的发生过程。分析 Cr2 寄存器的值，并尝试回答为什么 Page Fault 属于<strong>可恢复的异常</strong>。</li>
+</ul>
+<p>在<code>kernel_main</code>加入以下代码以引入缺页异常</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">unsafe</span>&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:*<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span> = <span class="hljs-number">0x1000000000</span> <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">b</span>:<span class="hljs-type">u8</span> = *a + <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;b&#125;&quot;</span>);<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>调试过程如下图:</p>
+<p><img src="./lab3.assets/image-20240326081634380.png" srcset="/img/loading.gif" lazyload alt="image-20240326081634380"></p>
+<p>可以看出, <code>Cr2</code>寄存器的值<code>0x0000001000000000</code>就是上面尝试访问的地址</p>
+<p>缺页异常经过异常处理函数处理之后, 可以将不在内存中的虚拟地址数据重新加载到内存中, 这样就可以正常访问了, 所以 Page Fault 属于<strong>可恢复的异常</strong>。</p>
+<p>使用QEMU可以看到中断记录如图</p>
+<p><img src="./lab3.assets/image-20240326084621565.png" srcset="/img/loading.gif" lazyload alt="image-20240326084621565"></p>
+<p><code>check_exception old: 0xffffffff new 0xe</code>表明当前出发了缺页中断, <code>0xe</code>恰好就是缺页的中断向量号</p>
+<p><img src="./lab3.assets/image-20240326084811241.png" srcset="/img/loading.gif" lazyload alt="image-20240326084811241"></p>
+<hr>
+<p><strong>6.如果在 TSS 中为中断分配的栈空间不足, 会发生什么情况？请分析 CPU 异常的发生过程, 并尝试回答什么时候会发生 Triple Fault。</strong></p>
+<p>==方法1==</p>
+<p>如果在 TSS 中为中断分配的栈空间不足，会发生<code>Triple Fault</code></p>
+<p>在<code>main</code>函数添加如下代码，用以触发<code>page_fault</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//访问0x1000000000触发page_fault</span><br><span class="hljs-keyword">unsafe</span>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:*<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span> = <span class="hljs-number">0x1000000000</span> <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">b</span>:<span class="hljs-type">u8</span> = *a + <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;b&#125;&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在<code>pkg/kernel/src/interrupt/exceptions.rs</code>修改<code>page_fault_handler</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust">debug!(<span class="hljs-string">&quot;at page_fault_handler, stack_frame=&#123;:#?&#125;, err_code=&#123;:#?&#125;&quot;</span>, stack_frame, err_code);<br><span class="hljs-comment">//访问0x2000000000, 再次触发page_fault</span><br><span class="hljs-keyword">unsafe</span>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:*<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span> = <span class="hljs-number">0x2000000000</span>  <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">b</span>:<span class="hljs-type">u8</span> = *a + <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;b&#125;&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>启动操作系统, 可以看到一直在循环打印<code>at page_fault_handler</code>, 没有发生<code>Triple Fault</code></p>
+<p>中断栈的分配情况如下</p>
+<p><img src="./lab3.assets/image-20240406092959887.png" srcset="/img/loading.gif" lazyload alt="image-20240406092959887"></p>
+<p><code>page_fault_handler</code>中打印的日志如下</p>
+<p><img src="./lab3.assets/image-20240406093129673.png" srcset="/img/loading.gif" lazyload alt="image-20240406093129673"></p>
+<p>栈指针一直指向<code>0xffffff00008c1218</code>, 在<code>Page Fault Stack</code>的栈顶附近</p>
+<p>因为<code>page_fault_handler</code>中一直在访问同一个地址<code>0x2000000000</code>, 栈指针没有变化, 所以中断栈没有被填满</p>
+<p>现在修改<code>pkg/kernel/src/memory/gdt.rs</code>, 修改给中断分配的栈大小如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//pub const IST_SIZES: [usize; 3] = [0x1000, 0x1000, 0x1000];</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">const</span> IST_SIZES: [<span class="hljs-type">usize</span>; <span class="hljs-number">3</span>] = [<span class="hljs-number">0x1</span>, <span class="hljs-number">0x1</span>, <span class="hljs-number">0x1</span>];<br></code></pre></td></tr></table></figure>
+<p>重新编译和启动操作系统, 可以看到<code>Triple Fault</code>发生了, 如下图</p>
+<p><img src="./lab3.assets/image-20240406094230105.png" srcset="/img/loading.gif" lazyload alt="image-20240406094230105"></p>
+<p>==方法2==</p>
+<p>该方法可以更加直观地看到中断栈被写满的过程</p>
+<p>在<code>main</code>函数添加如下代码，用以触发<code>page_fault</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//访问0x1000000000触发page_fault</span><br><span class="hljs-keyword">unsafe</span>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">a</span>:*<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span> = <span class="hljs-number">0x1000000000</span> <span class="hljs-keyword">as</span> *<span class="hljs-keyword">mut</span> <span class="hljs-type">u8</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">b</span>:<span class="hljs-type">u8</span> = *a + <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;b&#125;&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在<code>pkg/kernel/src/interrupt/exceptions.rs</code>修改<code>page_fault_handler</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust">debug!(<span class="hljs-string">&quot;at page_fault_handler, stack_frame=&#123;:#?&#125;, err_code=&#123;:#?&#125;&quot;</span>, stack_frame, err_code);<br><span class="hljs-comment">// 用于触发除0错误</span><br><span class="hljs-keyword">unsafe</span>&#123;<br>    asm!(<span class="hljs-string">&quot;mov eax, 1&quot;</span>);<br>    asm!(<span class="hljs-string">&quot;mov ebx, 0&quot;</span>);<br>    asm!(<span class="hljs-string">&quot;div ebx&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>修改<code>divide_error_handler</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust">debug!(<span class="hljs-string">&quot;at divide_error_handler, stack_pointer=&#123;:#?&#125;&quot;</span>, stack_frame.stack_pointer);<br><span class="hljs-comment">//循环触发除0错误</span><br><span class="hljs-keyword">unsafe</span>&#123;<br>    asm!(<span class="hljs-string">&quot;mov eax, 1&quot;</span>);<br>    asm!(<span class="hljs-string">&quot;mov ebx, 0&quot;</span>);<br>    asm!(<span class="hljs-string">&quot;div ebx&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>启动操作系统, 大约几秒后发生了<code>Triple Fault</code></p>
+<p><img src="./lab3.assets/image-20240406100055444.png" srcset="/img/loading.gif" lazyload alt="image-20240406100055444"></p>
+<p>输出的开头:</p>
+<p><img src="./lab3.assets/image-20240406100242340.png" srcset="/img/loading.gif" lazyload alt="image-20240406100242340"></p>
+<p>中间输出的内容很长,这里不展示了</p>
+<p>输出的结尾:</p>
+<p><img src="./lab3.assets/image-20240406100451394.png" srcset="/img/loading.gif" lazyload alt="image-20240406100451394"></p>
+<p>现在修改<code>pkg/kernel/src/memory/gdt.rs</code>, 修改给中断分配的栈大小如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//pub const IST_SIZES: [usize; 3] = [0x1000, 0x1000, 0x1000];</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">const</span> IST_SIZES: [<span class="hljs-type">usize</span>; <span class="hljs-number">3</span>] = [<span class="hljs-number">0x500</span>, <span class="hljs-number">0x500</span>, <span class="hljs-number">0x500</span>];<br></code></pre></td></tr></table></figure>
+<p>重新编译和启动操作系统, 结果如下</p>
+<p><img src="./lab3.assets/image-20240406101135817.png" srcset="/img/loading.gif" lazyload alt="image-20240406101135817"></p>
+<p><code>Triple Fault</code>前的输出明显变短了, 因为给中断分配的栈空间更小了</p>
+<p><img src="./lab3.assets/image-20240406101407566.png" srcset="/img/loading.gif" lazyload alt="image-20240406101407566"></p>
+<p>==结论==</p>
+<p>当处理器因为中断栈空间不足等原因无法调用中断处理程序时, 就会发生<code>Triple Fault</code></p>
+<hr>
+<p><strong>7.在未使用 <code>set_stack_index</code> 函数时, 中断处理程序的栈可能哪里？尝试结合 gdb 调试器, 找到中断处理程序的栈, 并验证你的猜想是否正确。</strong></p>
+<p>在未使用 <code>set_stack_index</code> 函数时, 中断处理程序<strong>使用内核栈</strong></p>
+<p><strong>在上一问方法2的基础上</strong>继续修改</p>
+<p>修改<code>pkg/kernel/src/interrupt/exceptions.rs</code>的<code>register_idt</code>, 注释掉<code>.set_stack_index</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust">idt.double_fault<br>    .<span class="hljs-title function_ invoke__">set_handler_fn</span>(double_fault_handler);<br>    <span class="hljs-comment">//.set_stack_index(gdt::DOUBLE_FAULT_IST_INDEX);</span><br>idt.page_fault<br>    .<span class="hljs-title function_ invoke__">set_handler_fn</span>(page_fault_handler);<br>    <span class="hljs-comment">//.set_stack_index(gdt::PAGE_FAULT_IST_INDEX);</span><br></code></pre></td></tr></table></figure>
+<p>重新编译和启动操作系统</p>
+<p><img src="./lab3.assets/image-20240406103822270.png" srcset="/img/loading.gif" lazyload alt="image-20240406103822270"></p>
+<p>输出很长,这里展示开头和结尾</p>
+<p><img src="./lab3.assets/image-20240406104026220.png" srcset="/img/loading.gif" lazyload alt="image-20240406104026220"></p>
+<p><img src="./lab3.assets/image-20240406104217588.png" srcset="/img/loading.gif" lazyload alt="image-20240406104217588"></p>
+<h3 id="加分项">加分项</h3>
+<p>1.😋 为<strong>全部可能的 CPU 异常</strong>设置对应的处理程序，使用 <code>panic!</code> 输出异常信息。</p>
+<p>见关键代码部分, [点击跳转](# 实现注册中断处理程序)</p>
+<p>2.😋 你如何定义用于计数的 <code>COUNTER</code>，它能够做到线程安全吗？如果不能，如何修改？</p>
+<p>见关键代码部分, [点击跳转](# 实现时钟中断)</p>
+<p>我使用<code>AtomicU64</code>实现计数的<code>COUNTER</code>, 在多线程下是安全的</p>
+<p>3.🤔 操作 APIC 时存在大量比特操作，尝试结合使用 <code>bitflags</code> 和 <code>bit_field</code> 来定义和操作这些寄存器的值，从而获得更好的可读性。</p>
+<p>见关键代码部分, [点击跳转](# 使用bitflags实现初始化APIC)</p>
+<p>4.🤔 你的串口输入驱动是否能正确的处理中文甚至 emoji 输入？如何能够正确处理？</p>
+<p>可以支持中文和emoji的输入,效果如下图</p>
+<p><img src="./lab3.assets/image-20240330093049877.png" srcset="/img/loading.gif" lazyload alt="image-20240330093049877"></p>
+<p>处理方式如下</p>
+<p>中文和emoji是采用UTF-8编码的, 这里需要以Unicode字符为单位保存. 串口输入接收到的单个字符长度在1到4字节不等, 需要在串口接收阶段就完成将字节流转为Unicode字符的操作. 在<code>pkg/kernel/src/interrupt/serial.rs</code>的<code>receive()</code>函数中, 使用一个长度为4的Unicode输入缓冲区, 它会在一个循环中逐字节读取, 直到当前Unicode输入缓冲区的数据刚好能够组成一个Unicode字符, 就清空Unicode输入缓冲区, 将该字符放入全局缓冲区.</p>
+<h2 id="3-关键代码">3. 关键代码</h2>
+<h3 id="实现tss-interrupt-stack-table">实现<code>tss.interrupt_stack_table</code></h3>
+<p><code>pkg/kernel/src/memory/gdt.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> fill tss.interrupt_stack_table with the static stack buffers like above</span><br>        tss.interrupt_stack_table[DOUBLE_FAULT_IST_INDEX <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] = &#123;<br>            <span class="hljs-keyword">const</span> STACK_SIZE: <span class="hljs-type">usize</span> = IST_SIZES[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">static</span> <span class="hljs-keyword">mut</span> STACK: [<span class="hljs-type">u8</span>; STACK_SIZE] = [<span class="hljs-number">0</span>; STACK_SIZE];<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_start</span> = VirtAddr::<span class="hljs-title function_ invoke__">from_ptr</span>(<span class="hljs-keyword">unsafe</span> &#123; STACK.<span class="hljs-title function_ invoke__">as_ptr</span>() &#125;);<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_end</span> = stack_start + STACK_SIZE <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>;<br>            info!(<br>                <span class="hljs-string">&quot;Double Fault Stack: 0x&#123;:016x&#125;-0x&#123;:016x&#125;&quot;</span>,<br>                stack_start.<span class="hljs-title function_ invoke__">as_u64</span>(),<br>                stack_end.<span class="hljs-title function_ invoke__">as_u64</span>()<br>            );<br>            stack_end<br>        &#125;;<br>        tss.interrupt_stack_table[PAGE_FAULT_IST_INDEX <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] = &#123;<br>            <span class="hljs-keyword">const</span> STACK_SIZE: <span class="hljs-type">usize</span> = IST_SIZES[<span class="hljs-number">2</span>];<br>            <span class="hljs-keyword">static</span> <span class="hljs-keyword">mut</span> STACK: [<span class="hljs-type">u8</span>; STACK_SIZE] = [<span class="hljs-number">0</span>; STACK_SIZE];<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_start</span> = VirtAddr::<span class="hljs-title function_ invoke__">from_ptr</span>(<span class="hljs-keyword">unsafe</span> &#123; STACK.<span class="hljs-title function_ invoke__">as_ptr</span>() &#125;);<br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">stack_end</span> = stack_start + STACK_SIZE <span class="hljs-keyword">as</span> <span class="hljs-type">u64</span>;<br>            info!(<br>                <span class="hljs-string">&quot;Page Fault Stack  : 0x&#123;:016x&#125;-0x&#123;:016x&#125;&quot;</span>,<br>                stack_start.<span class="hljs-title function_ invoke__">as_u64</span>(),<br>                stack_end.<span class="hljs-title function_ invoke__">as_u64</span>()<br>            );<br>            stack_end<br>        &#125;;<br>        <span class="hljs-comment">// You can use `tss.interrupt_stack_table[DOUBLE_FAULT_IST_INDEX as usize]`</span><br></code></pre></td></tr></table></figure>
+<h3 id="实现注册中断处理程序">实现注册中断处理程序</h3>
+<p>在<code>pkg/kernel/src/interrupt/mod.rs</code>修改<code>init</code>函数</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/// init interrupts system</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">init</span>() &#123;<br>    IDT.<span class="hljs-title function_ invoke__">load</span>();<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> check and init APIC</span><br>    <span class="hljs-keyword">match</span> apic::XApic::<span class="hljs-title function_ invoke__">support</span>() &#123;<br>        <span class="hljs-literal">true</span> =&gt; info!(<span class="hljs-string">&quot;XAPIC supported&quot;</span>),<br>        <span class="hljs-literal">false</span> =&gt; error!(<span class="hljs-string">&quot;XAPIC not supported&quot;</span>),<br>    &#125;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">xapic</span> = <span class="hljs-keyword">unsafe</span> &#123; XApic::<span class="hljs-title function_ invoke__">new</span>(<span class="hljs-title function_ invoke__">physical_to_virtual</span>(LAPIC_ADDR)) &#125;;<br>    xapic.<span class="hljs-title function_ invoke__">cpu_init</span>();<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> enable serial irq with IO APIC (use enable_irq)</span><br>    <span class="hljs-title function_ invoke__">enable_irq</span>(consts::Irq::Serial0 <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span> , <span class="hljs-number">0</span>);<br>    info!(<span class="hljs-string">&quot;Interrupts Initialized.&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在<code>pkg/kernel/src/interrupt/exceptions.rs</code>的<code>register_idt</code>函数添加以下内容</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> you should handle more exceptions here</span><br>    <span class="hljs-comment">// especially gerneral protection fault (GPF)</span><br>    <span class="hljs-comment">// see: https://wiki.osdev.org/Exceptions</span><br>    idt.debug.<span class="hljs-title function_ invoke__">set_handler_fn</span>(debug_handler);<br>    idt.non_maskable_interrupt.<span class="hljs-title function_ invoke__">set_handler_fn</span>(nmi_handler);<br>    idt.breakpoint.<span class="hljs-title function_ invoke__">set_handler_fn</span>(breakpoint_handler);<br>    idt.overflow.<span class="hljs-title function_ invoke__">set_handler_fn</span>(overflow_handler);<br>    idt.bound_range_exceeded<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(bound_range_exceeded_handler);<br>    idt.invalid_opcode.<span class="hljs-title function_ invoke__">set_handler_fn</span>(invalid_opcode_handler);<br>    idt.device_not_available<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(device_not_available_handler);<br>    idt.invalid_tss.<span class="hljs-title function_ invoke__">set_handler_fn</span>(invalid_tss_handler);<br>    idt.segment_not_present<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(segment_not_present_handler);<br>    idt.stack_segment_fault<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(stack_segment_fault_handler);<br>    idt.general_protection_fault<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(general_protection_fault_handler);<br>    idt.x87_floating_point.<span class="hljs-title function_ invoke__">set_handler_fn</span>(x87_floating_point_handler);<br>    idt.alignment_check.<span class="hljs-title function_ invoke__">set_handler_fn</span>(alignment_check_handler);<br>    idt.machine_check.<span class="hljs-title function_ invoke__">set_handler_fn</span>(machine_check_handler);<br>    idt.simd_floating_point.<span class="hljs-title function_ invoke__">set_handler_fn</span>(simd_floating_point_handler);<br>    idt.virtualization.<span class="hljs-title function_ invoke__">set_handler_fn</span>(virtualization_handler);<br>    <span class="hljs-comment">//idt.control_protection.set_handler_fn(control_protection_handler);</span><br>    idt.hv_injection_exception.<span class="hljs-title function_ invoke__">set_handler_fn</span>(hv_injection_handler);<br>    idt.vmm_communication_exception.<span class="hljs-title function_ invoke__">set_handler_fn</span>(vmm_communication_handler);<br>    idt.security_exception.<span class="hljs-title function_ invoke__">set_handler_fn</span>(security_exception_handler);<br></code></pre></td></tr></table></figure>
+<p>在<code>page_fault_handler</code>中, 将<code>Cr2::read().unwrap_or(0xdeadbeef),</code>改为<code>Cr2::read().unwrap_or(VirtAddr::new(0xdeadbeef)),</code></p>
+<p>然后添加中断处理函数</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">debug_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: DEBUG\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">nmi_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: NMI\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">breakpoint_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: BREAKPOINT\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">overflow_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: OVERFLOW\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">bound_range_exceeded_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: BOUND RANGE EXCEEDED\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">invalid_opcode_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: INVALID OPCODE\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">device_not_available_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: DEVICE NOT AVAILABLE\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">invalid_tss_handler</span>(stack_frame: InterruptStackFrame, err_code: <span class="hljs-type">u64</span>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<br>        <span class="hljs-string">&quot;EXCEPTION: INVALID TSS, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>,<br>        err_code, stack_frame<br>    );<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">segment_not_present_handler</span>(<br>    stack_frame: InterruptStackFrame, <br>    err_code: <span class="hljs-type">u64</span><br>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: SEGMENT NOT PRESENT, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>, err_code, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">stack_segment_fault_handler</span>(<br>    stack_frame: InterruptStackFrame,<br>     err_code: <span class="hljs-type">u64</span><br>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: STACK SEGMENT FAULT, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>, err_code, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">general_protection_fault_handler</span>(<br>    stack_frame: InterruptStackFrame,<br>    err_code: <span class="hljs-type">u64</span>,<br>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<br>        <span class="hljs-string">&quot;EXCEPTION: GENERAL PROTECTION FAULT, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>,<br>        err_code, stack_frame<br>    );<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">x87_floating_point_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: X87 FLOATING POINT\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">alignment_check_handler</span>(stack_frame: InterruptStackFrame, err_code: <span class="hljs-type">u64</span>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: ALIGNMENT CHECK, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>, <br>    err_code, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">machine_check_handler</span>(stack_frame: InterruptStackFrame) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: MACHINE CHECK\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">simd_floating_point_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: SIMD FLOATING POINT\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">virtualization_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: VIRTUALIZATION\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">hv_injection_handler</span>(stack_frame: InterruptStackFrame) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: HV INJECTION\n\n&#123;:#?&#125;&quot;</span>, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">vmm_communication_handler</span>(stack_frame: InterruptStackFrame, err_code: <span class="hljs-type">u64</span>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: VMM COMMUNICATION, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>, <br>    err_code, stack_frame);<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">security_exception_handler</span>(stack_frame: InterruptStackFrame, err_code: <span class="hljs-type">u64</span>) &#123;<br>    <span class="hljs-built_in">panic!</span>(<span class="hljs-string">&quot;EXCEPTION: SECURITY EXCEPTION, ERROR_CODE: 0x&#123;:016x&#125;\n\n&#123;:#?&#125;&quot;</span>, <br>    err_code, stack_frame);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现初始化APIC">实现初始化APIC</h3>
+<p><code>pkg/kernel/src/interrupt/apic/xapic.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/// If this type APIC is supported</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">support</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Check CPUID to see if xAPIC is supported.</span><br>    CpuId::<span class="hljs-title function_ invoke__">new</span>()<br>        .<span class="hljs-title function_ invoke__">get_feature_info</span>()<br>        .<span class="hljs-title function_ invoke__">map</span>(|f| f.<span class="hljs-title function_ invoke__">has_apic</span>())<br>        .<span class="hljs-title function_ invoke__">unwrap_or</span>(<span class="hljs-literal">false</span>)<br>&#125;<br><br><span class="hljs-comment">// Initialize the xAPIC for the current CPU.</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">cpu_init</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) &#123;<br>    <span class="hljs-keyword">unsafe</span> &#123;<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Enable local APIC; set spurious interrupt vector.</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">spiv</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(<span class="hljs-number">0xF0</span>);<br>        spiv |= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">8</span>; <span class="hljs-comment">// set EN bit</span><br>        <span class="hljs-comment">// clear and set Vector</span><br>        spiv &amp;= !(<span class="hljs-number">0xFF</span>);<br>        spiv |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Spurious <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0xF0</span>, spiv);<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> The timer repeatedly counts down at bus frequency</span><br>        <span class="hljs-comment">// 设置计时器相关寄存器</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x3E0</span>, <span class="hljs-number">0b1011</span>); <span class="hljs-comment">// set Timer Divide to 1</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x380</span>, <span class="hljs-number">0x20000</span>); <span class="hljs-comment">// set initial count to 0x20000</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">lvt_timer</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(<span class="hljs-number">0x320</span>); <span class="hljs-comment">// LVT Timer Register</span><br>        <span class="hljs-comment">// clear and set Vector</span><br>        lvt_timer &amp;= !(<span class="hljs-number">0xFF</span>);<br>        lvt_timer |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Timer <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>        lvt_timer &amp;= !(<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// clear Mask</span><br>        lvt_timer |= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">17</span>; <span class="hljs-comment">// set Timer Periodic Mode</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x320</span>, lvt_timer);<br><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Disable logical interrupt lines (LINT0, LINT1)</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x350</span>, <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// set Mask,  disable LINT0</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x360</span>, <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// set Mask,  disable LINT1</span><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Disable performance counter overflow interrupts (PCINT)</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x340</span>, <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>);<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Map error interrupt to IRQ_ERROR.</span><br>        <span class="hljs-comment">// 设置错误中断 LVT Error 到对应的中断向量号</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">lvt_error</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(<span class="hljs-number">0x370</span>);<br>        lvt_error &amp;= !(<span class="hljs-number">0xFF</span>);<br>        lvt_error |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Error <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x370</span>, lvt_error);<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Clear error status register (requires back-to-back writes).</span><br>        <span class="hljs-comment">// 连续写入两次 0 以清除错误状态寄存器</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x280</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x280</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Ack any outstanding interrupts.</span><br>        <span class="hljs-comment">// 向 EOI 寄存器写入 0 以确认任何挂起的中断。</span><br>        <span class="hljs-comment">//self.write(0x0B0, 0);</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">eoi</span>();<br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Send an Init Level De-Assert to synchronise arbitration ID&#x27;s.</span><br>        <span class="hljs-comment">// let mut icr = self.icr();</span><br>        <span class="hljs-comment">// icr |= 2 &lt;&lt; 18;</span><br>        <span class="hljs-comment">// icr |= 5 &lt;&lt; 8;</span><br>        <span class="hljs-comment">// icr &amp;= !(1 &lt;&lt; 14);</span><br>        <span class="hljs-comment">// icr |= 1 &lt;&lt; 15;</span><br>        <span class="hljs-comment">// self.set_icr(icr);</span><br>        <span class="hljs-comment">// #</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x310</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// set ICR 0x310</span><br>        <span class="hljs-keyword">const</span> BCAST: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">19</span>;<br>        <span class="hljs-keyword">const</span> INIT: <span class="hljs-type">u32</span> = <span class="hljs-number">5</span> &lt;&lt; <span class="hljs-number">8</span>;<br>        <span class="hljs-keyword">const</span> TMLV: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">15</span>; <span class="hljs-comment">// TM = 1, LV = 0</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x300</span>, BCAST | INIT | TMLV); <span class="hljs-comment">// set ICR 0x300</span><br>        <span class="hljs-keyword">const</span> DS: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">12</span>;<br>        <span class="hljs-keyword">while</span> <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(<span class="hljs-number">0x300</span>) &amp; DS != <span class="hljs-number">0</span> &#123;&#125; <span class="hljs-comment">// wait for delivery status</span><br>        <span class="hljs-comment">// #</span><br>        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Enable interrupts on the APIC (but not on the processor).</span><br>        <span class="hljs-comment">//设置 TPR 寄存器为 0, 允许接收中断。</span><br>        <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x080</span>, <span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Try to use bitflags! macro to set the flags.</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现时钟中断">实现时钟中断</h3>
+<p>修改<code>pkg/kernel/src/interrupt/clock.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> use a counter to count ticks</span><br><span class="hljs-keyword">static</span> COUNTER: AtomicU64 = AtomicU64::<span class="hljs-title function_ invoke__">new</span>(<span class="hljs-number">0</span>);<br><br><span class="hljs-meta">#[inline]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">read_counter</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u64</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> load counter value</span><br>    COUNTER.<span class="hljs-title function_ invoke__">load</span>(core::sync::atomic::Ordering::SeqCst)<br>&#125;<br><br><span class="hljs-meta">#[inline]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">inc_counter</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">u64</span> &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> read counter value and increase it</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">id</span> = COUNTER.<span class="hljs-title function_ invoke__">fetch_add</span>(<span class="hljs-number">1</span>, core::sync::atomic::Ordering::SeqCst);<br>    id<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现串口输入中断">实现串口输入中断</h3>
+<p>在<code>pkg/kernel/src/drivers/uart16550.rs</code>的<code>init</code>函数结尾加入以下内容</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Enable interrupts</span><br><span class="hljs-keyword">self</span>.interrupt_enable.<span class="hljs-title function_ invoke__">write</span>(<span class="hljs-number">0x01</span>);<br></code></pre></td></tr></table></figure>
+<p>实现<code>pkg/kernel/src/drivers/input.rs</code>, 代码如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> alloc::string::<span class="hljs-type">String</span>;<br><span class="hljs-comment">/* your input type */</span><br><span class="hljs-keyword">use</span> crossbeam_queue::ArrayQueue;<br><span class="hljs-keyword">use</span> pc_keyboard::DecodedKey;<br><span class="hljs-keyword">type</span> <span class="hljs-title class_">Key</span> = DecodedKey;<br><br><span class="hljs-keyword">const</span> BUFFER_SIZE: <span class="hljs-type">usize</span> = <span class="hljs-number">128</span>;<br>lazy_static! &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">ref</span> INPUT_BUF: ArrayQueue&lt;Key&gt; = ArrayQueue::<span class="hljs-title function_ invoke__">new</span>(BUFFER_SIZE);<br>&#125;<br><br><span class="hljs-meta">#[inline]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">push_key</span>(key: Key) &#123;<br>    <span class="hljs-keyword">if</span> INPUT_BUF.<span class="hljs-title function_ invoke__">push</span>(key).<span class="hljs-title function_ invoke__">is_err</span>() &#123;<br>        warn!(<span class="hljs-string">&quot;Input buffer is full. Dropping key &#x27;&#123;:?&#125;&#x27;&quot;</span>, key);<br>    &#125;<br>&#125;<br><br><span class="hljs-meta">#[inline]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">try_pop_key</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">Option</span>&lt;Key&gt; &#123;<br>    INPUT_BUF.<span class="hljs-title function_ invoke__">pop</span>()<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">pop_key</span>() <span class="hljs-punctuation">-&gt;</span> Key &#123;<br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(key) = <span class="hljs-title function_ invoke__">try_pop_key</span>() &#123;<br>            <span class="hljs-keyword">return</span> key;<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">get_line</span>() <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">String</span> &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">line</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">with_capacity</span>(BUFFER_SIZE);<br>    <span class="hljs-keyword">loop</span>&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">cur_key</span> = <span class="hljs-title function_ invoke__">pop_key</span>();<br>        <span class="hljs-keyword">match</span> cur_key &#123;<br>            Key::<span class="hljs-title function_ invoke__">Unicode</span>(c) =&gt; &#123;<br>                <span class="hljs-keyword">match</span> c &#123;<br>                    <span class="hljs-string">&#x27;\n&#x27;</span>|<span class="hljs-string">&#x27;\r&#x27;</span> =&gt; &#123;<br>                        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>                        <span class="hljs-keyword">break</span>;<br>                    &#125;,<br>                    <span class="hljs-string">&#x27;\x08&#x27;</span> | <span class="hljs-string">&#x27;\x7f&#x27;</span> =&gt; &#123;<br>                        <span class="hljs-keyword">if</span> !line.<span class="hljs-title function_ invoke__">is_empty</span>() &#123;<br>                            <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;\x08\x20\x08&quot;</span>);<br>                            line.<span class="hljs-title function_ invoke__">pop</span>();<br>                        &#125;<br>                    &#125;<br>                    c =&gt; &#123;<br>                        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, c);<br>                        line.<span class="hljs-title function_ invoke__">push</span>(c);<br>                    &#125;<br>                &#125;<br>            &#125;<br>            _ =&gt; &#123;&#125;<br>        &#125;<br>    &#125;<br>    line<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>实现<code>pkg/kernel/src/interrupt/serial.rs</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> core::<span class="hljs-type">str</span>::from_utf8;<br><span class="hljs-keyword">use</span> alloc::vec::<span class="hljs-type">Vec</span>;<br><span class="hljs-keyword">use</span> pc_keyboard::DecodedKey;<br><span class="hljs-keyword">use</span> x86_64::structures::idt::&#123;InterruptDescriptorTable, InterruptStackFrame&#125;;<br><br><span class="hljs-keyword">use</span> crate::&#123;drivers::input::push_key, serial::get_serial_for_sure&#125;;<br><br><span class="hljs-keyword">use</span> super::consts::*;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">register_idt</span>(idt: &amp;<span class="hljs-keyword">mut</span> InterruptDescriptorTable) &#123;<br>    idt[Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span> + Irq::Serial0 <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>]<br>        .<span class="hljs-title function_ invoke__">set_handler_fn</span>(serial_handler);<br>&#125;<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;x86-interrupt&quot;</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">serial_handler</span>(_st: InterruptStackFrame) &#123;<br>    <span class="hljs-comment">//info!(&quot;at serial handler&quot;);</span><br>    <span class="hljs-title function_ invoke__">receive</span>();<br>    super::<span class="hljs-title function_ invoke__">ack</span>();<br>&#125;<br><span class="hljs-keyword">const</span> INPUT_BUFFER_SIZE: <span class="hljs-type">usize</span> = <span class="hljs-number">4</span>;<br><span class="hljs-comment">/// Receive character from uart 16550</span><br><span class="hljs-comment">/// Should be called on every interrupt</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">receive</span>() &#123;<br>    <span class="hljs-comment">//info!(&quot;at receive&quot;);</span><br>    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> receive character from uart 16550, put it into INPUT_BUFFER</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">input_buffer</span>:<span class="hljs-type">Vec</span>&lt;<span class="hljs-type">u8</span>&gt; = <span class="hljs-type">Vec</span>::<span class="hljs-title function_ invoke__">with_capacity</span>(INPUT_BUFFER_SIZE);<br>    <span class="hljs-keyword">loop</span>&#123;<br>        <span class="hljs-comment">//info!(&quot;at receive&quot;);</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">serial</span> = <span class="hljs-title function_ invoke__">get_serial_for_sure</span>();<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">rec</span> = serial.<span class="hljs-title function_ invoke__">receive</span>();<br>        <span class="hljs-title function_ invoke__">drop</span>(serial);<br>        <span class="hljs-comment">// println!(&quot;&#123;:?&#125;&quot;, rec);</span><br>        <span class="hljs-comment">// break;</span><br><br>        <span class="hljs-keyword">match</span> rec&#123;<br>            <span class="hljs-title function_ invoke__">Some</span>(c) =&gt; &#123;<br>                <span class="hljs-comment">// info!(&quot;at some&quot;);</span><br>                <span class="hljs-comment">// info!(&quot;&#123;&#125;&quot;, c as char);</span><br>                input_buffer.<span class="hljs-title function_ invoke__">push</span>(c);<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-variable">Ok</span>(s) = <span class="hljs-title function_ invoke__">from_utf8</span>(&amp;input_buffer)&#123;<br>                    <span class="hljs-keyword">let</span> <span class="hljs-variable">ch</span> = s.<span class="hljs-title function_ invoke__">chars</span>().<span class="hljs-title function_ invoke__">next</span>().<span class="hljs-title function_ invoke__">unwrap</span>();<br>                    <span class="hljs-title function_ invoke__">push_key</span>(DecodedKey::<span class="hljs-title function_ invoke__">Unicode</span>(ch));<br>                    input_buffer.<span class="hljs-title function_ invoke__">clear</span>();<br>                &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> input_buffer.<span class="hljs-title function_ invoke__">len</span>() &gt;= INPUT_BUFFER_SIZE&#123;<br>                    input_buffer.<span class="hljs-title function_ invoke__">clear</span>();<br>                &#125;<br>            &#125;,<br>            _ =&gt; &#123;<br>                <span class="hljs-comment">// info!(&quot;failed to receive&quot;);</span><br>                <span class="hljs-comment">//println!(&quot;failed to receive&quot;);</span><br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实现用户交互">实现用户交互</h3>
+<p>修改<code>pkg/kernel/src/main.rs</code>如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![no_std]</span><br><span class="hljs-meta">#![no_main]</span><br><br><span class="hljs-keyword">use</span> ysos::*;<br><span class="hljs-keyword">use</span> ysos_kernel <span class="hljs-keyword">as</span> ysos;<br><span class="hljs-keyword">use</span> crate::drivers::input;<br><span class="hljs-keyword">use</span> crate::interrupt::clock::read_counter;<br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">crate</span> alloc;<br><br>boot::entry_point!(kernel_main);<br><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">kernel_main</span>(boot_info: &amp;<span class="hljs-symbol">&#x27;static</span> boot::BootInfo) <span class="hljs-punctuation">-&gt;</span> ! &#123;<br>    ysos::<span class="hljs-title function_ invoke__">init</span>(boot_info);<br><br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;&gt; &quot;</span>);<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">input</span> = input::<span class="hljs-title function_ invoke__">get_line</span>();<br><br>        <span class="hljs-keyword">match</span> input.<span class="hljs-title function_ invoke__">trim</span>() &#123;<br>            <span class="hljs-string">&quot;exit&quot;</span> =&gt; <span class="hljs-keyword">break</span>,<br>            _ =&gt; &#123;<br>                <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;You said: &#123;&#125;&quot;</span>, input);<br>                <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;The counter value is &#123;&#125;&quot;</span>, <span class="hljs-title function_ invoke__">read_counter</span>());<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    ysos::<span class="hljs-title function_ invoke__">shutdown</span>(boot_info);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="使用bitflags实现初始化APIC">使用bitflags实现初始化APIC</h3>
+<p>参照 <a target="_blank" rel="noopener" href="https://ysos.gzti.me/wiki/apic/#local-apic-%E5%AF%84%E5%AD%98%E5%99%A8">https://ysos.gzti.me/wiki/apic/#local-apic-寄存器</a> 中的表格</p>
+<p>修改<code>pkg/kernel/src/interrupt/apic/xapic.rs</code></p>
+<p>添加<code>bitflags</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-built_in">bitflags!</span> &#123;<br>    <span class="hljs-keyword">pub</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">APIC</span>: <span class="hljs-type">u32</span> &#123;<br>        <span class="hljs-keyword">const</span> TPR = <span class="hljs-number">0x80</span>;<br>        <span class="hljs-keyword">const</span> spiv = <span class="hljs-number">0xf0</span>;<br>        <span class="hljs-keyword">const</span> ErrorStatusRegister = <span class="hljs-number">0x280</span>;<br>        <span class="hljs-keyword">const</span> ICR0 = <span class="hljs-number">0x300</span>;<br>        <span class="hljs-keyword">const</span> ICR1 = <span class="hljs-number">0x310</span>;<br>        <span class="hljs-keyword">const</span> LVTTimerRegister = <span class="hljs-number">0x320</span>;<br>        <span class="hljs-keyword">const</span> LVTPerformance = <span class="hljs-number">0x340</span>;<br>        <span class="hljs-keyword">const</span> LVTLINT0Register = <span class="hljs-number">0x350</span>;<br>        <span class="hljs-keyword">const</span> LVTLINT1Register = <span class="hljs-number">0x360</span>;<br>        <span class="hljs-keyword">const</span> LVTErrorRegister = <span class="hljs-number">0x370</span>;<br>        <span class="hljs-keyword">const</span> InitialCountRegister = <span class="hljs-number">0x380</span>;<br>        <span class="hljs-keyword">const</span> DivideConfigurationRegister = <span class="hljs-number">0x3e0</span>;<br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>cpu_init</code>函数修改如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">cpu_init</span>(&amp;<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>) &#123;<br>        <span class="hljs-keyword">unsafe</span> &#123;<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Enable local APIC; set spurious interrupt vector.</span><br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">spiv</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(APIC::spiv.<span class="hljs-title function_ invoke__">bits</span>());<br>            spiv |= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">8</span>; <span class="hljs-comment">// set EN bit</span><br>            <span class="hljs-comment">// clear and set Vector</span><br>            spiv &amp;= !(<span class="hljs-number">0xFF</span>);<br>            spiv |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Spurious <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::spiv.<span class="hljs-title function_ invoke__">bits</span>(), spiv);<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> The timer repeatedly counts down at bus frequency</span><br>            <span class="hljs-comment">// 设置计时器相关寄存器</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::DivideConfigurationRegister.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0b1011</span>); <span class="hljs-comment">// set Timer Divide to 1</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::InitialCountRegister.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0x20000</span>); <span class="hljs-comment">// set initial count to 0x20000</span><br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">lvt_timer</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(APIC::LVTTimerRegister.<span class="hljs-title function_ invoke__">bits</span>()); <span class="hljs-comment">// LVT Timer Register</span><br>            <span class="hljs-comment">// clear and set Vector</span><br>            lvt_timer &amp;= !(<span class="hljs-number">0xFF</span>);<br>            lvt_timer |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Timer <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>            lvt_timer &amp;= !(<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// clear Mask</span><br>            lvt_timer |= <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">17</span>; <span class="hljs-comment">// set Timer Periodic Mode</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTTimerRegister.<span class="hljs-title function_ invoke__">bits</span>(), lvt_timer);<br><br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Disable logical interrupt lines (LINT0, LINT1)</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTLINT0Register.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// set Mask， disable LINT0</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTLINT1Register.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>); <span class="hljs-comment">// set Mask， disable LINT1</span><br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Disable performance counter overflow interrupts (PCINT)</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTPerformance.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">16</span>);<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Map error interrupt to IRQ_ERROR.</span><br>            <span class="hljs-comment">// 设置错误中断 LVT Error 到对应的中断向量号</span><br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">lvt_error</span> = <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(APIC::LVTErrorRegister.<span class="hljs-title function_ invoke__">bits</span>());<br>            lvt_error &amp;= !(<span class="hljs-number">0xFF</span>);<br>            lvt_error |= Interrupts::IrqBase <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span> + Irq::Error <span class="hljs-keyword">as</span> <span class="hljs-type">u32</span>;<br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTErrorRegister.<span class="hljs-title function_ invoke__">bits</span>(), lvt_error);<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Clear error status register (requires back-to-back writes).</span><br>            <span class="hljs-comment">// 连续写入两次 0 以清除错误状态寄存器</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTErrorRegister.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0</span>);<br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::LVTErrorRegister.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0</span>);<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Ack any outstanding interrupts.</span><br>            <span class="hljs-comment">// 向 EOI 寄存器写入 0 以确认任何挂起的中断。</span><br>            <span class="hljs-comment">//self.write(0x0B0, 0);</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">eoi</span>();<br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Send an Init Level De-Assert to synchronise arbitration ID&#x27;s.</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::ICR1.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0</span>); <span class="hljs-comment">// set ICR 0x310</span><br>            <span class="hljs-keyword">const</span> BCAST: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">19</span>;<br>            <span class="hljs-keyword">const</span> INIT: <span class="hljs-type">u32</span> = <span class="hljs-number">5</span> &lt;&lt; <span class="hljs-number">8</span>;<br>            <span class="hljs-keyword">const</span> TMLV: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">15</span>; <span class="hljs-comment">// TM = 1, LV = 0</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::ICR0.<span class="hljs-title function_ invoke__">bits</span>(), BCAST | INIT | TMLV); <span class="hljs-comment">// set ICR 0x300</span><br>            <span class="hljs-keyword">const</span> DS: <span class="hljs-type">u32</span> = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">12</span>;<br>            <span class="hljs-keyword">while</span> <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">read</span>(APIC::ICR0.<span class="hljs-title function_ invoke__">bits</span>()) &amp; DS != <span class="hljs-number">0</span> &#123;&#125; <span class="hljs-comment">// wait for delivery status</span><br>            <span class="hljs-comment">// #</span><br>            <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> Enable interrupts on the APIC (but not on the processor).</span><br>            <span class="hljs-comment">//设置 TPR 寄存器为 0，允许接收中断。</span><br>            <span class="hljs-keyword">self</span>.<span class="hljs-title function_ invoke__">write</span>(APIC::TPR.<span class="hljs-title function_ invoke__">bits</span>(), <span class="hljs-number">0</span>);<br>        &#125;<br><br>        <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Try to use bitflags! macro to set the flags.</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="4-实验结果">4. 实验结果</h2>
+<p><img src="./lab3.assets/image-20240330092703692.png" srcset="/img/loading.gif" lazyload alt="image-20240330092703692"></p>
+<p>如上图, 可以正常实现用户交互的功能, 支持中文输入和emoji, 并且打印出当前的时钟counter值, 输入<code>exit</code>能够正常关机</p>
+<h2 id="5-总结">5. 总结</h2>
+<p>熟悉了中断处理的操作, 并且了解了计算机如何实现时钟中断和输入中断, 如何与用户通过命令行交互</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/courses/" class="category-chain-item">courses</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/courses/YSOS/" class="category-chain-item">YSOS</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>YSOS-rust lab2</div>
+      <div>https://blog.algorithmpark.xyz/2024/04/06/YSOS/lab2/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年5月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/04/15/signal-and-system/index/" title="信号与系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">信号与系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/01/video/April-Fool/index/" title="2024愚人节防诈骗指南">
+                        <span class="hidden-mobile">2024愚人节防诈骗指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
