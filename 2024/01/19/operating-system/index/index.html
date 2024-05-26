@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
 <meta property="article:published_time" content="2024-01-19T09:17:40.000Z">
-<meta property="article:modified_time" content="2024-05-06T01:36:29.183Z">
+<meta property="article:modified_time" content="2024-05-22T03:40:32.262Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
@@ -287,7 +287,7 @@
         
         
         
-          172 分钟
+          176 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-05-06T01:36:29+00:00
+                    本文最后更新于 2024-05-22T03:40:32+00:00
                   
                   
 
@@ -1385,6 +1385,69 @@ id3(B类进程) ---&gt; id4[资源2]
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129075910196.png" srcset="/img/loading.gif" lazyload alt="两级页表"></p>
 <h3 id="基本分段存储管理方式">基本分段存储管理方式</h3>
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240209141643303.png" srcset="/img/loading.gif" lazyload alt="基本分段存储管理"></p>
+<h3 id="虚拟内存管理">虚拟内存管理</h3>
+<ul>
+<li>先进先出FIFO算法
+<ul>
+<li>可能出现Belady异常，page fault数量并非单调降低</li>
+</ul>
+</li>
+<li>OPT最优页面置换算法
+<ul>
+<li>替换在将来最长时间内不使用的页面</li>
+<li>不可实现，因为不可能预测未来。仅用于理论推导，作为算法可能实现的性能上限</li>
+</ul>
+</li>
+<li>LRU最小最近使用算法
+<ul>
+<li>替换在过去最长时间内不使用的页面</li>
+<li>实现方式：
+<ul>
+<li>计数器，每次页面被引用了，都将当前时间写到页面的计数器中，替换时选择计数器值最小的页面</li>
+<li>堆栈，将被访问的页面移动到栈顶，但是调整页面到栈顶的过程开销大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>近似LRU算法
+<ul>
+<li>用一个8位的字节，记录最近8次访问每个页是否被访问</li>
+<li>每次访问页面都将这个字节右移一位，如果页面被访问就在高位填1，否则填0</li>
+</ul>
+</li>
+<li>第二次机会算法
+<ul>
+<li>每个页有一个标志位
+<ul>
+<li>0代表最近未使用，可用于替换</li>
+<li>1代表最近使用，扫描到时修改为0</li>
+</ul>
+</li>
+<li>想要替换页面时循环扫描所有页，扫描到0就替换</li>
+</ul>
+</li>
+<li>增强型第二次机会算法
+<ul>
+<li>通过使用引用位和一致修改位（如果可用）来改进算法</li>
+<li>采取有序配对（引用、修改）：
+<ul>
+<li>(0, 0)最近未使用未修改-要替换的最佳页面</li>
+<li>(0, 1)最近未使用但已修改-不太好,必须在置换之前将页面写出；</li>
+<li>(1, 0)最近使用但没有修改-可能很快会再次使用</li>
+<li>(1, 1)最近使用和修改的-可能很快会再次使用，需要在更换前将页面写出；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>优化：页面缓冲</strong></p>
+<p>始终保持一个空闲帧池</p>
+<ul>
+<li>当出现缺页错误时,会像以前一样选择一个牺牲帧</li>
+<li>将页面读入空闲帧,选择要退出的牺牲帧并添加到空闲池</li>
+<li>方便时,驱逐牺牲帧,无需等待写出牺牲帧</li>
+<li>把必须串行的磁盘读和写操作变成可并行的（或对先后顺序不敏感的）</li>
+</ul>
 <h2 id="4-1-文件">4.1 文件</h2>
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129083459473.png" srcset="/img/loading.gif" lazyload alt="初识文件管理"></p>
 <h3 id="文件的逻辑结构">文件的逻辑结构</h3>
@@ -1924,7 +1987,7 @@ id3(B类进程) ---&gt; id4[资源2]
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月6日</div>
+          <div>2024年5月22日</div>
         </div>
       
       
