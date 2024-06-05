@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
 <meta property="article:published_time" content="2024-01-19T09:17:40.000Z">
-<meta property="article:modified_time" content="2024-05-22T03:40:32.262Z">
+<meta property="article:modified_time" content="2024-06-05T02:41:54.281Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/operating-system.png">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          21k 字
+          23k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          176 分钟
+          191 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-05-22T03:40:32+00:00
+                    本文最后更新于 2024-06-05T02:41:54+00:00
                   
                   
 
@@ -1182,6 +1182,66 @@ id3[缓冲区没满,V]--empty--&gt;id4[P,生产者生产]
 <li>各进程必须互斥访问管程的特性是由编译器实现的</li>
 <li>可在管程中设置条件变量及等待/唤醒操作以解决同步问题</li>
 </ul>
+<h3 id="面包师算法">面包师算法</h3>
+<p>伪代码：</p>
+<p>可能会用<code>(Number[j], j) &lt; (Number[i], i)</code>代替<code>number[j] &lt; number[i] || (number[j] == number[i] &amp;&amp; j &lt; i)</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c">Entering: <span class="hljs-built_in">array</span> [<span class="hljs-number">1.</span>.NUM_THREADS] of <span class="hljs-type">bool</span> = &#123;<span class="hljs-literal">false</span>&#125;;  <br>Number: <span class="hljs-built_in">array</span> [<span class="hljs-number">1.</span>.NUM_THREADS] of integer = &#123;<span class="hljs-number">0</span>&#125;;  <br><span class="hljs-type">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">(integer i)</span> &#123;      <br>  Entering[i] = <span class="hljs-literal">true</span>;<br>  Number[i] = <span class="hljs-number">1</span> + max(Number[<span class="hljs-number">1</span>], ..., Number[NUM_THREADS]);<br>  Entering[i] = <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">for</span> (integer j = <span class="hljs-number">1</span>; j &lt;= NUM_THREADS; j++) &#123; <br>    <span class="hljs-comment">// Wait until thread j receives its number:</span><br>    <span class="hljs-keyword">while</span> (Entering[j]) &#123;&#125; <br>    <span class="hljs-comment">// Wait until all threads with smaller numbers or with the same          </span><br>    <span class="hljs-comment">// number, but with higher priority, finish their work:</span><br>    <span class="hljs-keyword">while</span> ((Number[j] != <span class="hljs-number">0</span>) &amp;&amp; (number[j] &lt; number[i] || (number[j] == number[i] &amp;&amp; j &lt; i))) &#123;&#125;      <br>  &#125;  <br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">unlock</span><span class="hljs-params">(integer i)</span> &#123;  <br>  Number[i] = <span class="hljs-number">0</span>;  <br>&#125;  <br><span class="hljs-type">void</span> <span class="hljs-title function_">Thread</span><span class="hljs-params">(integer i)</span> &#123;<br>  <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>    lock(i);<br>    <span class="hljs-comment">// The critical section goes here...          </span><br>    unlock(i);<br>    <span class="hljs-comment">// non-critical section...      </span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当一个线程想要进入临界区时，它必须检查轮到它了。它应该检查每个其他线程的Number值，以确保它是最大的。如果另一个线程具有相同的Number值，则具有最小编号的线程将首先进入临界区。</p>
+<p>每个线程只写自己的存储，只读共享。值得注意的是，该算法不是建立在一些较低级别的“原子”操作之上。因此，该算法可用于在缺少同步原语的存储器上实现互斥</p>
+<p>数组Entering是必要的，假设变量被删除，两个进程计算相同的Number [i]。如果在设置Number [i]之前优先级较高的进程被抢占，则低优先级进程将看到另一个进程的数量为零，并进入临界区;之后，高优先级进程将忽略较低优先级进程的相等Number [i]，并进入临界区。结果，两个进程可以同时进入临界区。</p>
+<p>如果不使用Entering数组，假设最开始总共2个进程，它们的Number值都是0</p>
+<table>
+<thead>
+<tr>
+<th>进程号</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number值</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>进程0首先开始执行lock，当执行完第5行，它计算出<code> 1 + max(Number[1], ..., Number[NUM_THREADS])</code>的值为1，但是没有写回<code>Number[0]</code>时，它被进程1抢占了。</p>
+<p>进程1执行完lock没有被打断，进入临界区继续执行，此时的Number表如下</p>
+<table>
+<thead>
+<tr>
+<th>进程号</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number值</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>现在进程0被唤醒，它继续lock操作，把1写回<code>Number[0]</code>，此时的Number表如下</p>
+<table>
+<thead>
+<tr>
+<th>进程号</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number值</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>进程0现在执行第12行代码，它没有被阻塞，也进入了临界区，互斥性被违背了。</p>
 <h2 id="2-4-死锁">2.4 死锁</h2>
 <p>当一组进程中的每个进程都在等待某个事件（资源)，而仅有这组进程中被阻塞的其他进程才可触发该事件时，则认为该组进程发生了死锁。</p>
 <p>资源分为可重用资源（使用后不会耗尽）和消费型资源（例如中断信号）</p>
@@ -1448,6 +1508,19 @@ id3(B类进程) ---&gt; id4[资源2]
 <li>方便时,驱逐牺牲帧,无需等待写出牺牲帧</li>
 <li>把必须串行的磁盘读和写操作变成可并行的（或对先后顺序不敏感的）</li>
 </ul>
+<p><strong>页面替换</strong></p>
+<p>本地页面替换：替换进程自身的页面，不影响其他进程，可缓解系统抖动</p>
+<p>优先级页面替换：高优先级进程可替换，低优先级进程等待</p>
+<p><strong>工作集(Working Set)</strong></p>
+<p>一个进程在最近给定时间长度内，所有访问到的页面总数</p>
+<p>统计缺页错误率，如果小于给定阈值，减少进程的物理帧，如果大于阈值，增加进程的物理帧</p>
+<p><strong>系统抖动</strong></p>
+<p>进程的调页时间多于执行时间，那么这个进程就在抖动。或者说，进程的工作集（局部性访问的内存空间）大于总的物理内存大小</p>
+<p>另外，操作系统检测到CPU利用率低时，可能会创建更多进程，这会造成恶性循环。</p>
+<p>解决方案：</p>
+<p>本地页面替换：替换进程自身的页面，不影响其他进程，可缓解系统抖动</p>
+<p>优先级页面替换：高优先级进程可替换，低优先级进程等待</p>
+<p>杀死并发的进程</p>
 <h2 id="4-1-文件">4.1 文件</h2>
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240129083459473.png" srcset="/img/loading.gif" lazyload alt="初识文件管理"></p>
 <h3 id="文件的逻辑结构">文件的逻辑结构</h3>
@@ -1687,6 +1760,98 @@ id3(B类进程) ---&gt; id4[资源2]
 <p>②新挂载的文件系统，要向VFS提供一个函数地址列表</p>
 <p>③将新文件系统加到挂载点（mountpoint) ,也就是将新文件系统挂载在某个父目录下</p>
 <h2 id="5-1-I-O设备">5.1 I-O设备</h2>
+<h3 id="大容量存储">大容量存储</h3>
+<p>磁道 track</p>
+<p>扇区 sector</p>
+<p>柱面 cylinder</p>
+<p>磁盘调度：</p>
+<pre><code class=" mermaid">graph LR;
+id1[等待设备可用] ===&gt; id2[等待通道可用]
+id2 ===&gt; id3[寻道]
+id3 ===&gt; id4[旋转延迟]
+id4 ===&gt; id5[数据传送]
+id6[设备忙] --&gt;id2
+id6 --&gt;id5
+</code></pre>
+<p><strong>磁盘格式化</strong></p>
+<p>高级格式化：格式化为文件系统，比如说ext4, fat32</p>
+<p>低级格式化：格式化成扇区</p>
+<h3 id="磁盘调度">磁盘调度</h3>
+<p>空闲磁盘可以立即处理I/0请求，繁忙磁盘意味着工作必须排队</p>
+<p>只需提供LBA(逻辑区块地址)，磁盘设备将其转化为物理的扇区位置，读写数据</p>
+<p>调度算法：</p>
+<ul>
+<li>
+<p>FIFO先来先服务</p>
+<p>总是最公平的算法</p>
+</li>
+<li>
+<p>PRI基于优先级：由操作系统设置优先级</p>
+</li>
+<li>
+<p>SSTF:最短服务时间优先：选择使磁头臂从当前位置开始移动最少的磁盘I/O请求</p>
+</li>
+<li>
+<p>SCAN扫描算法/电梯算法：磁头往一个固定的方向移动，直到访问到该方向的最后一个请求，就折返</p>
+<p>是不公平的算法，因为不同请求序列的性能不同</p>
+</li>
+<li>
+<p>CSCAN扫描算法：限制扫描只能沿一个方向，不允许双向扫描</p>
+</li>
+<li>
+<p>N步SACN策略：准备若干长度为N的队列，队列内部使用SCAN算法扫描，队列间先来先服务</p>
+</li>
+<li>
+<p>FSCAN：准备2个队列，每次对一个队列SCAN扫描，另一个队列接收新的任务但不执行</p>
+</li>
+</ul>
+<p>进程更有可能在读的时候被阻塞，因为写的请求会收到互斥机制更严格的限制</p>
+<p><strong>linux的截止时间调度器</strong></p>
+<p>实现四个队列： 2个读取队列和2个写入队列</p>
+<ul>
+<li>1个读和1个写队列按LBA顺序排序,基本上实现了C-SCAN</li>
+<li>按FCFS顺序排序的1个读队列和1个写队列</li>
+<li>批量发送的所有I/O请求都按该队列的顺序排序</li>
+<li>每批处理后,检查FCFS中是否有任何请求早于配置的时间(默认为500毫秒）
+<ul>
+<li>如果是，将为下一批I/O选择包含该请求的LBA队列</li>
+</ul>
+</li>
+</ul>
+<h3 id="RAID">RAID</h3>
+<ul>
+<li>RAID0: 没有冗余，将一个大文件分为多个strip，存在不同的磁盘，可以提高并行性，性能好</li>
+<li>RAID1: 数据1:1复制，可靠性高，性能比RAID0快</li>
+<li>RAID2: 在冗余磁盘存储海明码保证可靠性</li>
+<li>RAID3: 在冗余磁盘使用Bit-interleaved parity保证可靠性，需要更少冗余盘</li>
+<li>RAID4: 按照块Block-interleaved parity保证可靠性</li>
+<li>RAID5: 和RAID4相似，将校验码分散到所有磁盘</li>
+<li>RAID6: 和RAID4相似，校验码存2份，进一步保证可靠性</li>
+</ul>
+<h3 id="I-O技术实现">I-O技术实现</h3>
+<h4 id="轮询式">轮询式</h4>
+<p>对于I/O的每个字节</p>
+<ol>
+<li>从状态寄存器读取忙位,直到该位清零</li>
+<li>主机设置读或写位,如果写入,则将数据复制到数据输出寄存器中</li>
+<li>主机设置命令就绪位</li>
+<li>控制器设置忙位</li>
+<li>控制器读取命令寄存器，并看到命令。从数据输出寄存器中读取一个字节，并向设备执行I/O操作</li>
+<li>传输完成时,控制器清除忙位、错误位、命令准备位</li>
+</ol>
+<h4 id="中断式">中断式</h4>
+<pre><code class=" mermaid">graph TD;
+id1[设备驱动初始化I/O请求] --CPU在执行一条指令后检查中断请求--&gt;id2[CPU收到中断请求,分发给相应中断服务例程]
+id2 --&gt; id3[中断服务例程进行中断处理]
+id3 --&gt; id4[CPU恢复被中断进程的执行]
+id4 --&gt; id1
+id1 ==&gt; id5(IO控制器初始化IO操作)
+id5 ==&gt; id6(IO控制器在操作完成或错误后产生中断)
+id6 ==&gt; id2
+</code></pre>
+<h4 id="DMA">DMA</h4>
+<p>DMA控制器被集成在CPU上</p>
+<p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240605103756235.png" srcset="/img/loading.gif" lazyload alt="DMA过程"></p>
 <h3 id="I-O设备的概念和分类">I-O设备的概念和分类</h3>
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240213151318292.png" srcset="/img/loading.gif" lazyload alt="I-O设备的概念和分类"></p>
 <h3 id="I-O控制器">I-O控制器</h3>
@@ -1731,7 +1896,7 @@ id3(B类进程) ---&gt; id4[资源2]
 <h3 id="I-O控制方式">I-O控制方式</h3>
 <p>计组学过，这里简略一点</p>
 <p><img src="./%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.assets/image-20240213154238727.png" srcset="/img/loading.gif" lazyload alt="I-O控制方式"></p>
-<h4 id="DMA">DMA</h4>
+<h4 id="DMA-2">DMA</h4>
 <ul>
 <li>
 <p>CPU干预的频率：仅在传送一个或多个数据块的开始和结束时，才需要CPU干预</p>
@@ -1987,7 +2152,7 @@ id3(B类进程) ---&gt; id4[资源2]
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月22日</div>
+          <div>2024年6月5日</div>
         </div>
       
       
