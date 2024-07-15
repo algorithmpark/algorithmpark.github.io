@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="pytorch-coviar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch-coviar">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/07/15/pytorch-coviar/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="pytorch-coviar">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-15T11:07:59.000Z">
+<meta property="article:modified_time" content="2024-07-15T03:08:03.716Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>pytorch-coviar - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="pytorch-coviar"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-15 11:07" pubdate>
+          2024年7月15日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">pytorch-coviar</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-07-15T03:08:03+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>pytorch-coviar</h1>
+<h2 id="仓库介绍">仓库介绍</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/chaoyuaw/pytorch-coviar">https://github.com/chaoyuaw/pytorch-coviar</a></p>
+<p>CoViAR (Compressed Video Action Recognition) 是一个压缩视频动作识别模型，由Chao-Yuan Wu、Manzil Zaheer、Hexiang Hu、R. Manmatha、Alexander J. Smola 和 Philipp Krähenbühl 在2018年的CVPR会议上提出。<br>
+这个模型的思想是，视频在当前互联网数据中占据重要地位，因为相比其他媒介，视频可以传递更加丰富形象的信息。CoViAR 的目标是从压缩视频中识别动作。它的实现是基于PyTorch，而原始论文使用了MXNet。目前，这个代码支持UCF-101和HMDB-51数据集，而Charades数据集的支持也在计划中。<br>
+CoViAR 的特点包括：<br>
+通过直接处理压缩视频，避免了提取和存储所有表示（I帧、运动矢量和残差）的图像文件。</p>
+<ul>
+<li>在HMDB-51和UCF-101数据集上，其结果与原始论文相当甚至更好：</li>
+<li>HMDB-51：I帧52%、运动矢量40%、残差43%、CoViAR 59.2%。</li>
+<li>UCF-101：I帧87%、运动矢量70%、残差80%、CoViAR 90.5%（平均3次划分；不使用光流）。<br>
+推荐阅读:<br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54939457">https://zhuanlan.zhihu.com/p/54939457</a></li>
+</ul>
+<h3 id="数据集介绍">数据集介绍</h3>
+<ul>
+<li>UCF-101 是一个实际动作识别数据集，收集自 YouTube 视频，包含 101 种动作类别。它是一个具有挑战性的数据集，拥有来自 101 种动作类别的 13,320 个视频，这些视频分为 25 组，每组包含 4-7 个视频。UCF-101 数据集的视频涵盖了大量摄像机运动、物体外观和姿势等方面的变化<br>
+这些动作类别可以分为以下五类：
+<ul>
+<li>人-物互动</li>
+<li>仅人体运动</li>
+<li>人-人互动</li>
+<li>演奏乐器</li>
+<li>体育运动</li>
+</ul>
+</li>
+<li>HMDB-51是一个用于人体动作识别的大型视频数据集, 是一个包含来自各种来源（包括电影和网络视频）的逼真视频的大型集合。数据集由6,766个视频剪辑组成，涵盖了51个动作类别，例如“跳跃”、“亲吻”和“笑”，每个类别至少包含101个剪辑12。
+<ul>
+<li>评估方案：原始评估方案使用三种不同的训练/测试划分。在每个划分中，每个动作类别有70个训练剪辑和30个测试剪辑。最终性能的度量标准是这三个划分的平均准确率。</li>
+<li>应用领域：HMDB-51数据集被广泛用于动作识别任务</li>
+</ul>
+</li>
+</ul>
+<h2 id="coviar环境搭建">coviar环境搭建</h2>
+<h3 id="树莓派arm版本">树莓派arm版本</h3>
+<h4 id="准备python环境">准备python环境</h4>
+<p>系统自带的python3.11路径为/usr/bin/python，以后可以通过绝对路径使用</p>
+<p>建议使用python3.9.1 , 实测python3.11不行</p>
+<p>使用pyenv管理环境</p>
+<p>pyenv的使用教程如下</p>
+<p><a target="_blank" rel="noopener" href="https://fugangqiang.github.io/posts/python/pyenv%E6%90%AD%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83.html">https://fugangqiang.github.io/posts/python/pyenv搭建python虚拟环境.html</a></p>
+<p>安装完成后，创建并使用python3.9.1环境</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pyenv</span> install <span class="hljs-number">3</span>.<span class="hljs-number">9</span>.<span class="hljs-number">1</span><br><span class="hljs-attribute">pyenv</span> global <span class="hljs-number">3</span>.<span class="hljs-number">9</span>.<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>顺手安装numpy，后面有用</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> numpy<br></code></pre></td></tr></table></figure>
+<h4 id="安装依赖">安装依赖</h4>
+<p>安装libmp3lame0</p>
+<p>因为奇怪的版本号，apt安装的最新版本不受支持，所以只能源码编译</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">tar -zxvf lame-<span class="hljs-number">3.99</span>.<span class="hljs-number">5</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span><br>lame-<span class="hljs-number">3.99</span>.<span class="hljs-number">5</span><br>./configure <span class="hljs-attr">--build</span>=aarch64-unknown-linux-gnu<br>make &amp;&amp; sudo make install<br></code></pre></td></tr></table></figure>
+<p>安装其他依赖</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> libopus-dev<br><span class="hljs-keyword">export</span> PKG_CONFIG_PATH=/usr/local/lib/pkgconfig<br>sudo apt <span class="hljs-keyword">install</span> libvorbis-dev<br>sudo apt <span class="hljs-keyword">install</span> libvpx-dev<br>sudo apt <span class="hljs-keyword">install</span> libx264-dev<br>sudo apt <span class="hljs-keyword">install</span> x265<br>sudo apt <span class="hljs-keyword">install</span> libx265-dev<br></code></pre></td></tr></table></figure>
+<h4 id="编译ffmpeg">编译ffmpeg</h4>
+<p>首先确定路径，不然后面会比较混乱</p>
+<p>在树莓派上会同时存在两个版本的ffmpeg，分别是</p>
+<ul>
+<li>apt安装的ffmpeg，路径为/usr/bin/ffmpeg</li>
+<li>编译的ffmpeg，路径为**/usr/local/ffmpeg**</li>
+</ul>
+<p>安装coviar</p>
+<p>执行下面的命令完成ffmpeg的编译</p>
+<p>make大约需要40min，请耐心等待</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">git clone https:<span class="hljs-string">//github.com/FFmpeg/FFmpeg/</span><br><span class="hljs-keyword">cd</span> FFmpeg<br>git checkout 74c6a6d3735f79671b177a0e0c6f2db696c2a6d2<br>make clean<br><span class="hljs-string">./configure</span> <span class="hljs-params">--prefix=/usr/local/ffmpeg</span> <span class="hljs-params">--arch=aarch64</span> <span class="hljs-params">--cpu=cortex-a72</span> <span class="hljs-params">--enable-neon</span> <span class="hljs-params">--enable-armv8</span> <span class="hljs-params">--enable-shared</span> <span class="hljs-params">--disable-static</span> <span class="hljs-params">--enable-gpl</span> <span class="hljs-params">--enable-libx264</span> <span class="hljs-params">--enable-libx265</span> <span class="hljs-params">--enable-libvpx</span> <span class="hljs-params">--enable-libopus</span> <span class="hljs-params">--enable-libvorbis</span> <span class="hljs-params">--enable-libmp3lame</span><br>make<br>sudo make install<br>export LD_LIBRARY_PATH=<span class="hljs-string">/usr/local/ffmpeg/lib/</span><br>export PATH=<span class="hljs-string">/usr/local/ffmpeg/bin/</span>:$PATH<br></code></pre></td></tr></table></figure>
+<h4 id="安装coviar">安装coviar</h4>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/chaoyuaw/pytorch-coviar<br></code></pre></td></tr></table></figure>
+<p>进入data_loader文件夹，修改setup.py如下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">from</span> distutils.core <span class="hljs-keyword">import</span> setup, <span class="hljs-keyword">Extension</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>coviar_utils_module = <span class="hljs-keyword">Extension</span>(<span class="hljs-string">&#x27;coviar&#x27;</span>,<br>		sources = [<span class="hljs-string">&#x27;coviar_data_loader.c&#x27;</span>],<br>		include_dirs=[np.get_include(), <span class="hljs-string">&#x27;./ffmpeg/include/&#x27;</span>, <span class="hljs-string">&#x27;/usr/local/ffmpeg/include/&#x27;</span>],<br>		extra_compile_args=[<span class="hljs-string">&#x27;-DNDEBUG&#x27;</span>, <span class="hljs-string">&#x27;-O3&#x27;</span>],<br>		extra_link_args=[<span class="hljs-string">&#x27;-lavutil&#x27;</span>, <span class="hljs-string">&#x27;-lavcodec&#x27;</span>, <span class="hljs-string">&#x27;-lavformat&#x27;</span>, <span class="hljs-string">&#x27;-lswscale&#x27;</span>, <span class="hljs-string">&#x27;-L/usr/local/ffmpeg/lib/&#x27;</span>]<br>)<br><br>setup ( <span class="hljs-type">name</span> = <span class="hljs-string">&#x27;coviar&#x27;</span>,<br>	version = <span class="hljs-string">&#x27;0.1&#x27;</span>,<br>	description = <span class="hljs-string">&#x27;Utils for coviar training.&#x27;</span>,<br>	ext_modules = [ coviar_utils_module ]<br>)<br></code></pre></td></tr></table></figure>
+<p>需要特别关照的是第6，8行，需要填入正确的路径，分别是ffmpeg编译后的路径中的include和lib文件夹</p>
+<p>执行安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./install.sh<br></code></pre></td></tr></table></figure>
+<h4 id="coviar启动！">coviar启动！</h4>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">python -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;import coviar&quot;</span><br></code></pre></td></tr></table></figure>
+<p>如果没有报错，则说明安装成功</p>
+<p>提取numpy数组的示例代码</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">from</span> coviar import <span class="hljs-built_in">load</span><br>import numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">a</span> = <span class="hljs-built_in">load</span>(<span class="hljs-string">&#x27;mpeg4_standard_output_000.mp4&#x27;</span>, <span class="hljs-number">3</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, True)<br>np.save(<span class="hljs-string">&#x27;load.npy&#x27;</span>,<span class="hljs-keyword">a</span>)<br>print(<span class="hljs-keyword">a</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="Ubuntu-x86版本">Ubuntu x86版本</h3>
+<p>预备环境Python 3.8(ubuntu20.04)</p>
+<p>不推荐使用python3.11，很可能用不了</p>
+<h4 id="编译ffmpeg-2">编译ffmpeg</h4>
+<p>首先确定路径，不然后面会比较混乱</p>
+<p>会同时存在两个版本的ffmpeg，分别是</p>
+<ul>
+<li>apt安装的ffmpeg，路径为/usr/bin/ffmpeg</li>
+<li>编译的ffmpeg，路径为**/usr/local/ffmpeg**</li>
+</ul>
+<p>执行下面的命令完成ffmpeg的编译</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs gauss">git clone https:<span class="hljs-comment">//github.com/FFmpeg/FFmpeg/</span><br>cd FFmpeg<br>git checkout <span class="hljs-number">74</span>c6a6d3735f79671b177a0e0c6f2db696c2a6d2<br><span class="hljs-built_in">make</span> clean<br>./configure --prefix=/usr/<span class="hljs-keyword">local</span>/ffmpeg --<span class="hljs-keyword">enable</span>-pic --<span class="hljs-keyword">disable</span>-yasm --<span class="hljs-keyword">enable</span>-shared<br><span class="hljs-built_in">make</span><br>sudo <span class="hljs-built_in">make</span> install<br>export LD_LIBRARY_PATH=/usr/<span class="hljs-keyword">local</span>/ffmpeg/<span class="hljs-keyword">lib</span>/<br>export PATH=/usr/<span class="hljs-keyword">local</span>/ffmpeg/bin/:$PATH<br></code></pre></td></tr></table></figure>
+<h4 id="安装coviar-2">安装coviar</h4>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/chaoyuaw/pytorch-coviar<br></code></pre></td></tr></table></figure>
+<p>进入data_loader文件夹，修改setup.py如下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">from</span> distutils.core <span class="hljs-keyword">import</span> setup, <span class="hljs-keyword">Extension</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>coviar_utils_module = <span class="hljs-keyword">Extension</span>(<span class="hljs-string">&#x27;coviar&#x27;</span>,<br>		sources = [<span class="hljs-string">&#x27;coviar_data_loader.c&#x27;</span>],<br>		include_dirs=[np.get_include(), <span class="hljs-string">&#x27;./ffmpeg/include/&#x27;</span>, <span class="hljs-string">&#x27;/usr/local/ffmpeg/include/&#x27;</span>],<br>		extra_compile_args=[<span class="hljs-string">&#x27;-DNDEBUG&#x27;</span>, <span class="hljs-string">&#x27;-O3&#x27;</span>],<br>		extra_link_args=[<span class="hljs-string">&#x27;-lavutil&#x27;</span>, <span class="hljs-string">&#x27;-lavcodec&#x27;</span>, <span class="hljs-string">&#x27;-lavformat&#x27;</span>, <span class="hljs-string">&#x27;-lswscale&#x27;</span>, <span class="hljs-string">&#x27;-L/usr/local/ffmpeg/lib/&#x27;</span>]<br>)<br><br>setup ( <span class="hljs-type">name</span> = <span class="hljs-string">&#x27;coviar&#x27;</span>,<br>	version = <span class="hljs-string">&#x27;0.1&#x27;</span>,<br>	description = <span class="hljs-string">&#x27;Utils for coviar training.&#x27;</span>,<br>	ext_modules = [ coviar_utils_module ]<br>)<br></code></pre></td></tr></table></figure>
+<p>需要特别关照的是第6，8行，需要填入正确的路径，分别是ffmpeg编译后的路径中的include和lib文件夹</p>
+<p>执行安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./install.sh<br></code></pre></td></tr></table></figure>
+<h4 id="coviar启动！-2">coviar启动！</h4>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">python -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;import coviar&quot;</span><br></code></pre></td></tr></table></figure>
+<p>如果没有报错，则说明安装成功</p>
+<p>提取numpy数组的示例代码</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">from</span> coviar import <span class="hljs-built_in">load</span><br>import numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">a</span> = <span class="hljs-built_in">load</span>(<span class="hljs-string">&#x27;mpeg4_standard_output_000.mp4&#x27;</span>, <span class="hljs-number">3</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, True)<br>np.save(<span class="hljs-string">&#x27;load.npy&#x27;</span>,<span class="hljs-keyword">a</span>)<br>print(<span class="hljs-keyword">a</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="coviar模型测试">coviar模型测试</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python test.py --gpus 0 --<span class="hljs-built_in">arch</span> resnet18 --data-name hmdb51 --representation <span class="hljs-built_in">mv</span> --data-root data/hmdb51/mpeg4_videos --test-list data/datalists/hmdb51_split1_test.txt --weights hmdb51_mv_model_mv_model_best.pth.tar --save-scores score.txt<br></code></pre></td></tr></table></figure>
+<p>先自动下载resnet18的预训练模型</p>
+<p>输出</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs gams">Initializing <span class="hljs-keyword">model</span>:<br>    base <span class="hljs-keyword">model</span>:         resnet18.<br>    input_representation:     mv.<br>    num_class:          <span class="hljs-number">51.</span><br>    num_segments:       <span class="hljs-number">25.</span><br>        <br>/root/miniconda3/lib/python3<span class="hljs-number">.8</span>/site-packages/torchvision/<span class="hljs-keyword">models</span>/_utils.py:<span class="hljs-number">208</span>: UserWarning: The <span class="hljs-keyword">parameter</span> <span class="hljs-string">&#x27;pretrained&#x27;</span> is <span class="hljs-comment">deprecated since 0.13 and may be removed in the future, please use</span> <span class="hljs-comment">&#x27;weights&#x27;</span> <span class="hljs-comment">instead.</span><br>  warnings.warn(<br>/root/miniconda3/lib/python3.8/site-packages/torchvision/<span class="hljs-keyword">models</span>/_utils.py:223: UserWarning: Arguments <span class="hljs-comment">other than a weight enum or</span> `<span class="hljs-comment">None</span>` <span class="hljs-comment">for</span> <span class="hljs-comment">&#x27;weights&#x27;</span> <span class="hljs-comment">are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing</span> `<span class="hljs-comment">weights=ResNet18_Weights.IMAGENET1K_V1</span>`<span class="hljs-comment">. You can also use</span> `<span class="hljs-comment">weights=ResNet18_Weights.DEFAULT</span>` <span class="hljs-comment">to get the most up-to-date weights.</span><br>  warnings.warn(msg)<br>Downloading: <span class="hljs-string">&quot;https://download.pytorch.org/models/resnet18-f37072fd.pth&quot;</span> to /root/<span class="hljs-comment">.cache</span>/torch/<span class="hljs-comment">hub</span>/checkpoints/<span class="hljs-comment">resnet18-f37072fd.pth</span><br>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 44.7M/<span class="hljs-number">44.7</span>M [<span class="hljs-number">02</span>:<span class="hljs-number">57</span>&lt;<span class="hljs-number">00</span>:<span class="hljs-number">00</span>, <span class="hljs-number">264</span>kB/s]<br>model <span class="hljs-comment">epoch 236 best prec@1: 30.130720138549805</span><br>1530 videos <span class="hljs-comment">loaded.</span><br>test.py:94: UserWarning: volatile <span class="hljs-comment">was removed and now has no effect. Use</span> `<span class="hljs-comment">with torch.no_grad():</span>` <span class="hljs-comment">instead.</span><br>  input_var <span class="hljs-comment">= torch.autograd.Variable(data, volatile=True)</span><br>video <span class="hljs-comment">99 done, total 100</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.2338184118270874</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">199 done, total 200</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.24016900300979616</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">299 done, total 300</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.24238990863164267</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">399 done, total 400</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23960657358169557</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">499 done, total 500</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23549086046218873</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">599 done, total 600</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.234343368212382</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">699 done, total 700</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23339044264384678</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">799 done, total 800</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23506154507398605</span> sec/<span class="hljs-comment">video</span><br></code></pre></td></tr></table></figure>
+<h2 id="coviar用于视频特征提取与远程识别">coviar用于视频特征提取与远程识别</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/CJL-sysu/pytorch-coviar">https://github.com/CJL-sysu/pytorch-coviar</a></p>
+<p>将特征提取分为本地端和服务端，中间通过网络传输无法复原出原视频的特征矩阵列表，可解决本地算力不足的问题，且保护用户隐私。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>pytorch-coviar</div>
+      <div>https://blog.algorithmpark.xyz/2024/07/15/pytorch-coviar/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/14/program-making/index/" title="程序的制作">
+                        <span class="hidden-mobile">程序的制作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
