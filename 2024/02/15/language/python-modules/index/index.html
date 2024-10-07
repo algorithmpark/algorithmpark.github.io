@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/python.jpg">
 <meta property="article:published_time" content="2024-02-15T16:24:45.000Z">
-<meta property="article:modified_time" content="2024-03-03T03:16:28.026Z">
+<meta property="article:modified_time" content="2024-08-27T09:24:36.555Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/python.jpg">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.8k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          19 分钟
+          24 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-03-03T03:16:28+00:00
+                    本文最后更新于 2024-08-27T09:24:36+00:00
                   
                   
 
@@ -412,6 +412,32 @@
 <h2 id="watchdog监听文件夹">watchdog监听文件夹</h2>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#! /usr/bin/env python</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-comment">#from __future__ import print_function</span><br><br><span class="hljs-keyword">from</span> watchdog.events <span class="hljs-keyword">import</span> FileSystemEventHandler<br><span class="hljs-keyword">from</span> watchdog.observers <span class="hljs-keyword">import</span> Observer<br><br><br>WATCH_PATH = <span class="hljs-string">&#x27;send&#x27;</span>  <span class="hljs-comment"># 监控目录</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FileMonitorHandler</span>(<span class="hljs-title class_ inherited__">FileSystemEventHandler</span>):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, **kwargs</span>):<br>    <span class="hljs-built_in">super</span>(FileMonitorHandler, self).__init__(**kwargs)<br>    <span class="hljs-comment"># 监控目录</span><br>    self._watch_path = WATCH_PATH<br><br><br><br>  <span class="hljs-comment"># 重写文件创建函数，文件改变都会触发文件夹变化</span><br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_created</span>(<span class="hljs-params">self, event</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> event.is_directory:  <span class="hljs-comment"># 文件创建都会触发文件夹变化</span><br>      file_path = event.src_path<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;文件创建: %s &quot;</span> % file_path)<br><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>  event_handler = FileMonitorHandler()<br>  observer = Observer()<br>  observer.schedule(event_handler, path=WATCH_PATH, recursive=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># recursive递归的</span><br>  observer.start()<br>  observer.join()<br></code></pre></td></tr></table></figure>
 <p>当send文件夹中出现新文件时，会执行on_created函数</p>
+<h2 id="tqdm-漂亮的进度条">tqdm:漂亮的进度条</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install tqdm<br></code></pre></td></tr></table></figure>
+<p>实例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm<br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tqdm(<span class="hljs-built_in">range</span>(<span class="hljs-number">10000</span>)):<br>     sleep(<span class="hljs-number">0.01</span>)<br></code></pre></td></tr></table></figure>
+<p>效果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">python test1.py</span> <br><span class="hljs-meta prompt_"> 16%</span><span class="language-bash">|███▎                 | 1600/10000 [00:16&lt;01:25,98.10it/s]</span><br></code></pre></td></tr></table></figure>
+<h2 id="sys-profile性能分析">sys.profile性能分析</h2>
+<p><code>sys.setprofile</code> 是 Python 标准库中的一个函数，用于设置全局的性能分析（profiling）函数。这个函数允许你指定一个回调函数，当 Python 解释器调用每一个函数时，该回调函数将被调用。这对于调试和性能分析非常有用。</p>
+<p>当你调用 <code>sys.setprofile</code> 并传递一个回调函数时，每当 Python 解释器进入或离开一个函数时，这个回调函数就会被调用。回调函数通常接受三个参数：<code>frame</code>，<code>event</code> 和 <code>arg</code>。</p>
+<ul>
+<li><code>frame</code>：当前执行的栈帧对象，包含关于当前执行状态的信息。</li>
+<li><code>event</code>：一个字符串，表示发生的事件类型，如 “call”、“return”、“exception” 等。</li>
+<li><code>arg</code>：事件的附加参数，如函数返回值或异常对象。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">profile_func</span>(<span class="hljs-params">frame, event, arg</span>):<br>    <span class="hljs-keyword">if</span> frame.f_code.co_name != <span class="hljs-string">&quot;test_function&quot;</span>:<br>        <span class="hljs-comment"># print(f&quot;Profiling function: &#123;frame.f_code.co_name&#125;&quot;)</span><br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">if</span> event == <span class="hljs-string">&#x27;call&#x27;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Calling function: <span class="hljs-subst">&#123;frame.f_code.co_name&#125;</span>&quot;</span>)<br>    <span class="hljs-keyword">elif</span> event == <span class="hljs-string">&#x27;return&#x27;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Returning from function: <span class="hljs-subst">&#123;frame.f_code.co_name&#125;</span>&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_function</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Inside test_function&quot;</span>)<br><br>sys.setprofile(profile_func)<br><br>test_function()<br><br>sys.setprofile(<span class="hljs-literal">None</span>)  <span class="hljs-comment"># 停止 profiling</span><br><br></code></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nsis">Calling <span class="hljs-keyword">function</span>: test_<span class="hljs-keyword">function</span><br><span class="hljs-title function_">Inside</span> test_<span class="hljs-keyword">function</span><br><span class="hljs-title function_">Returning</span> from <span class="hljs-keyword">function</span>: test_function<br></code></pre></td></tr></table></figure>
+<h2 id="ollama">ollama</h2>
+<p>详见<a target="_blank" rel="noopener" href="https://github.com/ollama/ollama-python">https://github.com/ollama/ollama-python</a></p>
+<p>可以使用python调用ollama的API</p>
+<p>示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> ollama <span class="hljs-keyword">import</span> Client<br>client = Client(host=<span class="hljs-string">&quot;http://127.0.0.1:11434&quot;</span>)<br>stream = client.chat(<br>    model=<span class="hljs-string">&quot;qwen2:latest&quot;</span>,<br>    messages=[&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;原神是什么&quot;</span>&#125;],<br>    stream=<span class="hljs-literal">True</span>,<br>)<br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> stream:<br>    <span class="hljs-built_in">print</span>(chunk[<span class="hljs-string">&quot;message&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>], end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dns">《原神》是由上海米哈游信息科技有限公司自主研发的开源动作角色扮演游戏，于<span class="hljs-number">2020年9月28</span>日发行。该游戏讲述了提瓦特大陆的七个神性国家之一的蒙德和璃月，在一次灾难事件后如何在“神”与“人”的协助下重建家园的故事。<br><br>游戏的核心是采用开放世界探险的游戏模式，并提供丰富多样的角色供玩家选择，每个角色都有独特的技能和属性。游戏中有大量任务、副本、活动等待玩家去探索和完成，同时也有丰富的社交元素，允许玩家之间组队合作或互相竞技。<br><br>《原神》通过精美的画面、动听的音乐以及引人入胜的故事剧情吸引了全球众多玩家的喜爱。游戏不仅在国内市场取得巨大成功，在海外也收获了广泛的好评和用户基础。<br></code></pre></td></tr></table></figure>
+<p>获取可用模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">client.<span class="hljs-built_in">list</span>()<br></code></pre></td></tr></table></figure>
 <p>未完待续</p>
 
                 
@@ -477,7 +503,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月3日</div>
+          <div>2024年8月27日</div>
         </div>
       
       

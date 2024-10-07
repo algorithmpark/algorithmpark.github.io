@@ -1,0 +1,1707 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="mssql(sql server)教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mssql">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/10/07/mssql/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="mssql(sql server)教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
+<meta property="article:published_time" content="2024-10-07T09:33:22.000Z">
+<meta property="article:modified_time" content="2024-10-07T01:35:46.948Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>mssql - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="mssql"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-07 09:33" pubdate>
+          2024年10月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">mssql</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-10-07T01:35:46+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>mssql</h1>
+<h2 id="安装">安装</h2>
+<p>windows版: <a target="_blank" rel="noopener" href="https://blog.skyw.cc/archives/366.html">https://blog.skyw.cc/archives/366.html</a></p>
+<p>ubuntu版: <a target="_blank" rel="noopener" href="https://fuuzen.github.io/cs/db/linux-mssql-server">https://fuuzen.github.io/cs/db/linux-mssql-server</a></p>
+<h3 id="docker版">docker版</h3>
+<p><code>docker-compose.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">mssql:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">mcr.microsoft.com/mssql/server:2022-latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">mssql</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">ACCEPT_EULA=Y</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">SA_PASSWORD=Sql114514</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;1433:1433&quot;</span><br>    <span class="hljs-attr">hostname:</span> <span class="hljs-string">sql1</span><br></code></pre></td></tr></table></figure>
+<p>启动！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker-compose up -d<br></code></pre></td></tr></table></figure>
+<p>进入容器</p>
+<p>以普通用户进入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker <span class="hljs-built_in">exec</span> -it mssql bash<br></code></pre></td></tr></table></figure>
+<p>以root用户进入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker <span class="hljs-built_in">exec</span> -it --user root mssql bash<br></code></pre></td></tr></table></figure>
+<h2 id="连接">连接</h2>
+<h3 id="命令行连接">命令行连接</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sqlcmd -S 127.0.0.1 -U sa -P Sql114514 <br></code></pre></td></tr></table></figure>
+<p>如果使用的端口不是1434，可指定端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sqlcmd -S 127.0.0.1:<span class="hljs-variable">$port</span> -U sa -P Sql114514 <br></code></pre></td></tr></table></figure>
+<h3 id="python连接">python连接</h3>
+<p>请先参考本文<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15">https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15</a> 安装驱动(linux)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pyodbc<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">mssql</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, server, database, username, password</span>):<br>        self.server = server<br>        self.database = database<br>        self.username = username<br>        self.password = password<br>        self.connectionString = <span class="hljs-string">f&quot;DRIVER=&#123;&#123;ODBC Driver 18 for SQL Server&#125;&#125;;SERVER=<span class="hljs-subst">&#123;server&#125;</span>;DATABASE=<span class="hljs-subst">&#123;database&#125;</span>;UID=<span class="hljs-subst">&#123;username&#125;</span>;PWD=<span class="hljs-subst">&#123;password&#125;</span>;TrustServerCertificate=yes;&quot;</span><br>        self.conn = pyodbc.connect(self.connectionString)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">exec</span>(<span class="hljs-params">self, query</span>):<br>        cursor = self.conn.cursor()<br>        cursor.execute(query)<br>        records = cursor.fetchall()<br>        <span class="hljs-keyword">return</span> records<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    server = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span><br>    database = <span class="hljs-string">&#x27;master&#x27;</span><br>    username = <span class="hljs-string">&#x27;user&#x27;</span><br>    password = <span class="hljs-string">&#x27;114514&#x27;</span><br>    ms = mssql(server, database, username, password)<br>    records = ms.<span class="hljs-built_in">exec</span>(<span class="hljs-string">&quot;SELECT name FROM master.dbo.sysdatabases;&quot;</span>)<br>    <span class="hljs-built_in">print</span>(records)<br><br></code></pre></td></tr></table></figure>
+<h2 id="hello-world">hello world</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">PRINT <span class="hljs-string">&#x27;Hello World!&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<h2 id="添加中文支持">添加中文支持</h2>
+<p>参考文献<a target="_blank" rel="noopener" href="https://blog.csdn.net/Frost216/article/details/121177814">https://blog.csdn.net/Frost216/article/details/121177814</a></p>
+<p>在每次创建数据库时，记得运行该语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> DATABASE 数据库名称 <span class="hljs-keyword">COLLATE</span> Chinese_PRC_CI_AS;<br></code></pre></td></tr></table></figure>
+<p>检验</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;好好好&#x27;</span> <span class="hljs-keyword">as</span> foo;<br></code></pre></td></tr></table></figure>
+<p>期望能够看到中文，而不是三个问号</p>
+<h2 id="DDL">DDL</h2>
+<p>Data Definition Language</p>
+<p>数据定义语言，用来定义数据库对象(数据库，表，字段)</p>
+<h3 id="数据库操作">数据库操作</h3>
+<h4 id="查询所有数据库">查询所有数据库</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> name <span class="hljs-keyword">FROM</span> master.dbo.sysdatabases;<br></code></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> name <span class="hljs-keyword">FROM</span> sys.databases<br></code></pre></td></tr></table></figure>
+<h4 id="创建数据库">创建数据库</h4>
+<p>当<code>test1</code>不存在时创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> name <span class="hljs-keyword">FROM</span> sys.databases <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;test1&#x27;</span>)<br><span class="hljs-keyword">CREATE</span> DATABASE test1;<br></code></pre></td></tr></table></figure>
+<h4 id="删库跑路">删库跑路</h4>
+<p>在删库前，您需要检查是否有任何连接到数据库，否则删库失败</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.dm_exec_sessions <span class="hljs-keyword">WHERE</span> database_id <span class="hljs-operator">=</span> DB_ID(<span class="hljs-string">&#x27;test1&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>当<code>test1</code>存在时删除</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.databases <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;test1&#x27;</span>) <br><span class="hljs-keyword">BEGIN</span><br>    <span class="hljs-keyword">DROP</span> DATABASE test1;<br><span class="hljs-keyword">END</span>;<br><br></code></pre></td></tr></table></figure>
+<h4 id="切换数据库">切换数据库</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">use dbname;<br></code></pre></td></tr></table></figure>
+<h3 id="表操作">表操作</h3>
+<h4 id="查询当前数据库所有表">查询当前数据库所有表</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.tables<br></code></pre></td></tr></table></figure>
+<h4 id="查看指定表结构">查看指定表结构</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.columns <span class="hljs-keyword">WHERE</span> object_id <span class="hljs-operator">=</span> OBJECT_ID(<span class="hljs-string">&#x27;table_name&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<h4 id="创建表">创建表</h4>
+<p>以tb_user为例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> tb_user(<br>    id <span class="hljs-type">INT</span>,<br>    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),<br>    age <span class="hljs-type">INT</span>,<br>    gender <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">1</span>)<br>);<br></code></pre></td></tr></table></figure>
+<p>仅当tb_user不存在时创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.tables <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;tb_user&#x27;</span>)<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> tb_user(<br>    id <span class="hljs-type">INT</span>,<br>    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),<br>    age <span class="hljs-type">INT</span>,<br>    gender <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">1</span>)<br>);<br></code></pre></td></tr></table></figure>
+<p>更加复杂的建表语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> emp (<br>    id <span class="hljs-type">INT</span>,<br>    workno <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>),<br>    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>),<br>    gender <span class="hljs-type">CHAR</span>(<span class="hljs-number">1</span>),<br>    age TINYINT,<br>    idcard <span class="hljs-type">CHAR</span>(<span class="hljs-number">18</span>),<br>    workaddress <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),<br>    entrydate <span class="hljs-type">DATE</span><br>);<br><br><span class="hljs-comment">-- 添加注释</span><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;编号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;id&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;工号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;workno&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;姓名&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;name&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;性别&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;gender&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;年龄&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;age&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;身份证号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;idcard&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;工作地址&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;workaddress&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;入职时间&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;entrydate&#x27;</span>;<br><br><span class="hljs-comment">-- 添加表注释</span><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;员工表&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>;<br><br></code></pre></td></tr></table></figure>
+<p>注意:</p>
+<ol>
+<li>MSSQL 不支持 COMMENT 语法, 改为使用 <code>sp_addextendedproperty</code> 添加注释。</li>
+<li>MSSQL 中的 <code>VARCHAR</code> 有最大长度限制</li>
+<li>MSSQL 不支持无符号整数。所以不支持<code>TINYINT UNSIGNED</code>之类的类型</li>
+</ol>
+<h4 id="修改表">修改表</h4>
+<p>修改表结构</p>
+<p>加入名为nickname的列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_user <span class="hljs-keyword">add</span> nickname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>);<br></code></pre></td></tr></table></figure>
+<p>重命名列</p>
+<p>修改名为nickname的列为username</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">EXEC</span> sp_rename <span class="hljs-string">&#x27;tb_user.nickname&#x27;</span>, <span class="hljs-string">&#x27;username&#x27;</span>, <span class="hljs-string">&#x27;COLUMN&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>修改列类型</p>
+<p>修改名为username的列类型为VARCHAR(30)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_user <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">COLUMN</span> username <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>);<br></code></pre></td></tr></table></figure>
+<p>删除列</p>
+<p>删除名为username的列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tb_user <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> username;<br></code></pre></td></tr></table></figure>
+<p>修改表名</p>
+<p>将名为tb_user的列修改为tb_user1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">EXEC</span> sp_rename <span class="hljs-string">&#x27;tb_user&#x27;</span>, <span class="hljs-string">&#x27;tb_user1&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<h4 id="删除表">删除表</h4>
+<p>当tb_user存在时删除该表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.tables <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;tb_user&#x27;</span>)<br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> tb_user;<br></code></pre></td></tr></table></figure>
+<h4 id="删除表并重新创建">删除表并重新创建</h4>
+<p>清空tb_user表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> tb_user;<br></code></pre></td></tr></table></figure>
+<h2 id="支持的数据类型">支持的数据类型</h2>
+<p>请can’khttps://learn.microsoft.com/zh-cn/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver16</p>
+<h2 id="DML">DML</h2>
+<p>Data Manipulation Language(数据操作语言)</p>
+<p>用来对数据库中表的数据记录进行增、删、改操作</p>
+<h3 id="添加数据">添加数据</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> tb_user <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&#x27;0&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> tb_user(id, name, age, gender) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;李四&#x27;</span>, <span class="hljs-number">19</span>, <span class="hljs-string">&#x27;1&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>批量添加数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> tb_user(id, name, age, gender) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;王五&#x27;</span>, <span class="hljs-number">28</span>, <span class="hljs-string">&#x27;3&#x27;</span>), (<span class="hljs-number">4</span>, <span class="hljs-string">&#x27;赵六&#x27;</span>, <span class="hljs-number">57</span>, <span class="hljs-string">&#x27;4&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="查询数据">查询数据</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> tb_user;<br></code></pre></td></tr></table></figure>
+<h3 id="修改数据">修改数据</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span> tb_user <span class="hljs-keyword">set</span> age <span class="hljs-operator">=</span> <span class="hljs-number">20</span>, gender <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;9&#x27;</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="删除数据">删除数据</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> tb_user <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+<h2 id="DQL">DQL</h2>
+<p>Data Query Language(数据查询语言)，用来查询数据库中表的记录</p>
+<p>准备示例数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs sql">IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> name <span class="hljs-keyword">FROM</span> sys.databases <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;demo1&#x27;</span>)<br><span class="hljs-keyword">CREATE</span> DATABASE demo1;<br><span class="hljs-keyword">ALTER</span> DATABASE demo1 <span class="hljs-keyword">COLLATE</span> Chinese_PRC_CI_AS;<br>use demo1;<br>IF <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.tables <span class="hljs-keyword">WHERE</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>)<br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> emp;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> emp (<br>    id <span class="hljs-type">INT</span>,<br>    workno <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>),<br>    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>),<br>    gender <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>),<br>    age TINYINT,<br>    idcard <span class="hljs-type">CHAR</span>(<span class="hljs-number">18</span>),<br>    workaddress <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),<br>    entrydate <span class="hljs-type">DATE</span><br>);<br><br><span class="hljs-comment">-- 添加注释</span><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;编号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;id&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;工号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;workno&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;姓名&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;name&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;性别&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;gender&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;年龄&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;age&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;身份证号&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;idcard&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;工作地址&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;workaddress&#x27;</span>;<br><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;入职时间&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>, <br><span class="hljs-variable">@level2type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;COLUMN&#x27;</span>, <span class="hljs-variable">@level2name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;entrydate&#x27;</span>;<br><br><span class="hljs-comment">-- 添加表注释</span><br><span class="hljs-keyword">EXEC</span> sp_addextendedproperty <br><span class="hljs-variable">@name</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;MS_Description&#x27;</span>, <span class="hljs-variable">@value</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;员工表&#x27;</span>, <br><span class="hljs-variable">@level0type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;SCHEMA&#x27;</span>, <span class="hljs-variable">@level0name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dbo&#x27;</span>, <br><span class="hljs-variable">@level1type</span> <span class="hljs-operator">=</span> N<span class="hljs-string">&#x27;TABLE&#x27;</span>, <span class="hljs-variable">@level1name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;emp&#x27;</span>;<br><br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;00001&#x27;</span>, <span class="hljs-string">&#x27;柳岩666&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">20</span>, <span class="hljs-string">&#x27;123456789012345678&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2000-01-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;00002&#x27;</span>, <span class="hljs-string">&#x27;张无忌&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&#x27;123456789012345670&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2005-09-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;00003&#x27;</span>, <span class="hljs-string">&#x27;韦一笑&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">38</span>, <span class="hljs-string">&#x27;123456789712345670&#x27;</span>, <span class="hljs-string">&#x27;上海&#x27;</span>, <span class="hljs-string">&#x27;2005-08-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">4</span>, <span class="hljs-string">&#x27;00004&#x27;</span>, <span class="hljs-string">&#x27;赵敏&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&#x27;123456757123845670&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2009-12-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">5</span>, <span class="hljs-string">&#x27;00005&#x27;</span>, <span class="hljs-string">&#x27;小昭&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">16</span>, <span class="hljs-string">&#x27;123456769012345678&#x27;</span>, <span class="hljs-string">&#x27;上海&#x27;</span>, <span class="hljs-string">&#x27;2007-07-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">6</span>, <span class="hljs-string">&#x27;00006&#x27;</span>, <span class="hljs-string">&#x27;杨逍&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">28</span>, <span class="hljs-string">&#x27;12345678931234567X&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2006-01-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">7</span>, <span class="hljs-string">&#x27;00007&#x27;</span>, <span class="hljs-string">&#x27;范瑶&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">40</span>, <span class="hljs-string">&#x27;123456789212345670&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2005-05-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">8</span>, <span class="hljs-string">&#x27;00008&#x27;</span>, <span class="hljs-string">&#x27;黛绮丝&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">38</span>, <span class="hljs-string">&#x27;123456157123645670&#x27;</span>, <span class="hljs-string">&#x27;天津&#x27;</span>, <span class="hljs-string">&#x27;2015-05-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">9</span>, <span class="hljs-string">&#x27;00009&#x27;</span>, <span class="hljs-string">&#x27;范凉凉&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">45</span>, <span class="hljs-string">&#x27;123156789012345678&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2010-04-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;00010&#x27;</span>, <span class="hljs-string">&#x27;陈友谅&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">53</span>, <span class="hljs-string">&#x27;123456789012345670&#x27;</span>, <span class="hljs-string">&#x27;上海&#x27;</span>, <span class="hljs-string">&#x27;2011-01-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">11</span>, <span class="hljs-string">&#x27;00011&#x27;</span>, <span class="hljs-string">&#x27;张士诚&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">55</span>, <span class="hljs-string">&#x27;123567897123465670&#x27;</span>, <span class="hljs-string">&#x27;江苏&#x27;</span>, <span class="hljs-string">&#x27;2015-05-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">12</span>, <span class="hljs-string">&#x27;00012&#x27;</span>, <span class="hljs-string">&#x27;常遇春&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">32</span>, <span class="hljs-string">&#x27;123446757152345670&#x27;</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2004-02-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">13</span>, <span class="hljs-string">&#x27;00013&#x27;</span>, <span class="hljs-string">&#x27;张三丰&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">88</span>, <span class="hljs-string">&#x27;123656789012345678&#x27;</span>, <span class="hljs-string">&#x27;江苏&#x27;</span>, <span class="hljs-string">&#x27;2020-11-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">14</span>, <span class="hljs-string">&#x27;00014&#x27;</span>, <span class="hljs-string">&#x27;灭绝&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">65</span>, <span class="hljs-string">&#x27;123456719012345670&#x27;</span>, <span class="hljs-string">&#x27;西安&#x27;</span>, <span class="hljs-string">&#x27;2019-05-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">15</span>, <span class="hljs-string">&#x27;00015&#x27;</span>, <span class="hljs-string">&#x27;胡青牛&#x27;</span>, <span class="hljs-string">&#x27;男&#x27;</span>, <span class="hljs-number">70</span>, <span class="hljs-string">&#x27;12345674971234567X&#x27;</span>, <span class="hljs-string">&#x27;西安&#x27;</span>, <span class="hljs-string">&#x27;2018-04-01&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> emp (id, workno, name, gender, age, idcard, workaddress, entrydate)<br><span class="hljs-keyword">VALUES</span> (<span class="hljs-number">16</span>, <span class="hljs-string">&#x27;00016&#x27;</span>, <span class="hljs-string">&#x27;周芷若&#x27;</span>, <span class="hljs-string">&#x27;女&#x27;</span>, <span class="hljs-number">18</span>, <span class="hljs-keyword">null</span>, <span class="hljs-string">&#x27;北京&#x27;</span>, <span class="hljs-string">&#x27;2012-06-01&#x27;</span>);<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> emp;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>workno</th>
+<th>name</th>
+<th>gender</th>
+<th>age</th>
+<th>idcard</th>
+<th>workaddress</th>
+<th>entrydate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>00001</td>
+<td>柳岩666</td>
+<td>女</td>
+<td>20</td>
+<td>123456789012345678</td>
+<td>北京</td>
+<td>2000-01-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>00002</td>
+<td>张无忌</td>
+<td>男</td>
+<td>18</td>
+<td>123456789012345670</td>
+<td>北京</td>
+<td>2005-09-01</td>
+</tr>
+<tr>
+<td>3</td>
+<td>00003</td>
+<td>韦一笑</td>
+<td>男</td>
+<td>38</td>
+<td>123456789712345670</td>
+<td>上海</td>
+<td>2005-08-01</td>
+</tr>
+<tr>
+<td>4</td>
+<td>00004</td>
+<td>赵敏</td>
+<td>女</td>
+<td>18</td>
+<td>123456757123845670</td>
+<td>北京</td>
+<td>2009-12-01</td>
+</tr>
+<tr>
+<td>5</td>
+<td>00005</td>
+<td>小昭</td>
+<td>女</td>
+<td>16</td>
+<td>123456769012345678</td>
+<td>上海</td>
+<td>2007-07-01</td>
+</tr>
+<tr>
+<td>6</td>
+<td>00006</td>
+<td>杨逍</td>
+<td>男</td>
+<td>28</td>
+<td>12345678931234567X</td>
+<td>北京</td>
+<td>2006-01-01</td>
+</tr>
+<tr>
+<td>7</td>
+<td>00007</td>
+<td>范瑶</td>
+<td>男</td>
+<td>40</td>
+<td>123456789212345670</td>
+<td>北京</td>
+<td>2005-05-01</td>
+</tr>
+<tr>
+<td>8</td>
+<td>00008</td>
+<td>黛绮丝</td>
+<td>女</td>
+<td>38</td>
+<td>123456157123645670</td>
+<td>天津</td>
+<td>2015-05-01</td>
+</tr>
+<tr>
+<td>9</td>
+<td>00009</td>
+<td>范凉凉</td>
+<td>女</td>
+<td>45</td>
+<td>123156789012345678</td>
+<td>北京</td>
+<td>2010-04-01</td>
+</tr>
+<tr>
+<td>10</td>
+<td>00010</td>
+<td>陈友谅</td>
+<td>男</td>
+<td>53</td>
+<td>123456789012345670</td>
+<td>上海</td>
+<td>2011-01-01</td>
+</tr>
+<tr>
+<td>11</td>
+<td>00011</td>
+<td>张士诚</td>
+<td>男</td>
+<td>55</td>
+<td>123567897123465670</td>
+<td>江苏</td>
+<td>2015-05-01</td>
+</tr>
+<tr>
+<td>12</td>
+<td>00012</td>
+<td>常遇春</td>
+<td>男</td>
+<td>32</td>
+<td>123446757152345670</td>
+<td>北京</td>
+<td>2004-02-01</td>
+</tr>
+<tr>
+<td>13</td>
+<td>00013</td>
+<td>张三丰</td>
+<td>男</td>
+<td>88</td>
+<td>123656789012345678</td>
+<td>江苏</td>
+<td>2020-11-01</td>
+</tr>
+<tr>
+<td>14</td>
+<td>00014</td>
+<td>灭绝</td>
+<td>女</td>
+<td>65</td>
+<td>123456719012345670</td>
+<td>西安</td>
+<td>2019-05-01</td>
+</tr>
+<tr>
+<td>15</td>
+<td>00015</td>
+<td>胡青牛</td>
+<td>男</td>
+<td>70</td>
+<td>12345674971234567X</td>
+<td>西安</td>
+<td>2018-04-01</td>
+</tr>
+<tr>
+<td>16</td>
+<td>00016</td>
+<td>周芷若</td>
+<td>女</td>
+<td>18</td>
+<td></td>
+<td>北京</td>
+<td>2012-06-01</td>
+</tr>
+</tbody>
+</table>
+<p>该部分所有查询都基于上面的数据</p>
+<h3 id="基础用法">基础用法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;A&#x27;</span> <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+<p>你会看到一列16个A</p>
+<h3 id="字符串通配">字符串通配</h3>
+<ul>
+<li><code>Intro%</code>匹配任何以<code>Intro</code>开头的字符串。</li>
+<li><code>%Comp%</code>匹配任何包含<code>Comp</code>的字符串。</li>
+<li><code>___</code>匹配任何恰好包含三个字符的字符串。</li>
+<li><code>___%</code>匹配任何至少包含三个字符的字符串。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> idcard <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%446%&#x27;</span><br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>workno</th>
+<th>name</th>
+<th>gender</th>
+<th>age</th>
+<th>idcard</th>
+<th>workaddress</th>
+<th>entrydate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>00012</td>
+<td>常遇春</td>
+<td>男</td>
+<td>32</td>
+<td>123446757152345670</td>
+<td>北京</td>
+<td>2004-02-01</td>
+</tr>
+</tbody>
+</table>
+<h3 id="执行顺序">执行顺序</h3>
+<p><img src="./mssql.assets/image-20240911165637049.png" srcset="/img/loading.gif" lazyload alt="执行顺序"></p>
+<h3 id="集合操作">集合操作</h3>
+<ul>
+<li>union 并集</li>
+<li>intersect 交集</li>
+<li>except 差集</li>
+</ul>
+<p>例子（需要在School数据库运行）</p>
+<p>找出和学生883794999或学生850955252的年级一样的学生的姓名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> sname <span class="hljs-keyword">from</span> STUDENTS <span class="hljs-keyword">where</span> grade <span class="hljs-keyword">in</span> (<br>    <span class="hljs-keyword">select</span> grade <span class="hljs-keyword">from</span> STUDENTS <br>    <span class="hljs-keyword">where</span> sid <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;883794999&#x27;</span><br>) <span class="hljs-keyword">UNION</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> sname <span class="hljs-keyword">from</span> STUDENTS <span class="hljs-keyword">where</span> grade <span class="hljs-keyword">in</span> (<br>    <span class="hljs-keyword">select</span> grade <span class="hljs-keyword">from</span> STUDENTS <br>    <span class="hljs-keyword">where</span> sid <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;850955252&#x27;</span><br>)<br></code></pre></td></tr></table></figure>
+<h3 id="聚合函数">聚合函数</h3>
+<ul>
+<li>avg:平均值</li>
+<li>min:最小值</li>
+<li>max:最大值</li>
+<li>sum:值之和</li>
+<li>count:值个数</li>
+</ul>
+<h3 id="分页查询">分页查询</h3>
+<p>mssql不支持limit进行分页查询</p>
+<p>跳过前5个结果，即从第6行开始，取接下来5行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> emp <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> age <br><span class="hljs-keyword">OFFSET</span> <span class="hljs-number">10</span> <span class="hljs-keyword">ROWS</span>  <span class="hljs-comment">-- 跳过前10行</span><br><span class="hljs-keyword">FETCH</span> NEXT <span class="hljs-number">5</span> <span class="hljs-keyword">ROWS</span> <span class="hljs-keyword">ONLY</span>; <span class="hljs-comment">-- 取接下来的5行</span><br></code></pre></td></tr></table></figure>
+<h3 id="with子句">with子句</h3>
+<p>例子（只做示范，不可运行）</p>
+<p>找到具有资产超过至少一个位于“Brooklyn”的分行的资产的所有分行名称。</p>
+<p>这里认为分行的总资产为总储蓄额减去总贷款额, 首先使用三个with函数计算银行的总资产、总储蓄额、总贷款额</p>
+<p>然后找到符合条件的分行名称</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">with</span> total_balance(branch_name, sum_balance) <span class="hljs-keyword">as</span><br>(<br>    <span class="hljs-keyword">select</span> branch_name,<span class="hljs-built_in">sum</span>(balance) <span class="hljs-keyword">from</span> account<br>    <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> branch_name<br>),<br>total_loan(branch_name, sum_loan) <span class="hljs-keyword">as</span> <br>(<br>    <span class="hljs-keyword">select</span> branch_name, <span class="hljs-built_in">sum</span>(amount) <span class="hljs-keyword">from</span> loan<br>    <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> branch_name<br>),<br>total_money(branch_name, money) <span class="hljs-keyword">as</span> <br>(<br>    <span class="hljs-keyword">select</span> b.branch_name, sum_balance <span class="hljs-operator">-</span> sum_loan <span class="hljs-keyword">from</span> total_balance b<br>    <span class="hljs-keyword">join</span> total_loan l <span class="hljs-keyword">on</span> b.branch_name <span class="hljs-operator">=</span> l.branch_name<br>)<br><span class="hljs-keyword">select</span> branch_name <span class="hljs-keyword">from</span> total_money <br><span class="hljs-keyword">where</span> money <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">any</span>(<br>    <span class="hljs-keyword">select</span> money <span class="hljs-keyword">from</span> total_money <span class="hljs-keyword">where</span> branch_name <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">select</span> branch_name <span class="hljs-keyword">from</span> branch <span class="hljs-keyword">where</span> branch_city <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Brooklyn&#x27;</span><br>    )<br>)<br></code></pre></td></tr></table></figure>
+<h3 id="创建view">创建view</h3>
+<p>例子（只做示范，不可运行）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">view</span> faculty <span class="hljs-keyword">as</span><br><span class="hljs-keyword">select</span> ID, name, dept_name<br><span class="hljs-keyword">from</span> instructor;<br><br><span class="hljs-keyword">select</span> name<br><span class="hljs-keyword">from</span> faculty<br><span class="hljs-keyword">where</span> dept_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Biology&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>大多数SQL实现只允许对简单的view进行更新:</p>
+<ul>
+<li>from后面只有一个表</li>
+<li>select子句只包含关系的属性名，没有任何表达式、聚合或distinct</li>
+<li>任何没有在select子句中列出的属性都可以设置为null</li>
+<li>没有group by或having</li>
+</ul>
+<h3 id="标量子查询">标量子查询</h3>
+<p>例子（只做示范，不可运行）</p>
+<p>这里的子查询应该只返回一个值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_name, <br>	(<span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">from</span> instructor <br>    <span class="hljs-keyword">where</span> department.dept_name <span class="hljs-operator">=</span> instructor.dept_name)<br>	<span class="hljs-keyword">as</span> num_instructors<br><span class="hljs-keyword">from</span> department;<br></code></pre></td></tr></table></figure>
+<h3 id="join">join</h3>
+<p>natural join 为所有公共属性匹配具有相同值的元组,并且只保留每个公共列的一个副本，<strong>但是mssql不支持natural join</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> course(<br>    course_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    title <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    dept_name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    credits <span class="hljs-type">INT</span><br>);<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">table</span> prereq(<br>    course_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    prereq_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>)<br>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> course <span class="hljs-keyword">values</span><br>(<span class="hljs-string">&#x27;BIO-301&#x27;</span>, <span class="hljs-string">&#x27;Genetics&#x27;</span>, <span class="hljs-string">&#x27;Biology&#x27;</span>, <span class="hljs-number">4</span>),<br>(<span class="hljs-string">&#x27;CS-190&#x27;</span>, <span class="hljs-string">&#x27;Game Design&#x27;</span>, <span class="hljs-string">&#x27;Comp. Sci.&#x27;</span>, <span class="hljs-number">4</span>),<br>(<span class="hljs-string">&#x27;CS-315&#x27;</span>, <span class="hljs-string">&#x27;Robotixs&#x27;</span>, <span class="hljs-string">&#x27;Comp. Sci.&#x27;</span>, <span class="hljs-number">3</span>);<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> prereq <span class="hljs-keyword">values</span><br>(<span class="hljs-string">&#x27;BIO-301&#x27;</span>, <span class="hljs-string">&#x27;BIO-101&#x27;</span>),<br>(<span class="hljs-string">&#x27;CS-190&#x27;</span>, <span class="hljs-string">&#x27;CS-101&#x27;</span>),<br>(<span class="hljs-string">&#x27;CS-347&#x27;</span>, <span class="hljs-string">&#x27;CS-101&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>示例</p>
+<p>join/inner join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br><span class="hljs-comment">-- 等价于</span><br><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>course_id</th>
+<th>title</th>
+<th>dept_name</th>
+<th>credits</th>
+<th>prereq_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIO-301</td>
+<td>Genetics</td>
+<td>Biology</td>
+<td>4</td>
+<td>BIO-101</td>
+</tr>
+<tr>
+<td>CS-190</td>
+<td>Game Design</td>
+<td>Comp. Sci.</td>
+<td>4</td>
+<td>CS-101</td>
+</tr>
+</tbody>
+</table>
+<p>left join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br><span class="hljs-comment">-- 等价于</span><br><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>course_id</th>
+<th>title</th>
+<th>dept_name</th>
+<th>credits</th>
+<th>prereq_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIO-301</td>
+<td>Genetics</td>
+<td>Biology</td>
+<td>4</td>
+<td>BIO-101</td>
+</tr>
+<tr>
+<td>CS-190</td>
+<td>Game Design</td>
+<td>Comp. Sci.</td>
+<td>4</td>
+<td>CS-101</td>
+</tr>
+<tr>
+<td>CS-315</td>
+<td>Robotixs</td>
+<td>Comp. Sci.</td>
+<td>3</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>right join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">right</span> <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>course_id</th>
+<th>title</th>
+<th>dept_name</th>
+<th>credits</th>
+<th>prereq_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIO-301</td>
+<td>Genetics</td>
+<td>Biology</td>
+<td>4</td>
+<td>BIO-101</td>
+</tr>
+<tr>
+<td>CS-190</td>
+<td>Game Design</td>
+<td>Comp. Sci.</td>
+<td>4</td>
+<td>CS-101</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>CS-101</td>
+</tr>
+</tbody>
+</table>
+<p>full join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> c.course_id, title, dept_name, credits, prereq_id <span class="hljs-keyword">from</span> course c <span class="hljs-keyword">full</span> <span class="hljs-keyword">join</span> prereq p <span class="hljs-keyword">on</span> c.course_id <span class="hljs-operator">=</span> p.course_id;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>course_id</th>
+<th>title</th>
+<th>dept_name</th>
+<th>credits</th>
+<th>prereq_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIO-301</td>
+<td>Genetics</td>
+<td>Biology</td>
+<td>4</td>
+<td>BIO-101</td>
+</tr>
+<tr>
+<td>CS-190</td>
+<td>Game Design</td>
+<td>Comp. Sci.</td>
+<td>4</td>
+<td>CS-101</td>
+</tr>
+<tr>
+<td>CS-315</td>
+<td>Robotixs</td>
+<td>Comp. Sci.</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>CS-101</td>
+</tr>
+</tbody>
+</table>
+<h2 id="DCL">DCL</h2>
+<p>Data Control Language(数据控制语言)，用来管理数据库用户、控制数据库的访问权限。</p>
+<h3 id="查询用户">查询用户</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.database_principals;<br></code></pre></td></tr></table></figure>
+<h2 id="函数">函数</h2>
+<p><strong>该部分为AI生成，未经验证</strong></p>
+<h3 id="字符串函数">字符串函数</h3>
+<ol>
+<li><code>LEN(str)</code>：返回指定字符串 str 的字符数。</li>
+<li><code>CHARINDEX(sub, str[, start])</code>：返回子字符串 sub 在字符串 str 中第一次出现的位置。如果未找到，则返回 0。</li>
+<li><code>SUBSTRING(str, start, length)</code>：从字符串 str 的指定位置开始获取指定长度的子串。</li>
+<li><code>STUFF(str, start, length, newStr)</code>：将新的文本插入到字符串 str 中的指定位置，同时删除原始字符串中相应数量的字符。</li>
+<li><code>REPLACE(str, oldSub, newSub)</code>：在字符串 str 中替换所有出现的旧子字符串 oldSub 为新子字符串 newSub。</li>
+<li><code>LEFT(str, length)</code> 或 <code>SUBSTRING(str, 1, length)</code>：返回字符串 str 的前 n 个字符（包括空格）。</li>
+<li><code>RIGHT(str, length)</code> 或 <code>SUBSTRING(str, LEN(str) - (length-1), length)</code>：返回字符串 str 的最后 n 个字符（包括空格）。</li>
+<li><code>REVERSE(str)</code>：返回输入字符串的反转版本。</li>
+<li><code>UPPER(str)</code> 和 <code>LOWER(str)</code>：将所有字母转换为大写或小写。</li>
+<li><code>LTrim(str)</code>、<code>RTrim(str)</code> 和 <code>Trim(str)</code>：删除字符串 str 左部、右部或两头空格。<code>Trim()</code> 函数会同时去除两端的空白字符。</li>
+<li><code>CONCAT(str1, [str2], ... ,[strN])</code> 或使用 <code>+</code> 运算符（从 SQL Server 2016 版本开始支持）：连接多个字符串为一个新字符串。</li>
+<li><code>REPLICATE(len, str)</code>：创建由 str 复制 len 次组成的字符串。</li>
+<li><code>CHAR(num)</code>: 返回 ASCII 编码表中指定的字符，例如 CHAR(65) 返回 ‘A’。</li>
+<li><code>ASCII(str)</code>：返回输入字符串的第一个非空格字符的 ASCII 值。</li>
+</ol>
+<h3 id="数值函数">数值函数</h3>
+<p>在 Microsoft SQL Server（MSSQL）中，提供了多种用于操作和转换数据的数学函数。这些函数可以用来执行复杂的计算或简单的算术运算。下面是一些常见的数值函数：</p>
+<ol>
+<li>
+<p><strong>ABS</strong> - 返回数值表达式的绝对值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">ABS</span>(<span class="hljs-number">-10</span>); <span class="hljs-comment">-- 输出 10</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>CEILING / CEIL</strong> - 将数值向上舍入到最接近的整数或指定的小数位。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CEILING</span>(<span class="hljs-number">3.14</span>), <span class="hljs-built_in">CEILING</span>(<span class="hljs-number">3.99</span>); <span class="hljs-comment">-- 分别输出 4 和 4</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>FLOOR</strong> - 将数值向下舍入到最接近的整数或指定的小数位。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">FLOOR</span>(<span class="hljs-number">3.14</span>), <span class="hljs-built_in">FLOOR</span>(<span class="hljs-number">3.99</span>); <span class="hljs-comment">-- 分别输出 3 和 3</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>ROUND</strong> - 对数值进行四舍五入。可以指定保留几位小数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> ROUND(<span class="hljs-number">3.14159</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">-- 输出 3.14</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>TRUNCATE / TRUNC</strong> - 将数值截断到所需的小数位或整数位，不进行四舍五入。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">TRUNCATE</span>(<span class="hljs-number">3.14159</span>, <span class="hljs-number">2</span>), TRUNC(<span class="hljs-number">3.14159</span>); <span class="hljs-comment">-- 输出 3.14 和 3</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>SQRT</strong> - 计算数值的平方根。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SQRT</span>(<span class="hljs-number">16</span>); <span class="hljs-comment">-- 输出 4</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>POWER</strong> - 返回第一个参数的第二个参数次方的结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">POWER</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">-- 输出 8</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>EXP</strong> - 计算 e（自然对数的底）的指定指数值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">EXP</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">-- 输出约 2.71828</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>LOG / LOG10</strong> - 返回数值的自然对数或以10为底的对数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">LOG</span>(<span class="hljs-number">100</span>), <span class="hljs-built_in">LOG10</span>(<span class="hljs-number">100</span>); <span class="hljs-comment">-- 分别输出约 4 和 2</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>RAND</strong> - 返回一个在0到1之间的随机浮点数（不包括0和1）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> RAND();<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>SIGN</strong> - 返回数值的符号，即 -1、0 或 +1。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> SIGN(<span class="hljs-number">-5</span>), SIGN(<span class="hljs-number">0</span>), SIGN(<span class="hljs-number">5</span>); <span class="hljs-comment">-- 分别输出 -1, 0 和 1</span><br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这些函数可以用于各种计算需求，从简单的算术操作到更复杂的数学分析。在实际应用中选择合适的函数取决于具体的数据处理或计算要求。</p>
+<h3 id="日期函数">日期函数</h3>
+<p>Microsoft SQL Server 提供了许多用于操作和查询日期时间数据的内置函数。以下是一些常见的日期函数：</p>
+<ol>
+<li>
+<p><strong>DATEADD</strong> - 添加或减少给定的时间单位（如年、月、日等）到一个特定的日期。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> DATEADD(<span class="hljs-keyword">month</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;2023-04-01&#x27;</span>); <span class="hljs-comment">-- 结果会是&#x27;2023-07-01&#x27;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DATEDIFF</strong> - 计算两个日期之间的时间间隔，可以指定要计算的单位（如年、月、天等）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> DATEDIFF(<span class="hljs-keyword">day</span>, <span class="hljs-string">&#x27;2023-04-01&#x27;</span>, <span class="hljs-string">&#x27;2023-05-01&#x27;</span>); <span class="hljs-comment">-- 结果会是30</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DATE</strong> - 返回当前的系统日期。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-type">DATE</span>(); <span class="hljs-comment">-- 取决于服务器时间，显示当前日期</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DATENAME</strong> 和 <strong>DATEDPART</strong> - 计算并返回给定日期在特定日历项（如星期、月份等）中的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs none">SELECT DATENAME(weekday, &#x27;2023-04-10&#x27;); -- 可能会显示 &#x27;Monday&#x27;<br>SELECT DATEDPART(weekday, &#x27;2023-04-10&#x27;); -- 返回数字表示，例如 5（星期天）<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>GETDATE</strong> - 获取当前系统时间。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> GETDATE();<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>CONVERT</strong> 或 <strong>CAST</strong> - 转换数据类型。在转换日期时很有用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CAST</span>(<span class="hljs-string">&#x27;2023-04-01&#x27;</span> <span class="hljs-keyword">AS</span> <span class="hljs-type">DATE</span>);<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>YEAR</strong>, <strong>MONTH</strong>, <strong>DAY</strong>, <strong>HOUR</strong>, <strong>MINUTE</strong>, <strong>SECOND</strong> - 从一个日期或时间值中提取特定的年、月、日等部分。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">YEAR</span>(<span class="hljs-string">&#x27;2023-04-15&#x27;</span>), <span class="hljs-keyword">MONTH</span>(<span class="hljs-string">&#x27;2023-04-15&#x27;</span>), <span class="hljs-keyword">DAY</span>(<span class="hljs-string">&#x27;2023-04-15&#x27;</span>);<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>ADD_MONTHS</strong> 和 <strong>SUB_MONTHS</strong> - 对日期添加或减少指定的月份。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> ADD_MONTHS(<span class="hljs-string">&#x27;2023-04-01&#x27;</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">-- 结果会是&#x27;2023-06-01&#x27;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DATEPART</strong> 和 <strong>DATEDIFF</strong> - 类似于<code>DATEDIFF</code>和<code>DATENAME</code>，但提供更多的选项以获取特定部分的值（如小时、分钟、秒等）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> DATEPART(<span class="hljs-keyword">hour</span>, <span class="hljs-string">&#x27;2023-04-15 12:34:56&#x27;</span>);<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DATE_FROM_UNIX_EPOCH</strong> - 将从Unix纪元开始的整数转换为日期时间值（Unix纪元从1970年1月1日午夜开始）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> DATEFROMPARTS(<span class="hljs-number">2023</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>); <span class="hljs-comment">-- 根据当前时区计算结果，例如 &#x27;2023-04-05&#x27;</span><br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这些函数可以单独使用或组合在更复杂的查询中，用于数据分析、报表生成以及其他需要日期和时间处理的任务。</p>
+<h3 id="流程函数">流程函数</h3>
+<p>Microsoft SQL Server 提供了一系列的流程（事务控制）函数和关键字来帮助管理数据库中的并发操作和事务的生命周期。以下是几个常用的与事务和流程相关的功能：</p>
+<ol>
+<li>
+<p><strong>BEGIN TRAN / START TRANSACTION</strong>：开始一个新的事务。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span> TRAN;<br><span class="hljs-comment">-- 执行一系列SQL语句...</span><br><span class="hljs-keyword">COMMIT</span>;  <span class="hljs-comment">-- 提交事务，使更改永久化</span><br><span class="hljs-keyword">ROLLBACK</span>;  <span class="hljs-comment">-- 回滚事务，取消所有更改并恢复到事务前的状态</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>ROLLBACK</strong>：回滚当前的事务。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span> TRAN;<br><span class="hljs-comment">-- 执行SQL语句...</span><br><span class="hljs-keyword">ROLLBACK</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>COMMIT</strong>：提交正在进行的事务，使所有更改永久化。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span> TRAN;<br><span class="hljs-comment">-- 执行SQL语句...</span><br><span class="hljs-keyword">COMMIT</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>SAVEPOINT</strong>：创建一个保存点，用于回退到事务的一部分。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span> TRAN;<br><span class="hljs-keyword">SAVEPOINT</span> my_savepoint;<br><span class="hljs-comment">-- 进行更改并执行更多操作</span><br><span class="hljs-keyword">ROLLBACK</span> <span class="hljs-keyword">TO</span> <span class="hljs-keyword">SAVEPOINT</span> my_savepoint;  <span class="hljs-comment">-- 回滚到指定的保存点</span><br><span class="hljs-keyword">COMMIT</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>SET XACT_ABORT</strong>：设置事务处理失败时的行为，可以立即终止事务。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> XACT_ABORT <span class="hljs-keyword">ON</span>;  <br><span class="hljs-keyword">BEGIN</span> TRAN;<br><span class="hljs-comment">-- 执行SQL语句...</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> invalid_table;  <span class="hljs-comment">-- 这将导致事务结束并抛出错误</span><br><span class="hljs-keyword">COMMIT</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>TRY…CATCH</strong>：用于捕获和处理在执行过程中的异常。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql">TRY<br>    <span class="hljs-keyword">BEGIN</span> TRAN;<br>    <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table_name (column1, column2) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&#x27;value1&#x27;</span>, <span class="hljs-string">&#x27;value2&#x27;</span>);<br>CATCH<br>    IF @<span class="hljs-variable">@ERROR</span> <span class="hljs-operator">!=</span> <span class="hljs-number">0</span><br>        PRINT <span class="hljs-string">&#x27;Transaction failed with error number: &#x27;</span> <span class="hljs-operator">+</span> <span class="hljs-built_in">CAST</span>(@<span class="hljs-variable">@ERROR</span> <span class="hljs-keyword">as</span> <span class="hljs-type">varchar</span>);<br>    <span class="hljs-keyword">ROLLBACK</span>;  <br><span class="hljs-keyword">END</span> TRY<br><span class="hljs-keyword">BEGIN</span> TRAN;<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>RAISERROR</strong>：用于显式地在SQL Server中引发错误。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">RAISERROR(<span class="hljs-string">&#x27;Error occurred&#x27;</span>, <span class="hljs-number">16</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">-- 引发一个严重错误</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>SET NOCOUNT</strong>：关闭SQL语句的计数输出，避免在每条查询后显示执行行数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> NOCOUNT <span class="hljs-keyword">ON</span>;<br><span class="hljs-comment">-- 执行SQL语句...</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>DBCC CHECKDB</strong>（只读模式下）或 SQL Server Management Studio 中使用图形界面：检查数据库中的所有对象以查找可能导致数据损坏的错误。</p>
+</li>
+</ol>
+<p>这些函数和关键字帮助确保事务的正确执行，以及在出现错误时能够控制事务的状态。在处理大量并发操作、维护数据库完整性等方面非常有用。</p>
+<h2 id="约束">约束</h2>
+<h3 id="综述">综述</h3>
+<h4 id="1-主键（Primary-Key）">1. <strong>主键（Primary Key）</strong></h4>
+<p><strong>定义：</strong> 主键用于唯一标识表中的一行。一个表只能有一个主键，并且不能包含 <code>NULL</code> 值。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employees (<br>    EmployeeID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY, <br>    FirstName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>), <br>    LastName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>)<br>);<br></code></pre></td></tr></table></figure>
+<p>查找主键</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> INFORMATION_SCHEMA.TABLE_CONSTRAINTS<br><span class="hljs-keyword">WHERE</span> CONSTRAINT_TYPE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;PRIMARY KEY&#x27;</span> <span class="hljs-keyword">and</span> table_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Employees&#x27;</span> ;<br></code></pre></td></tr></table></figure>
+<h4 id="2-外键（Foreign-Key）">2. <strong>外键（Foreign Key）</strong></h4>
+<p><strong>定义：</strong> 外键用于在两个表之间建立关系。它引用另一个表的主键或唯一索引。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Departments (<br>    DepartmentID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    DepartmentName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employees (<br>    EmployeeID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    FirstName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    LastName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    DepartmentID <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">FOREIGN</span> KEY (DepartmentID) <span class="hljs-keyword">REFERENCES</span> Departments(DepartmentID)<br>);<br></code></pre></td></tr></table></figure>
+<p><strong>查看所有外键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> INFORMATION_SCHEMA.TABLE_CONSTRAINTS<br><span class="hljs-keyword">WHERE</span> CONSTRAINT_TYPE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;FOREIGN KEY&#x27;</span> <span class="hljs-keyword">and</span> table_name <span class="hljs-operator">=</span> 表名;<br></code></pre></td></tr></table></figure>
+<p><strong>增加外键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br><span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> 约束名<br><span class="hljs-keyword">FOREIGN</span> KEY (外键列)<br><span class="hljs-keyword">REFERENCES</span> 其他表名(主键列);<br></code></pre></td></tr></table></figure>
+<p>例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Orders<br><span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> FK_Orders_Customers_114514<br><span class="hljs-keyword">FOREIGN</span> KEY (CustomerID)<br><span class="hljs-keyword">REFERENCES</span> Customers(CustomerID);<br></code></pre></td></tr></table></figure>
+<p><strong>级联操作:</strong> 你可以指定在删除或更新父表数据时，对子表数据进行级联操作。例如：</p>
+<ul>
+<li><code>ON DELETE CASCADE</code>: 删除父表中的记录时，级联删除子表中关联的记录。</li>
+<li><code>ON UPDATE CASCADE</code>: 更新父表中的主键时，级联更新子表中的外键。</li>
+</ul>
+<p>例如</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Orders<br><span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> FK_Orders_Customers_114514<br><span class="hljs-keyword">FOREIGN</span> KEY (CustomerID)<br><span class="hljs-keyword">REFERENCES</span> Customers(CustomerID) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> CASCADE;<br></code></pre></td></tr></table></figure>
+<p><strong>删除外键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> borrow <span class="hljs-keyword">drop</span> <span class="hljs-keyword">constraint</span> 外键名;<br></code></pre></td></tr></table></figure>
+<h4 id="删除-更新行为-AI生成">删除/更新行为(AI生成)</h4>
+<p>在 Microsoft SQL Server 中，当涉及到表之间的关系（即外键）时，有几种常见的行为或动作可以定义在主表和从属表之间，以控制数据插入、更新和删除时的行为。这些行为通常通过 <code>FOREIGN KEY</code> 语句中的 <code>ON DELETE</code> 和 <code>ON UPDATE</code> 子句来指定。以下是主要的四种外键约束删除（Delete）和更新（Update）行为：</p>
+<p><strong>ON DELETE</strong></p>
+<p>当主表中的一行被删除时，以下有几种情况可以发生于从属表中的关联行：</p>
+<ol>
+<li><strong>NO ACTION</strong> (默认)：如果未定义任何特定的行为，则会尝试删除时引发错误。这是在不允许删除与外键约束相关的任何数据的情况下使用的情况。</li>
+<li><strong>RESTRICT</strong>：类似于 NO ACTION。这意味着当尝试删除主表中被引用的行时，SQL Server 将不执行删除操作并引发一个错误。</li>
+<li><strong>SET NULL</strong>：如果从属表中的外键列允许 <code>NULL</code> 值，并且在主表中该行被设置为 <code>NULL</code> 以匹配此行为，则从属表中的相关外键可以变为 <code>NULL</code>。这使得外键引用丢失，但是保留了从属表的完整性规则（例如非空约束）。</li>
+<li><strong>CASCADE</strong>：如果定义了 CASCADE 行为，那么当主表中被引用的行被删除时，SQL Server 会自动删除所有在从属表中的相关关联行。这意味着从属表的记录将与主表一起删除。</li>
+<li><strong>SET DEFAULT</strong>：如果在主表中被删除的行有一个默认值（如果存在），则尝试用该默认值来更新从属表中的外键列。这通常不太常见，除非有特别的设计需求。</li>
+</ol>
+<p><strong>ON UPDATE</strong></p>
+<p>当主表中的数据发生变化时（例如插入、更新或删除数据），与从属表中的引用相关的行为可以定义如下：</p>
+<ol>
+<li><strong>NO ACTION</strong> (默认)：如果未定义任何特定行为，则尝试更新或添加时可能会引发错误。</li>
+<li><strong>RESTRICT</strong>：不允许对主表进行修改以违反外键约束。这意味着在主表中无法执行更新或插入，除非所有相关引用都已正确更新或删除。</li>
+<li><strong>SET NULL</strong>：如果从属表的外键列允许 <code>NULL</code> 值，并且主表中被引用的数据被替换为默认值、设置为 <code>NULL</code> 或者不再存在时，则将从属表中的外键字段设置为 <code>NULL</code>。这有助于保持数据完整性，但可能需要额外的逻辑来确保从属表的其他约束（如非空）得到满足。</li>
+<li><strong>CASCADE</strong>：如果定义了 CASCADE 行为，那么主表中对引用值的任何更新都将自动导致从属表中的相关行进行相应的更新。这可以确保数据一致性，并在需要时强制执行外键规则。</li>
+<li><strong>SET DEFAULT</strong>：如果在主表中有默认值，并且使用了 SET DEFAULT 的 ON UPDATE 行为，则尝试用该默认值来更新从属表的外键列，前提是这些更改不会违反任何其他约束（例如非空约束）。</li>
+</ol>
+<p>通过正确配置这些行为，可以确保数据库中的数据一致性，在不同操作场景下提供灵活和强大的数据管理功能。在实际应用中选择哪种行为通常取决于特定业务规则或应用程序需求。</p>
+<h4 id="3-唯一约束（Unique-Constraint）">3. <strong>唯一约束（Unique Constraint）</strong></h4>
+<p><strong>定义：</strong> 确保表中一个或多个列的值不重复。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Product (<br>    ProductID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    ProductName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    CategoryID <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">FOREIGN</span> KEY (CategoryID) <span class="hljs-keyword">REFERENCES</span> Categories(CategoryID)<br>);<br></code></pre></td></tr></table></figure>
+<h4 id="4-检查约束（Check-Constraint）">4. <strong>检查约束（Check Constraint）</strong></h4>
+<p><strong>定义：</strong> 确保数据满足特定的逻辑条件。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Sales (<br>    SaleID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    Amount <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">CHECK</span> (Amount <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span>),<br>    SaleDate <span class="hljs-type">DATE</span><br>);<br></code></pre></td></tr></table></figure>
+<h4 id="5-非空约束（Not-Null-Constraint）">5. <strong>非空约束（Not Null Constraint）</strong></h4>
+<p><strong>定义：</strong> 确保表中的特定字段不能为 <code>NULL</code>。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Users (<br>    UserID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    FirstName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    LastName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>)<br>);<br></code></pre></td></tr></table></figure>
+<h4 id="6-默认值约束（Default-Constraint）">6. <strong>默认值约束（Default Constraint）</strong></h4>
+<p><strong>定义：</strong> 当用户在插入数据时未指定特定字段的值时，使用预设的值。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Orders (<br>    OrderID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    OrderDate DATETIME <span class="hljs-keyword">DEFAULT</span> GETDATE(),<br>    UserID <span class="hljs-type">INT</span> <span class="hljs-keyword">FOREIGN</span> KEY <span class="hljs-keyword">REFERENCES</span> Users(UserID)<br>);<br></code></pre></td></tr></table></figure>
+<h4 id="7-唯一索引">7. <strong>唯一索引</strong></h4>
+<p>虽然不是传统意义上的约束，但它们在确保数据的一致性和唯一性方面非常有用。</p>
+<p><strong>创建示例：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Products (<br>    ProductID <span class="hljs-type">int</span> <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">IDENTITY</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>),<br>    ProductName <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    CategoryID <span class="hljs-type">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    Price <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)<br>);<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> NONCLUSTERED INDEX idx_ProductName <br><span class="hljs-keyword">ON</span> Products (ProductName) INCLUDE (CategoryID);<br></code></pre></td></tr></table></figure>
+<p><strong>CREATE UNIQUE NONCLUSTERED INDEX:</strong> 这部分表示我们要创建一个唯一的、非聚集的索引。</p>
+<ul>
+<li><strong>UNIQUE:</strong> 确保索引中的值是唯一的，即ProductName列不能有重复值。</li>
+<li><strong>NONCLUSTERED:</strong> 这个索引不会改变表中数据的物理存储顺序，它只是提供了一种快速查找数据的方式。</li>
+<li><strong>INDEX:</strong> 表示我们要创建一个索引。</li>
+<li><strong>idx_ProductName:</strong> 是我们给这个索引起的名字。</li>
+</ul>
+<p><strong>ON Product:</strong> 指定要创建索引的表是Product。</p>
+<p><strong>(ProductName):</strong> 索引基于ProductName列创建，查询时会根据ProductName列的值进行快速查找。</p>
+<p><strong>INCLUDE CategoryID:</strong> 表示除了ProductName列作为索引键之外，我们还希望在索引中包含CategoryID列的值。这样，在查询时，如果查询条件中涉及CategoryID列，就可以直接从索引中获取到相关数据，而不需要回表查询。</p>
+<h3 id="案例">案例</h3>
+<p>P#为表PERSON的主键，具有唯一性约束，Page具有约束：大于18</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> PERSON<br>(<br>    P# <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">UNIQUE</span>,<br>    Pname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    Page <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY(P#),<br>    <span class="hljs-keyword">CHECK</span>(Page<span class="hljs-operator">&gt;</span><span class="hljs-number">18</span>)<br>);<br></code></pre></td></tr></table></figure>
+<p>R#是表ROOM的主键，具有唯一性约束。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> ROOM<br>(<br>    R# <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">UNIQUE</span>,<br>    Rname <span class="hljs-type">CHAR</span>(<span class="hljs-number">20</span>),<br>    Rarea <span class="hljs-type">FLOAT</span>(<span class="hljs-number">10</span>),<br>    <span class="hljs-keyword">PRIMARY</span> KEY(R#)<br>)<br></code></pre></td></tr></table></figure>
+<p>表P-R中的P#，R#是外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> PR<br>(<br>    P# <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">UNIQUE</span>,<br>    R# <span class="hljs-type">CHAR</span>(<span class="hljs-number">8</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">UNIQUE</span>,<br><br>    <span class="hljs-keyword">PRIMARY</span> KEY(P#,R#),<br>    <span class="hljs-keyword">FOREIGN</span> KEY(P#) <span class="hljs-keyword">REFERENCES</span> PERSON <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> CASCADE,<br>    <span class="hljs-keyword">FOREIGN</span> KEY(R#) <span class="hljs-keyword">REFERENCES</span> ROOM <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> CASCADE<br>)<br></code></pre></td></tr></table></figure>
+<p>为ROOM表创建按R#降序排列的索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX XCNO <span class="hljs-keyword">ON</span> ROOM(R# <span class="hljs-keyword">DESC</span>)<br></code></pre></td></tr></table></figure>
+<p>为 PERSON表创建按P#升序排列的索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX XSNO <span class="hljs-keyword">ON</span> PERSON(P#) <span class="hljs-comment">-- (默认升序）</span><br></code></pre></td></tr></table></figure>
+<p>创建表 PERSON的按 Pname升序排列的唯一性索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX RNUA <span class="hljs-keyword">ON</span> PERSON (Pname <span class="hljs-keyword">ASC</span>)<br></code></pre></td></tr></table></figure>
+<p>取消 PERSON表P#升序索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> INDEX PERSON.XSNO<br></code></pre></td></tr></table></figure>
+<h2 id="多表查询">多表查询</h2>
+<h3 id="一对一-一对多">一对一/一对多</h3>
+<p>假设我们有三个表：<code>Customers</code>, <code>Orders</code>, 和 <code>OrderDetails</code>。这些表如下所示：</p>
+<p><strong>Customers 表</strong></p>
+<table>
+<thead>
+<tr>
+<th>ColumnName</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CustomerID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>varchar(50)</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>varchar(100)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Orders 表</strong></p>
+<table>
+<thead>
+<tr>
+<th>ColumnName</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OrderID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>CustomerID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>OrderDate</td>
+<td>datetime</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OrderDetails 表</strong></p>
+<table>
+<thead>
+<tr>
+<th>ColumnName</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DetailID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>OrderID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>ProductID</td>
+<td>int</td>
+</tr>
+<tr>
+<td>Quantity</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+<p>我们首先创建这三个表，然后插入一些示例数据：</p>
+<p>创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- Customers 表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Customers (<br>    CustomerID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    Name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),<br>    Email <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><span class="hljs-comment">-- Orders 表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Orders (<br>    OrderID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    CustomerID <span class="hljs-type">INT</span>,<br>    OrderDate DATETIME,<br>    <span class="hljs-keyword">FOREIGN</span> KEY (CustomerID) <span class="hljs-keyword">REFERENCES</span> Customers(CustomerID)<br>);<br><br><span class="hljs-comment">-- OrderDetails 表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> OrderDetails (<br>    DetailID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    OrderID <span class="hljs-type">INT</span>,<br>    ProductID <span class="hljs-type">INT</span>,<br>    Quantity <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">FOREIGN</span> KEY (OrderID) <span class="hljs-keyword">REFERENCES</span> Orders(OrderID)<br>);<br></code></pre></td></tr></table></figure>
+<p>插入数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Customers <span class="hljs-keyword">VALUES</span><br>(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;John Doe&#x27;</span>, <span class="hljs-string">&#x27;john.doe@example.com&#x27;</span>),<br>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;Jane Smith&#x27;</span>, <span class="hljs-string">&#x27;jane.smith@example.com&#x27;</span>);<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Orders <span class="hljs-keyword">VALUES</span><br>(<span class="hljs-number">101</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;2023-09-15 14:30:00&#x27;</span>),<br>(<span class="hljs-number">102</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;2023-09-16 10:20:00&#x27;</span>);<br><br><span class="hljs-comment">-- 假设 Product 表中存在以下条目：</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> OrderDetails <span class="hljs-keyword">VALUES</span><br>(<span class="hljs-number">1</span>, <span class="hljs-number">101</span>, <span class="hljs-number">501</span>, <span class="hljs-number">1</span>),<br>(<span class="hljs-number">2</span>, <span class="hljs-number">101</span>, <span class="hljs-number">502</span>, <span class="hljs-number">3</span>),<br>(<span class="hljs-number">3</span>, <span class="hljs-number">102</span>, <span class="hljs-number">501</span>, <span class="hljs-number">2</span>);<br><br><span class="hljs-comment">-- 这里只是示例，实际 Product 表可能还有更多行。</span><br></code></pre></td></tr></table></figure>
+<p>多表查询</p>
+<p>现在我们可以使用多表查询来获取特定客户的所有订单和订购产品的详细信息：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> c.Name, o.OrderDate, d.ProductID, od.Quantity<br><span class="hljs-keyword">FROM</span> Customers <span class="hljs-keyword">AS</span> c<br><span class="hljs-keyword">JOIN</span> Orders <span class="hljs-keyword">AS</span> o <span class="hljs-keyword">ON</span> c.CustomerID <span class="hljs-operator">=</span> o.CustomerID<br><span class="hljs-keyword">JOIN</span> OrderDetails <span class="hljs-keyword">AS</span> od <span class="hljs-keyword">ON</span> o.OrderID <span class="hljs-operator">=</span> od.OrderID;<br></code></pre></td></tr></table></figure>
+<p>这个查询将 <code>Customers</code> 表、<code>Orders</code> 表和 <code>OrderDetails</code> 表联接在一起，以获取每个客户的订单日期、订购的产品 ID 和数量。</p>
+<p>输出效果：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>OrderDate</th>
+<th>ProductID</th>
+<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>John Doe</td>
+<td>2023-09-15 14:30:00</td>
+<td>501</td>
+<td>1</td>
+</tr>
+<tr>
+<td>John Doe</td>
+<td>2023-09-15 14:30:00</td>
+<td>502</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Jane Smith</td>
+<td>2023-09-16 10:20:00</td>
+<td>501</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%93%E4%B8%9A%E6%8A%80%E8%83%BD/" class="category-chain-item">专业技能</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>mssql</div>
+      <div>https://blog.algorithmpark.xyz/2024/10/07/mssql/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年10月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/07/docker/docker/" title="docker">
+                        <span class="hidden-mobile">docker</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
