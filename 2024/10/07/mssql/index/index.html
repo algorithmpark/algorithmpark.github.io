@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
 <meta property="article:published_time" content="2024-10-07T09:33:22.000Z">
-<meta property="article:modified_time" content="2024-10-07T01:35:46.948Z">
+<meta property="article:modified_time" content="2024-10-10T13:56:40.824Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.6k 字
+          6.8k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          56 分钟
+          57 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-10-07T01:35:46+00:00
+                    本文最后更新于 2024-10-10T13:56:40+00:00
                   
                   
 
@@ -437,7 +437,7 @@
 <p>清空tb_user表</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> tb_user;<br></code></pre></td></tr></table></figure>
 <h2 id="支持的数据类型">支持的数据类型</h2>
-<p>请can’khttps://learn.microsoft.com/zh-cn/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver16</p>
+<p>请参考<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver16">https://learn.microsoft.com/zh-cn/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver16</a></p>
 <h2 id="DML">DML</h2>
 <p>Data Manipulation Language(数据操作语言)</p>
 <p>用来对数据库中表的数据记录进行增、删、改操作</p>
@@ -714,6 +714,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_name, <br>	(<span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">from</span> instructor <br>    <span class="hljs-keyword">where</span> department.dept_name <span class="hljs-operator">=</span> instructor.dept_name)<br>	<span class="hljs-keyword">as</span> num_instructors<br><span class="hljs-keyword">from</span> department;<br></code></pre></td></tr></table></figure>
 <h3 id="join">join</h3>
 <p>natural join 为所有公共属性匹配具有相同值的元组,并且只保留每个公共列的一个副本，<strong>但是mssql不支持natural join</strong></p>
+<p>using可指定用于连接的同名属性，但是mssql也不支持</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> course(<br>    course_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    title <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    dept_name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    credits <span class="hljs-type">INT</span><br>);<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">table</span> prereq(<br>    course_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>),<br>    prereq_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">30</span>)<br>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> course <span class="hljs-keyword">values</span><br>(<span class="hljs-string">&#x27;BIO-301&#x27;</span>, <span class="hljs-string">&#x27;Genetics&#x27;</span>, <span class="hljs-string">&#x27;Biology&#x27;</span>, <span class="hljs-number">4</span>),<br>(<span class="hljs-string">&#x27;CS-190&#x27;</span>, <span class="hljs-string">&#x27;Game Design&#x27;</span>, <span class="hljs-string">&#x27;Comp. Sci.&#x27;</span>, <span class="hljs-number">4</span>),<br>(<span class="hljs-string">&#x27;CS-315&#x27;</span>, <span class="hljs-string">&#x27;Robotixs&#x27;</span>, <span class="hljs-string">&#x27;Comp. Sci.&#x27;</span>, <span class="hljs-number">3</span>);<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> prereq <span class="hljs-keyword">values</span><br>(<span class="hljs-string">&#x27;BIO-301&#x27;</span>, <span class="hljs-string">&#x27;BIO-101&#x27;</span>),<br>(<span class="hljs-string">&#x27;CS-190&#x27;</span>, <span class="hljs-string">&#x27;CS-101&#x27;</span>),<br>(<span class="hljs-string">&#x27;CS-347&#x27;</span>, <span class="hljs-string">&#x27;CS-101&#x27;</span>)<br></code></pre></td></tr></table></figure>
 <p>示例</p>
 <p>join/inner join</p>
@@ -1073,6 +1074,8 @@
 <p><strong>定义：</strong> 确保数据满足特定的逻辑条件。</p>
 <p><strong>创建示例：</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Sales (<br>    SaleID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY,<br>    Amount <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">CHECK</span> (Amount <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span>),<br>    SaleDate <span class="hljs-type">DATE</span><br>);<br></code></pre></td></tr></table></figure>
+<p>复杂的check示例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">check</span> (id <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> student))<br></code></pre></td></tr></table></figure>
 <h4 id="5-非空约束（Not-Null-Constraint）">5. <strong>非空约束（Not Null Constraint）</strong></h4>
 <p><strong>定义：</strong> 确保表中的特定字段不能为 <code>NULL</code>。</p>
 <p><strong>创建示例：</strong></p>
@@ -1226,6 +1229,105 @@
 </tr>
 </tbody>
 </table>
+<h2 id="事务">事务</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> name, age <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> id<br><span class="hljs-keyword">OFFSET</span> <span class="hljs-number">1</span> <span class="hljs-keyword">ROWS</span> <br><span class="hljs-keyword">FETCH</span> NEXT <span class="hljs-number">5</span> <span class="hljs-keyword">ROWS</span> <span class="hljs-keyword">ONLY</span>;<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张无忌</td>
+<td>18</td>
+</tr>
+<tr>
+<td>韦一笑</td>
+<td>38</td>
+</tr>
+<tr>
+<td>赵敏</td>
+<td>18</td>
+</tr>
+<tr>
+<td>小昭</td>
+<td>16</td>
+</tr>
+<tr>
+<td>杨逍</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 开始事务处理</span><br><span class="hljs-keyword">BEGIN</span> TRANSACTION;<br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- 回滚事务</span><br><span class="hljs-keyword">ROLLBACK</span> TRANSACTION;<br></code></pre></td></tr></table></figure>
+<p>再次执行上面的查询，发现age不变</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 开始事务处理</span><br><span class="hljs-keyword">BEGIN</span> TRANSACTION;<br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- 提交事务，保存所做的所有更改。如果任何一个步骤失败，则后续步骤不会执行，并自动回滚。</span><br><span class="hljs-keyword">COMMIT</span> TRANSACTION;<br></code></pre></td></tr></table></figure>
+<p>再次查询，观察到age+2</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张无忌</td>
+<td>20</td>
+</tr>
+<tr>
+<td>韦一笑</td>
+<td>40</td>
+</tr>
+<tr>
+<td>赵敏</td>
+<td>20</td>
+</tr>
+<tr>
+<td>小昭</td>
+<td>18</td>
+</tr>
+<tr>
+<td>杨逍</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>发生语法错误时，会自动回滚</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">BEGIN</span> TRANSACTION;<br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-number">114514</span> <span class="hljs-comment">-- 制造语法错误</span><br>    <span class="hljs-keyword">UPDATE</span> emp <span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">COMMIT</span> TRANSACTION;<br></code></pre></td></tr></table></figure>
+<p>再次执行上面的查询</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张无忌</td>
+<td>20</td>
+</tr>
+<tr>
+<td>韦一笑</td>
+<td>40</td>
+</tr>
+<tr>
+<td>赵敏</td>
+<td>20</td>
+</tr>
+<tr>
+<td>小昭</td>
+<td>18</td>
+</tr>
+<tr>
+<td>杨逍</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
 
                 
               </div>
@@ -1283,7 +1385,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月7日</div>
+          <div>2024年10月10日</div>
         </div>
       
       
@@ -1313,6 +1415,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/10/11/swap-face/index/" title="AI换脸入门">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AI换脸入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -1,0 +1,1091 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="试水开源SOTA换脸项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI换脸入门">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2024/10/11/swap-face/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="试水开源SOTA换脸项目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/img/swap-face.png">
+<meta property="article:published_time" content="2024-10-11T17:34:49.000Z">
+<meta property="article:modified_time" content="2024-10-11T09:36:46.480Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/swap-face.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>AI换脸入门 - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/old/" target="_self">
+                <i class="iconfont icon-plan"></i>
+                <span>旧算法乐园</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI换脸入门"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-11 17:34" pubdate>
+          2024年10月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">AI换脸入门</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2024-10-11T09:36:46+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>AI换脸入门</h1>
+<h2 id="DeepFaceLive"><strong>DeepFaceLive</strong></h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/iperov/DeepFaceLive">https://github.com/iperov/DeepFaceLive</a></p>
+<p>支持换脸和视频驱动图片，但是只提供了预训练的模型</p>
+<p>用 docker 部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker pull akash19nayak/deepfacelive<br><span class="hljs-built_in">cd</span> build/linux<br><span class="hljs-comment"># 建议结合./start.sh 修改启动指令 xhost +</span><br>sudo docker run --ipc host --gpus all -e DISPLAY=<span class="hljs-variable">$DISPLAY</span> -v /tmp/.X11-unix:/tmp/.X11-unix -v ./data:/data/  --<span class="hljs-built_in">rm</span> -it akash19nayak/deepfacelive<br><br><span class="hljs-comment"># 需要挂载摄像头的运行这个</span><br>sudo docker run --ipc host --gpus all -e DISPLAY=<span class="hljs-variable">$DISPLAY</span>  -v /tmp/.X11-unix:/tmp/.X11-unix -v ./data:/data/ -v /home/node1/Desktop/code/ai/data/swap-face/syz:/syz_data --device=/dev/video0:/dev/video0 --device=/dev/video1:/dev/video1 --<span class="hljs-built_in">rm</span> -it akash19nayak/deepfacelive<br></code></pre></td></tr></table></figure>
+<p><strong>该仓库支持换脸和视频驱动图片，但是部署后只找到换脸功能，可用的脸有限</strong></p>
+<p>对于每张脸都需要训练个模型，训练模型使用<a target="_blank" rel="noopener" href="https://github.com/iperov/DeepFaceLab">iperov/DeepFaceLab</a> （这个仓库目前被封了），自训练的模型可以实现自定义的脸、更高的清晰度</p>
+<p>DeepFaceLab镜像仓库<a target="_blank" rel="noopener" href="https://dagshub.com/idonov/DeepFaceLab">idonov/DeepFaceLab</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/davidnasar/DeepFaceLab-1">GitHub - davidnasar/DeepFaceLab-1: DeepFaceLab最新版，完整版，原版汉化版。</a></p>
+<p>Docker构建DeepFaceLab <a target="_blank" rel="noopener" href="https://github.com/xychelsea/deepfacelab-docker">GitHub - xychelsea/deepfacelab-docker: Docker Containers for DeepFaceLab with TensorFlow in Anaconda 3</a></p>
+<h3 id="换脸实现">换脸实现</h3>
+<p>打开图形化界面之后，可以手动选择脸模型和保存图片的文件夹</p>
+<p>要想获得换脸后的视频，需要从原视频提取出mp3音频，然后以25帧每秒的帧率将图片合成为mp4视频，使用ffmpeg</p>
+<p>换脸过程需要手动操作，暂无自动化的方案，只作了2个demo</p>
+<p>mp4视频提取mp3音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ffmpeg -i .\121.mp4 121.mp3<br></code></pre></td></tr></table></figure>
+<p>以25帧每秒的帧率将图片合成为mp4视频，使用之前生成的mp3音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ffmpeg -framerate 25 -i Ava_121/%06d.jpg -i 121.mp3 -c:v libx264 -c:a aac -strict experimental -b:a 192k -shortest -pix_fmt yuv420p Ava_121.mp4<br></code></pre></td></tr></table></figure>
+<h3 id="效果">效果</h3>
+<p><img src="./swap-face.assets/image-20241011170205691.png" srcset="/img/loading.gif" lazyload alt="image-20241011170205691"></p>
+<p>比DeepLiveCam清晰，但是存在额头颜色不衔接的问题（左下图）</p>
+<h3 id="调研">调研</h3>
+<p>网络上的其他实现</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=YV1PeHRETEo">https://www.youtube.com/watch?v=YV1PeHRETEo</a></p>
+<p><img src="./swap-face.assets/image.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="DeepFaceLab">DeepFaceLab</h2>
+<p>对于每张脸都需要训练个模型，训练模型使用<a target="_blank" rel="noopener" href="https://github.com/iperov/DeepFaceLab">iperov/DeepFaceLab</a> （这个仓库目前被封了），自训练的模型可以实现自定义的脸、更高的清晰度</p>
+<p>DeepFaceLab镜像仓库<a target="_blank" rel="noopener" href="https://dagshub.com/idonov/DeepFaceLab">idonov/DeepFaceLab</a></p>
+<p>原版DeepFaceLab只支持windows</p>
+<p>linux版 <a target="_blank" rel="noopener" href="https://github.com/dream80/DeepFaceLab_Linux">GitHub - dream80/DeepFaceLab_Linux: Linux环境，自用！阿里云P4测试通过！</a></p>
+<p>汉化版<a target="_blank" rel="noopener" href="https://github.com/davidnasar/DeepFaceLab-1">GitHub - davidnasar/DeepFaceLab-1: DeepFaceLab最新版，完整版，原版汉化版。</a></p>
+<p>Docker构建DeepFaceLab <a target="_blank" rel="noopener" href="https://github.com/xychelsea/deepfacelab-docker">GitHub - xychelsea/deepfacelab-docker: Docker Containers for DeepFaceLab with TensorFlow in Anaconda 3</a></p>
+<p>docker镜像仓库<a target="_blank" rel="noopener" href="https://hub.docker.com/r/xychelsea/deepfacelab">https://hub.docker.com/r/xychelsea/deepfacelab</a></p>
+<p>DeepFaceLab论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.05535">DeepFaceLab: Integrated, flexible and extensible face-swapping framework</a></p>
+<p>【高精度AI换脸全网最详细deepfacelab教程】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1g94y1e7dX?vd_source=0746909e8642dc821f4dc86699071129">高精度AI换脸全网最详细deepfacelab教程_哔哩哔哩_bilibili</a></p>
+<p>教程文档（详细）<a target="_blank" rel="noopener" href="https://www.deepfakevfx.com/guides/deepfacelab-2-0-guide/">DeepFaceLab 2.0 Guide - DeepfakeVFX.com</a></p>
+<p>常用模型下载地址 <a target="_blank" rel="noopener" href="https://blog.csdn.net/j_starry/article/details/129042235">https://blog.csdn.net/j_starry/article/details/129042235</a></p>
+<h3 id="docker安装">docker安装</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 经测试可用</span><br>sudo docker run --gpus all --<span class="hljs-built_in">rm</span> -it --user root --name deepfacelab \<br>     -v ./workspace:/usr/local/deepfacelab/workspace \<br>     --net=host --ipc=host \<br>	 -e DISPLAY=<span class="hljs-variable">$DISPLAY</span> \<br>	 -v /tmp/.X11-unix:/tmp/.X11-unix \<br>     xychelsea/deepfacelab:latest-gpu /bin/bash<br><span class="hljs-comment"># 使用CJL构建的镜像</span><br>sudo docker run --gpus all --<span class="hljs-built_in">rm</span> -it --user root --name deepfacelab      -v ./workspace:/usr/local/deepfacelab/workspace      --net=host --ipc=host     -e DISPLAY=<span class="hljs-variable">$DISPLAY</span>     -v /tmp/.X11-unix:/tmp/.X11-unix      cjl/deepfacelab1 /bin/bash<br></code></pre></td></tr></table></figure>
+<p>下面的操作在latest-gpu版本的容器内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br>apt install nano<br>su anaconda<br><span class="hljs-built_in">cd</span> /usr/local/deepfacelab/scripts<br>nano env.sh<br><span class="hljs-comment"># 修改python3.8为python</span><br></code></pre></td></tr></table></figure>
+<h3 id="使用方法">使用方法</h3>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1g94y1e7dX?vd_source=0746909e8642dc821f4dc86699071129">高精度AI换脸全网最详细deepfacelab教程_哔哩哔哩_bilibili</a></p>
+<ol>
+<li>运行脚本2，3，将两个视频分割为图片</li>
+<li>源视频切脸</li>
+</ol>
+<p>可选 f(face)/wf(whole face)/head</p>
+<p><img src="./swap-face.assets/image-1728637598456-2.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">./<span class="hljs-number">4</span>_dat<span class="hljs-built_in">a_src</span>_extract_faces_S3FD.sh<br></code></pre></td></tr></table></figure>
+<p>如果切脸的时候进度条保持在0，等待一段时间后遇到报错 <code>NVIDIA Geforce RTX 4060 Ti doesnt response, terminating it.</code> 可能是虚拟内存不足了，重启设备或扩大虚拟内存(swap 分区)即可。参考文献<a target="_blank" rel="noopener" href="https://dfldata.cc/forum.php?mod=viewthread&amp;tid=13632">https://dfldata.cc/forum.php?mod=viewthread&amp;tid=13632</a></p>
+<ol start="3">
+<li>源视频排序</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">4</span>.<span class="hljs-number">2</span>_data_src_sort.sh<br></code></pre></td></tr></table></figure>
+<p>默认选5即可，速度很快</p>
+<ol start="4">
+<li>目标视频切脸</li>
+</ol>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-number">5</span>_dat<span class="hljs-built_in">a_dst</span>_extract_faces_S3FD.sh<br></code></pre></td></tr></table></figure>
+<ol start="5">
+<li>目标视频排序</li>
+</ol>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">./<span class="hljs-number">5.2</span>_dat<span class="hljs-built_in">a_dst</span>_sort.sh<br></code></pre></td></tr></table></figure>
+<ol start="6">
+<li>训练</li>
+</ol>
+<p>先在宿主机运行 <code>xhost +</code></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">6_train_SAEHD.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+<p>超参调节可参考<a target="_blank" rel="noopener" href="https://www.vfxcool.com/36267.html">https://www.vfxcool.com/36267.html</a></p>
+<p>需要连接到图形化界面，可在容器内检查 <code>DISPLAY</code> 环境变量是否已经设置，是否和图形界面的 <code>DISPLAY</code> 一致</p>
+<p>调参有点复杂，下面是训练时的效果</p>
+<p><img src="./swap-face.assets/image-1728637718921-4.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="./swap-face.assets/image-1728637746358-6.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="./swap-face.assets/image-1728637759277-8.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可供参考的调参方式</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">==------------------ Model Options ------------------==<br><span class="hljs-section">==                                                   ==</span><br><span class="hljs-section">==            resolution: 256                        ==</span><br><span class="hljs-section">==             face_type: head                       ==</span><br><span class="hljs-section">==     models_opt_on_gpu: True                       ==</span><br><span class="hljs-section">==                 archi: liae-ud                    ==</span><br><span class="hljs-section">==               ae_dims: 384                        ==</span><br><span class="hljs-section">==                e_dims: 96                         ==</span><br><span class="hljs-section">==                d_dims: 96                         ==</span><br><span class="hljs-section">==           d_mask_dims: 32                         ==</span><br><span class="hljs-section">==       masked_training: True                       ==</span><br><span class="hljs-section">==       eyes_mouth_prio: True                       ==</span><br><span class="hljs-section">==           uniform_yaw: False                      ==</span><br><span class="hljs-section">==             adabelief: True                       ==</span><br><span class="hljs-section">==            lr_dropout: n                          ==</span><br><span class="hljs-section">==           random_warp: True                       ==</span><br><span class="hljs-section">==       true_face_power: 0.0                        ==</span><br><span class="hljs-section">==      face_style_power: 0.0                        ==</span><br><span class="hljs-section">==        bg_style_power: 0.0                        ==</span><br><span class="hljs-section">==               ct_mode: none                       ==</span><br><span class="hljs-section">==              clipgrad: True                       ==</span><br><span class="hljs-section">==              pretrain: False                      ==</span><br><span class="hljs-section">==       autobackup_hour: 6                          ==</span><br><span class="hljs-section">== write_preview_history: False                      ==</span><br><span class="hljs-section">==           target_iter: 0                          ==</span><br><span class="hljs-section">==       random_src_flip: False                      ==</span><br><span class="hljs-section">==       random_dst_flip: False                      ==</span><br><span class="hljs-section">==            batch_size: 8                          ==</span><br><span class="hljs-section">==             gan_power: 0.1                        ==</span><br><span class="hljs-section">==        gan_patch_size: 32                         ==</span><br><span class="hljs-section">==              gan_dims: 24                         ==</span><br></code></pre></td></tr></table></figure>
+<ol start="7">
+<li>导出dfm模型</li>
+</ol>
+<p>（参考<a target="_blank" rel="noopener" href="https://github.com/Qyuzet/DeepFaceLab-Scripts-NVIDIA-RTX2080Ti-11-20-2021%EF%BC%89">https://github.com/Qyuzet/DeepFaceLab-Scripts-NVIDIA-RTX2080Ti-11-20-2021）</a></p>
+<p><code>6_export_SAEHD_as_dfm.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> exportdfm \<br>    --model-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/model&quot;</span> \<br>    --model SAEHD<br></code></pre></td></tr></table></figure>
+<p>安装所需包 <code>pip install tf2onnx</code></p>
+<p>得到模型<code>workspace/model/model_name_SAEHD_model.dfm</code></p>
+<h3 id="Xseg遮罩">Xseg遮罩</h3>
+<p>不使用遮罩的话，在头发、眼镜、手等遮挡面部时会产生奇怪的效果，如下图</p>
+<p><img src="./swap-face.assets/image-1728637855609-10.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>遮罩使用教程及遮罩模型下载</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647961546">https://zhuanlan.zhihu.com/p/647961546</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoyunduo168/article/details/137216493">【镇坛之宝】deepfacelab万能Xseg遮罩模型最新版本下载_deepfakelab镇坛之宝-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://dfldata.cc/forum.php?mod=viewthread&amp;tid=1637">https://dfldata.cc/forum.php?mod=viewthread&amp;tid=1637</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.deepfakevfx.com/tutorials/deepfacelab-2-0-xseg-tutorial/">DeepFaceLab 2.0 XSeg Tutorial - DeepfakeVFX.com</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=CHs3VuW7TtU&amp;t=167s">https://www.youtube.com/watch?v=CHs3VuW7TtU&amp;t=167s</a></p>
+<p>参考<a target="_blank" rel="noopener" href="https://github.com/Qyuzet/DeepFaceLab-Scripts-NVIDIA-RTX2080Ti-11-20-2021%EF%BC%8C%E8%A1%A5%E5%85%A8Xseg%E5%BF%85%E9%A1%BB%E7%9A%84%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6">https://github.com/Qyuzet/DeepFaceLab-Scripts-NVIDIA-RTX2080Ti-11-20-2021，补全Xseg必须的脚本文件</a></p>
+<p><code>scripts/5.XSeg-data_dst_mask-edit.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg editor \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_dst/aligned&quot;</span><br></code></pre></td></tr></table></figure>
+<p><code>scripts/5.XSeg-data_src_mask-edit.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg editor \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_src/aligned&quot;</span><br></code></pre></td></tr></table></figure>
+<p>启动遮罩，如果遇到qt的问题，参考这篇文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/LOVEmy134611/article/details/107212845">https://blog.csdn.net/LOVEmy134611/article/details/107212845</a> 手动安装所有动态链接库即可解决</p>
+<p>手动标注数据集😖</p>
+<p><img src="./swap-face.assets/image-1728637949565-12.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>整理手工标注好的遮罩</p>
+<p><code>5.XSeg-data_dst_mask-fetch.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg fetch \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_dst/aligned&quot;</span><br></code></pre></td></tr></table></figure>
+<p><code>5.XSeg-data_src_mask-fetch.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg fetch \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_src/aligned&quot;</span><br></code></pre></td></tr></table></figure>
+<p><code>5.XSeg-train.sh</code>   训练遮罩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> train \<br>    --training-data-src-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_src/aligned&quot;</span> \<br>    --training-data-dst-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_dst/aligned&quot;</span> \<br>    --model-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/model&quot;</span> \<br>    --model XSeg<br></code></pre></td></tr></table></figure>
+<p>基于训练好的模型应用遮罩</p>
+<p><code>5.XSeg-data_src_trained_mask-apply.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg apply \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_src/aligned&quot;</span> \<br>    --model-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/model&quot;</span><br></code></pre></td></tr></table></figure>
+<p><code>5.XSeg-data_dst_trained_mask-apply.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">source</span> env.sh<br><br><span class="hljs-variable">$DFL_PYTHON</span> <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_SRC</span>/main.py&quot;</span> xseg apply \<br>    --input-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/data_dst/aligned&quot;</span> \<br>    --model-dir <span class="hljs-string">&quot;<span class="hljs-variable">$DFL_WORKSPACE</span>/model&quot;</span><br></code></pre></td></tr></table></figure>
+<p>应用Xseg遮罩：</p>
+<p>在merge阶段，按<code>X</code>可以切换遮罩模式</p>
+<p><img src="./swap-face.assets/image-20241011171503694.png" srcset="/img/loading.gif" lazyload alt="image-20241011171503694"></p>
+<h3 id="肤色和脸型问题">肤色和脸型问题</h3>
+<p>典型反例：</p>
+<p><img src="./swap-face.assets/image-1728638137952-14.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在训练前开启rct变色，然后在融合时<strong>调参</strong>解决肤色和脸型问题</p>
+<p>解决肤色：</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dfldata.cc/forum.php?mod=viewthread&amp;tid=6017">https://dfldata.cc/forum.php?mod=viewthread&amp;tid=6017</a></li>
+<li><a target="_blank" rel="noopener" href="https://dfldata.cc/forum.php?mod=viewthread&amp;tid=8673">https://dfldata.cc/forum.php?mod=viewthread&amp;tid=8673</a></li>
+</ul>
+<p>摘要：</p>
+<ul>
+<li>开rct训练</li>
+<li>合成时按C</li>
+<li>后期软件调色(AE)</li>
+</ul>
+<p>调参示范（效果最好）（训练10万次）</p>
+<p><img src="./swap-face.assets/image-1728638185395-16.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>调参思路：</p>
+<p>解决脸型不一样导致的黑边： 增大image_denoise_power</p>
+<p>解决脸型不一样导致的光影差别：同时增大erode_mask_modifier和blur_mask_modifier</p>
+<p>按C切换合适的颜色模式</p>
+<p>按X尝试不同的遮罩</p>
+<h3 id="导出结果为mp4">导出结果为mp4</h3>
+<p><code>./8_merged_to_mp4.sh</code></p>
+<p>如果您的ffmpeg不支持libx264，可考虑在<a target="_blank" rel="noopener" href="https://johnvansickle.com/ffmpeg/">John Van Sickle - FFmpeg Static Builds</a>下载ffmpeg，并将其添加到PATH</p>
+<h3 id="demo">demo</h3>
+<p><img src="./swap-face.assets/image-1728638244858-18.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>训练10万次的效果：</p>
+<p><img src="./swap-face.assets/demo.gif" srcset="/img/loading.gif" lazyload alt="demo"></p>
+<p>对比：deeplivecam的效果</p>
+<p><img src="./swap-face.assets/demo-1728638297535-21.gif" srcset="/img/loading.gif" lazyload alt="demo"></p>
+<p>deeplivecam的脸更模糊，边缘处理不是很好</p>
+<h3 id="DeepFaceLab论文粗读">DeepFaceLab论文粗读</h3>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.05535">https://arxiv.org/abs/2005.05535</a></p>
+<p>本项目简称DFL</p>
+<p>src为源脸，dst为目标脸，需要将src的脸换到dst上</p>
+<h4 id="流程">流程</h4>
+<p>3.1Extraction</p>
+<ol>
+<li>
+<p>从src和dst中提取人脸，默认使用S3FD(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.05237">https://arxiv.org/abs/1708.05237</a>)作为人脸检测器。另外RetinaFace也可以用于检测人脸</p>
+</li>
+<li>
+<p>面部对齐：facial landmarks很重要</p>
+<ol>
+<li>
+<p>2DFANhttps://arxiv.org/abs/1703.07332 适合标准正脸</p>
+</li>
+<li>
+<p>PRNethttps://arxiv.org/abs/1803.07835 处理侧脸</p>
+</li>
+</ol>
+<p>在检索到面部特征点后，还提供了一个可配置时间步长的可选函数，以平滑单个镜头中连续帧的面部特征点，以确保进一步的稳定性。</p>
+<p>使用这篇论文<a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs273/refs/umeyama.pdf">https://web.stanford.edu/class/cs273/refs/umeyama.pdf</a> 的方法计算相似变换矩阵</p>
+<p>DFL提供了上面论文所需的标准对齐的人脸关键点模板。值得注意的是，DFL可以利用获得的面部特征点自动预测欧拉角（处理侧脸）。</p>
+</li>
+</ol>
+<p><img src="./swap-face.assets/image-1728638423828-23.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>使用fine-grained Face Segmentation network 基于论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1801.05746">TernausNet: U-Net with VGG11 Encoder Pre-Trained on ImageNet for Image Segmentation</a>，这样头发、手指、眼镜等都可以分割。去除不规则遮挡是可选的，但很有用，可以保持网络在训练过程中对手、眼镜和任何其他可能以某种方式遮住脸部的物体具有鲁棒性。</p>
+<p>然而，由于一些最先进的人脸分割模型在某些特定的镜头中未能生成细粒度的掩模，因此在DFL中引入了XSeg。XSeg允许每个人通过少样本学习范式(图8是XSeg的示意图)来训练他们的模型，以分割特定的人脸集(对齐的src或对齐的dst)。</p>
+<p>DFL在训练阶段需要的一切都已经准备好了:原始图像中的对应坐标裁剪的人脸、面部标记、对齐的人脸，以及src的逐像素分割掩码(由于dst的提取过程与src相同，因此无需详细阐述)。</p>
+<p>3.2 training</p>
+<p>我们提出DF和LIAE两种训练架构</p>
+<p><img src="./swap-face.assets/image-1728638444481-25.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>效果：LIAE&gt;DF</p>
+<p>Quick用的就是DF架构</p>
+<p>3.3 conversion</p>
+<p><img src="./swap-face.assets/image-1728638459492-27.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="Deep-Live-Cam">Deep-Live-Cam</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/hacksider/Deep-Live-Cam"><strong>https://github.com/hacksider/Deep-Live-Cam</strong></a></p>
+<p><strong>这个仓库是</strong><a target="_blank" rel="noopener" href="https://github.com/s0md3v/roop"><strong>https://github.com/s0md3v/roop</strong></a> <strong>的分支，因为旧的仓库停止维护了，这个仓库做了一些完善</strong></p>
+<p><strong>仓库只包含了运行所需的代码和预训练的模型，没有找到训练代码</strong></p>
+<p><strong>库和模型由 insightface 仓库提供</strong></p>
+<p><strong>用docker完成一次推导</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run --gpus all \<br> -v ./data/change-face:/app/data \<br> -v ./.insightface:/root/.insightface/models \<br> -e HTTP_PROXY=<span class="hljs-string">&quot;http://192.168.134.196:7890&quot;</span> \<br> -e HTTPS_PROXY=<span class="hljs-string">&quot;http://192.168.134.196:7890&quot;</span> \<br>       pepitedata/deep-live-cam \<br> -s /app/data/1.png \<br> -t /app/data/1.mp4 \<br> -o /app/data/1_dlc.mp4 \<br> --keep-fps --keep-audio<br></code></pre></td></tr></table></figure>
+<p><strong>批量推导：详见</strong><code>/home/node1/Desktop/code/ai/Deep-Live-Cam/work/run.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> argparse<br>args = argparse.ArgumentParser()<br>args.add_argument(<br>    <span class="hljs-string">&quot;--img_path&quot;</span>,<br>    <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>,<br>    default=<span class="hljs-string">&quot;/home/node1/Desktop/code/ai/data/swap-face/random-face-jpg&quot;</span>,<br>)<br>args.add_argument(<br>    <span class="hljs-string">&quot;--video_path&quot;</span>,<br>    <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>,<br>    default=<span class="hljs-string">&quot;/home/node1/Desktop/code/ai/DeepFaceLive/build/linux/data/video_240823&quot;</span>,<br>)<br>args.add_argument(<br>    <span class="hljs-string">&quot;--output_path&quot;</span>,<br>    <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>,<br>    default=<span class="hljs-string">&quot;/home/node1/Desktop/code/ai/Deep-Live-Cam/work/output&quot;</span>,<br>)<br>args = args.parse_args()<br>template = <span class="hljs-string">f&quot;&quot;&quot;sudo docker run --gpus all \</span><br><span class="hljs-string">      -v /home/node1/Desktop/code/ai/Deep-Live-Cam/data/change-face:/app/data \</span><br><span class="hljs-string">      -v /home/node1/Desktop/code/ai/Deep-Live-Cam/.insightface:/root/.insightface/models \</span><br><span class="hljs-string">      -v <span class="hljs-subst">&#123;args.img_path&#125;</span>:/app/random_face \</span><br><span class="hljs-string">      -v <span class="hljs-subst">&#123;args.video_path&#125;</span>:/app/video_240823 \</span><br><span class="hljs-string">      -v <span class="hljs-subst">&#123;args.output_path&#125;</span>:/app/myoutput \</span><br><span class="hljs-string">      -e HTTP_PROXY=&quot;http://192.168.134.197:7890&quot; \</span><br><span class="hljs-string">      -e HTTPS_PROXY=&quot;http://192.168.134.197:7890&quot; \</span><br><span class="hljs-string">      --name deep-live-cam \</span><br><span class="hljs-string">      pepitedata/deep-live-cam \</span><br><span class="hljs-string">      -s /app/random_face/!1 \</span><br><span class="hljs-string">      -t /app/video_240823/!2 \</span><br><span class="hljs-string">      -o /app/myoutput/!3 \</span><br><span class="hljs-string">      --keep-fps --keep-audio</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-comment"># from d2l</span><br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Timer</span>:<br>    <span class="hljs-string">&quot;&quot;&quot;记录多次运行时间&quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.times = []<br>        self.start()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">start</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;启动计时器&quot;&quot;&quot;</span><br>        self.tik = time.time()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">stop</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;停止计时器并将时间记录在列表中&quot;&quot;&quot;</span><br>        self.times.append(time.time() - self.tik)<br>        <span class="hljs-keyword">return</span> self.times[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">avg</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;返回平均时间&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(self.times) / <span class="hljs-built_in">len</span>(self.times)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;返回时间总和&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(self.times)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">cumsum</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;返回累计时间&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> np.array(self.times).cumsum().tolist()<br><br>timer = Timer()<br><span class="hljs-keyword">for</span> img <span class="hljs-keyword">in</span> os.listdir(args.img_path):<br>    <span class="hljs-keyword">for</span> video <span class="hljs-keyword">in</span> os.listdir(args.video_path):<br>        output_name = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;img[:-<span class="hljs-number">4</span>]&#125;</span>_<span class="hljs-subst">&#123;video[:-<span class="hljs-number">4</span>]&#125;</span>.mp4&quot;</span><br>        <span class="hljs-keyword">if</span> output_name <span class="hljs-keyword">in</span> os.listdir(args.output_path):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;output_name&#125;</span> already exists&quot;</span>)<br>            <span class="hljs-keyword">continue</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\x1b[32mstart processing img <span class="hljs-subst">&#123;img&#125;</span> and video <span class="hljs-subst">&#123;video&#125;</span>\x1b[0m&quot;</span>)<br>        cmd = template.replace(<span class="hljs-string">&quot;!1&quot;</span>, img).replace(<span class="hljs-string">&quot;!2&quot;</span>, video).replace(<span class="hljs-string">&quot;!3&quot;</span>, output_name)<br>        timer.start()<br>        os.system(cmd)<br>        os.system(<span class="hljs-string">&quot;sudo docker remove deep-live-cam&quot;</span>)<br>        <span class="hljs-keyword">if</span> timer.stop() &lt; <span class="hljs-number">5</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\x1b[31m<span class="hljs-subst">&#123;output_name&#125;</span> failed\x1b[0m&quot;</span>)<br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-comment"># print(cmd)</span><br>    <span class="hljs-comment">#     break</span><br>    <span class="hljs-comment"># break</span><br></code></pre></td></tr></table></figure>
+<h3 id="效果-2">效果</h3>
+<p><img src="./swap-face.assets/image-20241011172420957.png" srcset="/img/loading.gif" lazyload alt="image-20241011172420957"></p>
+<p>问题：面部清晰度明显比周围低，尽管原视频和换脸图片的分辨率都足够高</p>
+<h3 id="docker部署-带直播功能">docker部署(带直播功能)</h3>
+<p>直播功能需要使用摄像头和图形界面，docker部署需要挂载摄像头并实现X11转发</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run --gpus all \<br>      -e HTTP_PROXY=<span class="hljs-string">&quot;http://192.168.134.197:7890&quot;</span> \<br>      -e HTTPS_PROXY=<span class="hljs-string">&quot;http://192.168.134.197:7890&quot;</span> \<br>      -v ./data/change-face:/app/data \<br>      -v ./.insightface:/root/.insightface/models \<br>      --device=/dev/video0:/dev/video0 \<br>      --device=/dev/video1:/dev/video1 \<br>      --<span class="hljs-built_in">env</span>=<span class="hljs-string">&quot;DISPLAY&quot;</span> \<br>      --volume=<span class="hljs-string">&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot;</span> \<br>      --name deep-live-cam \<br>      pepitedata/deep-live-cam \<br>      --execution-provider cuda<br></code></pre></td></tr></table></figure>
+<p>效果</p>
+<p><img src="./swap-face.assets/image-1728638708409-29.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="facefusion">facefusion</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/facefusion/facefusion">GitHub - facefusion/facefusion: Next generation face swapper and enhancer</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.facefusion.io/">https://docs.facefusion.io/</a></p>
+<p>安装：</p>
+<p>跟随官网教程，然后 pip install -r requirements.txt</p>
+<p>python <a target="_blank" rel="noopener" href="http://run.py">run.py</a></p>
+<p>只推理了一张图，面部太糊，遂放弃该仓库</p>
+<p><img src="./swap-face.assets/image-1728638755234-31.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="FaceDancer">FaceDancer</h2>
+<p>2022/10</p>
+<p>在线测试<a target="_blank" rel="noopener" href="https://huggingface.co/spaces/felixrosberg/face-swap">https://huggingface.co/spaces/felixrosberg/face-swap</a></p>
+<p>论文 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.10473">https://arxiv.org/abs/2210.10473</a></p>
+<p>github <a target="_blank" rel="noopener" href="https://github.com/felixrosberg/facedancer">GitHub - felixrosberg/FaceDancer</a></p>
+<p><img src="./swap-face.assets/image-1728638780393-33.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="insightface"><strong>insightface</strong></h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/deepinsight/insightface/"><strong>https://github.com/deepinsight/insightface/</strong></a></p>
+<p><strong>这本来是一个人脸识别仓库，但是借助人脸识别的技术可以实现换脸</strong></p>
+<p><strong>仓库没有开源换脸的细节，而是提供了商用换脸服务 picsi:</strong> <a target="_blank" rel="noopener" href="https://www.picsi.ai/"><strong>https://www.picsi.ai/</strong></a> <strong>，在picsi 的网站上没有找到相关技术细节</strong></p>
+<p><strong>仓库下方提供了一系列论文，但是都和人脸识别有关，没有找到换脸相关的论文</strong></p>
+<h2 id="腾讯云-人脸融合">腾讯云-人脸融合</h2>
+<p>不开源，可作为换脸任务标杆</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/facefusion">人脸融合_AI换脸_AI变脸  - 腾讯云</a></p>
+<p>融合并非单纯的换脸，最终合成图经过人脸识别提取的信息和选脸图经过人脸识别提取的信息是相同的</p>
+<p><img src="./swap-face.assets/image-1728638809189-35.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>优势：稳定性好，肉眼看不出区别</p>
+<p>同样的输入换三次：</p>
+<p><img src="./swap-face.assets/image-20241011172709401.png" srcset="/img/loading.gif" lazyload alt="image-20241011172709401"></p>
+<p>下图为 上图图1和图2用python做差得到的效果</p>
+<p><img src="./swap-face.assets/image-1728638877214-37.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="人脸数据生成"><strong>人脸数据生成</strong></h2>
+<p><strong>随机人脸生成</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://this-person-does-not-exist.com/zh"><strong>https://this-person-does-not-exist.com/zh</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://marketingtool.online/en/face-generator/"><strong>https://marketingtool.online/en/face-generator/</strong></a></li>
+</ul>
+<p><strong>公开人脸数据集</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/YMilton/article/details/120503287"><strong>https://blog.csdn.net/YMilton/article/details/120503287</strong></a></p>
+<h2 id="Face-Adapter"><strong>Face Adapter</strong></h2>
+<p>浙大，腾讯</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.12970">https://arxiv.org/abs/2405.12970</a></p>
+<p>代码<a target="_blank" rel="noopener" href="https://github.com/FaceAdapter/Face-Adapter">GitHub - FaceAdapter/Face-Adapter</a></p>
+<p>和相关工作相比，FADM能够提升图片质量，但仍然无法解决由于姿态变化过大导致的模糊问题，DiffSwap因为在训练时缺少背景信息而导致面部模糊。这俩方法都没有充分发掘预训练的大型diffusion model的潜力</p>
+<p>如果直接用遮罩覆盖面部区域，没有考虑到脸型的变化，会降低身份的保真度</p>
+<h4 id="运行代码">运行代码</h4>
+<p>选用不同的diffusion模型能得到不同的风格</p>
+<p><strong>模型1</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python infer.py --base_model <span class="hljs-string">&quot;frankjoshua/toonyou_beta6&quot;</span><br></code></pre></td></tr></table></figure>
+<p>得到output1</p>
+<p><img src="./swap-face.assets/image-1728638971523-39.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>右下角的图，凭空出现了一只手</p>
+<p><strong>模型2</strong></p>
+<p>该模型的效果更加贴近现实，但是在纹理上和真实有些区别（更加平滑），容易被认出为AI生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python infer.py --base_model <span class="hljs-string">&quot;benjamin-paine/stable-diffusion-v1-5&quot;</span><br></code></pre></td></tr></table></figure>
+<p>得到output2</p>
+<p>默认迭代25轮，平均每秒迭代10轮(4060Ti)</p>
+<p><img src="./swap-face.assets/image-1728638997463-41.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这个模型对耳部的处理有欠缺</p>
+<p>做成视频的效果：抖动严重（画质原本很好，这里画质差是视频压缩导致的)</p>
+<p><img src="./swap-face.assets/demo-1728639038073-43.gif" srcset="/img/loading.gif" lazyload alt="demo"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI换脸入门</div>
+      <div>https://blog.algorithmpark.xyz/2024/10/11/swap-face/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年10月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/07/mssql/index/" title="mssql">
+                        <span class="hidden-mobile">mssql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
