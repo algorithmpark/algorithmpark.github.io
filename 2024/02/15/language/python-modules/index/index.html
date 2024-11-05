@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/python.jpg">
 <meta property="article:published_time" content="2024-02-15T16:24:45.000Z">
-<meta property="article:modified_time" content="2024-08-27T09:24:36.555Z">
+<meta property="article:modified_time" content="2024-10-14T12:23:00.670Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/python.jpg">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          3k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          24 分钟
+          26 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-08-27T09:24:36+00:00
+                    本文最后更新于 2024-10-14T12:23:00+00:00
                   
                   
 
@@ -438,6 +438,9 @@
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dns">《原神》是由上海米哈游信息科技有限公司自主研发的开源动作角色扮演游戏，于<span class="hljs-number">2020年9月28</span>日发行。该游戏讲述了提瓦特大陆的七个神性国家之一的蒙德和璃月，在一次灾难事件后如何在“神”与“人”的协助下重建家园的故事。<br><br>游戏的核心是采用开放世界探险的游戏模式，并提供丰富多样的角色供玩家选择，每个角色都有独特的技能和属性。游戏中有大量任务、副本、活动等待玩家去探索和完成，同时也有丰富的社交元素，允许玩家之间组队合作或互相竞技。<br><br>《原神》通过精美的画面、动听的音乐以及引人入胜的故事剧情吸引了全球众多玩家的喜爱。游戏不仅在国内市场取得巨大成功，在海外也收获了广泛的好评和用户基础。<br></code></pre></td></tr></table></figure>
 <p>获取可用模型</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">client.<span class="hljs-built_in">list</span>()<br></code></pre></td></tr></table></figure>
+<h2 id="multiprocessing多线程库">multiprocessing多线程库</h2>
+<p>SIMD多线程示例程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># SIMD多线程运行器</span><br><span class="hljs-keyword">import</span> multiprocessing<br><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Lock<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">worker</span>(<span class="hljs-params">mli, mlres, l, i, a</span>):<br>    <span class="hljs-comment"># sleep(5)</span><br>    ans = a**<span class="hljs-number">2</span><br>    l.acquire()<br>    mli.append(i)<br>    mlres.append(ans)<br>    l.release()<br>    <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    mli = multiprocessing.Manager().<span class="hljs-built_in">list</span>()  <span class="hljs-comment"># 主进程与子进程共享这个字典</span><br>    mlres = multiprocessing.Manager().<span class="hljs-built_in">list</span>()  <span class="hljs-comment"># 主进程与子进程共享这个字典</span><br>    N = <span class="hljs-number">3000</span> <span class="hljs-comment"># 数据数量</span><br>    num_threads = <span class="hljs-number">8</span> <span class="hljs-comment"># 线程数量</span><br>    a = [random.randint(<span class="hljs-number">0</span>, N) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N)]<br>    l = Lock()<br>    jobs = [multiprocessing.Process(target=worker, args=(mli, mlres, l, i, a[i])) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N)]<br>    running_job = <span class="hljs-number">0</span><br>    next_job = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> jobs:<br>        j.daemon = <span class="hljs-literal">True</span> <span class="hljs-comment"># 退出主进程时，子进程也会被自动终止，因为它被设置为守护进程</span><br>        <br>    <span class="hljs-comment"># 进度条</span><br>    <span class="hljs-keyword">with</span> tqdm(total=N, desc=<span class="hljs-string">&quot;Monitoring Progress&quot;</span>) <span class="hljs-keyword">as</span> pbar:<br>        old = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            l.acquire()<br>            curmli = <span class="hljs-built_in">list</span>(mli)<br>            l.release()<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(curmli) &gt; old:<br>                pbar.update(<span class="hljs-built_in">len</span>(curmli) - old)<br>                <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(old, <span class="hljs-built_in">len</span>(curmli)):<br>                    jobs[curmli[i]].join()<br>                    running_job -= <span class="hljs-number">1</span><br>                old = <span class="hljs-built_in">len</span>(curmli)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(curmli) == N:<br>                <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">while</span> running_job &lt; num_threads <span class="hljs-keyword">and</span> next_job &lt; N:<br>                jobs[next_job].start()<br>                running_job += <span class="hljs-number">1</span><br>                next_job += <span class="hljs-number">1</span><br>            sleep(<span class="hljs-number">0.01</span>)<br>                <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Results:&#x27;</span>)<br><br>    <span class="hljs-comment"># sort</span><br>    mzip = <span class="hljs-built_in">zip</span>(mli, mlres)<br>    mzip = <span class="hljs-built_in">sorted</span>(mzip)<br>    mli, mlres = <span class="hljs-built_in">zip</span>(*mzip)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>(mlres))<br><br></code></pre></td></tr></table></figure>
 <p>未完待续</p>
 
                 
@@ -503,7 +506,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月27日</div>
+          <div>2024年10月14日</div>
         </div>
       
       

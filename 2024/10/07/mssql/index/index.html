@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
 <meta property="article:published_time" content="2024-10-07T09:33:22.000Z">
-<meta property="article:modified_time" content="2024-10-10T13:56:40.824Z">
+<meta property="article:modified_time" content="2024-10-19T07:36:26.082Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/mssql.png">
@@ -276,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          6.9k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
         
-          57 分钟
+          58 分钟
         
       </span>
     
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-10-10T13:56:40+00:00
+                    本文最后更新于 2024-10-19T07:36:26+00:00
                   
                   
 
@@ -698,7 +698,8 @@
 <p>这里认为分行的总资产为总储蓄额减去总贷款额, 首先使用三个with函数计算银行的总资产、总储蓄额、总贷款额</p>
 <p>然后找到符合条件的分行名称</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">with</span> total_balance(branch_name, sum_balance) <span class="hljs-keyword">as</span><br>(<br>    <span class="hljs-keyword">select</span> branch_name,<span class="hljs-built_in">sum</span>(balance) <span class="hljs-keyword">from</span> account<br>    <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> branch_name<br>),<br>total_loan(branch_name, sum_loan) <span class="hljs-keyword">as</span> <br>(<br>    <span class="hljs-keyword">select</span> branch_name, <span class="hljs-built_in">sum</span>(amount) <span class="hljs-keyword">from</span> loan<br>    <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> branch_name<br>),<br>total_money(branch_name, money) <span class="hljs-keyword">as</span> <br>(<br>    <span class="hljs-keyword">select</span> b.branch_name, sum_balance <span class="hljs-operator">-</span> sum_loan <span class="hljs-keyword">from</span> total_balance b<br>    <span class="hljs-keyword">join</span> total_loan l <span class="hljs-keyword">on</span> b.branch_name <span class="hljs-operator">=</span> l.branch_name<br>)<br><span class="hljs-keyword">select</span> branch_name <span class="hljs-keyword">from</span> total_money <br><span class="hljs-keyword">where</span> money <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">any</span>(<br>    <span class="hljs-keyword">select</span> money <span class="hljs-keyword">from</span> total_money <span class="hljs-keyword">where</span> branch_name <span class="hljs-keyword">in</span> (<br>        <span class="hljs-keyword">select</span> branch_name <span class="hljs-keyword">from</span> branch <span class="hljs-keyword">where</span> branch_city <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Brooklyn&#x27;</span><br>    )<br>)<br></code></pre></td></tr></table></figure>
-<h3 id="创建view">创建view</h3>
+<h3 id="view">view</h3>
+<p><strong>创建view</strong></p>
 <p>例子（只做示范，不可运行）</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">view</span> faculty <span class="hljs-keyword">as</span><br><span class="hljs-keyword">select</span> ID, name, dept_name<br><span class="hljs-keyword">from</span> instructor;<br><br><span class="hljs-keyword">select</span> name<br><span class="hljs-keyword">from</span> faculty<br><span class="hljs-keyword">where</span> dept_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Biology&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <p>大多数SQL实现只允许对简单的view进行更新:</p>
@@ -708,6 +709,10 @@
 <li>任何没有在select子句中列出的属性都可以设置为null</li>
 <li>没有group by或having</li>
 </ul>
+<p><strong>删除view</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">view</span> faculty<br></code></pre></td></tr></table></figure>
+<p><strong>查看所有视图</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> INFORMATION_SCHEMA.VIEWS;<br></code></pre></td></tr></table></figure>
 <h3 id="标量子查询">标量子查询</h3>
 <p>例子（只做示范，不可运行）</p>
 <p>这里的子查询应该只返回一个值</p>
@@ -865,6 +870,13 @@
 <p>Data Control Language(数据控制语言)，用来管理数据库用户、控制数据库的访问权限。</p>
 <h3 id="查询用户">查询用户</h3>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sys.database_principals;<br></code></pre></td></tr></table></figure>
+<h3 id="授予权限">授予权限</h3>
+<p>授予所有用户对表 STUDENTS的查询权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> students <span class="hljs-keyword">to</span> public;<br></code></pre></td></tr></table></figure>
+<p>授予所有用户对表 COURSES的查询和更新权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span>, <span class="hljs-keyword">update</span> <span class="hljs-keyword">on</span> courses <span class="hljs-keyword">to</span> public;<br></code></pre></td></tr></table></figure>
+<p>授予USER1对表 TEACHERS的查询,更新工资的权限,且允许 USERI1可以传播这些权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span>, <span class="hljs-keyword">update</span> <span class="hljs-keyword">on</span> teachers <span class="hljs-keyword">to</span> user1 <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> option;<br></code></pre></td></tr></table></figure>
 <h2 id="函数">函数</h2>
 <p><strong>该部分为AI生成，未经验证</strong></p>
 <h3 id="字符串函数">字符串函数</h3>
@@ -1385,7 +1397,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月10日</div>
+          <div>2024年10月19日</div>
         </div>
       
       
