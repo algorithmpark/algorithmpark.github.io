@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.algorithmpark.xyz/img/linux.png">
 <meta property="article:published_time" content="2023-07-05T14:02:13.000Z">
-<meta property="article:modified_time" content="2024-10-23T14:02:11.810Z">
+<meta property="article:modified_time" content="2025-01-14T13:51:35.867Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog.algorithmpark.xyz/img/linux.png">
@@ -337,7 +337,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-10-23T14:02:11+00:00
+                    本文最后更新于 2025-01-14T13:51:35+00:00
                   
                   
 
@@ -1954,8 +1954,19 @@ CJL is handsome
 <h3 id="nmap端口扫描">nmap端口扫描</h3>
 <p>下面表示扫描1到65535所有在监听的tcp端口。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap ip -p1-65535<br></code></pre></td></tr></table></figure>
-<p>示例</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+<h3 id="申请SSL证书">申请SSL证书</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo certbot certonly --manual --preferred-challenges dns -d yourdomain.com<br></code></pre></td></tr></table></figure>
+<p>使用下面指令检验dns是否生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nslookup -q=TXT _acme-challenge.yourdomain.com<br></code></pre></td></tr></table></figure>
+<p>得到了下面四个文件cert.pem  chain.pem  fullchain.pem  privkey.pem</p>
+<p><strong><code>fullchain.pem</code></strong> 包含了服务器证书和中间证书链。</p>
+<ul>
+<li>用作 Nginx 的 <strong><code>ssl_certificate</code></strong> 配置项。</li>
+</ul>
+<p><strong><code>privkey.pem</code></strong> 包含私钥，用于配合服务器证书加密通信。</p>
+<ul>
+<li>用作 Nginx 的 <strong><code>ssl_certificate_key</code></strong> 配置项。</li>
+</ul>
 
                 
               </div>
@@ -2013,7 +2024,7 @@ CJL is handsome
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月23日</div>
+          <div>2025年1月14日</div>
         </div>
       
       
@@ -2222,7 +2233,7 @@ CJL is handsome
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL196" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
     </div>
   
   

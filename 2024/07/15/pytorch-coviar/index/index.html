@@ -24,7 +24,7 @@
 <meta property="og:description" content="pytorch-coviar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-15T11:07:59.000Z">
-<meta property="article:modified_time" content="2024-07-22T02:10:10.211Z">
+<meta property="article:modified_time" content="2025-01-20T12:00:09.432Z">
 <meta property="article:author" content="CJL">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -335,7 +335,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-07-22T02:10:10+00:00
+                    本文最后更新于 2025-01-20T12:00:09+00:00
                   
                   
 
@@ -451,7 +451,7 @@ CoViAR 的特点包括：<br>
 <p>输出</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs gams">Initializing <span class="hljs-keyword">model</span>:<br>    base <span class="hljs-keyword">model</span>:         resnet18.<br>    input_representation:     mv.<br>    num_class:          <span class="hljs-number">51.</span><br>    num_segments:       <span class="hljs-number">25.</span><br>        <br>/root/miniconda3/lib/python3<span class="hljs-number">.8</span>/site-packages/torchvision/<span class="hljs-keyword">models</span>/_utils.py:<span class="hljs-number">208</span>: UserWarning: The <span class="hljs-keyword">parameter</span> <span class="hljs-string">&#x27;pretrained&#x27;</span> is <span class="hljs-comment">deprecated since 0.13 and may be removed in the future, please use</span> <span class="hljs-comment">&#x27;weights&#x27;</span> <span class="hljs-comment">instead.</span><br>  warnings.warn(<br>/root/miniconda3/lib/python3.8/site-packages/torchvision/<span class="hljs-keyword">models</span>/_utils.py:223: UserWarning: Arguments <span class="hljs-comment">other than a weight enum or</span> `<span class="hljs-comment">None</span>` <span class="hljs-comment">for</span> <span class="hljs-comment">&#x27;weights&#x27;</span> <span class="hljs-comment">are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing</span> `<span class="hljs-comment">weights=ResNet18_Weights.IMAGENET1K_V1</span>`<span class="hljs-comment">. You can also use</span> `<span class="hljs-comment">weights=ResNet18_Weights.DEFAULT</span>` <span class="hljs-comment">to get the most up-to-date weights.</span><br>  warnings.warn(msg)<br>Downloading: <span class="hljs-string">&quot;https://download.pytorch.org/models/resnet18-f37072fd.pth&quot;</span> to /root/<span class="hljs-comment">.cache</span>/torch/<span class="hljs-comment">hub</span>/checkpoints/<span class="hljs-comment">resnet18-f37072fd.pth</span><br>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 44.7M/<span class="hljs-number">44.7</span>M [<span class="hljs-number">02</span>:<span class="hljs-number">57</span>&lt;<span class="hljs-number">00</span>:<span class="hljs-number">00</span>, <span class="hljs-number">264</span>kB/s]<br>model <span class="hljs-comment">epoch 236 best prec@1: 30.130720138549805</span><br>1530 videos <span class="hljs-comment">loaded.</span><br>test.py:94: UserWarning: volatile <span class="hljs-comment">was removed and now has no effect. Use</span> `<span class="hljs-comment">with torch.no_grad():</span>` <span class="hljs-comment">instead.</span><br>  input_var <span class="hljs-comment">= torch.autograd.Variable(data, volatile=True)</span><br>video <span class="hljs-comment">99 done, total 100</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.2338184118270874</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">199 done, total 200</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.24016900300979616</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">299 done, total 300</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.24238990863164267</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">399 done, total 400</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23960657358169557</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">499 done, total 500</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23549086046218873</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">599 done, total 600</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.234343368212382</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">699 done, total 700</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23339044264384678</span> sec/<span class="hljs-comment">video</span><br>video <span class="hljs-comment">799 done, total 800</span>/<span class="hljs-number">1530</span>, average <span class="hljs-number">0.23506154507398605</span> sec/<span class="hljs-comment">video</span><br></code></pre></td></tr></table></figure>
 <h2 id="coviar用于视频特征提取与远程识别">coviar用于视频特征提取与远程识别</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/CJL-sysu/pytorch-coviar">https://github.com/CJL-sysu/pytorch-coviar</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CJL196/pytorch-coviar">https://github.com/CJL196/pytorch-coviar</a></p>
 <p>将特征提取分为本地端和服务端，中间通过网络传输无法复原出原视频的特征矩阵列表，可解决本地算力不足的问题，且保护用户隐私。</p>
 
                 
@@ -510,7 +510,7 @@ CoViAR 的特点包括：<br>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月22日</div>
+          <div>2025年1月20日</div>
         </div>
       
       
@@ -719,7 +719,7 @@ CoViAR 的特点包括：<br>
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL-sysu" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL196" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
     </div>
   
   
