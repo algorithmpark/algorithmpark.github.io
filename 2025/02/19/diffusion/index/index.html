@@ -1,0 +1,1037 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/algorithmpark.png">
+  <link rel="icon" href="/img/algorithmpark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="CJL">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="扩散模型(diffusion-model)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="diffusion">
+<meta property="og:url" content="https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/index.html">
+<meta property="og:site_name" content="AlgorithmPark">
+<meta property="og:description" content="扩散模型(diffusion-model)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/diffusion/image.png">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/diffusion/image+1.png">
+<meta property="og:image" content="https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/diffusion/image+2.png">
+<meta property="article:published_time" content="2025-02-19T11:45:14.000Z">
+<meta property="article:modified_time" content="2025-02-19T05:25:02.372Z">
+<meta property="article:author" content="CJL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/diffusion/image.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>diffusion - AlgorithmPark</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.algorithmpark.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algorithm Park</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="diffusion"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-19 11:45" pubdate>
+          2025年2月19日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">diffusion</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2025-02-19T05:25:02+00:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>diffusion</h1>
+<p>好文推荐</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhangzhenhu.com/aigc/index.html">AI内容生成（ai-gc） — 张振虎的博客 张振虎 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17r4y1u77B/">DALL·E 2（内含扩散模型介绍）【论文精读】_哔哩哔哩_bilibili</a></p>
+<p>huggingface🤗课程：</p>
+<p>原版</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusion-models-class">GitHub - huggingface/diffusion-models-class: Materials for the Hugging Face Diffusion Models Course</a></p>
+<p>中文翻译</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/darcula1993/diffusion-models-class-CN">GitHub - darcula1993/diffusion-models-class-CN: Materials for the Hugging Face Diffusion Models Course</a></p>
+<h2 id="ddpm">ddpm</h2>
+<p>diffusion模型奠基作 <strong>Denoising Diffusion Probabilistic Models(DDPM)</strong></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2006.11239">Denoising Diffusion Probabilistic Models</a></p>
+<p>代码 <a target="_blank" rel="noopener" href="https://github.com/hojonathanho/diffusion">GitHub - hojonathanho/diffusion: Denoising Diffusion Probabilistic Models</a></p>
+<p>diffusion入门教程、数学推导：推荐阅读下面的这篇文章：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/563661713">https://zhuanlan.zhihu.com/p/563661713</a></p>
+<p>理解加噪去噪过程及数学原理：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40714949/article/details/126643111">简单基础入门理解Denoising Diffusion Probabilistic Model，DDPM扩散模型-CSDN博客</a></p>
+<p>理解模型Unet设计</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/637815071">https://zhuanlan.zhihu.com/p/637815071</a></p>
+<hr>
+<p>训练与采样过程：</p>
+<p><img src="diffusion/image.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>Unet架构：</p>
+<p><img src="diffusion/image+1.png" srcset="/img/loading.gif" lazyload alt="image+1.png"></p>
+<h3 id="代码实操：">代码实操：</h3>
+<p>deeplearning.ai的diffusion在线课程  <a target="_blank" rel="noopener" href="https://www.deeplearning.ai/short-courses/how-diffusion-models-work/">How Diffusion Models Work - DeepLearning.AI</a></p>
+<p>如何从deeplearning.ai的jupyter批量下载文件？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">!tar cvfz allfiles.tar.gz *<br></code></pre></td></tr></table></figure>
+<p>完成打包后下载即可</p>
+<h2 id="ddim">ddim</h2>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2010.02502">Denoising Diffusion Implicit Models</a></p>
+<p>推荐阅读：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/666552214">zhuanlan.zhihu.com</a></p>
+<h2 id="diffusion加速">diffusion加速</h2>
+<p>参考<a target="_blank" rel="noopener" href="https://huggingface.co/docs/diffusers/stable_diffusion">hugging face: Effective and efficient diffusion</a></p>
+<ol>
+<li>DeepCache</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/672386808">zhuanlan.zhihu.com</a></p>
+<ol start="2">
+<li>更换scheduler，比如DPMSolverMultistepScheduler</li>
+</ol>
+<p>示例代码：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-string">from</span> <span class="hljs-string">diffusers</span> <span class="hljs-string">import</span> <span class="hljs-string">DPMSolverMultistepScheduler</span><br><span class="hljs-string">pipeline.scheduler</span> <span class="hljs-string">=</span> <span class="hljs-string">DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)</span><br><span class="hljs-string">device</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;cuda&quot;</span> <span class="hljs-string">if</span> <span class="hljs-string">torch.cuda.is_available()</span> <span class="hljs-string">else</span> <span class="hljs-string">&quot;cpu&quot;</span><br><span class="hljs-string">pipeline</span> <span class="hljs-string">=</span> <span class="hljs-string">pipeline.to(device)</span><br><span class="hljs-string">generator</span> <span class="hljs-string">=</span> <span class="hljs-string">torch.Generator(&quot;cuda&quot;).manual_seed(0)</span><br><span class="hljs-comment"># 设置时间步为20（默认是50）</span><br><span class="hljs-string">images</span> <span class="hljs-string">=</span> <span class="hljs-string">pipeline(prompt,</span> <span class="hljs-string">generator=generator,</span> <span class="hljs-string">num_inference_steps=20).images</span><br><span class="hljs-string">image</span> <span class="hljs-string">=</span> <span class="hljs-string">images[0]</span><br><span class="hljs-string">display(image)</span><br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用torch.float16加速</li>
+</ol>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">- pipeline = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)</span><br><span class="hljs-addition">+ pipeline = DiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16, use_safetensors=True)</span><br></code></pre></td></tr></table></figure>
+<h2 id="latent-diffusion">latent diffusion</h2>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2112.10752">High-Resolution Image Synthesis with Latent Diffusion Models</a></p>
+<p>代码仓库</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/compvis/latent-diffusion">https://github.com/compvis/latent-diffusion</a></p>
+<p>讲解，但是你不一定能看得懂 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/582693939">https://zhuanlan.zhihu.com/p/582693939</a></p>
+<p>推荐教程：</p>
+<p>【【渣渣讲课】试图做一个正常讲解Latent / Stable Diffusion的成年人】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tY4y1Z7eR/?share_source=copy_web&amp;vd_source=0746909e8642dc821f4dc86699071129">【渣渣讲课】试图做一个正常讲解Latent / Stable Diffusion的成年人_哔哩哔哩_bilibili</a></p>
+<p>渣渣讲课的笔记 <a target="_blank" rel="noopener" href="https://blog.csdn.net/milu_ELK/article/details/129915435">【AI绘图学习笔记】Latent Diffusion Model（上）——论文解读_latent diffusion models-CSDN博客</a></p>
+<p>推荐阅读：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/582693939">zhuanlan.zhihu.com</a></p>
+<p>论文中文翻译 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/816c60d981b1">https://www.jianshu.com/p/816c60d981b1</a></p>
+<p>渣渣学姐的 latent diffusion 在手写数字上的实现<a target="_blank" rel="noopener" href="https://juejin.cn/post/7371995232160268288">https://juejin.cn/post/7371995232160268288</a></p>
+<p>github仓库</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/guchengzhong/latent_diffusion_model_mnist">https://github.com/guchengzhong/latent_diffusion_model_mnist</a></p>
+<p><strong>尝试在本地训练出生成手写数字的模型，并读懂相关代码</strong></p>
+<p>如果你不知道什么是VAE，请先阅读对VAE的介绍，<strong>步子迈太大会扯着蛋</strong></p>
+<p>你也可以观看这个视频<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ZBKpAp_6TGI&amp;t=4745s">https://www.youtube.com/watch?v=ZBKpAp_6TGI&amp;t=4745s</a>，从零开始使用pytorch实现stable diffusion</p>
+<h2 id="controlnet">controlnet</h2>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2302.05543">Adding Conditional Control to Text-to-Image Diffusion Models</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">GitHub - lllyasviel/ControlNet: Let us control diffusion models</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/660924126">zhuanlan.zhihu.com</a></p>
+<h2 id="学会调库"><strong>学会调库</strong></h2>
+<p>参见hugging face <strong>difffusers</strong></p>
+<p>HCP-diffusion: Diffusion工具箱</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/IrisRainbowNeko/HCP-Diffusion">GitHub - IrisRainbowNeko/HCP-Diffusion: A universal Stable-Diffusion toolbox</a></p>
+<h2 id="视频生成">视频生成</h2>
+<p>【【中文】视频扩散模型，三小时入门到精通，Mike Shou, Video Diffusion Models, 2023】</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rg4y1r7d5?vd_source=0746909e8642dc821f4dc86699071129">【中文】视频扩散模型，三小时入门到精通，Mike Shou, Video Diffusion Models, 2023_哔哩哔哩_bilibili</a></p>
+<p><img src="diffusion/image+2.png" srcset="/img/loading.gif" lazyload alt="image+2.png"></p>
+<h3 id="stable-video-diffusion">stable video diffusion</h3>
+<p>Stable Video Diffusion (SVD)可以从图片生成短视频</p>
+<p>不支持文本控制</p>
+<p>论文</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.15127">Stable Video Diffusion: Scaling Latent Video Diffusion Models to Large Datasets</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cN4y127qY">【Stable Video Diffusion论文】视频生成SD，Stability AI又一开源力作_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Stability-AI/generative-models">GitHub - Stability-AI/generative-models: Generative Models by Stability AI</a></p>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt">huggingface.co</a></p>
+<h3 id="帧间连续性">帧间连续性</h3>
+<p>在使用 Stable Video Diffusion（SVD）或其他类似的视频生成模型时，帧之间的连续性是一个关键问题。为了保证生成的视频帧之间具有平滑的过渡和一致性，通常会采用以下几种技术和方法：</p>
+<hr>
+<ol>
+<li><strong>时间一致性约束</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>时间嵌入（Temporal Embedding）</strong>：在 SVD 中，每一帧的时间信息会被显式地编码为时间嵌入向量。这些嵌入向量被输入到模型中，使得模型能够感知帧与帧之间的时间关系，从而生成具有时间连续性的内容。</p>
+</li>
+<li>
+<p><strong>时间注意力机制（Temporal Attention）</strong>：通过引入跨帧的注意力机制，模型可以在生成某一帧时参考前一帧或后一帧的信息，从而确保帧间的一致性。</p>
+</li>
+</ul>
+<hr>
+<ol start="2">
+<li><strong>帧间条件生成</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>条件扩散（Conditional Diffusion）</strong>：在生成当前帧时，模型可以以前一帧作为条件输入。这样，当前帧的生成过程会受到前一帧的影响，从而保持视觉上的一致性。</p>
+</li>
+<li>
+<p><strong>双向扩散（Bidirectional Diffusion）</strong>：除了从前向后生成帧外，还可以从后向前生成帧，并结合两者的输出进行融合，进一步提升帧间连续性。</p>
+</li>
+</ul>
+<hr>
+<ol start="3">
+<li><strong>光流估计与运动建模</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>光流引导（Optical Flow Guidance）</strong>：通过计算相邻帧之间的光流场，模型可以学习物体在帧间的运动轨迹，从而生成更加连贯的动态效果。</p>
+</li>
+<li>
+<p><strong>运动先验（Motion Prior）</strong>：引入预训练的运动模型（如基于物理的运动模拟或深度学习的运动预测模型），帮助生成更自然的运动。</p>
+</li>
+</ul>
+<hr>
+<ol start="4">
+<li><strong>帧间正则化</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>帧差损失（Frame Difference Loss）</strong>：在训练过程中，加入帧间差异的损失函数，鼓励相邻帧之间的像素变化尽可能小，从而减少闪烁或不连续的现象。</p>
+</li>
+<li>
+<p><strong>一致性损失（Consistency Loss）</strong>：通过约束相邻帧在特征空间中的相似性，确保生成的帧在语义和外观上具有一致性。</p>
+</li>
+</ul>
+<hr>
+<ol start="5">
+<li><strong>多尺度生成与融合</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>多分辨率生成（Multi-Resolution Generation）</strong>：在不同分辨率下生成帧，然后逐步融合，以确保低频信息（如背景）和高频信息（如细节）都能保持连续性。</p>
+</li>
+<li>
+<p><strong>金字塔结构（Pyramid Structure）</strong>：采用金字塔式的生成方式，先生成粗略的帧序列，再逐步细化，从而避免帧间跳跃。</p>
+</li>
+</ul>
+<hr>
+<ol start="6">
+<li><strong>后处理技术</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>帧插值（Frame Interpolation）</strong>：在生成的帧之间插入额外的中间帧，利用插值算法（如基于光流的插值）来增强连续性。</p>
+</li>
+<li>
+<p><strong>去噪与平滑（Denoising and Smoothing）</strong>：对生成的视频进行后处理，例如应用高斯模糊或时间域滤波，以减少帧间的突变。</p>
+</li>
+</ul>
+<hr>
+<ol start="7">
+<li><strong>数据增强与训练策略</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>时间对齐数据增强（Temporal Alignment Augmentation）</strong>：在训练数据中引入时间对齐的增强操作，例如随机裁剪、缩放或旋转，使模型学会处理帧间变化。</p>
+</li>
+<li>
+<p><strong>长序列训练（Long Sequence Training）</strong>：使用较长的视频片段进行训练，让模型更好地捕捉长时间依赖关系。</p>
+</li>
+</ul>
+<hr>
+<ol start="8">
+<li><strong>用户交互与控制</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>关键帧引导（Keyframe Guidance）</strong>：允许用户指定某些关键帧，模型根据这些关键帧生成中间帧，从而确保重要的场景转换是平滑的。</p>
+</li>
+<li>
+<p><strong>运动轨迹编辑（Motion Trajectory Editing）</strong>：提供工具让用户调整物体的运动轨迹，从而间接控制帧间连续性。</p>
+</li>
+</ul>
+<hr>
+<p>通过以上方法的组合，Stable Video Diffusion 能够在生成高质量视频的同时，有效保证帧之间的连续性和一致性。具体实现时，这些技术可能会根据应用场景和需求进行定制和优化。</p>
+<p>diffusers支持视频生成</p>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/diffusers/using-diffusers/svd">huggingface.co</a></p>
+<h3 id="CogVideoX">CogVideoX</h3>
+<p>text and image to video generation</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2408.06072">CogVideoX: Text-to-Video Diffusion Models with An Expert Transformer</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/THUDM/CogVideo">GitHub - THUDM/CogVideo: Text-to-video generation. The repo for ICLR2023 paper “CogVideo: Large-scale Pretraining for Text-to-Video Generation via Transformers”</a></p>
+<p>diffusers库提供的cogvideo <a target="_blank" rel="noopener" href="https://github.com/huggingface/diffusers/tree/main/examples/cogvideo">https://github.com/huggingface/diffusers/tree/main/examples/cogvideo</a></p>
+<p>CogVideoX提供的LoRA微调</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/a-r-r-o-w/finetrainers">GitHub - a-r-r-o-w/finetrainers: Memory-optimized training scripts for video models based on Diffusers</a></p>
+<h2 id="dreambooth">dreambooth</h2>
+<p>DreamBooth 用于<strong>微调</strong>预训练的文本到图像生成模型（如 Stable Diffusion）。它的核心目标是通过少量的自定义图像输入，让模型学会生成<strong>特定对象或主题</strong>的高质量图像，同时<strong>保留</strong>原始模型的<strong>泛化能力</strong>。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18m4y1H7fs/">[论文简析]DreamBooth: Fine Tuning Text-to-Image Diffusion Models…[2208.12242]_哔哩哔哩_bilibili</a></p>
+<p>阅读huggingface提供的dreambooth教程<a target="_blank" rel="noopener" href="https://huggingface.co/docs/diffusers/training/dreambooth">https://huggingface.co/docs/diffusers/training/dreambooth</a>，微调stable-diffusion-v1-4模型，教模型如何生成&quot;sks dog&quot;</p>
+<h2 id="LoRA">LoRA</h2>
+<p>LoRA用于提高大规模预训练模型微调的效率，同时减少计算资源和存储开销。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a></p>
+<p>LoRA 是一种通过低秩矩阵逼近来实现高效微调的方法。它的基本思想是将原始模型的权重矩阵分解成两个低秩矩阵，这样可以在微调时只更新这些低秩矩阵，从而避免对整个预训练模型进行全面更新。LoRA的优点在于，微调时只增加了少量的参数，从而减少了计算量和存储需求。</p>
+<p>假设模型的权重矩阵为 W，LoRA 将其分解为两个较小的矩阵 A 和 B，其中 A 的维度为 d×r，B 的维度为 r×k。这里 r 是一个远小于 d 和 k 的秩（rank），因此 A 和 B 的参数量远远少于原始矩阵 W。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>W</mi><mtext>′</mtext></msup><mo>=</mo><mi>W</mi><mo>+</mo><mi>A</mi><mo>⋅</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">W^′=W+A⋅B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span></p>
+<p>其中，A 和 B 是低秩矩阵，它们在微调过程中被更新，而原始的权重矩阵 W 不需要更新。</p>
+<p>快速简单理解：</p>
+<p>[<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wX4y1s7an">论文速览]LoRA: Low-Rank Adaptation of Large Language Models[2106.09685]<em>哔哩哔哩</em>bilibili</a></p>
+<p>深入理解：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/639229126">深入浅出完整解析LoRA(Low-Rank Adaptation)模型核心基础知识</a></p>
+<p><a target="_blank" rel="noopener" href="https://hcpdiff.readthedocs.io/zh-cn/latest/tutorial/lora_anime.html">https://hcpdiff.readthedocs.io/zh-cn/latest/tutorial/lora_anime.html</a></p>
+<h2 id="其他">其他</h2>
+<p>DiffusionDet目标检测</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37412775/article/details/127985811">目标检测DiffusionDet: Diffusion Model for Object Detection-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64720568/article/details/129844550">使用预训练模型运行DiffusionDetection_diffusion detection-CSDN博客</a></p>
+<p>Diffusion-LM文本生成</p>
+<p>论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.14217">https://arxiv.org/abs/2205.14217</a></p>
+<p>IP-adapter:使预训练的text-to-image diffusion model能够根据image prompt生成图像</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.06721">IP-Adapter: Text Compatible Image Prompt Adapter for Text-to-Image Diffusion Models</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tencent-ailab/IP-Adapter">GitHub - tencent-ailab/IP-Adapter: The image prompt adapter is designed to enable a pretrained text-to-image diffusion model to generate images with image prompt.</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>diffusion</div>
+      <div>https://blog.algorithmpark.xyz/2025/02/19/diffusion/index/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>CJL</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年2月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/19/video-understanding/index/" title="video-understanding">
+                        <span class="hidden-mobile">video-understanding</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"algorithmpark/algorithmpark.github.io","repo-id":"R_kgDOKIc7hQ","category":"Announcements","category-id":"DIC_kwDOKIc7hc4CdDq9","theme-light":"dark","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'dark';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://blog.algorithmpark.xyz" target="_blank" rel="nofollow noopener"><span>AlgorithmPark</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/CJL196" target="_blank" rel="nofollow noopener"><span>CJL</span></a> <p><a href="https://icp.gov.moe/?keyword=20240042" target="_blank">萌ICP备20240042号</a></p> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
